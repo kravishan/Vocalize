@@ -205,6 +205,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var height = waveCanvas.height;
         canvasContext.clearRect(0, 0, width, height);
 
+        waveCanvas.style.display = 'none';
+
     });
     
 
