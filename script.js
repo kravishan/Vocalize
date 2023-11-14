@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     var audioUrl = URL.createObjectURL(audioBlob);
 
                     // Save the audio as a WAV file
-                    saveAs(audioBlob, 'recorded_audio.wav');
+                    //saveAs(audioBlob, 'recorded_audio.wav');
 
                     // Save the audio data to a variable (you can use this variable to save to a file later)
                     savedAudioData = audioBlob;
