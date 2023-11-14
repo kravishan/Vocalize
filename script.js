@@ -9,6 +9,33 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// Function to transcribe audio using OpenAI API
+function transcribeAudio(audioData) {
+    fetch('http://localhost:3000/transcribe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'audio/wav',
+        },
+        body: audioData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`OpenAI API request failed: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Transcription result:', data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+
+
+
 // Popup script
 document.addEventListener('DOMContentLoaded', function () {
     var popup = document.getElementById('popup');
@@ -62,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     var audioUrl = URL.createObjectURL(audioBlob);
                     // Save the audio or do further processing
                     console.log('Audio saved:', audioUrl);
+                    transcribeAudio(new Blob(audioChunks, { type: 'audio/wav' }));
                 };
 
                 mediaRecorder.start();
@@ -139,8 +167,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     stopButton.addEventListener('click', function () {
+        // Stop mediaRecorder
+        stopRecording();
+    
         recognition.stop();
+    
+        // Clear the wave canvas
+        var canvasContext = waveCanvas.getContext('2d');
+        var width = waveCanvas.width;
+        var height = waveCanvas.height;
+        canvasContext.clearRect(0, 0, width, height);
+
     });
+    
 
     var closeButton = document.querySelector('.close');
     closeButton.addEventListener('click', closePopup);
