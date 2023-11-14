@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 source.connect(analyser);
                 analyser.connect(audioContext.destination);
 
-                dataArray = new Uint8Array(analyser.frequencyBinCount);
+                dataArray = new Float32Array(analyser.fftSize);
 
                 mediaRecorder = new MediaRecorder(stream);
 
@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         audioChunks.push(event.data);
 
                         // Update the wave view
-                        analyser.getByteTimeDomainData(dataArray);
                         drawWave();
                     }
                 };
@@ -80,37 +79,37 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function drawWave() {
-        var canvasContext = waveCanvas.getContext('2d');
-        var width = waveCanvas.width;
-        var height = waveCanvas.height;
-      
-        analyser.getFloatTimeDomainData(dataArray);
-      
-        canvasContext.clearRect(0, 0, width, height);
-        canvasContext.lineWidth = 2;
-        canvasContext.strokeStyle = '#51B96D';
-        canvasContext.beginPath();
-      
-        var sliceWidth = width / dataArray.length;
-        var x = 0;
-      
-        for (var i = 0; i < dataArray.length; i++) {
-          var value = (dataArray[i] + 1) / 2; // Normalize values to [0, 1]
-          var y = value * height;
-      
-          if (i === 0) {
-            canvasContext.moveTo(x, y);
-          } else {
-            canvasContext.lineTo(x, y);
-          }
-      
-          x += sliceWidth;
+        if (analyser) {
+            analyser.getFloatTimeDomainData(dataArray);
+
+            var canvasContext = waveCanvas.getContext('2d');
+            var width = waveCanvas.width;
+            var height = waveCanvas.height;
+
+            canvasContext.clearRect(0, 0, width, height);
+            canvasContext.lineWidth = 2;
+            canvasContext.strokeStyle = '#51B96D';
+            canvasContext.beginPath();
+
+            var sliceWidth = width / analyser.fftSize;
+            var x = 0;
+
+            for (var i = 0; i < analyser.fftSize; i++) {
+                var value = (dataArray[i] + 1) / 2; // Normalize values to [0, 1]
+                var y = value * height;
+
+                if (i === 0) {
+                    canvasContext.moveTo(x, y);
+                } else {
+                    canvasContext.lineTo(x, y);
+                }
+
+                x += sliceWidth;
+            }
+
+            canvasContext.stroke();
         }
-      
-        canvasContext.stroke();
-      }
-      
-    
+    }
 
     function updateWave() {
         drawWave();

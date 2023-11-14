@@ -95,7 +95,7 @@ a.link:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  background-color: #ffffffe4;
+  background-color: #3498dbe4;
   color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -137,7 +137,7 @@ a.link:hover {
 }
 
 .wave-canvas {
-  border: 2px solid #ffffff; 
-  border-radius: 5px; 
-  margin-top: 20px; 
+  margin-top: 20px;
+  width: 300px; 
+  height: 100px; 
 }
