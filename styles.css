@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    background: #000;
+    text-align: center;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size:  16px;
+    line-height: 1.5;
+  }
+        
+  h1 {
+    font-weight: 500;
+    font-size:  1.6em;
+  } 
+
+  h2 {
+    font-weight: 300;
+    font-size:  1.125em;
+    width:  80%;
+    max-width:  400px;
+    margin-bottom: 1.5em;
+  }
+
+  .logo, .logo svg {
+    width: 100px;
+    height:  44px;
+  }
+
+  .symbol, .symbol svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  .symbol {
+    cursor: pointer;
+    position: fixed;
+    bottom: 50px; 
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .symbol img {
+    width: 80px; 
+    height: auto;
+  }
+    
+  a.button {
+    color:  #fff;
+    text-decoration: none;
+    padding: .75em 1.5em;
+    border:  1px solid #fff;
+    border-radius: 2em;
+    margin-bottom: 1.5em;
+    transition:  transform .3s;
+  }
+
+  a.button:hover {
+    transform: scale(1.125);
+  }
+
+  a.link {
+    color:  #51B96D;
+    text-decoration: none;
+    font-weight: 300;
+    transition:  opacity .3s;
+  }
+
+  a.link:hover {
+    opacity: .4;
+  }
+
+  .st0{
+    fill:#FFFFFF;
+  }
+
+  .st1{
+    fill:#51B96D;
+  }
