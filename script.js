@@ -9,29 +9,34 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+
 // Function to transcribe audio using OpenAI API
-function transcribeAudio(audioData) {
-    fetch('http://localhost:3000/transcribe', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'audio/wav',
-        },
-        body: {
-            'file': savedAudioData,
-        }
-    })
-    .then(response => {
+async function transcribeAudio(audioBlob) {
+    const apiKey = 'key'
+
+    const formData = new FormData();
+    formData.append('model', 'whisper-1');
+    formData.append('response_format', 'text');
+    formData.append('file', audioBlob, 'audio.wav');
+
+    try {
+        const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+            },
+            body: formData,
+        });
+
         if (!response.ok) {
             throw new Error(`OpenAI API request failed: ${response.statusText}`);
         }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Transcription result:', data);
-    })
-    .catch(error => {
+
+        const data = await response.text();
+        console.log('Whisper transcription result:', data);
+    } catch (error) {
         console.error('Error:', error);
-    });
+    }
 }
 
 
