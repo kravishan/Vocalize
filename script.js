@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             canvasContext.clearRect(0, 0, width, height);
             canvasContext.lineWidth = 2;
-            canvasContext.strokeStyle = '#51B96D';
+            canvasContext.strokeStyle = '#ffffff';
             canvasContext.beginPath();
 
             var sliceWidth = width / analyser.fftSize;
