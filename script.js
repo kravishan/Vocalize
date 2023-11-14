@@ -16,7 +16,9 @@ function transcribeAudio(audioData) {
         headers: {
             'Content-Type': 'audio/wav',
         },
-        body: audioData,
+        body: {
+            'file': savedAudioData,
+        }
     })
     .then(response => {
         if (!response.ok) {
@@ -61,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
         stopRecording();
     }
 
+
     function startRecording() {
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(function (stream) {
@@ -69,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 analyser.fftSize = 256;
                 var source = audioContext.createMediaStreamSource(stream);
                 source.connect(analyser);
-                analyser.connect(audioContext.destination);
+                //analyser.connect(audioContext.destination);
 
                 dataArray = new Float32Array(analyser.fftSize);
 
@@ -87,10 +90,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 mediaRecorder.onstop = function () {
                     var audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                     var audioUrl = URL.createObjectURL(audioBlob);
+
+                    // Save the audio as a WAV file
+                    saveAs(audioBlob, 'recorded_audio.wav');
+
+                    // Save the audio data to a variable (you can use this variable to save to a file later)
+                    savedAudioData = audioBlob;
+
+                     
                     // Save the audio or do further processing
                     console.log('Audio saved:', audioUrl);
-                    transcribeAudio(new Blob(audioChunks, { type: 'audio/wav' }));
-                };
+                    transcribeAudio(audioBlob);
+                    };
 
                 mediaRecorder.start();
             })
@@ -98,6 +109,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error accessing microphone:', error);
             });
     }
+    
+    
 
     function stopRecording() {
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
@@ -169,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
     stopButton.addEventListener('click', function () {
         // Stop mediaRecorder
         stopRecording();
+        mediaRecorder.stop();
     
         recognition.stop();
     
