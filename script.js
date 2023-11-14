@@ -12,7 +12,7 @@ if ('serviceWorker' in navigator) {
 
 // Function to transcribe audio using OpenAI API
 async function transcribeAudio(audioBlob) {
-    const apiKey = 'key'
+    const apiKey = 'sk'
 
     const formData = new FormData();
     formData.append('model', 'whisper-1');
@@ -33,7 +33,7 @@ async function transcribeAudio(audioBlob) {
         }
 
         const data = await response.text();
-        console.log('Whisper transcription result:', data);
+        console.log('Whisper:', data);
     } catch (error) {
         console.error('Error:', error);
     }
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 mediaRecorder.onstop = function () {
                     var audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                    var audioUrl = URL.createObjectURL(audioBlob);
+                    //var audioUrl = URL.createObjectURL(audioBlob);
 
                     // Save the audio as a WAV file
                     //saveAs(audioBlob, 'recorded_audio.wav');
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                      
                     // Save the audio or do further processing
-                    console.log('Audio saved:', audioUrl);
+                    //console.log('Audio saved:', audioUrl);
                     transcribeAudio(audioBlob);
                     };
 
@@ -121,8 +121,16 @@ document.addEventListener('DOMContentLoaded', function () {
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
             mediaRecorder.stop();
             audioChunks = [];
+    
+            // Stop the media stream
+            if (audioContext && audioContext.state === 'running') {
+                audioContext.close().then(function () {
+                    console.log('Microphone stream closed');
+                });
+            }
         }
     }
+    
 
     function drawWave() {
         if (analyser) {
@@ -168,11 +176,11 @@ document.addEventListener('DOMContentLoaded', function () {
         recognition.lang = 'en-US';
         recognition.start();
 
-        recognition.onresult = function (event) {
-            var transcript = event.results[0][0].transcript;
-            console.log('Speech Recognition Result:', transcript);
+        //recognition.onresult = function (event) {
+            //var transcript = event.results[0][0].transcript;
+            //console.log('Speech Recognition Result:', transcript);
             // Do something with the recognized speech
-        };
+        //};
 
         recognition.onend = function () {
             // Speech recognition ended
