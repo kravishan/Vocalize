@@ -9,10 +9,26 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// Function to show the spinner
+function showSpinner() {
+    var spinner = document.querySelector('.loadingio-spinner-spinner-euwfnax506b');
+    if (spinner) {
+    spinner.style.display = 'block';
+    }
+}
+
+// Function to hide the spinner
+function hideSpinner() {
+    var spinner = document.querySelector('.loadingio-spinner-spinner-euwfnax506b');
+    if (spinner) {
+    spinner.style.display = 'none';
+    }
+}
+
 
 // Function to transcribe audio using OpenAI API
 async function transcribeAudio(audioBlob) {
-    const apiKey = 'sk'
+    const apiKey = 'sk-'
 
     const formData = new FormData();
     formData.append('model', 'whisper-1');
@@ -34,6 +50,7 @@ async function transcribeAudio(audioBlob) {
 
         const data = await response.text();
         console.log('Whisper:', data);
+        hideSpinner();
     } catch (error) {
         console.error('Error:', error);
     }
@@ -57,27 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var analyser;
     var dataArray;
 
-        // Function to show the spinner
-    function showSpinner() {
-        var spinner = document.querySelector('.loadingio-spinner-spinner-euwfnax506b');
-        if (spinner) {
-        spinner.style.display = 'block';
-        }
-    }
     
-    // Function to hide the spinner
-    function hideSpinner() {
-        var spinner = document.querySelector('.loadingio-spinner-spinner-euwfnax506b');
-        if (spinner) {
-        spinner.style.display = 'none';
-        }
-    }
-    
-    // Example of how to use these functions
-    // Call showSpinner() when you want to show the spinner
-    // Call hideSpinner() when you want to hide the spinner
-  
-
     function openPopup() {
         document.body.classList.add('popup-open');
         popup.style.display = 'block';
