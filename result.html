@@ -4,6 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result Page</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #resultOutput {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
     <h1>Result Page</h1>
@@ -22,13 +54,13 @@
 
         // Display the data on the page
         document.getElementById('resultOutput').innerHTML = `
-            <p>Whisper Text: ${whisperText}</p>
-            <p>Overall Star Count: ${overallStarCount}</p>
-            <p>Food Rating: ${foodRating}</p>
-            <p>Service Rating: ${serviceRating}</p>
-            <p>Atmosphere Rating: ${atmosphereRating}</p>
-            <p>Improved Review with stars: ${decodeURIComponent(improvedReviewWithStars)}</p>
-            <p>Improved Review without stars: ${improvedReview}</p>
+            <p><strong>Whisper Text:</strong> ${whisperText}</p>
+            <p><strong>Overall Star Count:</strong> ${overallStarCount}</p>
+            <p><strong>Food Rating:</strong> ${foodRating}</p>
+            <p><strong>Service Rating:</strong> ${serviceRating}</p>
+            <p><strong>Atmosphere Rating:</strong> ${atmosphereRating}</p>
+            <p><strong>Improved Review with stars:</strong> ${decodeURIComponent(improvedReviewWithStars)}</p>
+            <p><strong>Improved Review without stars:</strong> ${improvedReview}</p>
         `;
     </script>
 </body>
