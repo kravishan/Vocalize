@@ -93,8 +93,6 @@ function handleRating(event, set) {
     }
 }
 
-
-
 // Function to show the overall rating
 function showRating() {
     var rating = document.querySelector('.rating');
@@ -166,7 +164,8 @@ function hideStopButton() {
 
 // Function to transcribe audio using OpenAI API
 async function transcribeAudio(audioBlob) {
-    const apiKey = 'sk'
+    let whisperText = '';
+    const apiKey = 'sk-'
 
     const formData = new FormData();
     formData.append('model', 'whisper-1');
@@ -187,17 +186,14 @@ async function transcribeAudio(audioBlob) {
         }
 
         const data = await response.text();
-        console.log('Whisper:', data);
+        whisperText = data;
+        console.log('Whisper text:', whisperText);
         hideSpinner();
         showRating();
     } catch (error) {
         console.error('Error:', error);
     }
 }
-
-
-
-
 
 // Popup script
 document.addEventListener('DOMContentLoaded', function () {
