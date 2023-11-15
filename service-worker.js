@@ -1,4 +1,4 @@
-var CACHE_NAME = 'PWA Template';
+var CACHE_NAME = 'Vocalize';
 var urlsToCache = [
   'https://henryegloff.com/demos/pwa-template/index.html'
 ];
@@ -21,8 +21,7 @@ self.addEventListener('fetch', function(event) {
           return response;
         }
         return fetch(event.request);
-      }
-    )
+      })
   );
 });
 
@@ -31,6 +30,8 @@ self.addEventListener('activate', function(event) {
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.filter(function(cacheName) {
+          // Add a condition to preserve the desired cache(s)
+          return cacheName.startsWith('Vocalize') && cacheName !== CACHE_NAME;
         }).map(function(cacheName) {
           return caches.delete(cacheName);
         })
