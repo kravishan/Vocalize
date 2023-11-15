@@ -1,8 +1,8 @@
 
 {
-  "name": "Vocalize",
-  "short_name": "Vocalize",
-  "description": "New review app",
+  "name": "PWA Template",
+  "short_name": "PWA Template",
+  "description": "A Basic PWA Template.",
   "default_locale": "en",
   "start_url": "./index.html",
   "scope": "./",
@@ -16,8 +16,8 @@
       "purpose": "any maskable"
     }],
   "developer": {
-    "name": "Kavindu Ravishan",
-    "url": "https://memoscrap.com"
+    "name": "Henry Egloff",
+    "url": "https://henryegloff.com"
   },
   "installs_allowed_from": [
     "*"

@@ -215,6 +215,7 @@ a.link:hover {
   100% { opacity: 0 }
 }
 .ldio-3da7yahiari div {
+  top: 20%;
   left: 50%;
   position: absolute;
   animation: ldio-3da7yahiari linear 1s infinite;

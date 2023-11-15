@@ -1,5 +1,5 @@
 // API key
-const apiKey = '';
+const apiKey = 'sk-2';
 
 
 // Index page script
@@ -47,55 +47,6 @@ function handleOverallRating(event) {
         console.log('Overall star count:', selectedOverallStarCount);
         hideRating();
         showRatingSets();
-    }
-}
-
-// Star rating set script
-
-let foodRating = 0;
-let serviceRating = 0;
-let atmosphereRating = 0;
-
-function handleRating(event, set, whisperText) {
-    const stars = document.querySelectorAll(`.${set} .star`);
-    const clickedStar = event.target;
-
-    if (clickedStar.classList.contains('star')) {
-        const ratingValue = parseInt(clickedStar.getAttribute('data-value'));
-
-        // Reset all stars in the set
-        stars.forEach(star => star.classList.remove('checked'));
-
-        // Mark stars up to the clicked one as checked
-        for (let i = 1; i <= ratingValue; i++) {
-            const star = document.getElementById(`${set}_star${i}`);
-            if (star) {
-                star.classList.add('checked');
-            }
-        }
-
-        // Log or use the selected star count as needed
-        //console.log(`Selected Star Count for ${set}:`, ratingValue);
-
-        // Save the rating value to the corresponding variable
-        switch (set) {
-            case 'set1':
-                foodRating = ratingValue;
-                console.log('Food rating:', foodRating);
-                break;
-            case 'set2':
-                serviceRating = ratingValue;
-                console.log('Service rating:', serviceRating);
-                break;
-            case 'set3':
-                atmosphereRating = ratingValue;
-                console.log('Atmosphere rating:', atmosphereRating);
-                break;
-            default:
-                break;
-                
-        }
-        generateImprovedReviewWithStars(whisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
     }
 }
 
@@ -153,6 +104,7 @@ function hideSpinner() {
     }
 }
 
+
 function showStopButton() {
     var stopButton = document.querySelector('.stop');
     if (stopButton) {
@@ -167,6 +119,7 @@ function hideStopButton() {
     }
 }
 
+let globalWhisperText = '';
 
 // Function to transcribe audio using OpenAI API
 async function transcribeAudio(audioBlob) {
@@ -190,12 +143,15 @@ async function transcribeAudio(audioBlob) {
             throw new Error(`OpenAI API request failed: ${response.statusText}`);
         }
 
-        const data = await response.text();
+        const data = await response.text();        
         whisperText = data;
+        globalWhisperText = data;
+        
         console.log('Whisper text:', whisperText);
         hideSpinner();
         showRating();
         generateImprovedReviewWithoutStars(whisperText);
+
     } catch (error) {
         console.error('Error:', error);
     }
@@ -380,6 +336,66 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// Star rating set script
+
+let foodRating = 0;
+let serviceRating = 0;
+let atmosphereRating = 0;
+
+function handleRating(event, set) {
+    const stars = document.querySelectorAll(`.${set} .star`);
+    const clickedStar = event.target;
+
+    if (clickedStar.classList.contains('star')) {
+        const ratingValue = parseInt(clickedStar.getAttribute('data-value'));
+
+        // Reset all stars in the set
+        stars.forEach(star => star.classList.remove('checked'));
+
+        // Mark stars up to the clicked one as checked
+        for (let i = 1; i <= ratingValue; i++) {
+            const star = document.getElementById(`${set}_star${i}`);
+            if (star) {
+                star.classList.add('checked');
+            }
+        }
+
+        // Log or use the selected star count as needed
+        //console.log(`Selected Star Count for ${set}:`, ratingValue);
+
+        // Save the rating value to the corresponding variable
+        switch (set) {
+            case 'set1':
+                foodRating = ratingValue;
+                console.log('Food rating:', foodRating);
+                break;
+            case 'set2':
+                serviceRating = ratingValue;
+                console.log('Service rating:', serviceRating);
+                break;
+            case 'set3':
+                atmosphereRating = ratingValue;
+                console.log('Atmosphere rating:', atmosphereRating);
+                break;
+            default:
+                break;
+                
+        }
+
+        // Check if all ratings are set before calling showSpinnerWithStar
+        if (foodRating !== 0 && serviceRating !== 0 && atmosphereRating !== 0) {
+            hideRatingSets();
+            showSpinner();
+            generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
+            //generateImprovedReviewWithStars();
+        }
+         
+        //generateImprovedReviewWithStars(whisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
+    }
+
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
@@ -446,7 +462,18 @@ async function generateImprovedReviewWithoutStars(whisperText) {
 }
 
 
-async function generateImprovedReviewWithStars(whisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating) {
+async function generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating) {
+//async function generateImprovedReviewWithStars() { 
+    //let globalWhisperText = 'Food was good.';
+    //let selectedOverallStarCount = '3';
+    //let foodRating = '5';
+    //let serviceRating = '4';
+    //let atmosphereRating = '4';   
+    console.log('Whisper text new:', globalWhisperText);
+    console.log('Overall star count new:', selectedOverallStarCount);
+    console.log('Food rating new:', foodRating);
+    console.log('Service rating new:', serviceRating);
+    console.log('Atmosphere rating new:', atmosphereRating);
 
     try {
         // Prompts tailored for hotel and restaurant reviews
@@ -463,7 +490,7 @@ async function generateImprovedReviewWithStars(whisperText, selectedOverallStarC
         const inputMessages = [
             { role: 'system', content: 'You are a helpful assistant.' },
             ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
-            { role: 'user', content: whisperText },
+            { role: 'user', content: globalWhisperText },
             { role: 'user', content: `Overall Star Rating: ${selectedOverallStarCount}` },
             { role: 'user', content: `Food Rating: ${foodRating}` },
             { role: 'user', content: `Service Rating: ${serviceRating}` },
@@ -502,4 +529,3 @@ async function generateImprovedReviewWithStars(whisperText, selectedOverallStarC
         console.error('Error:', error);
     }
 }
-
