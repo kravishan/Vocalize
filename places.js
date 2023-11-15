@@ -1,28 +1,20 @@
 // places.js
 
+let map; // Declare map globally
+
 // Replace 'YOUR_API_KEY_HERE' with your Google Places API key
-const apiKey = 'AIzaSyB5Cmjq8we6WvcQBuhllozxOTNQeK3N2I8';
+const googleApiKey = 'AIzaSyB5Cmjq8we6WvcQBuhllozxOTNQeK3N2I8';
 
-// Function to get the user's current location
-function getCurrentLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const location = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                };
+// Function to initialize the map
+function initMap() {
+    // Your map initialization code here
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8
+    });
 
-                // Call the function to fetch nearby restaurants with the obtained location
-                fetchNearbyRestaurants(location);
-            },
-            (error) => {
-                console.error('Error getting current location:', error);
-            }
-        );
-    } else {
-        console.error('Geolocation is not supported by this browser.');
-    }
+    // Call the function to fetch nearby restaurants
+    getCurrentLocation();
 }
 
 // Function to fetch nearby restaurants using Google Places API
@@ -30,41 +22,41 @@ async function fetchNearbyRestaurants(location) {
     const radius = 5000; // 5000 meters (5 km) radius
     const type = 'restaurant';
 
-    // Load the Google Maps JavaScript API with async and defer attributes
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
-    script.async = true;
-    script.defer = true;
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=${radius}&type=${type}&key=${googleApiKey}`;
 
-    // Set a global callback function to be called after the Google Maps JavaScript API is loaded
-    window.initMap = function () {
-        const service = new google.maps.places.PlacesService(map);
-        const request = {
-            location: location,
-            radius: radius,
-            type: type,
-        };
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
 
-        service.nearbySearch(request, function (results, status) {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                // Process the data (e.g., display a list of nearby restaurants)
-                displayNearbyRestaurants(results);
-            } else {
-                console.error('Error fetching nearby restaurants:', status);
-            }
-        });
-    };
-
-    // Append the script tag to the document
-    document.head.appendChild(script);
+        // Process the data and display a list of nearby restaurants
+        displayNearbyRestaurants(data.results);
+    } catch (error) {
+        console.error('Error fetching nearby restaurants:', error);
+    }
 }
 
 // Function to display a list of nearby restaurants
 function displayNearbyRestaurants(restaurants) {
-    // You can customize this function based on how you want to display the restaurant information on your page
-    console.log('Nearby Restaurants:', restaurants);
+    const restaurantList = document.getElementById('restaurantList');
+
+    // Clear existing list
+    restaurantList.innerHTML = '';
+
+    // Iterate through the restaurants and add them to the list
+    restaurants.forEach(restaurant => {
+        const listItem = document.createElement('li');
+        listItem.textContent = restaurant.name;
+        restaurantList.appendChild(listItem);
+    });
 }
 
-// Example usage:
-// Call the getCurrentLocation function to initiate the process
-getCurrentLocation();
+// Function to get the current location
+function getCurrentLocation() {
+    navigator.geolocation.getCurrentPosition(
+        position => {
+            const location = `${position.coords.latitude},${position.coords.longitude}`;
+            fetchNearbyRestaurants(location);
+        },
+        error => console.error('Error getting location:', error)
+    );
+}
