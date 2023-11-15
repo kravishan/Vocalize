@@ -35,6 +35,15 @@
             margin: 10px 0;
             color: #555;
         }
+
+        .star-rating {
+            display: inline-block;
+        }
+
+        .star-rating span {
+            font-size: 24px;
+            color: #ffd700; /* Golden yellow color */
+        }
     </style>
 </head>
 <body>
@@ -60,13 +69,19 @@
             localStorage.setItem('generatedDateTime', generatedDateTime);
         }
 
+        // Function to generate star icons based on the rating
+        function getStarRating(rating) {
+            const stars = '\u2605'; // Unicode character for a solid star
+            return stars.repeat(parseInt(rating));
+        }
+
         // Display the data on the page
         document.getElementById('resultOutput').innerHTML = `
             <p><strong>Voice Review:</strong> ${whisperText}</p>
-            <p><strong>Overall Rating:</strong> ${overallStarCount}</p>
-            <p><strong>Food Rating:</strong> ${foodRating}</p>
-            <p><strong>Service Rating:</strong> ${serviceRating}</p>
-            <p><strong>Atmosphere Rating:</strong> ${atmosphereRating}</p>
+            <p><strong>Overall Rating:</strong> <span class="star-rating">${getStarRating(overallStarCount)}</span></p>
+            <p><strong>Food Rating:</strong> <span class="star-rating">${getStarRating(foodRating)}</span></p>
+            <p><strong>Service Rating:</strong> <span class="star-rating">${getStarRating(serviceRating)}</span></p>
+            <p><strong>Atmosphere Rating:</strong> <span class="star-rating">${getStarRating(atmosphereRating)}</span></p>
             <p><strong>Improved Review:</strong> ${improvedReview}</p>
             <p><strong>Improved Review with stars:</strong> ${decodeURIComponent(improvedReviewWithStars)}</p>           
             <p><strong>Generated Date and Time:</strong> ${generatedDateTime}</p>
