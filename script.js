@@ -293,9 +293,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     microphoneButton.addEventListener('click', function () {
         openPopup();
-        recognition = new webkitSpeechRecognition();
-        recognition.lang = 'en-US';
-        recognition.start();
+        //recognition = new webkitSpeechRecognition();
+       // recognition.lang = 'en-US';
+        //recognition.start();
 
         //recognition.onresult = function (event) {
             //var transcript = event.results[0][0].transcript;
@@ -303,9 +303,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // Do something with the recognized speech
         //};
 
-        recognition.onend = function () {
+       // recognition.onend = function () {
             // Speech recognition ended
-        };
+        //};
 
         startRecording();
 
