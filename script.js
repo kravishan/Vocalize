@@ -1,5 +1,5 @@
 // API key
-const apiKey = '';
+const apiKey = 'sk-';
 
 
 // Index page script

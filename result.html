@@ -52,15 +52,24 @@
         const improvedReview = localStorage.getItem('improvedReview');
         const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
 
+        // Get or set the generated date and time
+        let generatedDateTime = localStorage.getItem('generatedDateTime');
+
+        if (!generatedDateTime) {
+            generatedDateTime = new Date().toLocaleString();
+            localStorage.setItem('generatedDateTime', generatedDateTime);
+        }
+
         // Display the data on the page
         document.getElementById('resultOutput').innerHTML = `
-            <p><strong>Whisper Text:</strong> ${whisperText}</p>
-            <p><strong>Overall Star Count:</strong> ${overallStarCount}</p>
+            <p><strong>Voice Review:</strong> ${whisperText}</p>
+            <p><strong>Overall Rating:</strong> ${overallStarCount}</p>
             <p><strong>Food Rating:</strong> ${foodRating}</p>
             <p><strong>Service Rating:</strong> ${serviceRating}</p>
             <p><strong>Atmosphere Rating:</strong> ${atmosphereRating}</p>
-            <p><strong>Improved Review with stars:</strong> ${decodeURIComponent(improvedReviewWithStars)}</p>
-            <p><strong>Improved Review without stars:</strong> ${improvedReview}</p>
+            <p><strong>Improved Review:</strong> ${improvedReview}</p>
+            <p><strong>Improved Review with stars:</strong> ${decodeURIComponent(improvedReviewWithStars)}</p>           
+            <p><strong>Generated Date and Time:</strong> ${generatedDateTime}</p>
         `;
     </script>
 </body>
