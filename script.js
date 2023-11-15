@@ -1,3 +1,7 @@
+// API key
+const apiKey = '';
+
+
 // Index page script
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -167,7 +171,6 @@ function hideStopButton() {
 // Function to transcribe audio using OpenAI API
 async function transcribeAudio(audioBlob) {
     let whisperText = '';
-    const apiKey = 'sk-'
 
     const formData = new FormData();
     formData.append('model', 'whisper-1');
@@ -389,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Async function to generate an improved review with additional prompts
 // Async function to generate an improved hotel or restaurant review
 async function generateImprovedReviewWithoutStars(whisperText) {
-    const apiKey = 'sk-'; 
+
     try {
         // Prompts tailored for hotel and restaurant reviews
         const additionalPrompts = [
@@ -444,7 +447,6 @@ async function generateImprovedReviewWithoutStars(whisperText) {
 
 
 async function generateImprovedReviewWithStars(whisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating) {
-    const apiKey = ''; 
 
     try {
         // Prompts tailored for hotel and restaurant reviews
