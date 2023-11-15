@@ -57,6 +57,27 @@ document.addEventListener('DOMContentLoaded', function () {
     var analyser;
     var dataArray;
 
+        // Function to show the spinner
+    function showSpinner() {
+        var spinner = document.querySelector('.loadingio-spinner-spinner-euwfnax506b');
+        if (spinner) {
+        spinner.style.display = 'block';
+        }
+    }
+    
+    // Function to hide the spinner
+    function hideSpinner() {
+        var spinner = document.querySelector('.loadingio-spinner-spinner-euwfnax506b');
+        if (spinner) {
+        spinner.style.display = 'none';
+        }
+    }
+    
+    // Example of how to use these functions
+    // Call showSpinner() when you want to show the spinner
+    // Call hideSpinner() when you want to hide the spinner
+  
+
     function openPopup() {
         document.body.classList.add('popup-open');
         popup.style.display = 'block';
@@ -70,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function startRecording() {
+        hideSpinner();
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(function (stream) {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -113,12 +135,14 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(function (error) {
                 console.error('Error accessing microphone:', error);
             });
+
     }
     
     
 
     function stopRecording() {
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+            showSpinner();
             mediaRecorder.stop();
             audioChunks = [];
     
