@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result Page</title>
 
+    <!-- Add Firebase scripts using the script tag method -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+
+
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -42,15 +48,64 @@
 
         .star-rating span {
             font-size: 24px;
-            color: #ffd700; /* Golden yellow color */
+            color: #ffd700; 
+        }
+
+        button {
+            background-color: #4caf50; 
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 0 auto; 
+            margin-inline-start: 50px;
+      
+
+        }
+
+        button.cancel {
+            background-color: #f44336; 
+        }
+
+        .button-container {
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <h1>Result Page</h1>
     <div id="resultOutput"></div>
+    <button onclick="saveToFirestore()">Save Result</button>
+    <button onclick="goBack()" class="cancel">Cancel</button>
 
     <script>
+        // Your Firebase project configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB9GNhQGsnfy85gM9u_dJuOKWAZqPUdk44",
+            authDomain: "vocalize-dc445.firebaseapp.com",
+            projectId: "vocalize-dc445",
+            storageBucket: "vocalize-dc445.appspot.com",
+            messagingSenderId: "50867328520",
+            appId: "1:50867328520:web:81681fc6f1baaae8b823bd"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the Firestore database
+        const db = firebase.firestore();
+
+        // Function to navigate back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+        
         // Get parameters from URL
         const urlParams = new URLSearchParams(window.location.search);
         const whisperText = urlParams.get('whisperText');
@@ -73,6 +128,31 @@
         function getStarRating(rating) {
             const stars = '\u2605'; // Unicode character for a solid star
             return stars.repeat(parseInt(rating));
+        }
+
+        // Function to save data to Firestore
+        function saveToFirestore() {
+            // Get the result data
+            const resultData = {
+                whisperText: whisperText,
+                overallStarCount: overallStarCount,
+                foodRating: foodRating,
+                serviceRating: serviceRating,
+                atmosphereRating: atmosphereRating,
+                improvedReview: improvedReview,
+                improvedReviewWithStars: improvedReviewWithStars,
+                generatedDateTime: generatedDateTime,
+            };
+
+            // Add a new document with a generated ID to the 'results' collection
+            db.collection('results')
+                .add(resultData)
+                .then((docRef) => {
+                    console.log('Document written with ID:', docRef.id);
+                })
+                .catch((error) => {
+                    console.error('Error adding document:', error);
+                });
         }
 
         // Display the data on the page
