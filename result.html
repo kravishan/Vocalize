@@ -35,6 +35,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
+            margin-bottom: 20px;
         }
 
         p {
@@ -52,7 +53,7 @@
         }
 
         button {
-            background-color: #4caf50; 
+            background-color: #000000; 
             border: none;
             color: white;
             padding: 10px 20px;
@@ -65,12 +66,13 @@
             border-radius: 4px;
             margin: 0 auto; 
             margin-inline-start: 50px;
+            margin-bottom: 20px;
       
 
         }
 
         button.cancel {
-            background-color: #f44336; 
+            background-color: #000000; 
         }
 
         .button-container {
@@ -81,7 +83,7 @@
 <body>
     <h1>Result Page</h1>
     <div id="resultOutput"></div>
-    <button onclick="saveToFirestore()">Save Result</button>
+    <button id="saveButton" onclick="saveToFirestore()">Save Result</button>
     <button onclick="goBack()" class="cancel">Cancel</button>
 
     <script>
@@ -149,10 +151,22 @@
                 .add(resultData)
                 .then((docRef) => {
                     console.log('Document written with ID:', docRef.id);
+                    updateButtonColor(true);
                 })
                 .catch((error) => {
                     console.error('Error adding document:', error);
+                    updateButtonColor(false);
                 });
+        }
+
+        // Function to update button color based on success or error
+        function updateButtonColor(success) {
+            const button = document.getElementById('saveButton');
+            if (success) {
+                button.style.backgroundColor = '#4caf50'; // Green color for success
+            } else {
+                button.style.backgroundColor = '#f44336'; // Red color for error
+            }
         }
 
         // Display the data on the page
