@@ -12,7 +12,7 @@ if ('serviceWorker' in navigator) {
 // Star rating script
 
 
-let selectedStarCount = 0; // Variable to store the selected star count
+let selectedStarCount = 0; 
 
 function handleRating(event) {
     const stars = document.querySelectorAll('.star');
@@ -45,6 +45,19 @@ function handleRating(event) {
     }
 }
 
+function showRating() {
+    var rating = document.querySelector('.rating');
+    if (rating) {
+        rating.style.display = 'block';
+    }
+}
+
+function hideRating() {
+    var rating = document.querySelector('.rating');
+    if (rating) {
+        rating.style.display = 'none';
+    }
+}
 
 // Function to show the spinner
 function showSpinner() {
@@ -62,10 +75,24 @@ function hideSpinner() {
     }
 }
 
+function showStopButton() {
+    var stopButton = document.querySelector('.stop');
+    if (stopButton) {
+        stopButton.style.display = 'block';
+    }
+}
+
+function hideStopButton() {
+    var stopButton = document.querySelector('.stop');
+    if (stopButton) {
+        stopButton.style.display = 'none';
+    }
+}
+
 
 // Function to transcribe audio using OpenAI API
 async function transcribeAudio(audioBlob) {
-    const apiKey = 'sk'
+    const apiKey = ''
 
     const formData = new FormData();
     formData.append('model', 'whisper-1');
@@ -88,6 +115,7 @@ async function transcribeAudio(audioBlob) {
         const data = await response.text();
         console.log('Whisper:', data);
         hideSpinner();
+        showRating();
     } catch (error) {
         console.error('Error:', error);
     }
@@ -126,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function startRecording() {
         hideSpinner();
+        hideRating();
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(function (stream) {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -176,7 +205,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function stopRecording() {
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-            //showSpinner();         // Need to remove this line
+            showSpinner();        
+            hideStopButton();     
             mediaRecorder.stop();
             audioChunks = [];
     

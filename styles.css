@@ -151,7 +151,7 @@ a.link:hover {
   cursor: pointer;
   user-select: none;
   align-items: center;
-  height: 20px;
+  margin-top: 50px;
   /* transform: rotate(180deg);*/
 }
 
