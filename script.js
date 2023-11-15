@@ -52,7 +52,7 @@ let foodRating = 0;
 let serviceRating = 0;
 let atmosphereRating = 0;
 
-function handleRating(event, set) {
+function handleRating(event, set, whisperText) {
     const stars = document.querySelectorAll(`.${set} .star`);
     const clickedStar = event.target;
 
@@ -89,7 +89,9 @@ function handleRating(event, set) {
                 break;
             default:
                 break;
+                
         }
+        generateImprovedReviewWithStars(whisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
     }
 }
 
@@ -190,6 +192,7 @@ async function transcribeAudio(audioBlob) {
         console.log('Whisper text:', whisperText);
         hideSpinner();
         showRating();
+        generateImprovedReviewWithoutStars(whisperText);
     } catch (error) {
         console.error('Error:', error);
     }
@@ -372,3 +375,129 @@ document.addEventListener('DOMContentLoaded', function () {
     var closeButton = document.querySelector('.close');
     closeButton.addEventListener('click', closePopup);
 });
+
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+// Function to send a request to ChatGPT-4 API and update the review output
+// Async function to generate an improved review with additional prompts
+// Async function to generate an improved hotel or restaurant review
+async function generateImprovedReviewWithoutStars(whisperText) {
+    const apiKey = 'sk-'; 
+    try {
+        // Prompts tailored for hotel and restaurant reviews
+        const additionalPrompts = [
+            "I recently visited a restaurant and want to share my experience.",
+            "Please enhance my brief feedback by adding more details and making it consumer-friendly.",
+            "Imagine you are the customer, what additional information would you find helpful in a review?",
+            "Take my short review and make it more informative for other consumers.",
+            "Provide insights that would be valuable for someone considering a visit to the restaurant.",
+            "Add details that could influence a consumer's decision to choose or avoid the restaurant.",
+        ];
+        
+
+        // Combine additional prompts with the user's input
+        const inputMessages = [
+            { role: 'system', content: 'You are a helpful assistant.' },
+            ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
+            { role: 'user', content: whisperText },
+        ];
+
+        // Fetch response from OpenAI API
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+                model: 'gpt-3.5-turbo',
+                messages: inputMessages,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`OpenAI API request failed: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        const improvedReview = data.choices[0].message.content;
+
+        // Log or use the generated improved review as needed
+        console.log('Improved Review:', improvedReview);
+
+        // Display the improved review on your webpage
+        const reviewOutput = document.getElementById('reviewOutput');
+        if (reviewOutput) {
+            reviewOutput.textContent = improvedReview;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+
+async function generateImprovedReviewWithStars(whisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating) {
+    const apiKey = ''; 
+
+    try {
+        // Prompts tailored for hotel and restaurant reviews
+        const additionalPrompts = [
+            "I recently visited a restaurant and want to share my experience.",
+            "Please enhance my brief feedback by adding more details and making it consumer-friendly.",
+            "Imagine you are the customer, what additional information would you find helpful in a review?",
+            "Take my short review and make it more informative for other consumers.",
+            "Provide insights that would be valuable for someone considering a visit to the restaurant.",
+            "Add details that could influence a consumer's decision to choose or avoid the restaurant.",
+        ];
+
+        // Combine additional prompts with the user's input and star ratings
+        const inputMessages = [
+            { role: 'system', content: 'You are a helpful assistant.' },
+            ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
+            { role: 'user', content: whisperText },
+            { role: 'user', content: `Overall Star Rating: ${selectedOverallStarCount}` },
+            { role: 'user', content: `Food Rating: ${foodRating}` },
+            { role: 'user', content: `Service Rating: ${serviceRating}` },
+            { role: 'user', content: `Atmosphere Rating: ${atmosphereRating}` },
+        ];
+
+        // Fetch response from OpenAI API
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+                model: 'gpt-3.5-turbo',
+                messages: inputMessages,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`OpenAI API request failed: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        const improvedReviewWithStars = data.choices[0].message.content;
+
+        // Log or use the generated improved review as needed
+        console.log('Improved review with stars:', improvedReviewWithStars);
+
+        // Display the improved review on your webpage
+        const reviewOutput = document.getElementById('reviewOutput');
+        if (reviewOutput) {
+            reviewOutput.textContent = improvedReviewWithStars;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
