@@ -127,7 +127,7 @@ a.link:hover {
 }
 
 .close {
-  width: 20px;
+  width: 16px;
   height: auto;
   cursor: pointer;
   position: absolute;
@@ -172,6 +172,38 @@ a.link:hover {
   color: #ffcc00;
 }
 
+/* Star rating  pack */
+
+.ratingpack {
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+  margin-top: 8px;
+
+}
+
+.rating-text {
+  font-size: 12px; 
+}
+
+
+.ratingpack span {
+  color: #ffffff;
+  margin: 0 5px;
+  background: linear-gradient(to right, #ffcc00 100%, #ffcc00 100%, #ffffff 0%, #ffffff 0%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  display: inline-block;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.ratingpack span:hover,
+.ratingpack span.checked,
+.ratingpack span:hover ~ span::selection,
+.ratingpack span.checked ~ span::after {
+  color: #ffcc00;
+}
 
 
 

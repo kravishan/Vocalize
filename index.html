@@ -36,14 +36,43 @@
     <div class="loadingio-spinner-spinner-euwfnax506b"><div class="ldio-3da7yahiari">
       <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
       </div></div>
-
-    <div class="rating" onclick="handleRating(event)">
+    <!-- Overall star rating -->
+    <div class="rating" onclick="handleOverallRating(event)">
       <span id="star1" class="star" data-value="1">★</span>
       <span id="star2" class="star" data-value="2">★</span>
       <span id="star3" class="star" data-value="3">★</span>
       <span id="star4" class="star" data-value="4">★</span>
       <span id="star5" class="star" data-value="5">★</span>
     </div>  
+
+    <!-- Other star rating -->
+    <div class="ratingpack" onclick="handleRating(event, 'set1')">
+      <span class="rating-text">Food: </span>
+      <span id="set1_star1" class="star" data-value="1">★</span>
+      <span id="set1_star2" class="star" data-value="2">★</span>
+      <span id="set1_star3" class="star" data-value="3">★</span>
+      <span id="set1_star4" class="star" data-value="4">★</span>
+      <span id="set1_star5" class="star" data-value="5">★</span>
+    </div>
+
+  <div class="ratingpack" onclick="handleRating(event, 'set2')">
+    <span class="rating-text">Service: </span>
+      <span id="set2_star1" class="star" data-value="1">★</span>
+      <span id="set2_star2" class="star" data-value="2">★</span>
+      <span id="set2_star3" class="star" data-value="3">★</span>
+      <span id="set2_star4" class="star" data-value="4">★</span>
+      <span id="set2_star5" class="star" data-value="5">★</span>
+    </div>
+
+  <div class="ratingpack" onclick="handleRating(event, 'set3')">
+    <span class="rating-text">Atmosphere: </span>
+      <span id="set3_star1" class="star" data-value="1">★</span>
+      <span id="set3_star2" class="star" data-value="2">★</span>
+      <span id="set3_star3" class="star" data-value="3">★</span>
+      <span id="set3_star4" class="star" data-value="4">★</span>
+      <span id="set3_star5" class="star" data-value="5">★</span>
+    </div>
+
     <img src="close.png" alt="Close Button" class="close" />
     <img src="stop.png" alt="Stop Button" class="stop" />
     <canvas class="wave-canvas"></canvas>

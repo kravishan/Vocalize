@@ -11,10 +11,9 @@ if ('serviceWorker' in navigator) {
 
 // Star rating script
 
+let selectedOverallStarCount = 0; 
 
-let selectedStarCount = 0; 
-
-function handleRating(event) {
+function handleOverallRating(event) {
     const stars = document.querySelectorAll('.star');
     const clickedStar = event.target;
 
@@ -38,13 +37,39 @@ function handleRating(event) {
         }
 
         // Update the selected star count
-        selectedStarCount = ratingValue;
+        selectedOverallStarCount = ratingValue;
 
         // Log or use the selected star count as needed
-        console.log('Selected Star Count:', selectedStarCount);
+        console.log('Selected overall star count:', selectedOverallStarCount);
+        hideRating();
+        showRatingSets();
     }
 }
 
+function handleRating(event, set) {
+    const stars = document.querySelectorAll(`.${set} .star`);
+    const clickedStar = event.target;
+
+    if (clickedStar.classList.contains('star')) {
+        const ratingValue = parseInt(clickedStar.getAttribute('data-value'));
+
+        // Reset all stars in the set
+        stars.forEach(star => star.classList.remove('checked'));
+
+        // Mark stars up to the clicked one as checked
+        for (let i = 1; i <= ratingValue; i++) {
+            const star = document.getElementById(`${set}_star${i}`);
+            if (star) {
+                star.classList.add('checked');
+            }
+        }
+
+        // Log or use the selected star count as needed
+        console.log(`Selected Star Count for ${set}:`, ratingValue);
+    }
+}
+
+// Function to show the overall rating
 function showRating() {
     var rating = document.querySelector('.rating');
     if (rating) {
@@ -52,12 +77,35 @@ function showRating() {
     }
 }
 
+// Function to hide the overall rating
 function hideRating() {
     var rating = document.querySelector('.rating');
     if (rating) {
         rating.style.display = 'none';
     }
 }
+
+// Function to show all rating sets
+function showRatingSets() {
+    var ratingpacks = document.querySelectorAll('.ratingpack');
+    if (ratingpacks) {
+        ratingpacks.forEach(ratingpack => {
+            ratingpack.style.display = 'block';
+        });
+    }
+}
+
+
+// Function to hide all rating sets
+function hideRatingSets() {
+    var ratingpacks = document.querySelectorAll('.ratingpack');
+    if (ratingpacks) {
+        ratingpacks.forEach(ratingpack => {
+            ratingpack.style.display = 'none';
+        });
+    }
+}
+
 
 // Function to show the spinner
 function showSpinner() {
@@ -92,7 +140,7 @@ function hideStopButton() {
 
 // Function to transcribe audio using OpenAI API
 async function transcribeAudio(audioBlob) {
-    const apiKey = ''
+    const apiKey = 'sk'
 
     const formData = new FormData();
     formData.append('model', 'whisper-1');
@@ -155,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function startRecording() {
         hideSpinner();
         hideRating();
+        hideRatingSets()
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(function (stream) {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
