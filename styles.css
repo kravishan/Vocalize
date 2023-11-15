@@ -144,6 +144,37 @@ a.link:hover {
   height: 100px; 
 }
 
+/* Star rating  */
+
+.rating {
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+  height: 20px;
+  /* transform: rotate(180deg);*/
+}
+
+.rating span {
+  color: #ffffff;
+  margin: 0 5px;
+  background: linear-gradient(to right, #ffcc00 100%, #ffcc00 100%, #ffffff 0%, #ffffff 0%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  display: inline-block;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.rating span:hover,
+.rating span.checked,
+.rating span:hover ~ span::selection,
+.rating span.checked ~ span::after {
+  color: #ffcc00;
+}
+
+
+
+
 
 /* Loading Animation */
 
@@ -209,5 +240,3 @@ a.link:hover {
   animation-delay: 0s;
   background: #157759;
 }
-
-

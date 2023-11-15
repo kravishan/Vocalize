@@ -9,6 +9,43 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// Star rating script
+
+
+let selectedStarCount = 0; // Variable to store the selected star count
+
+function handleRating(event) {
+    const stars = document.querySelectorAll('.star');
+    const clickedStar = event.target;
+
+    if (clickedStar.classList.contains('star')) {
+        const ratingValue = parseInt(clickedStar.getAttribute('data-value'));
+
+        // Mark stars up to the clicked one as checked
+        for (let i = 1; i <= ratingValue; i++) {
+            const star = document.getElementById(`star${i}`);
+            if (star) {
+                star.classList.add('checked');
+            }
+        }
+
+        // Unmark stars after the clicked one
+        for (let i = ratingValue + 1; i <= stars.length; i++) {
+            const star = document.getElementById(`star${i}`);
+            if (star) {
+                star.classList.remove('checked');
+            }
+        }
+
+        // Update the selected star count
+        selectedStarCount = ratingValue;
+
+        // Log or use the selected star count as needed
+        console.log('Selected Star Count:', selectedStarCount);
+    }
+}
+
+
 // Function to show the spinner
 function showSpinner() {
     var spinner = document.querySelector('.loadingio-spinner-spinner-euwfnax506b');
@@ -28,7 +65,7 @@ function hideSpinner() {
 
 // Function to transcribe audio using OpenAI API
 async function transcribeAudio(audioBlob) {
-    const apiKey = 'sk-'
+    const apiKey = 'sk'
 
     const formData = new FormData();
     formData.append('model', 'whisper-1');
@@ -139,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function stopRecording() {
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-            showSpinner();
+            //showSpinner();         // Need to remove this line
             mediaRecorder.stop();
             audioChunks = [];
     
