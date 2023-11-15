@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page</title>
+</head>
+<body>
+    <h1>Result Page</h1>
+    <div id="resultOutput"></div>
+
+    <script>
+        // Get parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const whisperText = urlParams.get('whisperText');
+        const overallStarCount = urlParams.get('overallStarCount');
+        const foodRating = urlParams.get('foodRating');
+        const serviceRating = urlParams.get('serviceRating');
+        const atmosphereRating = urlParams.get('atmosphereRating');
+        const improvedReview = localStorage.getItem('improvedReview');
+        const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
+
+        // Display the data on the page
+        document.getElementById('resultOutput').innerHTML = `
+            <p>Whisper Text: ${whisperText}</p>
+            <p>Overall Star Count: ${overallStarCount}</p>
+            <p>Food Rating: ${foodRating}</p>
+            <p>Service Rating: ${serviceRating}</p>
+            <p>Atmosphere Rating: ${atmosphereRating}</p>
+            <p>Improved Review with stars: ${decodeURIComponent(improvedReviewWithStars)}</p>
+            <p>Improved Review without stars: ${improvedReview}</p>
+        `;
+    </script>
+</body>
+</html>

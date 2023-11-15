@@ -1,5 +1,5 @@
 // API key
-const apiKey = 'sk-2';
+const apiKey = 'sk-';
 
 
 // Index page script
@@ -451,11 +451,9 @@ async function generateImprovedReviewWithoutStars(whisperText) {
         // Log or use the generated improved review as needed
         console.log('Improved Review:', improvedReview);
 
-        // Display the improved review on your webpage
-        const reviewOutput = document.getElementById('reviewOutput');
-        if (reviewOutput) {
-            reviewOutput.textContent = improvedReview;
-        }
+        // Store the improved review in localStorage
+        localStorage.setItem('improvedReview', improvedReview);
+        
     } catch (error) {
         console.error('Error:', error);
     }
@@ -469,11 +467,11 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
     //let foodRating = '5';
     //let serviceRating = '4';
     //let atmosphereRating = '4';   
-    console.log('Whisper text new:', globalWhisperText);
-    console.log('Overall star count new:', selectedOverallStarCount);
-    console.log('Food rating new:', foodRating);
-    console.log('Service rating new:', serviceRating);
-    console.log('Atmosphere rating new:', atmosphereRating);
+    //console.log('Whisper text new:', globalWhisperText);
+    //console.log('Overall star count new:', selectedOverallStarCount);
+    //console.log('Food rating new:', foodRating);
+    //console.log('Service rating new:', serviceRating);
+    //console.log('Atmosphere rating new:', atmosphereRating);
 
     try {
         // Prompts tailored for hotel and restaurant reviews
@@ -520,11 +518,14 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         // Log or use the generated improved review as needed
         console.log('Improved review with stars:', improvedReviewWithStars);
 
-        // Display the improved review on your webpage
-        const reviewOutput = document.getElementById('reviewOutput');
-        if (reviewOutput) {
-            reviewOutput.textContent = improvedReviewWithStars;
-        }
+        // Store the improved review in localStorage
+        //localStorage.setItem('improvedReviewWithStars', improvedReviewWithStars);
+
+        // Redirect to the result page with parameters
+        const resultPageURL = `result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
+        window.location.href = resultPageURL;
+
+
     } catch (error) {
         console.error('Error:', error);
     }
