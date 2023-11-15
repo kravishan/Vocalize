@@ -14,9 +14,11 @@
   <meta content="#000" name="apple-mobile-web-app-status-bar-style">
   <meta content="PWA Demo" name="apple-mobile-web-app-title">
   	
-  <link href="https://henryegloff.com/demos/pwa-template/favicon.ico" rel="icon" type="image/x-icon">
-  <link href="https://henryegloff.com/demos/pwa-template/manifest.json" rel="manifest"> 
-  <link href="https://henryegloff.com/demos/pwa-template/icon-152x152.png" rel="apple-touch-icon">
+  <!-- <link href="https://henryegloff.com/demos/pwa-template/favicon.ico" rel="icon" type="image/x-icon"> -->
+  <!-- <link href="https://henryegloff.com/demos/pwa-template/manifest.json" rel="manifest"> 
+  <link href="https://henryegloff.com/demos/pwa-template/icon-152x152.png" rel="apple-touch-icon"> -->
+
+  <link rel="manifest" href="manifest.json">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,13 +28,7 @@
 
 </head>
 <body>
-  <!-- Map container -->
-  <div id="map" style="height: 300px;"></div>
-
-  <!-- Restaurant list container -->
-  <ul id="restaurantList"></ul>
-
-  
+  <ul id="restaurantList"></ul> 
 
   <div class="symbol">
     <img src="microphone.png" alt="Microphone">
@@ -87,7 +83,6 @@
 
 <script src="script.js"></script>
 <script src="places.js"></script>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5Cmjq8we6WvcQBuhllozxOTNQeK3N2I8&libraries=places&callback=initMap"></script>-->
 
 <!-- <script src="https://cdn.jsdelivr.net/g/filesaver.js"></script> -->
 </body>

@@ -1,25 +1,30 @@
-
 {
-  "name": "PWA Template",
-  "short_name": "PWA Template",
-  "description": "A Basic PWA Template.",
+  "name": "Vocalize",
+  "short_name": "Vocalize",
+  "description": "Discover nearby restaurants with Vocalize.",
   "default_locale": "en",
   "start_url": "./index.html",
   "scope": "./",
   "background_color": "#000",
   "theme_color": "#000",
   "display": "standalone",
-  "icons": [{
+  "icons": [
+    {
       "src": "./icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    }],
+    }
+  ],
   "developer": {
-    "name": "Henry Egloff",
-    "url": "https://henryegloff.com"
+    "name": "Kavindu Ravishan",
+    "url": "https://memoscrap.com"
   },
   "installs_allowed_from": [
     "*"
+  ],
+  "permissions": [
+    "geolocation"
   ]
 }
+
