@@ -536,11 +536,4 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
 
 
 
-
-
-
-// Add this at the end of your script.js file
-document.addEventListener('DOMContentLoaded', function () {
-    initMap();
-  });
-  
+////////////////////////////////

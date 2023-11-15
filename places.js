@@ -1,48 +1,110 @@
-// Add this at the beginning of your script.js file
+// Initialize Google Maps
 function initMap() {
-    // Create a map centered at a default location (e.g., your city)
-    const map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: 37.7749, lng: -122.4194 }, // Example: San Francisco, CA
-      zoom: 12, // Adjust the zoom level as needed
-    });
-  
-    // Add a marker for the default location
-    const marker = new google.maps.Marker({
-      position: { lat: 37.7749, lng: -122.4194 }, // Example: San Francisco, CA
-      map: map,
-      title: 'Default Location',
-    });
-  
-    // Uncomment the following line if you want to get the user's current location
-    // getUserLocation(map);
-  }
-  
-  // Function to get the user's current location
-  function getUserLocation(map) {
+    // Check if geolocation is supported
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const userLocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-  
-          // Center the map on the user's location
-          map.setCenter(userLocation);
-  
-          // Add a marker for the user's location
-          const userMarker = new google.maps.Marker({
-            position: userLocation,
-            map: map,
-            title: 'Your Location',
-          });
-        },
-        (error) => {
-          console.error('Error getting user location:', error);
-        }
-      );
+      // Get current location
+      navigator.geolocation.getCurrentPosition(success, error);
     } else {
       console.error('Geolocation is not supported by this browser.');
     }
   }
+  
+  // Callback function on successful geolocation
+  function success(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+  
+    // Create a LatLng object for the current location
+    const currentLocation = new google.maps.LatLng(latitude, longitude);
+  
+    // Create a map centered at the current location
+    const map = new google.maps.Map(document.getElementById('map'), {
+      center: currentLocation,
+      zoom: 15,  // You can adjust the zoom level as needed
+    });
+  
+    // Add a marker for the current location
+    const marker = new google.maps.Marker({
+      position: currentLocation,
+      map: map,
+      title: 'Your Location',
+    });
+  
+    // Call the function to search for nearby restaurants and display them on the map
+    searchNearbyRestaurants(map, currentLocation);
+  }
+  
+  // Callback function on geolocation error
+  function error() {
+    console.error('Unable to retrieve your location.');
+  }
+  
+  // Function to search for nearby restaurants using Places API
+  function searchNearbyRestaurants(map, location) {
+    const placesService = new google.maps.places.PlacesService(map);
+  
+    // Define search parameters
+    const request = {
+      location: location,
+      radius: 500,  // You can adjust the radius as needed
+      type: 'restaurant',  // Change the type as needed
+    };
+  
+    // Perform the Places API search
+    placesService.nearbySearch(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        // Display the results on the map
+        displayResultsOnMap(map, results);
+      } else {
+        console.error('Places API search failed with status:', status);
+      }
+    });
+  }
+  
+  // Function to display search results on the map
+  function displayResultsOnMap(map, results) {
+    results.forEach((place) => {
+      const marker = new google.maps.Marker({
+        position: place.geometry.location,
+        map: map,
+        title: place.name,
+      });
+  
+      // You can add additional information to the marker's info window if needed
+      const infowindow = new google.maps.InfoWindow({
+        content: `<strong>${place.name}</strong><br>${place.vicinity}`,
+      });
+  
+      marker.addListener('click', () => {
+        infowindow.open(map, marker);
+      });
+    });
+  }
+
+  // Function to display search results on the map
+function displayResultsOnMap(map, results) {
+    const descriptionContainer = document.getElementById('restaurant-description');
+  
+    results.forEach((place) => {
+      const marker = new google.maps.Marker({
+        position: place.geometry.location,
+        map: map,
+        title: place.name,
+      });
+  
+      // You can add additional information to the marker's info window if needed
+      const infowindow = new google.maps.InfoWindow({
+        content: `<strong>${place.name}</strong><br>${place.vicinity}`,
+      });
+  
+      marker.addListener('click', () => {
+        // Display restaurant description in the designated HTML element
+        descriptionContainer.innerHTML = `<strong>${place.name}</strong><br>${place.vicinity}`;
+        
+        // Open the info window
+        infowindow.open(map, marker);
+      });
+    });
+  }
+  
   
