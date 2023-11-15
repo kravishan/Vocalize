@@ -1,7 +1,7 @@
 // places.js
 
 // Replace 'YOUR_API_KEY_HERE' with your Google Places API key
-const googleapiKey = '';
+const apiKey = 'AIzaSyB5Cmjq8we6WvcQBuhllozxOTNQeK3N2I8';
 
 // Function to get the user's current location
 function getCurrentLocation() {
@@ -30,16 +30,14 @@ async function fetchNearbyRestaurants(location) {
     const radius = 5000; // 5000 meters (5 km) radius
     const type = 'restaurant';
 
-    // Dynamically create a script element to load the Google Maps JavaScript API
+    // Load the Google Maps JavaScript API with async and defer attributes
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${googleapiKey}&libraries=places&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
+    script.async = true;
+    script.defer = true;
 
-    // Append the script element to the document body
-    document.body.appendChild(script);
-
-    // Callback function to be called after the Google Maps JavaScript API is loaded
+    // Set a global callback function to be called after the Google Maps JavaScript API is loaded
     window.initMap = function () {
-        // Now you can use the Google Maps API safely
         const service = new google.maps.places.PlacesService(map);
         const request = {
             location: location,
@@ -56,22 +54,15 @@ async function fetchNearbyRestaurants(location) {
             }
         });
     };
+
+    // Append the script tag to the document
+    document.head.appendChild(script);
 }
 
 // Function to display a list of nearby restaurants
 function displayNearbyRestaurants(restaurants) {
-    // Get the HTML element where you want to display the list
-    const restaurantList = document.getElementById('restaurantList');
-
-    // Clear previous content
-    restaurantList.innerHTML = '';
-
-    // Iterate through the restaurants and create list items
-    restaurants.forEach((restaurant) => {
-        const listItem = document.createElement('li');
-        listItem.textContent = restaurant.name;
-        restaurantList.appendChild(listItem);
-    });
+    // You can customize this function based on how you want to display the restaurant information on your page
+    console.log('Nearby Restaurants:', restaurants);
 }
 
 // Example usage:

@@ -1,5 +1,5 @@
 // API key
-const apiKey = process.env.OPENAI_API_KEY;
+const apiKey = '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';
 
 
 // Index page script
