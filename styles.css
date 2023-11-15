@@ -273,3 +273,18 @@ a.link:hover {
   animation-delay: 0s;
   background: #157759;
 }
+
+
+
+
+
+
+
+
+/* Need to remove */
+
+#map {
+  height: 400px;
+  width: 100%;
+}
+

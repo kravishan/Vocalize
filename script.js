@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var microphoneButton = document.querySelector('.symbol');
     var waveCanvas = document.querySelector('.wave-canvas');
 
-    var recognition;
+    //var recognition;
     var mediaRecorder;
     var audioChunks = [];
     var audioContext;
@@ -251,6 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
+
     
 
     function drawWave() {
@@ -270,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var x = 0;
 
             for (var i = 0; i < analyser.fftSize; i++) {
-                var value = (dataArray[i] + 1) / 2; // Normalize values to [0, 1]
+                var value = (dataArray[i] + 1) / 2; 
                 var y = value * height;
 
                 if (i === 0) {
@@ -318,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function () {
         stopRecording();
         mediaRecorder.stop();
     
-        recognition.stop();
+       // recognition.stop();
     
         // Clear the wave canvas
         var canvasContext = waveCanvas.getContext('2d');
@@ -530,3 +531,16 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         console.error('Error:', error);
     }
 }
+
+
+
+
+
+
+
+
+// Add this at the end of your script.js file
+document.addEventListener('DOMContentLoaded', function () {
+    initMap();
+  });
+  
