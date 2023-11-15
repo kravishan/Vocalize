@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// Star rating script
+// Star rating overall script
 
 let selectedOverallStarCount = 0; 
 
@@ -40,11 +40,17 @@ function handleOverallRating(event) {
         selectedOverallStarCount = ratingValue;
 
         // Log or use the selected star count as needed
-        console.log('Selected overall star count:', selectedOverallStarCount);
+        console.log('Overall star count:', selectedOverallStarCount);
         hideRating();
         showRatingSets();
     }
 }
+
+// Star rating set script
+
+let foodRating = 0;
+let serviceRating = 0;
+let atmosphereRating = 0;
 
 function handleRating(event, set) {
     const stars = document.querySelectorAll(`.${set} .star`);
@@ -65,9 +71,29 @@ function handleRating(event, set) {
         }
 
         // Log or use the selected star count as needed
-        console.log(`Selected Star Count for ${set}:`, ratingValue);
+        //console.log(`Selected Star Count for ${set}:`, ratingValue);
+
+        // Save the rating value to the corresponding variable
+        switch (set) {
+            case 'set1':
+                foodRating = ratingValue;
+                console.log('Food rating:', foodRating);
+                break;
+            case 'set2':
+                serviceRating = ratingValue;
+                console.log('Service rating:', serviceRating);
+                break;
+            case 'set3':
+                atmosphereRating = ratingValue;
+                console.log('Atmosphere rating:', atmosphereRating);
+                break;
+            default:
+                break;
+        }
     }
 }
+
+
 
 // Function to show the overall rating
 function showRating() {
