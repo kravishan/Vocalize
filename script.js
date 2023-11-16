@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Stop the media stream
             if (audioContext && audioContext.state === 'running') {
                 audioContext.close().then(function () {
-                    console.log('Microphone stream closed');
+                    //console.log('Microphone stream closed');
                 });
             }
         }
@@ -291,6 +291,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     microphoneButton.addEventListener('click', function () {
+        // Hide the restaurant list
+        var restaurantList = document.getElementById('restaurant-list');
+        if (restaurantList) {
+            restaurantList.style.display = 'none';
+        }
+
+        // Hide the microphone button
+        var symbolButton = document.querySelector('.symbol');
+        if (symbolButton) {
+            symbolButton.style.display = 'none';
+        }
+        
         openPopup();
         //recognition = new webkitSpeechRecognition();
        // recognition.lang = 'en-US';
@@ -396,9 +408,6 @@ function handleRating(event, set) {
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 // Retrieve the value from localStorage
 const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
