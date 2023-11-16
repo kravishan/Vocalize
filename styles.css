@@ -28,6 +28,16 @@ h2 {
   margin-bottom: 1.5em;
 }
 
+h3 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-weight: 300;
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .logo, .logo svg {
   width: 100px;
   height: 44px;
@@ -287,4 +297,14 @@ a.link:hover {
   height: 400px;
   width: 100%;
 }
+
+/* styles.css */
+.restaurant-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #902a2a;
+  border-radius: 5px;
+  color: black;
+}
+
 

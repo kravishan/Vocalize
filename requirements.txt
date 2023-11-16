@@ -1,0 +1,3 @@
+  // Hardcode a location for testing (replace with your desired coordinates)
+//const fixedLocation = new google.maps.LatLng(65.061225, 25.478849);
+//searchNearbyRestaurants(fixedLocation);
