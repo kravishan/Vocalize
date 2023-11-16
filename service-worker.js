@@ -1,6 +1,6 @@
 var CACHE_NAME = 'Vocalize';
 var urlsToCache = [
-  'https://henryegloff.com/demos/pwa-template/index.html'
+  'https://vocalize-livid.vercel.app/index.html'
 ];
 
 self.addEventListener('install', function(event) {

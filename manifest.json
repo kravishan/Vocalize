@@ -1,7 +1,7 @@
 {
   "name": "Vocalize",
   "short_name": "Vocalize",
-  "description": "Discover nearby restaurants with Vocalize.",
+  "description": "The app that turns your voice into reviews",
   "default_locale": "en",
   "start_url": "./index.html",
   "scope": "./",
