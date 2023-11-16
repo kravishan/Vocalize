@@ -24,10 +24,11 @@ function initMap() {
     });
   
     // Add a marker for the current location
-    const marker = new google.maps.Marker({
+    const currentLocationMarker = new google.maps.Marker({
       position: currentLocation,
       map: map,
       title: 'Your Location',
+      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png', // Customize the marker icon
     });
   
     // Call the function to search for nearby restaurants and display them on the map
@@ -62,28 +63,8 @@ function initMap() {
   }
   
   // Function to display search results on the map
-  function displayResultsOnMap(map, results) {
-    results.forEach((place) => {
-      const marker = new google.maps.Marker({
-        position: place.geometry.location,
-        map: map,
-        title: place.name,
-      });
-  
-      // You can add additional information to the marker's info window if needed
-      const infowindow = new google.maps.InfoWindow({
-        content: `<strong>${place.name}</strong><br>${place.vicinity}`,
-      });
-  
-      marker.addListener('click', () => {
-        infowindow.open(map, marker);
-      });
-    });
-  }
-
-  // Function to display search results on the map
 function displayResultsOnMap(map, results) {
-    const descriptionContainer = document.getElementById('restaurant-description');
+    const infowindows = []; // Array to store info windows
   
     results.forEach((place) => {
       const marker = new google.maps.Marker({
@@ -92,19 +73,26 @@ function displayResultsOnMap(map, results) {
         title: place.name,
       });
   
-      // You can add additional information to the marker's info window if needed
+      // Create an info window with restaurant name and address
       const infowindow = new google.maps.InfoWindow({
         content: `<strong>${place.name}</strong><br>${place.vicinity}`,
       });
   
       marker.addListener('click', () => {
-        // Display restaurant description in the designated HTML element
-        descriptionContainer.innerHTML = `<strong>${place.name}</strong><br>${place.vicinity}`;
-        
-        // Open the info window
+        // Close any open info windows
+        closeInfoWindows(infowindows);
+        // Open the current marker's info window
         infowindow.open(map, marker);
       });
+  
+      infowindows.push(infowindow); // Add infowindow to the array
     });
   }
   
+  // Function to close all info windows
+  function closeInfoWindows(infowindows) {
+    infowindows.forEach((infowindow) => {
+      infowindow.close();
+    });
+  }
   
