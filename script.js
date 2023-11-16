@@ -338,7 +338,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // Star rating set script
-
 let foodRating = 0;
 let serviceRating = 0;
 let atmosphereRating = 0;
