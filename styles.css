@@ -299,11 +299,8 @@ a.link:hover {
 }
 
 #restaurant-list {
-  margin: 20px 0;
+  margin-top: 80px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  max-width: 400px; 
 }
 
 #restaurant-list li {
