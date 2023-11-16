@@ -298,13 +298,26 @@ a.link:hover {
   width: 100%;
 }
 
-/* styles.css */
-.restaurant-item {
-  margin-bottom: 10px;
+#restaurant-list {
+  margin: 20px 0;
   padding: 10px;
-  border: 1px solid #902a2a;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  color: black;
+  max-width: 400px; 
 }
 
+#restaurant-list li {
+  list-style-type: none;
+  margin-bottom: 10px;
+  padding: 8px;
+  background-color: #000000e0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#restaurant-list li:hover {
+  background-color: #e0e0e0;
+}
 
