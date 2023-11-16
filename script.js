@@ -302,7 +302,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (symbolButton) {
             symbolButton.style.display = 'none';
         }
-        
+
+        // Hide the h3 element
+        var h3Element = document.querySelector('h3');
+        if (h3Element) {
+            h3Element.style.display = 'none';
+        }
+      
         openPopup();
         //recognition = new webkitSpeechRecognition();
        // recognition.lang = 'en-US';
@@ -453,7 +459,12 @@ async function generateImprovedReviewWithoutStars(whisperText) {
             "Take my short review and make it more informative for other consumers.",
             "Provide insights that would be valuable for someone considering a visit to the restaurant.",
             "Add details that could influence a consumer's decision to choose or avoid the restaurant.",
+            "Don't make it too lengthy. you know what the average review looks like.",
+           
         ];
+
+
+        
         
 
         // Combine additional prompts with the user's input
@@ -522,6 +533,9 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
             "Take my short review and make it more informative for other consumers.",
             "Provide insights that would be valuable for someone considering a visit to the restaurant.",
             "Add details that could influence a consumer's decision to choose or avoid the restaurant.",
+            "Don't make it too lengthy. you know what the average review looks like.",
+            "Don't mmentioend any star rating values inside the review. just use them to get an idea about user experience.",
+            "I also can share my star ratings for overall experience, food quality, service and atmosphere. dont mentione them in the review. just use them to make it more informative.",
         ];
 
         // Combine additional prompts with the user's input and star ratings
@@ -529,11 +543,11 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
             { role: 'system', content: 'You are a helpful assistant.' },
             ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
             { role: 'user', content: globalWhisperText },
-            { role: 'user', content: `Restaurant Name: ${restaurantName}` },
-            { role: 'user', content: `Overall Star Rating: ${selectedOverallStarCount}` },
-            { role: 'user', content: `Food Rating: ${foodRating}` },
-            { role: 'user', content: `Service Rating: ${serviceRating}` },
-            { role: 'user', content: `Atmosphere Rating: ${atmosphereRating}` },
+            { role: 'user', content: `This is the restaurant name: ${restaurantName}` },
+            { role: 'user', content: `This is the overall star rating user have given about their expirience: ${selectedOverallStarCount}` },
+            { role: 'user', content: `This is rating that user gives about food quality: ${foodRating}` },
+            { role: 'user', content: `This is rating that user gives about service that they had: ${serviceRating}` },
+            { role: 'user', content: `This is rating that user gives about Atmosphere that resturent had: ${atmosphereRating}` },
         ];
 
         // Fetch response from OpenAI API
