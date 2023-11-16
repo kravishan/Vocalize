@@ -287,20 +287,10 @@ a.link:hover {
 
 
 
-
-
-
-
-/* Need to remove */
-
-#map {
-  height: 400px;
-  width: 100%;
-}
-
 #restaurant-list {
-  margin-top: 80px;
+  margin-top: 10px;
   padding: 10px;
+  width: 95%; 
 }
 
 #restaurant-list li {
