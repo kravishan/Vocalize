@@ -158,7 +158,6 @@ a.link:hover {
 }
 
 /* Star rating  */
-
 .rating {
   font-size: 24px;
   cursor: pointer;
@@ -186,7 +185,6 @@ a.link:hover {
 }
 
 /* Star rating  pack */
-
 .ratingpack {
   font-size: 24px;
   cursor: pointer;
@@ -218,11 +216,7 @@ a.link:hover {
   color: #ffcc00;
 }
 
-
-
-
 /* Loading Animation */
-
 @keyframes ldio-3da7yahiari {
   0% { opacity: 1 }
   100% { opacity: 0 }
@@ -286,9 +280,6 @@ a.link:hover {
   animation-delay: 0s;
   background: #157759;
 }
-
-
-
 
 #restaurant-list {
   margin-top: 10px;

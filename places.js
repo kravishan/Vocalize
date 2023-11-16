@@ -1,5 +1,3 @@
-// script.js
-
 // Function to fetch user's location and display nearby restaurants
 function fetchAndDisplayNearbyRestaurants() {
   // Check if the browser supports geolocation
@@ -16,7 +14,7 @@ function fetchAndDisplayNearbyRestaurants() {
         // Define the request to fetch nearby restaurants
         const request = {
           location: userLocation,
-          radius: 100, // Search radius in meters (1km)
+          radius: 100, 
           types: ["restaurant"],
         };
 

@@ -1,6 +1,5 @@
-// API key
+// API key for OpenAI
 const apiKey = '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';
-
 
 // Index page script
 if ('serviceWorker' in navigator) {
@@ -14,7 +13,6 @@ if ('serviceWorker' in navigator) {
 }
 
 // Star rating overall script
-
 let selectedOverallStarCount = 0; 
 
 function handleOverallRating(event) {
@@ -428,16 +426,9 @@ function showMicrophoneButton() {
     }
   }
 
-
-
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
-// Function to send a request to ChatGPT-4 API and update the review output
-// Async function to generate an improved review with additional prompts
-// Async function to generate an improved hotel or restaurant review
 async function generateImprovedReviewWithoutStars(whisperText) {
 
     try {
