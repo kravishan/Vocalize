@@ -48,12 +48,15 @@ h3 {
   height: 80px;
 }
 
+
+/* microphone button  */
 .symbol {
   cursor: pointer;
   position: fixed;
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
+  display: none;
 }
 
 .symbol img {

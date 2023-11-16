@@ -399,7 +399,38 @@ function handleRating(event, set) {
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+// Retrieve the value from localStorage
+const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
+
+// Check if the value exists
+if (selectedRestaurantData) {
+  // Parse the JSON string to get the object
+  const selectedRestaurant = JSON.parse(selectedRestaurantData);
+
+  // Now you can use the selectedRestaurant object in your script
+  console.log("Selected Restaurant in script.js:", selectedRestaurant);
+
+  // Add your code here to use the selectedRestaurant object as needed
+} else {
+  console.log("No selected restaurant data in localStorage.");
+}
+
+
+// Function to show the microphone button
+function showMicrophoneButton() {
+    var microphoneButton = document.querySelector('.symbol');
+    var selectedRestaurantData = localStorage.getItem("selectedRestaurant");
+    if (selectedRestaurantData) {
+      microphoneButton.style.display = 'block';
+    }
+  }
+
+
+
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
@@ -411,6 +442,10 @@ function handleRating(event, set) {
 async function generateImprovedReviewWithoutStars(whisperText) {
 
     try {
+        // Get restaurant details from localStorage
+        const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
+        const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
+
         // Prompts tailored for hotel and restaurant reviews
         const additionalPrompts = [
             "I recently visited a restaurant and want to share my experience.",
@@ -427,6 +462,7 @@ async function generateImprovedReviewWithoutStars(whisperText) {
             { role: 'system', content: 'You are a helpful assistant.' },
             ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
             { role: 'user', content: whisperText },
+            { role: 'user', content: `Restaurant Name: ${restaurantName}` },
         ];
 
         // Fetch response from OpenAI API
@@ -475,6 +511,10 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
     //console.log('Atmosphere rating new:', atmosphereRating);
 
     try {
+        // Get restaurant details from localStorage
+        const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
+        const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
+
         // Prompts tailored for hotel and restaurant reviews
         const additionalPrompts = [
             "I recently visited a restaurant and want to share my experience.",
@@ -490,6 +530,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
             { role: 'system', content: 'You are a helpful assistant.' },
             ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
             { role: 'user', content: globalWhisperText },
+            { role: 'user', content: `Restaurant Name: ${restaurantName}` },
             { role: 'user', content: `Overall Star Rating: ${selectedOverallStarCount}` },
             { role: 'user', content: `Food Rating: ${foodRating}` },
             { role: 'user', content: `Service Rating: ${serviceRating}` },
@@ -515,6 +556,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
 
         const data = await response.json();
         const improvedReviewWithStars = data.choices[0].message.content;
+        
 
         // Log or use the generated improved review as needed
         console.log('Improved review with stars:', improvedReviewWithStars);
@@ -534,9 +576,6 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
 
 
 
-
-
-////////////////////////////////
 
 
 

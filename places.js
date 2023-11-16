@@ -32,6 +32,7 @@ function fetchAndDisplayNearbyRestaurants() {
   }
 }
 
+
 // Function to handle the results of the nearby search
 function handleResults(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -48,6 +49,14 @@ function handleResults(results, status) {
       const listItem = document.createElement("li");
       listItem.textContent = restaurantName;
 
+      // Add a click event listener to each list item
+      listItem.addEventListener("click", function () {
+        // Save the entire result object to localStorage
+        localStorage.setItem("selectedRestaurant", JSON.stringify(result));
+        console.log("Selected:", result);
+        showMicrophoneButton();
+      });
+
       // Append the list item to the restaurant list
       restaurantList.appendChild(listItem);
     }
@@ -61,3 +70,8 @@ window.onload = function () {
   console.log("Page loaded. Fetching and displaying nearby restaurants.");
   fetchAndDisplayNearbyRestaurants();
 };
+
+
+
+
+ 
