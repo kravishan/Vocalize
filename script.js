@@ -125,6 +125,7 @@ async function transcribeAudio(audioBlob) {
 
     const formData = new FormData();
     formData.append('model', 'whisper-1');
+    formData.append('language', 'en');
     formData.append('response_format', 'text');
     formData.append('file', audioBlob, 'audio.wav');
 
