@@ -234,29 +234,27 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     function stopRecording() {
-        // Check if mediaRecorder is initialized and is not in the 'inactive' state
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-            // Show spinner and hide stop button during the stopping process
             showSpinner();
             hideStopButton();
     
-            // Stop the mediaRecorder and clear recorded audio chunks
             mediaRecorder.stop();
             audioChunks = [];
     
-            // Check if the audioContext is active and close it
+            // Stop the media stream and close the audio context
             if (audioContext && audioContext.state === 'running') {
-                // Close the audioContext and handle the promise resolution
-                audioContext.close().then(() => {
-                    // Log a message after successfully closing the microphone stream
-                    console.log('Microphone stream closed');
-                }).catch(error => {
-                    // Log an error message if there's an issue closing the audioContext
-                    console.error('Error closing microphone stream:', error);
+                // Stop all tracks in the stream
+                const tracks = mediaRecorder.stream.getTracks();
+                tracks.forEach(track => track.stop());
+    
+                // Close the audio context
+                audioContext.close().then(function () {
+                    //console.log('Microphone stream closed');
                 });
             }
         }
     }
+    
     
 
     
