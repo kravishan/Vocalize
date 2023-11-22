@@ -151,6 +151,12 @@ async function transcribeAudio(audioBlob) {
         showRating();
         generateImprovedReviewWithoutStars(whisperText);
 
+        // Replace the content of the <h4> element with Whisper text
+        var h4Element = document.querySelector('h4');
+        if (h4Element) {
+            h4Element.textContent = whisperText;
+        }
+
     } catch (error) {
         console.error('Error:', error);
     }
@@ -306,10 +312,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Hide the microphone button
-        var symbolButton = document.querySelector('.symbol');
-        if (symbolButton) {
-            symbolButton.style.display = 'none';
-        }
+        // var symbolButton = document.querySelector('.symbol');
+        // if (symbolButton) {
+        //     //symbolButton.style.display = 'none';
+        // }
 
         // Hide the h3 element
         var h3Element = document.querySelector('h3');
@@ -470,10 +476,7 @@ async function generateImprovedReviewWithoutStars(whisperText) {
             "Don't make it too lengthy. you know what the average review looks like.",
            
         ];
-
-
-        
-        
+    
 
         // Combine additional prompts with the user's input
         const inputMessages = [

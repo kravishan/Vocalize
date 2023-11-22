@@ -39,6 +39,18 @@ h3 {
   font-weight: bold;
 }
 
+/* remove this later */
+h4 {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  font-weight: 300;
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .logo, .logo svg {
   width: 100px;
   height: 44px;
