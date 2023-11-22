@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     transcribeAudio(audioBlob);
     
                     // Clear audioChunks after processing
-                    audioChunks = [];
+                    //audioChunks = [];
                 };
     
                 // Start the mediaRecorder
