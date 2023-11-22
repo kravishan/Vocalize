@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 mediaRecorder.onstop = function () {
                     var audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
     
-                    // Save the audio data to a variable (you can use this variable to save to a file later)
+                    // Save the audio data to a variable for later use
                     savedAudioData = audioBlob;
     
                     // Save the audio or do further processing
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     transcribeAudio(audioBlob);
     
                     // Clear audioChunks after processing
-                    //audioChunks = [];
+                    audioChunks = [];
                 };
     
                 // Start the mediaRecorder
@@ -594,7 +594,6 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         console.error('Error:', error);
     }
 }
-
 
 
 
