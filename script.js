@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
     
                 mediaRecorder.onstop = function () {
-                    var audioBlob = new Blob(audioChunks, { type: 'audio/mp4' });
+                    var audioBlob = new Blob(audioChunks, { type: 'video/mp4' });
     
                     // Save the audio data to a variable for later use
                     savedAudioData = audioBlob;
