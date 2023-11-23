@@ -120,6 +120,17 @@ function hideStopButton() {
 
 let globalWhisperText = '';
 
+async function transcribeAudio(audioBlob) {
+    const chunkSize = 10 * 1000; // Split audio into 10-second chunks (adjust as needed)
+    let offset = 0;
+
+    while (offset < audioBlob.size) {
+        const chunk = audioBlob.slice(offset, offset + chunkSize);
+        await transcribeChunk(chunk);
+        offset += chunkSize;
+    }
+}
+
 // Function to transcribe audio using OpenAI API
 async function transcribeAudio(audioBlob) {
     let whisperText = '';
@@ -128,7 +139,7 @@ async function transcribeAudio(audioBlob) {
     formData.append('model', 'whisper-1');
     formData.append('language', 'en');
     formData.append('response_format', 'text');
-    formData.append('file', audioBlob, 'audio.wav');
+    formData.append('file', audioChunk, 'audio.wav');
 
     try {
         const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
@@ -231,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
     
                 // Start the mediaRecorder
-                mediaRecorder.start(1000);
+                mediaRecorder.start();
             })
             .catch(function (error) {
                 console.error('Error accessing microphone:', error);
