@@ -12,6 +12,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+
 // Star rating overall script
 let selectedOverallStarCount = 0; 
 
