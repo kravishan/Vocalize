@@ -193,6 +193,51 @@ document.addEventListener('DOMContentLoaded', function () {
         hideSpinner();
         hideRating();
         hideRatingSets();
+
+        if (navigator.userAgent.indexOf('Safari') !== -1) {
+            // Use the MediaRecorder API
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(function (stream) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    analyser = audioContext.createAnalyser();
+                    analyser.fftSize = 256;
+                    var source = audioContext.createMediaStreamSource(stream);
+                    source.connect(analyser);
+    
+                    dataArray = new Float32Array(analyser.fftSize);
+    
+                    mediaRecorder = new MediaRecorder(stream);
+    
+                    mediaRecorder.ondataavailable = function (event) {
+                        if (event.data.size > 0) {
+                            audioChunks.push(event.data);
+    
+                            // Update the wave view
+                            drawWave();
+                        }
+                    };
+    
+                    mediaRecorder.onstop = function () {
+                        var audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+    
+                        // Save the audio data to a variable for later use
+                        savedAudioData = audioBlob;
+    
+                        // Save the audio or do further processing
+                        //console.log('Audio saved:', audioUrl);
+                        transcribeAudio(audioBlob);
+    
+                        // Clear audioChunks after processing
+                        audioChunks = [];
+                    };
+    
+                    // Start the mediaRecorder
+                    mediaRecorder.start();
+                })
+                .catch(function (error) {
+                    console.error('Error accessing microphone:', error);
+                });
+        } else {
     
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(function (stream) {
@@ -235,6 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(function (error) {
                 console.error('Error accessing microphone:', error);
             });
+        }
     }
     
     
