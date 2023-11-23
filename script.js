@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(function (stream) {
-                audioContext = new (window.AudioContext || window.AudioContext)();
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 analyser = audioContext.createAnalyser();
                 analyser.fftSize = 256;
                 var source = audioContext.createMediaStreamSource(stream);
