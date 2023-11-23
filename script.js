@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
         hideRating();
         hideRatingSets();
     
-        navigator.mediaDevices.getUserMedia({ audio: true })
+        navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then(function (stream) {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 analyser = audioContext.createAnalyser();
@@ -247,7 +247,8 @@ document.addEventListener('DOMContentLoaded', function () {
             hideStopButton();
     
             mediaRecorder.stop();
-            audioChunks = [];
+            stream.getTracks().forEach(track => track.stop());
+            // audioChunks = [];
     
             // Stop the media stream and close the audio context
             if (audioContext && audioContext.state === 'running') {
