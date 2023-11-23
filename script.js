@@ -206,31 +206,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 dataArray = new Float32Array(analyser.fftSize);
     
                 mediaRecorder = new MediaRecorder(stream);
-
-
-
-                // Check audio format before starting recording
-                const checkAndStartRecording = async () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                    const convertedAudioBlob = await checkAndConvertAudio(audioBlob);
-
-                    if (convertedAudioBlob) {
-                        // Save the audio data to a variable for later use
-                        savedAudioData = convertedAudioBlob;
-
-                        // Save the audio or do further processing
-                        transcribeAudio(convertedAudioBlob);
-                    }
-
-                    // Clear audioChunks after processing
-                    audioChunks = [];
-                };
-
-
-
-
-
-
     
                 mediaRecorder.ondataavailable = function (event) {
                     if (event.data.size > 0) {
@@ -262,29 +237,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error accessing microphone:', error);
             });
     }
-
-
-    async function checkAndConvertAudio(audioBlob) {
-        try {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const audioBuffer = await readAudioBlob(audioBlob, audioContext);
-    
-            // Check the audio format
-            const audioFormat = audioBuffer.numberOfChannels;
-            if (audioFormat === 1 || audioFormat === 2) {
-                console.log('Audio is already in WAV format.');
-                return audioBlob; // No need to convert
-            } else {
-                console.log('Converting audio to WAV format...');
-                const wavBlob = await convertToWAV(audioBuffer, audioContext);
-                return wavBlob;
-            }
-        } catch (error) {
-            console.error('Error checking and converting audio:', error);
-            return null;
-        }
-    }
-    
     
     
     
