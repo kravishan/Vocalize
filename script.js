@@ -128,7 +128,7 @@ async function transcribeAudio(audioBlob) {
     formData.append('model', 'whisper-1');
     formData.append('language', 'en');
     formData.append('response_format', 'text');
-    formData.append('file', audioBlob, 'audio.wav');
+    formData.append('file', audioBlob, 'audio.m4a');
 
     try {
         const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
     
                 mediaRecorder.onstop = function () {
-                    var audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    var audioBlob = new Blob(audioChunks, { type: 'audio/m4a' });
     
                     // Save the audio data to a variable for later use
                     savedAudioData = audioBlob;
