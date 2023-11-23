@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
     
                 mediaRecorder.onstop = function () {
-                    var audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    var audioBlob = new Blob(audioChunks, { type: 'audio/mp4' });
     
                     // Save the audio data to a variable for later use
                     savedAudioData = audioBlob;
@@ -247,8 +247,8 @@ document.addEventListener('DOMContentLoaded', function () {
             hideStopButton();
     
             mediaRecorder.stop();
-            stream.getTracks().forEach(track => track.stop());
-            // audioChunks = [];
+            //stream.getTracks().forEach(track => track.stop());
+            audioChunks = [];
     
             // Stop the media stream and close the audio context
             if (audioContext && audioContext.state === 'running') {
