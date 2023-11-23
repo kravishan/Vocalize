@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
     
                 mediaRecorder.onstop = function () {
-                    var audioBlob = new Blob(audioChunks, { type: 'video/mp4' });
+                    var audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
     
                     // Save the audio data to a variable for later use
                     savedAudioData = audioBlob;
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
     
                 // Start the mediaRecorder
-                mediaRecorder.start();
+                mediaRecorder.start(1000);
             })
             .catch(function (error) {
                 console.error('Error accessing microphone:', error);
