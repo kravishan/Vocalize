@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Hide the microphone button
         var symbolButton = document.querySelector('.symbol');
         if (symbolButton) {
-            //symbolButton.style.display = 'none';
+            symbolButton.style.display = 'none';
         }
 
         // Hide the h3 element
