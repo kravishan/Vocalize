@@ -1,8 +1,19 @@
-const googleMapsScript = document.createElement('script');
-googleMapsScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAsSEtd2cKGE9m9StqSl-epk8HbToAA1NM&libraries=places';
-googleMapsScript.async = true;
-googleMapsScript.defer = true;
-document.head.appendChild(googleMapsScript);
+// places.js (Client-side code)
+
+// Fetch the Google Maps API script from your server
+fetch('http://localhost:3000/google-maps-script')
+  .then(response => response.text())
+  .then(script => {
+    // Execute the retrieved script
+    eval(script);
+
+    // Call the fetchAndDisplayNearbyRestaurants function when the page loads
+    window.onload = function () {
+      console.log("Page loaded. Fetching and displaying nearby restaurants.");
+      fetchAndDisplayNearbyRestaurants();
+    };
+  })
+  .catch(error => console.error('Error fetching Google Maps script:', error));
 
 // Function to fetch user's location and display nearby restaurants
 function fetchAndDisplayNearbyRestaurants() {
