@@ -469,140 +469,86 @@ function showMicrophoneButton() {
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
-async function generateImprovedReviewWithoutStars(whisperText) {
-
+// Function to send the text to the backend and trigger OpenAI request
+async function sendTextToBackendAndGenerateReview(whisperText) {
     try {
         // Get restaurant details from localStorage
         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
-        // Prompts tailored for hotel and restaurant reviews
-        const additionalPrompts = [
-            "I recently visited a restaurant and want to share my experience.",
-            "Please enhance my brief feedback by adding more details and making it consumer-friendly.",
-            "Imagine you are the customer, what additional information would you find helpful in a review?",
-            "Take my short review and make it more informative for other consumers.",
-            "Provide insights that would be valuable for someone considering a visit to the restaurant.",
-            "Add details that could influence a consumer's decision to choose or avoid the restaurant.",
-            "Don't make it too lengthy. you know what the average review looks like.",
-           
-        ];
-    
-
-        // Combine additional prompts with the user's input
-        const inputMessages = [
-            { role: 'system', content: 'You are a helpful assistant.' },
-            ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
-            { role: 'user', content: whisperText },
-            { role: 'user', content: `Restaurant Name: ${restaurantName}` },
-        ];
-
-        // Fetch response from OpenAI API
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        // Send text to the backend
+        const response = await fetch('http://localhost:3000/generate-improved-review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
-                model: 'gpt-3.5-turbo',
-                messages: inputMessages,
+                whisperText,
+                restaurantName,
             }),
         });
 
         if (!response.ok) {
-            throw new Error(`OpenAI API request failed: ${response.statusText}`);
+            throw new Error(`Backend request failed: ${response.statusText}`);
         }
 
-        const data = await response.json();
-        const improvedReview = data.choices[0].message.content;
+        const data = await response.text();
+        const improvedReview = data.improvedReview;
 
         // Log or use the generated improved review as needed
         console.log('Improved Review:', improvedReview);
 
         // Store the improved review in localStorage
         localStorage.setItem('improvedReview', improvedReview);
-        
+
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
 
-async function generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating) {
-//async function generateImprovedReviewWithStars() { 
-    //let globalWhisperText = 'Food was good.';
-    //let selectedOverallStarCount = '3';
-    //let foodRating = '5';
-    //let serviceRating = '4';
-    //let atmosphereRating = '4';   
-    //console.log('Whisper text new:', globalWhisperText);
-    //console.log('Overall star count new:', selectedOverallStarCount);
-    //console.log('Food rating new:', foodRating);
-    //console.log('Service rating new:', serviceRating);
-    //console.log('Atmosphere rating new:', atmosphereRating);
 
+
+
+// Function to send the data to the backend and trigger OpenAI request
+async function sendReviewDataToBackendAndGenerateReview(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating) {
     try {
         // Get restaurant details from localStorage
         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
-        // Prompts tailored for hotel and restaurant reviews
-        const additionalPrompts = [
-            "I recently visited a restaurant and want to share my experience.",
-            "Please enhance my brief feedback by adding more details and making it consumer-friendly.",
-            "Imagine you are the customer, what additional information would you find helpful in a review?",
-            "Take my short review and make it more informative for other consumers.",
-            "Provide insights that would be valuable for someone considering a visit to the restaurant.",
-            "Add details that could influence a consumer's decision to choose or avoid the restaurant.",
-            "Don't make it too lengthy. you know what the average review looks like.",
-            "Don't mmentioend any star rating values inside the review. just use them to get an idea about user experience.",
-            "I also can share my star ratings for overall experience, food quality, service and atmosphere. dont mentione them in the review. just use them to make it more informative.",
-        ];
-
-        // Combine additional prompts with the user's input and star ratings
-        const inputMessages = [
-            { role: 'system', content: 'You are a helpful assistant.' },
-            ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
-            { role: 'user', content: globalWhisperText },
-            { role: 'user', content: `This is the restaurant name: ${restaurantName}` },
-            { role: 'user', content: `This is the overall star rating user have given about their expirience: ${selectedOverallStarCount}` },
-            { role: 'user', content: `This is rating that user gives about food quality: ${foodRating}` },
-            { role: 'user', content: `This is rating that user gives about service that they had: ${serviceRating}` },
-            { role: 'user', content: `This is rating that user gives about Atmosphere that resturent had: ${atmosphereRating}` },
-        ];
-
-        // Fetch response from OpenAI API
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        // Send data to the backend
+        const response = await fetch('http://localhost:3000/generate-improved-review-with-stars', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
-                model: 'gpt-3.5-turbo',
-                messages: inputMessages,
+                globalWhisperText,
+                selectedOverallStarCount,
+                foodRating,
+                serviceRating,
+                atmosphereRating,
+                restaurantName,
             }),
         });
 
         if (!response.ok) {
-            throw new Error(`OpenAI API request failed: ${response.statusText}`);
+            throw new Error(`Backend request failed: ${response.statusText}`);
         }
 
-        const data = await response.json();
-        const improvedReviewWithStars = data.choices[0].message.content;
-        
+        const data = await response.text();
+        const improvedReviewWithStars = data.improvedReviewWithStars;
 
         // Log or use the generated improved review as needed
-        console.log('Improved review with stars:', improvedReviewWithStars);
+        console.log('Improved Review with Stars:', improvedReviewWithStars);
 
         // Store the improved review in localStorage
-        //localStorage.setItem('improvedReviewWithStars', improvedReviewWithStars);
+        localStorage.setItem('improvedReviewWithStars', improvedReviewWithStars);
 
         // Redirect to the result page with parameters
-        const resultPageURL = `result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
-        window.location.href = resultPageURL;
-
+        //const resultPageURL = `result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
+        //window.location.href = resultPageURL;
 
     } catch (error) {
         console.error('Error:', error);
