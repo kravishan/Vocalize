@@ -117,51 +117,60 @@ function hideStopButton() {
         stopButton.style.display = 'none';
     }
 }
+///////////////////////////////////////////////////////////////////////////////////////
 
 let globalWhisperText = '';
 
-// Function to transcribe audio using OpenAI API
 async function transcribeAudio(audioBlob) {
-    let whisperText = '';
+  let whisperText = '';
 
-    const formData = new FormData();
-    formData.append('model', 'whisper-1');
-    formData.append('language', 'en');
-    formData.append('response_format', 'text');
-    formData.append('file', audioBlob, 'audio.wav');
+  // Create a Blob from the audio data
+  const audioBlobObject = new Blob([audioBlob], { type: 'audio/wav' });
 
-    try {
-        const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${apiKey}`,
-            },
-            body: formData,
-        });
+  // Create a FormData for sending to the server
+  const formData = new FormData();
+  formData.append('file', audioBlobObject, 'audio_received.wav');
 
-        if (!response.ok) {
-            throw new Error(`OpenAI API request failed: ${response.statusText}`);
-        }
+  // Create an XMLHttpRequest object
+  const xhr = new XMLHttpRequest();
 
-        const data = await response.text();        
-        whisperText = data;
-        globalWhisperText = data;
-        
-        console.log('Whisper text:', whisperText);
-        hideSpinner();
-        showRating();
-        generateImprovedReviewWithoutStars(whisperText);
+  // Configure it: POST-request for the specified URL
+  xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
 
-        // Replace the content of the <h4> element with Whisper text
-        var h4Element = document.querySelector('h4');
-        if (h4Element) {
-            h4Element.textContent = whisperText;
-        }
+  // Set up a handler for when the request is successfully completed
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      whisperText = xhr.responseText;
 
-    } catch (error) {
-        console.error('Error:', error);
+      globalWhisperText = whisperText;
+
+      console.log('Whisper text:', whisperText);
+      hideSpinner();
+      showRating();
+      generateImprovedReviewWithoutStars(whisperText);
+
+      // Replace the content of the <h4> element with Whisper text
+      const h4Element = document.querySelector('h4');
+      if (h4Element) {
+        h4Element.textContent = whisperText;
+      }
+    } else {
+      console.error('Backend request failed:', xhr.statusText);
     }
+  };
+
+  // Set up a handler for network errors
+  xhr.onerror = function () {
+    console.error('Network error occurred');
+  };
+
+  // Send the FormData with the audio file
+  xhr.send(formData);
 }
+
+
+
+
 
 // Popup script
 document.addEventListener('DOMContentLoaded', function () {

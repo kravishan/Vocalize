@@ -1,9 +1,21 @@
-// Import necessary modules
 const express = require('express');
+const bodyParser = require('body-parser');
+const fetch = require('node-fetch');
+const FormData = require('form-data');
+
+const multer = require('multer');
+
+const fs = require('fs');
+const wav = require('wav');
+
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Define your Google Maps API key
 const googleMapsApiKey = 'AIzaSyAsSEtd2cKGE9m9StqSl-epk8HbToAA1NM';
+const openaiApiKey = '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';
 
 // Middleware to handle CORS (Cross-Origin Resource Sharing) - adjust as needed
 app.use((req, res, next) => {
@@ -25,11 +37,69 @@ app.get('/google-maps-script', (req, res) => {
   res.send(script);
 });
 
-// Your existing endpoint for fetching and forwarding data to Google Maps API
-app.post('/google-maps-endpoint', async (req, res) => {
-  // Your existing logic to fetch and forward data to Google Maps API
-  // ...
+// Multer middleware for handling file uploads
+const upload = multer();
+
+// Endpoint to transcribe audio
+app.post('/transcribe-audio', upload.single('file'), async (req, res) => {
+  try {
+    const audioBlob = req.file.buffer.toString('base64');
+
+    // Log the raw audioBlob data
+    console.log('Raw Audio Blob:', audioBlob);
+
+    if (!audioBlob || typeof audioBlob !== 'string') {
+      console.error('Invalid audio data:', audioBlob);
+      res.status(400).send({ error: 'Invalid audio data' });
+      return;
+    }
+
+    // Convert the received audio data to a Buffer
+    const wavData = Buffer.from(audioBlob, 'base64');
+
+    // Log the converted audio data
+    console.log('Converted Audio Data:', wavData);
+
+    // Construct the multipart/form-data manually
+    const formData = new FormData();
+
+    // Append additional parameters
+    formData.append('model', 'whisper-1');
+    formData.append('language', 'en');
+    formData.append('response_format', 'text');
+    formData.append('file', wavData, { filename: 'audio_received.wav' });
+
+    // Forward the audio to the Whisper API
+    const whisperApiResponse = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${openaiApiKey}`,
+      },
+      body: formData,
+    });
+
+    console.log('Whisper API Response:', whisperApiResponse.status, whisperApiResponse.statusText);
+
+    if (!whisperApiResponse.ok) {
+      throw new Error(`Whisper API request failed: ${whisperApiResponse.statusText}`);
+    }
+
+    const whisperApiData = await whisperApiResponse.text();
+    const transcription = whisperApiData;
+
+    console.log('Whisper API Data:', transcription);
+
+    // Send the result back to the frontend
+    res.send({ transcription });
+  } catch (error) {
+    console.error('Error during Whisper API request:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
+
+
+
+
 
 // Start the server
 const port = 3000; // Choose a port for your server
