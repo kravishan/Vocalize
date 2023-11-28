@@ -547,8 +547,8 @@ async function sendReviewDataToBackendAndGenerateReview(globalWhisperText, selec
         localStorage.setItem('improvedReviewWithStars', improvedReviewWithStars);
 
         // Redirect to the result page with parameters
-        //const resultPageURL = `result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
-        //window.location.href = resultPageURL;
+        const resultPageURL = `result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
+        window.location.href = resultPageURL;
 
     } catch (error) {
         console.error('Error:', error);
