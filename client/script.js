@@ -1,6 +1,3 @@
-// API key for OpenAI
-const apiKey = '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';
-
 // Index page script
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
