@@ -25,6 +25,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
 // Endpoint to serve the Google Maps API script
 app.get('/google-maps-script', (req, res) => {
   const script = `

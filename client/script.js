@@ -137,10 +137,7 @@ async function transcribeAudio(audioBlob) {
   // Set up a handler for when the request is successfully completed
   xhr.onload = function () {
     if (xhr.status === 200) {
-        const responseData = JSON.parse(xhr.responseText);
-        const whisperText = responseData.transcription;
-
-        globalWhisperText = whisperText;
+      whisperText = xhr.responseText;
 
       globalWhisperText = whisperText;
 
