@@ -137,7 +137,10 @@ async function transcribeAudio(audioBlob) {
   // Set up a handler for when the request is successfully completed
   xhr.onload = function () {
     if (xhr.status === 200) {
-      whisperText = xhr.responseText;
+        const responseData = JSON.parse(xhr.responseText);
+        const whisperText = responseData.transcription;
+
+        globalWhisperText = whisperText;
 
       globalWhisperText = whisperText;
 
@@ -145,12 +148,6 @@ async function transcribeAudio(audioBlob) {
       hideSpinner();
       showRating();
       generateImprovedReviewWithoutStars(whisperText);
-
-      // Replace the content of the <h4> element with Whisper text
-      const h4Element = document.querySelector('h4');
-      if (h4Element) {
-        h4Element.textContent = whisperText;
-      }
     } else {
       console.error('Backend request failed:', xhr.statusText);
     }
@@ -467,7 +464,7 @@ function showMicrophoneButton() {
 /////////////////////////////////////////////////////////////////////////////////
 
 // Function to send the text to the backend and trigger OpenAI request
-async function sendTextToBackendAndGenerateReview(whisperText) {
+async function generateImprovedReviewWithoutStars(whisperText) {
     try {
         // Get restaurant details from localStorage
         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
@@ -508,7 +505,7 @@ async function sendTextToBackendAndGenerateReview(whisperText) {
 
 
 // Function to send the data to the backend and trigger OpenAI request
-async function sendReviewDataToBackendAndGenerateReview(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating) {
+async function generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating) {
     try {
         // Get restaurant details from localStorage
         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
