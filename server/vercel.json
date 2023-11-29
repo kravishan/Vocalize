@@ -1,0 +1,32 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "app.js", 
+        "use": "@now/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/transcribe-audio",
+        "dest": "app.js"
+      },
+      {
+        "src": "/generate-improved-review",
+        "dest": "app.js"
+      },
+      {
+        "src": "/generate-improved-review-with-stars",
+        "dest": "app.js"
+      },
+      {
+        "src": "/google-maps-script",
+        "dest": "app.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "app.js"
+      }
+    ]
+  }
+  
