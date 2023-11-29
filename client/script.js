@@ -1,4 +1,4 @@
-// Index page script
+// Add service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('service-worker.js').then(function(registration) {
@@ -10,7 +10,13 @@ if ('serviceWorker' in navigator) {
 }
 
 
-// Star rating overall script
+
+
+
+
+/////////////////////////   Star rating   ///////////////////////////
+
+ // Star rating overall script
 let selectedOverallStarCount = 0; 
 
 function handleOverallRating(event) {
@@ -46,19 +52,76 @@ function handleOverallRating(event) {
     }
 }
 
+// Star rating set script
+let foodRating = 0;
+let serviceRating = 0;
+let atmosphereRating = 0;
+
+function handleRating(event, set) {
+    const stars = document.querySelectorAll(`.${set} .star`);
+    const clickedStar = event.target;
+
+    if (clickedStar.classList.contains('star')) {
+        const ratingValue = parseInt(clickedStar.getAttribute('data-value'));
+
+        // Reset all stars in the set
+        stars.forEach(star => star.classList.remove('checked'));
+
+        // Mark stars up to the clicked one as checked
+        for (let i = 1; i <= ratingValue; i++) {
+            const star = document.getElementById(`${set}_star${i}`);
+            if (star) {
+                star.classList.add('checked');
+            }
+        }
+
+        // Log or use the selected star count as needed
+        //console.log(`Selected Star Count for ${set}:`, ratingValue);
+
+        // Save the rating value to the corresponding variable
+        switch (set) {
+            case 'set1':
+                foodRating = ratingValue;
+                console.log('Food rating:', foodRating);
+                break;
+            case 'set2':
+                serviceRating = ratingValue;
+                console.log('Service rating:', serviceRating);
+                break;
+            case 'set3':
+                atmosphereRating = ratingValue;
+                console.log('Atmosphere rating:', atmosphereRating);
+                break;
+            default:
+                break;
+                
+        }
+
+        // Check if all ratings are set before calling showSpinnerWithStar
+        if (foodRating !== 0 && serviceRating !== 0 && atmosphereRating !== 0) {
+            hideRatingSets();
+            showSpinner();
+            generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
+            //generateImprovedReviewWithStars();
+        }
+         
+        //generateImprovedReviewWithStars(whisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
+    }
+
+}
+
+
+
+
+
+
+/////////////////////////   Show BUTTONS   ///////////////////////////
+
 // Function to show the overall rating
 function showRating() {
     var rating = document.querySelector('.rating');
     if (rating) {
         rating.style.display = 'block';
-    }
-}
-
-// Function to hide the overall rating
-function hideRating() {
-    var rating = document.querySelector('.rating');
-    if (rating) {
-        rating.style.display = 'none';
     }
 }
 
@@ -69,6 +132,45 @@ function showRatingSets() {
         ratingpacks.forEach(ratingpack => {
             ratingpack.style.display = 'block';
         });
+    }
+}
+
+// Function to show the spinner
+function showSpinner() {
+    var spinner = document.querySelector('.loadingio-spinner-spinner-euwfnax506b');
+    if (spinner) {
+    spinner.style.display = 'block';
+    }
+}
+
+function showStopButton() {
+    var stopButton = document.querySelector('.stop');
+    if (stopButton) {
+        stopButton.style.display = 'block';
+    }
+}
+
+// Function to show the microphone button
+function showMicrophoneButton() {
+    var microphoneButton = document.querySelector('.symbol');
+    var selectedRestaurantData = localStorage.getItem("selectedRestaurant");
+    if (selectedRestaurantData) {
+      microphoneButton.style.display = 'block';
+    }
+  }
+
+
+
+
+
+
+/////////////////////////   HIDE BUTTONS   ///////////////////////////
+
+// Function to hide the overall rating
+function hideRating() {
+    var rating = document.querySelector('.rating');
+    if (rating) {
+        rating.style.display = 'none';
     }
 }
 
@@ -84,14 +186,6 @@ function hideRatingSets() {
 }
 
 
-// Function to show the spinner
-function showSpinner() {
-    var spinner = document.querySelector('.loadingio-spinner-spinner-euwfnax506b');
-    if (spinner) {
-    spinner.style.display = 'block';
-    }
-}
-
 // Function to hide the spinner
 function hideSpinner() {
     var spinner = document.querySelector('.loadingio-spinner-spinner-euwfnax506b');
@@ -101,68 +195,18 @@ function hideSpinner() {
 }
 
 
-function showStopButton() {
-    var stopButton = document.querySelector('.stop');
-    if (stopButton) {
-        stopButton.style.display = 'block';
-    }
-}
-
+// Function to hide the stop button
 function hideStopButton() {
     var stopButton = document.querySelector('.stop');
     if (stopButton) {
         stopButton.style.display = 'none';
     }
 }
-///////////////////////////////////////////////////////////////////////////////////////
-
-let globalWhisperText = '';
-
-async function transcribeAudio(audioBlob) {
-  let whisperText = '';
-
-  // Create a Blob from the audio data
-  const audioBlobObject = new Blob([audioBlob], { type: 'audio/wav' });
-
-  // Create a FormData for sending to the server
-  const formData = new FormData();
-  formData.append('file', audioBlobObject, 'audio_received.wav');
-
-  // Create an XMLHttpRequest object
-  const xhr = new XMLHttpRequest();
-
-  // Configure it: POST-request for the specified URL
-  xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
-
-  // Set up a handler for when the request is successfully completed
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-        const responseData = JSON.parse(xhr.responseText);
-        const whisperText = responseData.transcription;
-
-      globalWhisperText = whisperText;
-
-      console.log('Whisper text:', whisperText);
-      hideSpinner();
-      showRating();
-      generateImprovedReviewWithoutStars(whisperText);
-    } else {
-      console.error('Backend request failed:', xhr.statusText);
-    }
-  };
-
-  // Set up a handler for network errors
-  xhr.onerror = function () {
-    console.error('Network error occurred');
-  };
-
-  // Send the FormData with the audio file
-  xhr.send(formData);
-}
 
 
 
 
+/////////////////////////   POPUP   ///////////////////////////
 
 // Popup script
 document.addEventListener('DOMContentLoaded', function () {
@@ -177,7 +221,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var audioContext;
     var analyser;
     var dataArray;
-
     
     function openPopup() {
         document.body.classList.add('popup-open');
@@ -189,7 +232,6 @@ document.addEventListener('DOMContentLoaded', function () {
         popup.style.display = 'none';
         stopRecording();
     }
-
 
     function startRecording() {
         hideSpinner();
@@ -237,10 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(function (error) {
                 console.error('Error accessing microphone:', error);
             });
-    }
-    
-    
-    
+    }  
 
     function stopRecording() {
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
@@ -264,10 +303,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-    
-    
-
-    
 
     function drawWave() {
         if (analyser) {
@@ -361,76 +396,17 @@ document.addEventListener('DOMContentLoaded', function () {
         canvasContext.clearRect(0, 0, width, height);
 
         waveCanvas.style.display = 'none';
-
     });
     
-
     var closeButton = document.querySelector('.close');
     closeButton.addEventListener('click', closePopup);
 });
 
 
-// Star rating set script
-let foodRating = 0;
-let serviceRating = 0;
-let atmosphereRating = 0;
-
-function handleRating(event, set) {
-    const stars = document.querySelectorAll(`.${set} .star`);
-    const clickedStar = event.target;
-
-    if (clickedStar.classList.contains('star')) {
-        const ratingValue = parseInt(clickedStar.getAttribute('data-value'));
-
-        // Reset all stars in the set
-        stars.forEach(star => star.classList.remove('checked'));
-
-        // Mark stars up to the clicked one as checked
-        for (let i = 1; i <= ratingValue; i++) {
-            const star = document.getElementById(`${set}_star${i}`);
-            if (star) {
-                star.classList.add('checked');
-            }
-        }
-
-        // Log or use the selected star count as needed
-        //console.log(`Selected Star Count for ${set}:`, ratingValue);
-
-        // Save the rating value to the corresponding variable
-        switch (set) {
-            case 'set1':
-                foodRating = ratingValue;
-                console.log('Food rating:', foodRating);
-                break;
-            case 'set2':
-                serviceRating = ratingValue;
-                console.log('Service rating:', serviceRating);
-                break;
-            case 'set3':
-                atmosphereRating = ratingValue;
-                console.log('Atmosphere rating:', atmosphereRating);
-                break;
-            default:
-                break;
-                
-        }
-
-        // Check if all ratings are set before calling showSpinnerWithStar
-        if (foodRating !== 0 && serviceRating !== 0 && atmosphereRating !== 0) {
-            hideRatingSets();
-            showSpinner();
-            generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
-            //generateImprovedReviewWithStars();
-        }
-         
-        //generateImprovedReviewWithStars(whisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
-    }
-
-}
 
 
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////   LOCAL STORAGE   ///////////////////////////
 
 // Retrieve the value from localStorage
 const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
@@ -449,17 +425,57 @@ if (selectedRestaurantData) {
 }
 
 
-// Function to show the microphone button
-function showMicrophoneButton() {
-    var microphoneButton = document.querySelector('.symbol');
-    var selectedRestaurantData = localStorage.getItem("selectedRestaurant");
-    if (selectedRestaurantData) {
-      microphoneButton.style.display = 'block';
-    }
-  }
 
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////   API REQUESTS   ///////////////////////////
+
+
+// Function to get the transcribe audio from the backend
+let globalWhisperText = '';
+
+async function transcribeAudio(audioBlob) {
+  let whisperText = '';
+
+  // Create a Blob from the audio data
+  const audioBlobObject = new Blob([audioBlob], { type: 'audio/wav' });
+
+  // Create a FormData for sending to the server
+  const formData = new FormData();
+  formData.append('file', audioBlobObject, 'audio_received.wav');
+
+  // Create an XMLHttpRequest object
+  const xhr = new XMLHttpRequest();
+
+  // Configure it: POST-request for the specified URL
+  xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
+
+  // Set up a handler for when the request is successfully completed
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+        const responseData = JSON.parse(xhr.responseText);
+        const whisperText = responseData.transcription;
+
+      globalWhisperText = whisperText;
+
+      console.log('Whisper text:', whisperText);
+      hideSpinner();
+      showRating();
+      generateImprovedReviewWithoutStars(whisperText);
+    } else {
+      console.error('Backend request failed:', xhr.statusText);
+    }
+  };
+
+  // Set up a handler for network errors
+  xhr.onerror = function () {
+    console.error('Network error occurred');
+  };
+
+  // Send the FormData with the audio file
+  xhr.send(formData);
+}
+
 
 // Function to send the text to the backend and trigger OpenAI request
 async function generateImprovedReviewWithoutStars(whisperText) {
@@ -497,10 +513,6 @@ async function generateImprovedReviewWithoutStars(whisperText) {
         console.error('Error:', error);
     }
 }
-
-
-
-
 
 // Function to send the data to the backend and trigger OpenAI request
 async function generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating) {
