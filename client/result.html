@@ -57,18 +57,15 @@
             border: none;
             color: white;
             padding: 10px 20px;
-            text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin: 4px 2px;
             cursor: pointer;
             border-radius: 4px;
-            margin: 0 auto; 
-            margin-inline-start: 50px;
             margin-bottom: 20px;
-      
-
+            margin-inline-end: 10%;
+            margin-inline-start: 15%;
+            align-self: center;
         }
 
         button.cancel {
@@ -78,13 +75,32 @@
         .button-container {
             text-align: center;
         }
+
+        .toast {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #000000d5; /* Background color for the toast */
+            color: #fff; /* Text color */
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0.9;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10%;
+        }
     </style>
 </head>
 <body>
     <h1>Result Page</h1>
     <div id="resultOutput"></div>
-    <button id="saveButton" onclick="saveToFirestore()">Save Result</button>
-    <button onclick="goBack()" class="cancel">Cancel</button>
+    <div class="container">
+    <button id="saveButton" onclick="saveToFirestore()" class="button">Save Result</button>
+    <button onclick="goBack()" class="button">Cancel</button></div>
+    <div id="toast" class="toast"></div>
 
     <script>
         // Your Firebase project configuration
@@ -151,22 +167,32 @@
                 .add(resultData)
                 .then((docRef) => {
                     console.log('Document written with ID:', docRef.id);
-                    updateButtonColor(true);
+                    updateButtonColorAndShowToast(true);
                 })
                 .catch((error) => {
                     console.error('Error adding document:', error);
-                    updateButtonColor(false);
+                    updateButtonColorAndShowToast(false);
                 });
         }
 
-        // Function to update button color based on success or error
-        function updateButtonColor(success) {
+        // Function to show toast based on success or error
+        function updateButtonColorAndShowToast(success) {
             const button = document.getElementById('saveButton');
+            const toast = document.getElementById('toast');
+
             if (success) {
-                button.style.backgroundColor = '#4caf50'; // Green color for success
+                toast.innerHTML = 'Save successful!';
             } else {
-                button.style.backgroundColor = '#f44336'; // Red color for error
+                toast.innerHTML = 'Save failed!';
             }
+
+            // Show the toast
+            toast.style.display = 'block';
+
+            // Hide the toast after 3 seconds (adjust as needed)
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
         }
 
         // Display the data on the page
