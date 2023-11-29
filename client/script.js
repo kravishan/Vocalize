@@ -137,7 +137,8 @@ async function transcribeAudio(audioBlob) {
   // Set up a handler for when the request is successfully completed
   xhr.onload = function () {
     if (xhr.status === 200) {
-      whisperText = xhr.responseText;
+        const responseData = JSON.parse(xhr.responseText);
+        const whisperText = responseData.transcription;
 
       globalWhisperText = whisperText;
 
@@ -483,7 +484,7 @@ async function generateImprovedReviewWithoutStars(whisperText) {
             throw new Error(`Backend request failed: ${response.statusText}`);
         }
 
-        const data = await response.text();
+        const data = await response.json();
         const improvedReview = data.improvedReview;
 
         // Log or use the generated improved review as needed
@@ -528,7 +529,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
             throw new Error(`Backend request failed: ${response.statusText}`);
         }
 
-        const data = await response.text();
+        const data = await response.json();
         const improvedReviewWithStars = data.improvedReviewWithStars;
 
         // Log or use the generated improved review as needed
@@ -538,7 +539,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         localStorage.setItem('improvedReviewWithStars', improvedReviewWithStars);
 
         // Redirect to the result page with parameters
-        const resultPageURL = `result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
+        const resultPageURL = `/client/result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
         window.location.href = resultPageURL;
 
     } catch (error) {
