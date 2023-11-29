@@ -1,7 +1,7 @@
 // places.js (Client-side code)
 
 // Fetch the Google Maps API script from your server
-fetch('https://nodejs-production-7fe8.up.railway.app/google-maps-script')
+fetch('http://localhost:3000/google-maps-script')
   .then(response => response.text())
   .then(script => {
     // Execute the retrieved script
