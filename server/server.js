@@ -94,7 +94,7 @@ app.post('/transcribe-audio', upload.single('file'), async (req, res) => {
     console.log('Whisper API Data:', transcription);
 
     // Send the result back to the frontend
-    res.text({ transcription });
+    res.send({ transcription });
   } catch (error) {
     console.error('Error during Whisper API request:', error);
     res.status(500).json({ error: 'Internal server error' });
