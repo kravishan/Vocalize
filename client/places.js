@@ -1,7 +1,7 @@
 // places.js (Client-side code)
 
 // Fetch the Google Maps API script from your server
-fetch('http://192.168.0.100:3000/google-maps-script')
+fetch('http://34.30.26.167:8080/google-maps-script')
   .then(response => response.text())
   .then(script => {
     // Execute the retrieved script
