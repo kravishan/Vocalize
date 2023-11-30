@@ -1,7 +1,7 @@
 // places.js (Client-side code)
 
 // Fetch the Google Maps API script from your server
-fetch('https://coral-app-mbl5v.ondigitalocean.app/server/google-maps-script')
+fetch('https://vocalizer.dev/server/google-maps-script')
   .then(response => response.text())
   .then(script => {
     // Execute the retrieved script
