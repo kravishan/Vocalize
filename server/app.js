@@ -2,8 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 const FormData = require('form-data');
-
 const multer = require('multer');
+
+require('dotenv').config();
 
 const fs = require('fs');
 const wav = require('wav');
@@ -14,8 +15,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Define your Google Maps API key
-const googleMapsApiKey = 'AIzaSyAsSEtd2cKGE9m9StqSl-epk8HbToAA1NM';
-const openaiApiKey = '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';
+const googleMapsApiKey = process.env.GOOGLEMAP_APIKEY;
+const openaiApiKey = process.env.OPENAI_APIKEY;
 
 // Middleware to handle CORS (Cross-Origin Resource Sharing) - adjust as needed
 app.use((req, res, next) => {
