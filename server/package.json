@@ -4,7 +4,7 @@
     "description": "Vocalize",
     "main": "app.js",
     "engines": {
-      "npm": "16.x"
+      "node": "16.x"
     },
     "scripts": {
       "build:digitalocean": "npm install --production=false && npm run build && npm ci",
