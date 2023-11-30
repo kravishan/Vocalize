@@ -226,11 +226,8 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
 });
 
 
-
-
-
 // Start the server
-const port = 3000; // Choose a port for your server
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
