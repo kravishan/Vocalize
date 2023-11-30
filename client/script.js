@@ -152,7 +152,7 @@ function showStopButton() {
 
 // Function to show the microphone button
 function showMicrophoneButton() {
-    var microphoneButton = document.querySelector('.symbol');
+    var microphoneButton = document.querySelector('.microphone-black');
     var selectedRestaurantData = localStorage.getItem("selectedRestaurant");
     if (selectedRestaurantData) {
       microphoneButton.style.display = 'block';
@@ -212,7 +212,7 @@ function hideStopButton() {
 document.addEventListener('DOMContentLoaded', function () {
     var popup = document.getElementById('popup');
     var stopButton = document.querySelector('.stop');
-    var microphoneButton = document.querySelector('.symbol');
+    var microphoneButton = document.querySelector('.microphone-black');
     var waveCanvas = document.querySelector('.wave-canvas');
 
     //var recognition;
@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Hide the microphone button
-        var symbolButton = document.querySelector('.symbol');
+        var symbolButton = document.querySelector('.microphone-black');
         if (symbolButton) {
             symbolButton.style.display = 'none';
         }

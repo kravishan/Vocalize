@@ -44,14 +44,16 @@ h3 {
   height: 44px;
 }
 
-.symbol, .symbol svg {
+
+/* microphone button  black*/
+.microphone-black, .microphone-black svg {
   width: 80px;
   height: 80px;
 }
 
 
-/* microphone button  */
-.symbol {
+
+.microphone-black {
   cursor: pointer;
   position: fixed;
   bottom: 50px;
@@ -60,10 +62,37 @@ h3 {
   display: none;
 }
 
-.symbol img {
-  width: 80px;
+.microphone-black img {
+  width: 100px;
   height: auto;
 }
+
+
+
+
+/* microphone button  white*/
+
+.microphone-white, .microphone-white svg {
+  width: 80px;
+  height: 80px;
+}
+
+
+.microphone-white {
+  cursor: pointer;
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+
+.microphone-white img {
+  width: 100px;
+  height: auto;
+}
+
+
 
 a.button {
   color: #fff;
@@ -98,7 +127,7 @@ a.link:hover {
   fill: #51B96D;
 }
 
-.popup-open .symbol {
+.popup-open .microphone-black {
   display: none;
 }
 
@@ -319,6 +348,14 @@ body.theme-dark .bg-theme {
 
 body.theme-dark .font-22 {
   color: #fff;
+}
+
+body.theme-dark .microphone-white {
+  display: block;
+}
+
+body.theme-dark .microphone-white {
+  display: block;
 }
 
 /* Light theme styles */
