@@ -1,61 +1,50 @@
-//Dark Mode
-function checkDarkMode(){
-    const toggleDark = document.querySelectorAll('[data-toggle-theme]');
-    function activateDarkMode(){
+document.addEventListener('DOMContentLoaded', function () {
+    const darkButton = document.querySelector('.dark-button');
+    const lightButton = document.querySelector('.white-button');
+  
+    // Initially hide the light mode button
+    lightButton.style.display = 'none';
+  
+    function checkDarkMode() {
+      const toggleDark = document.querySelectorAll('[data-toggle-theme]');
+  
+      function activateDarkMode() {
         document.body.classList.add('theme-dark');
         document.body.classList.remove('theme-light', 'detect-theme');
-        for(let i = 0; i < toggleDark.length; i++){toggleDark[i].checked="checked"};
-        localStorage.setItem(pwaName+'-Theme', 'dark-mode');
-    }
-    function activateLightMode(){
+        for (let i = 0; i < toggleDark.length; i++) {
+          toggleDark[i].checked = "checked";
+        }
+        localStorage.setItem('-Theme', 'dark-mode');
+  
+        // Show the light mode button after dark mode is activated
+        lightButton.style.display = 'block';
+  
+        // Replace the dark mode button with another button
+        darkButton.style.display = 'none';
+      }
+  
+      function activateLightMode() {
         document.body.classList.add('theme-light');
-        document.body.classList.remove('theme-dark','detect-theme');
-        for(let i = 0; i < toggleDark.length; i++){toggleDark[i].checked=false};
-        localStorage.setItem(pwaName+'-Theme', 'light-mode');
+        document.body.classList.remove('theme-dark', 'detect-theme');
+        for (let i = 0; i < toggleDark.length; i++) {
+          toggleDark[i].checked = false;
+        }
+        localStorage.setItem('Theme', 'light-mode');
+  
+        // Hide the light mode button after light mode is activated
+        lightButton.style.display = 'none';
+  
+        // Restore the dark mode button
+        darkButton.style.display = 'block';
+      }
+  
+      // Activating Dark Mode
+      darkButton.addEventListener('click', activateDarkMode);
+  
+      // Activating Light Mode
+      lightButton.addEventListener('click', activateLightMode);
     }
-    function removeTransitions(){var falseTransitions = document.querySelectorAll('.btn, .header, #footer-bar, .menu-box, .menu-active'); for(let i = 0; i < falseTransitions.length; i++) {falseTransitions[i].style.transition = "all 0s ease";}}
-    function addTransitions(){var trueTransitions = document.querySelectorAll('.btn, .header, #footer-bar, .menu-box, .menu-active'); for(let i = 0; i < trueTransitions.length; i++) {trueTransitions[i].style.transition = "";}}
-
-    function setColorScheme() {
-        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
-        const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
-        const isNoPreference = window.matchMedia("(prefers-color-scheme: no-preference)").matches
-        window.matchMedia("(prefers-color-scheme: dark)").addListener(e => e.matches && activateDarkMode())
-        window.matchMedia("(prefers-color-scheme: light)").addListener(e => e.matches && activateLightMode())
-        if(isDarkMode) activateDarkMode();
-        if(isLightMode) activateLightMode();
-    }
-
-    //Activating Dark Mode
-    var darkModeSwitch = document.querySelectorAll('[data-toggle-theme]')
-    darkModeSwitch.forEach(el => el.addEventListener('click',e =>{
-        if(document.body.className == "theme-light"){ removeTransitions(); activateDarkMode();}
-        else if(document.body.className == "theme-dark"){ removeTransitions(); activateLightMode();}
-        setTimeout(function(){addTransitions();},350);
-    }));
-
-    //Set Color Based on Remembered Preference.
-    if(localStorage.getItem(pwaName+'-Theme') == "dark-mode"){for(let i = 0; i < toggleDark.length; i++){toggleDark[i].checked="checked"};document.body.className = 'theme-dark';}
-    if(localStorage.getItem(pwaName+'-Theme') == "light-mode"){document.body.className = 'theme-light';} if(document.body.className == "detect-theme"){setColorScheme();}
-
-    //Detect Dark/Light Mode
-    const darkModeDetect = document.querySelectorAll('.detect-dark-mode');
-    darkModeDetect.forEach(el => el.addEventListener('click',e =>{
-        document.body.classList.remove('theme-light', 'theme-dark');
-        document.body.classList.add('detect-theme')
-        setTimeout(function(){setColorScheme();},50)
-    }))
-}
-if(localStorage.getItem(pwaName+'-Theme') == "dark-mode"){document.body.className = 'theme-dark';}
-if(localStorage.getItem(pwaName+'-Theme') == "light-mode"){document.body.className = 'theme-light';}
-
-
-//Back Button
-const backButton = document.querySelectorAll('[data-back-button]');
-if(backButton.length){
-    backButton.forEach(el => el.addEventListener('click',e =>{
-        e.stopPropagation;
-        e.preventDefault;
-        window.history.go(-1);
-    }));
-}
+  
+    checkDarkMode();
+  });
+  
