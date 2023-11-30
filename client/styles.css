@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background: #ffffff;
+  background: #eef2f1;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -29,15 +29,15 @@ h2 {
 }
 
 h3 {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif; 
   position: absolute;
-  top: 10px;
+  top: 0px;
   left: 10px;
-  font-weight: 300;
-  color: #333;
-  font-size: 24px;
-  font-weight: bold;
+  font-weight: 1000; 
+  color: #000000;
+  font-size: 32px;
 }
+
 
 .logo, .logo svg {
   width: 100px;
