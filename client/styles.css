@@ -363,6 +363,48 @@ a.link:hover {
   text-align: center;
 }
 
+/* Dark Mode */
+.theme-dark input:not([type=submit]):not(.focus-color):focus,
+.theme-dark select:focus,
+.theme-dark textarea:active {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Generating Color Pack */
+.color-highlight {
+  color: #4A89DC !important;
+}
+
+.bg-highlight {
+  background-color: #4A89DC !important;
+  color: #FFF !important;
+}
+
+.border-highlight {
+  border-color: #4A89DC !important;
+}
+
+.gradient-highlight {
+  background-image: linear-gradient(to bottom, #5D9CEC, #4A89DC) !important;
+  color: #FFF;
+}
+
+/* Additional color variations and styles go here */
+
+/* Dark Mode Switch */
+[data-toggle-theme]:checked {
+  border-color: #4A89DC !important;
+  background-color: #4A89DC !important;
+  color: #FFF !important;
+}
+
+/* Back Button */
+[data-back-button]:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
 
 
 
