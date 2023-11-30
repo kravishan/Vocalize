@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Hide the h3 element
-        var h3Element = document.querySelector('h3');
+        var h3Element = document.querySelector('.font-22');
         if (h3Element) {
             h3Element.style.display = 'none';
         }
