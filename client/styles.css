@@ -306,6 +306,32 @@ a.link:hover {
   color: #f6bb42 !important;
 }
 
-/* .white {
-  display: none;
-} */
+/* Default styles for both themes */
+body {
+  transition: background-color 0.3s ease;
+}
+
+/* Dark theme styles */
+body.theme-dark {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+body.theme-dark .bg-theme {
+  background-color: #0f1117 !important;
+}
+
+body.theme-dark .font-22 {
+  color: #fff;
+}
+
+/* Light theme styles */
+body.theme-light {
+  background-color: #fff;
+
+}
+
+body.theme-light .bg-theme {
+  background-color: #f0f0f0 !important;
+}
+
