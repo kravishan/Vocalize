@@ -79,6 +79,12 @@
   .shadow-xl {
     box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.712), 0 5px 15px 0 rgba(0, 0, 0, 0.384) !important;
   }
+
+  h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 500;
+    font-size: 1.6em;
+  }
   
   .font-22 {
     font-size: 22px;
@@ -93,77 +99,21 @@
   /* Default styles for both themes */
   body {
     transition: background-color 0.3s ease;
-    background-color: #76767600;
     margin-top: 120px;
+    font-family: 'San Francisco', Arial, sans-serif;
   }
   
   /* Dark theme styles */
   body.theme-dark {
     background-color: #1a1a1a;
-    color: #fff;
-  }
-  
-  body.theme-dark .bg-theme {
-    background-color: #0f1117 !important;
-  }
-  
-  body.theme-dark .font-22 {
-    color: #fff;
-  }
-  
-  body.theme-dark .microphone-black {
-    display: none;
   }
   
   
   /* Light theme styles */
   body.theme-light {
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.066);
   
   }
-  
-  body.theme-light .bg-theme {
-    background-color: #f0f0f0 !important;
-  }
-
-
-
-
-
-
-
-
-
-
-
-  /* /////////////////////////////////////////// */
-
-  .theme-dark .bg-theme {
-    background-color: #0f1117 !important;
-  }
-
-  .background-changer .bg-theme {
-    border: solid 1px rgba(0, 0, 0, 0.2);
-  }
-
-  .theme-dark .bg-theme {
-    background-color: #0f1117 !important;
-  }
-
-  .theme-light .bg-theme {
-    background-color: #FFF !important;
-  }
-  
-  .theme-light .color-theme {
-    color: #0f1117 !important;
-  }
-  
-  .theme-dark .color-theme {
-    color: #FFF !important;
-  }
-
-  .theme-dark .color-theme,
-
   .back-button {
     position: absolute;
     left: 10px; 
@@ -172,12 +122,8 @@
 
   p {
     margin: 10px 0;;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
-
-
-
-
-/* /////////////////////////////////////////// */
 
 
 
@@ -194,14 +140,6 @@
   background-position: center center !important;
 }
 
-.cover-slider .card {
-  margin-bottom: 0px !important;
-}
-
-[data-card-height=cover].card {
-  margin-bottom: 0px !important;
-}
-
 .card-style {
   overflow: hidden;
   margin: 0px 15px 30px 15px;
@@ -209,75 +147,9 @@
   border: none;
   box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.1);
 }
-.card-style .card-body {
-  padding: 15px;
-}
 
 .card-style .card-overlay {
   border-radius: 20px;
-}
-
-.card-style-full {
-  margin-left: 0px;
-  margin-right: 0px;
-}
-
-.card-body {
-  z-index: 2;
-}
-
-.card-header {
-  z-index: 2;
-}
-
-.card-footer {
-  z-index: 2;
-}
-
-.card-top {
-  z-index: 2;
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-}
-
-.card-bottom {
-  z-index: 2;
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-}
-
-.card-center {
-  z-index: 2;
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.card-overlay {
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
-  position: absolute;
-  z-index: 1;
-}
-
-.card-image {
-  display: block;
-  width: 100%;
-  min-height: 250px;
-  overflow: hidden;
-  position: absolute;
-  width: 100%;
-}
-.card-image img {
-  transition: all 450ms ease;
 }
 
 .card-fixed {
@@ -286,69 +158,48 @@
   right: 0px;
 }
 
-.card-clear {
-  pointer-events: none;
-  margin-bottom: -30px;
-  opacity: 0;
-}
-
 .card-overflow {
   overflow: visible !important;
   z-index: 20;
 }
 
-[data-card-height] p {
-  padding-bottom: 0px;
-}
-
 .centered-heading {
   text-align: center;
   text-transform: uppercase;
+  font-family: 'San Francisco', Arial, sans-serif;
 }
 
-.menu .input-style input,
-.menu .input-style select {
-  background-color: transparent !important;
-
-/*Menu Update*/
-#menu-update {
-  background-color: #FFF;
-  position: fixed;
-  z-index: 9999;
-  width: 310px;
-  height: 430px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  pointer-events: none;
-  border-radius: 10px;
-  transition: all 300ms ease;
+.boxp {
+  margin-top: 10px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  margin-left: 15px;
 }
 
-.menu-active {
-  opacity: 1 !important;
+
+
+
+
+
+/* iOS-style button */
+.button {
+  margin-top: 20px;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 8px;
+  background-color: #000000; /* iOS blue color */
+  color: #fff; /* Text color */
+  border: 2px solid #ffffff; /* Border color */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-.menu-active-no-click {
-  opacity: 1;
-  background-color: rgba(0, 0, 0, 0.7);
-  pointer-events: all !important;
+.button-container {
+  display: flex;
+  text-align: center;
 }
 
-#menu-install-pwa-ios {
-  overflow: visible !important;
-}
-
-.fa-ios-arrow {
-  transform: translateY(4px);
-}
-
-.theme-light .fa-ios-arrow {
-  color: #FFF !important;
-}
-
-.menu-open {
-  overflow: hidden !important;
-}
 

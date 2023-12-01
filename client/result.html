@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" type="text/css" href="bootstrap.css">
     <link rel="stylesheet" type="text/css" href="results.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css"> 
 
     <!-- Add Firebase scripts using the script tag method -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -35,7 +36,7 @@
     <div class="card card-style mt-5">
         <div class="content mb-3">
             <h4 class="centered-heading">Voice review</h4>
-            <p id="voiceReviewText" class="mb-3"></p>
+            <p id="voiceReviewText" class="boxp"></p>
         </div>  
     </div>
 
@@ -43,7 +44,7 @@
     <div class="card card-style mt-5">
         <div class="content mb-3">
             <h4 class="centered-heading">Improved review</h4>
-            <p id="improvedReviewText" class="mb-3"></p>
+            <p id="improvedReviewText" class="boxp"></p>
         </div>  
     </div>
 
@@ -51,7 +52,7 @@
     <div class="card card-style mt-5">
         <div class="content mb-3">
             <h4 class="centered-heading">Improved review with stars</h4>
-            <p id="improvedReviewWithStarsText" class="mb-3"></p>
+            <p id="improvedReviewWithStarsText" class="boxp"></p>
         </div>  
     </div>
 </div>
@@ -59,7 +60,6 @@
     <div id="dateandtimeOutput" class="resultOutput"></div>     
        
     <button id="saveButton" onclick="saveToFirestore()" class="button">Save Result</button>
-    <button onclick="goBack()" class="button">Cancel</button></div>
     <div id="toast" class="toast"></div>
     
     <div data-menu-load="menu-footer.html"></div>
