@@ -61,77 +61,22 @@
     <button id="saveButton" onclick="saveToFirestore()" class="button">Save Result</button>
     <button onclick="goBack()" class="button">Cancel</button></div>
     <div id="toast" class="toast"></div>
-
-    <div class="card card-style mt-5">
-        <div class="content mb-3">
-            <h4>Modal Timed Info Alerts</h4>
-            <p>
-                Beautiful and small messages to inform your users an actions has sucessfully taken place!
-            </p>
-            <div class="list-group list-custom-small list-icon-0">
-                <a href="#" data-menu="timed-1">
-                    <i class="fa font-17 fa-check-circle color-green-dark"></i>
-                    <span>Success / Ok</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>        
-                <a href="#" data-menu="timed-2">
-                    <i class="fa font-17 fa-times-circle color-red-dark"></i>
-                    <span>Failed / Error</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>        
-                <a href="#" data-menu="timed-3">
-                    <i class="fa font-17 fa-shopping-bag color-brown-dark"></i>
-                    <span>Added to Cart</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>        
-                <a href="#" data-menu="timed-4" class="border-0">
-                    <i class="fa font-17 fa-bookmark color-red-dark"></i>
-                    <span>Bookmarked</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>        
-            </div>
-        </div>  
-    </div>
     
     <div data-menu-load="menu-footer.html"></div>
 </div>
 <!-- Page content ends here-->
 
-<div id="timed-1" 
-     class="menu menu-box-modal rounded-m" 
-     data-menu-hide="1000"
-     data-menu-width="220"
-     data-menu-height="160">
-     <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-check-circle color-green-dark"></i></h1>
-     <h2 class="text-center">Success</h2>
+<div id="success-msg" class="menu menu-box-modal rounded-m" data-menu-hide="1000" data-menu-width="220" data-menu-height="160" style="display: none;">
+    <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-check-circle color-green-dark"></i></h1>
+    <h2 class="text-center">Success</h2>
 </div>
 
-<div id="timed-2" 
-     class="menu menu-box-modal rounded-m" 
-     data-menu-hide="1000"
-     data-menu-width="220"
-     data-menu-height="160">
-     <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-times-circle color-red-dark"></i></h1>
-     <h2 class="text-center">Task Failed</h2>
+<div id="failed-msg" class="menu menu-box-modal rounded-m" data-menu-hide="1000" data-menu-width="220" data-menu-height="160" style="display: none;">
+    <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-times-circle color-red-dark"></i></h1>
+    <h2 class="text-center">Task Failed</h2>
 </div>
 
-<div id="timed-3" 
-     class="menu menu-box-modal rounded-m" 
-     data-menu-hide="1000"
-     data-menu-width="220"
-     data-menu-height="160">
-     <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-shopping-bag color-brown-dark"></i></h1>
-     <h2 class="text-center">Added to Cart</h2>
-</div>
 
-<div id="timed-4" 
-     class="menu menu-box-modal rounded-m" 
-     data-menu-hide="1000"
-     data-menu-width="220"
-     data-menu-height="160">
-     <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-bookmark color-red-dark"></i></h1>
-     <h2 class="text-center">Bookmarked</h2>
-</div>
 
     <script>
         // Your Firebase project configuration
@@ -207,21 +152,25 @@
         }
 
         // Function to show success or failure messages
+        // Function to show success message
         function showSuccessMessage() {
             const successMsg = document.getElementById('success-msg');
             successMsg.style.display = 'block';
             setTimeout(() => {
                 successMsg.style.display = 'none';
-            }, 3000);
+            }, 3000); // Adjust the time to your preference (in milliseconds)
         }
 
+        // Function to show failure message
         function showFailedMessage() {
             const failedMsg = document.getElementById('failed-msg');
             failedMsg.style.display = 'block';
             setTimeout(() => {
                 failedMsg.style.display = 'none';
-            }, 3000);
+            }, 3000); // Adjust the time to your preference (in milliseconds)
         }
+
+
         // Display the data on the page
         document.getElementById('voiceReviewText').innerHTML = `${whisperText}`;
         document.getElementById('improvedReviewText').innerHTML = `${improvedReview}`;
