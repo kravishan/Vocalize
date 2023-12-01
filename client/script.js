@@ -153,7 +153,7 @@ function showStopButton() {
 // Function to show the microphone button
 function showMicrophoneButton() {
     var microphoneButton = document.querySelector('.microphone-black ');
-    var microphoneButtonWhite = document.querySelector('.microphone-white');
+    // var microphoneButtonWhite = document.querySelector('.microphone-white');
     var selectedRestaurantData = localStorage.getItem("selectedRestaurant");
     if (selectedRestaurantData) {
       microphoneButton.style.display = 'block';
@@ -215,10 +215,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var popup = document.getElementById('popup');
     var stopButton = document.querySelector('.stop');
     var microphoneButton = document.querySelector('.microphone-black');
-    var microphoneButtonWhite = document.querySelector('.microphone-white');
+    // var microphoneButtonWhite = document.querySelector('.microphone-white');
     var waveCanvas = document.querySelector('.wave-canvas');
 
-    microphoneButton=microphoneButtonWhite;
+    microphoneButton=microphoneButtonWhite
 
     //var recognition;
     var mediaRecorder;
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Hide the microphone button
         var symbolButton = document.querySelector('.microphone-black');
-        var symbolButtonWhite = document.querySelector('.microphone-white');
+        // var symbolButtonWhite = document.querySelector('.microphone-white');
         if (symbolButton) {
             symbolButton.style.display = 'none';
             symbolButtonWhite.style.display = 'none';
@@ -455,7 +455,7 @@ async function transcribeAudio(audioBlob) {
   const xhr = new XMLHttpRequest();
 
   // Configure it: POST-request for the specified URL
-  xhr.open('POST', 'https://vocalizer.dev/server/transcribe-audio', true);
+  xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
 
   // Set up a handler for when the request is successfully completed
   xhr.onload = function () {
@@ -492,7 +492,7 @@ async function generateImprovedReviewWithoutStars(whisperText) {
         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
         // Send text to the backend
-        const response = await fetch('https://vocalizer.dev/server/generate-improved-review', {
+        const response = await fetch('http://localhost:3000/generate-improved-review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -529,7 +529,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
         // Send data to the backend
-        const response = await fetch('https://vocalizer.dev/server/generate-improved-review-with-stars', {
+        const response = await fetch('http://localhost:3000/generate-improved-review-with-stars', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
