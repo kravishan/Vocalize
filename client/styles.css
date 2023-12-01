@@ -79,6 +79,7 @@ h3 {
 
 
 .microphone-white {
+  z-index: 999;
   cursor: pointer;
   position: fixed;
   bottom: 50px;
@@ -350,13 +351,10 @@ body.theme-dark .font-22 {
   color: #fff;
 }
 
-body.theme-dark .microphone-white {
-  display: block;
+body.theme-dark .microphone-black {
+  display: none;
 }
 
-body.theme-dark .microphone-white {
-  display: block;
-}
 
 /* Light theme styles */
 body.theme-light {
