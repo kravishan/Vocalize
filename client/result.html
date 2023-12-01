@@ -3,104 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result Page</title>
+
+    <link rel="stylesheet" type="text/css" href="results.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="results.css">
 
     <!-- Add Firebase scripts using the script tag method -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-
-
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        #resultOutput {
-            max-width: 600px;
-            margin: 20px auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        p {
-            margin: 10px 0;
-            color: #555;
-        }
-
-        .star-rating {
-            display: inline-block;
-        }
-
-        .star-rating span {
-            font-size: 24px;
-            color: #ffd700; 
-        }
-
-        button {
-            background-color: #000000; 
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            margin-inline-end: 10%;
-            margin-inline-start: 15%;
-            align-self: center;
-        }
-
-        button.cancel {
-            background-color: #000000; 
-        }
-
-        .button-container {
-            text-align: center;
-        }
-
-        .toast {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #000000d5; /* Background color for the toast */
-            color: #fff; /* Text color */
-            padding: 16px;
-            border-radius: 12px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            opacity: 0.9;
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 10%;
-        }
-    </style>
 </head>
 <body>
-    <h1>Result Page</h1>
-    <div id="resultOutput"></div>
-    <div class="container">
+    <div class="page-title page-title-fixed">
+		<a href="#" class="page-title-icon shadow-xl bg-theme color-theme me-0 ms-3 back-button"><i class="fa fa-arrow-left"></i></a>
+		<h1 class="font-22">Result Page</h1>
+		<a href="#" class="page-title-icon shadow-xl show-on-theme-light dark-button"><i class="fa fa-moon"></i></a>
+        <a href="#" class="page-title-icon shadow-xl show-on-theme-dark white-button"><i class="fa fa-lightbulb color-yellow-dark"></i></a>
+	</div>
+	<div class="page-title-clear"></div>
+
+    <div class="container"></div>
+
+    <div id="voiceReviewOutput" class="resultOutput"></div>
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h4 class="centered-heading">Voice review</h4>
+            <p id="voiceReviewText" class="mb-3"></p>
+        </div>  
+    </div>
+
+    <div id="improvedReviewOutput" class="resultOutput"></div>
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h4 class="centered-heading">Improved review</h4>
+            <p id="improvedReviewText" class="mb-3"></p>
+        </div>  
+    </div>
+
+    <div id="improvedReviewWithStarsOutput" class="resultOutput"></div>
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h4 class="centered-heading">Improved review with stars</h4>
+            <p id="improvedReviewWithStarsText" class="mb-3"></p>
+        </div>  
+    </div>
+</div>
+
+    <div id="dateandtimeOutput" class="resultOutput"></div>     
+       
     <button id="saveButton" onclick="saveToFirestore()" class="button">Save Result</button>
     <button onclick="goBack()" class="button">Cancel</button></div>
     <div id="toast" class="toast"></div>
+
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h4>Modal Timed Info Alerts</h4>
+            <p>
+                Beautiful and small messages to inform your users an actions has sucessfully taken place!
+            </p>
+            <div class="list-group list-custom-small list-icon-0">
+                <a href="#" data-menu="timed-1">
+                    <i class="fa font-17 fa-check-circle color-green-dark"></i>
+                    <span>Success / Ok</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>        
+                <a href="#" data-menu="timed-2">
+                    <i class="fa font-17 fa-times-circle color-red-dark"></i>
+                    <span>Failed / Error</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>        
+                <a href="#" data-menu="timed-3">
+                    <i class="fa font-17 fa-shopping-bag color-brown-dark"></i>
+                    <span>Added to Cart</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>        
+                <a href="#" data-menu="timed-4" class="border-0">
+                    <i class="fa font-17 fa-bookmark color-red-dark"></i>
+                    <span>Bookmarked</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>        
+            </div>
+        </div>  
+    </div>
+    
+    <div data-menu-load="menu-footer.html"></div>
+</div>
+<!-- Page content ends here-->
+
+<div id="timed-1" 
+     class="menu menu-box-modal rounded-m" 
+     data-menu-hide="1000"
+     data-menu-width="220"
+     data-menu-height="160">
+     <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-check-circle color-green-dark"></i></h1>
+     <h2 class="text-center">Success</h2>
+</div>
+
+<div id="timed-2" 
+     class="menu menu-box-modal rounded-m" 
+     data-menu-hide="1000"
+     data-menu-width="220"
+     data-menu-height="160">
+     <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-times-circle color-red-dark"></i></h1>
+     <h2 class="text-center">Task Failed</h2>
+</div>
+
+<div id="timed-3" 
+     class="menu menu-box-modal rounded-m" 
+     data-menu-hide="1000"
+     data-menu-width="220"
+     data-menu-height="160">
+     <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-shopping-bag color-brown-dark"></i></h1>
+     <h2 class="text-center">Added to Cart</h2>
+</div>
+
+<div id="timed-4" 
+     class="menu menu-box-modal rounded-m" 
+     data-menu-hide="1000"
+     data-menu-width="220"
+     data-menu-height="160">
+     <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-bookmark color-red-dark"></i></h1>
+     <h2 class="text-center">Bookmarked</h2>
+</div>
 
     <script>
         // Your Firebase project configuration
@@ -167,45 +198,38 @@
                 .add(resultData)
                 .then((docRef) => {
                     console.log('Document written with ID:', docRef.id);
-                    updateButtonColorAndShowToast(true);
+                    showSuccessMessage();
                 })
                 .catch((error) => {
                     console.error('Error adding document:', error);
-                    updateButtonColorAndShowToast(false);
+                    showFailedMessage();
                 });
         }
 
-        // Function to show toast based on success or error
-        function updateButtonColorAndShowToast(success) {
-            const button = document.getElementById('saveButton');
-            const toast = document.getElementById('toast');
-
-            if (success) {
-                toast.innerHTML = 'Save successful!';
-            } else {
-                toast.innerHTML = 'Save failed!';
-            }
-
-            // Show the toast
-            toast.style.display = 'block';
-
-            // Hide the toast after 3 seconds (adjust as needed)
+        // Function to show success or failure messages
+        function showSuccessMessage() {
+            const successMsg = document.getElementById('success-msg');
+            successMsg.style.display = 'block';
             setTimeout(() => {
-                toast.style.display = 'none';
+                successMsg.style.display = 'none';
             }, 3000);
         }
 
+        function showFailedMessage() {
+            const failedMsg = document.getElementById('failed-msg');
+            failedMsg.style.display = 'block';
+            setTimeout(() => {
+                failedMsg.style.display = 'none';
+            }, 3000);
+        }
         // Display the data on the page
-        document.getElementById('resultOutput').innerHTML = `
-            <p><strong>Voice Review:</strong> ${whisperText}</p>
-            <p><strong>Overall Rating:</strong> <span class="star-rating">${getStarRating(overallStarCount)}</span></p>
-            <p><strong>Food Rating:</strong> <span class="star-rating">${getStarRating(foodRating)}</span></p>
-            <p><strong>Service Rating:</strong> <span class="star-rating">${getStarRating(serviceRating)}</span></p>
-            <p><strong>Atmosphere Rating:</strong> <span class="star-rating">${getStarRating(atmosphereRating)}</span></p>
-            <p><strong>Improved Review:</strong> ${improvedReview}</p>
-            <p><strong>Improved Review with stars:</strong> ${decodeURIComponent(improvedReviewWithStars)}</p>           
-            <p><strong>Generated Date and Time:</strong> ${generatedDateTime}</p>
-        `;
+        document.getElementById('voiceReviewText').innerHTML = `${whisperText}`;
+        document.getElementById('improvedReviewText').innerHTML = `${improvedReview}`;
+        document.getElementById('improvedReviewWithStarsText').innerHTML = `${decodeURIComponent(improvedReviewWithStars)}`;
+        document.getElementById('dateandtimeOutput').innerHTML = `<strong>Generated Date and Time:</strong> ${generatedDateTime}`;
     </script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="custom.js"></script>
 </body>
 </html>
