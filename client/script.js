@@ -152,12 +152,10 @@ function showStopButton() {
 
 // Function to show the microphone button
 function showMicrophoneButton() {
-    var microphoneButton = document.querySelector('.microphone-black ');
-    // var microphoneButtonWhite = document.querySelector('.microphone-white');
+    var microphoneButton = document.querySelector('.symbol');
     var selectedRestaurantData = localStorage.getItem("selectedRestaurant");
     if (selectedRestaurantData) {
       microphoneButton.style.display = 'block';
-      microphoneButtonWhite.style.display = 'block';
     }
   }
 
@@ -214,11 +212,8 @@ function hideStopButton() {
 document.addEventListener('DOMContentLoaded', function () {
     var popup = document.getElementById('popup');
     var stopButton = document.querySelector('.stop');
-    var microphoneButton = document.querySelector('.microphone-black');
-    // var microphoneButtonWhite = document.querySelector('.microphone-white');
+    var microphoneButton = document.querySelector('.symbol');
     var waveCanvas = document.querySelector('.wave-canvas');
-
-    microphoneButton=microphoneButtonWhite
 
     //var recognition;
     var mediaRecorder;
@@ -355,12 +350,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Hide the microphone button
-        var symbolButton = document.querySelector('.microphone-black');
-        // var symbolButtonWhite = document.querySelector('.microphone-white');
+        var symbolButton = document.querySelector('.symbol');
         if (symbolButton) {
             symbolButton.style.display = 'none';
-            symbolButtonWhite.style.display = 'none';
         }
+
 
         // Hide the h3 element
         var h3Element = document.querySelector('.font-22');

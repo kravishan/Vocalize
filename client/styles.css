@@ -38,22 +38,14 @@ h3 {
   font-size: 32px;
 }
 
-
-.logo, .logo svg {
-  width: 100px;
-  height: 44px;
-}
-
-
-/* microphone button  black*/
-.microphone-black, .microphone-black svg {
+.symbol, .symbol svg {
   width: 80px;
   height: 80px;
 }
 
 
-
-.microphone-black {
+/* microphone button  */
+.symbol {
   cursor: pointer;
   position: fixed;
   bottom: 50px;
@@ -62,10 +54,11 @@ h3 {
   display: none;
 }
 
-.microphone-black img {
-  width: 100px;
+.symbol img {
+  width: 80px;
   height: auto;
 }
+
 
 
 
@@ -128,7 +121,7 @@ a.link:hover {
   fill: #51B96D;
 }
 
-.popup-open .microphone-black {
+.popup-open .symbol {
   display: none;
 }
 
