@@ -236,14 +236,14 @@ a.link:hover {
 
 /* Star rating  pack */
 .ratingpack {
-  font-size: 36px;
+  font-size: 28px;
   cursor: pointer;
   user-select: none;
   align-items: center;
 }
 
 .ratingpack-body {
-  margin-top: 90px;
+  margin-top: 100px;
 }
 
 .rating-text {
