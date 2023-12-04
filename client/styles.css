@@ -20,12 +20,23 @@ h1 {
   font-size: 1.6em;
 }
 
-h2 {
-  font-weight: 300;
-  font-size: 1.125em;
-  width: 80%;
-  max-width: 400px;
-  margin-bottom: 1.5em;
+.heading {
+  font-family: 'Poppins', sans-serif; 
+  position: absolute;
+  z-index: 999;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+
+}
+
+.info {
+  font-family: 'Poppins', sans-serif; 
+  position: absolute;
+  margin-top: 30px;
+  top: 50px;
+  z-index: 999;
 }
 
 h3 {
@@ -60,11 +71,7 @@ h3 {
 }
 
 
-
-
-
 /* microphone button  white*/
-
 .microphone-white, .microphone-white svg {
   width: 80px;
   height: 80px;
@@ -85,8 +92,6 @@ h3 {
   width: 100px;
   height: auto;
 }
-
-
 
 a.button {
   color: #fff;
@@ -135,11 +140,11 @@ a.link:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  background-color: #0098fe84;
+  background-color: #0098fec0;
   color: #fff;
   border-radius: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.308), 0 5px 15px 0 rgba(0, 0, 0, 0.596) !important;
 }
 
 .popup-open {
@@ -165,12 +170,24 @@ a.link:hover {
 }
 
 .close {
-  width: 16px;
+  width: 23px;
   height: auto;
   cursor: pointer;
   position: absolute;
-  top: 10px;
-  right: 0%;
+  bottom: 20px;
+  right: 2%;
+  transform: translateX(-50%);
+  /* border: 1px solid #ffffff;
+  border-radius: 50%;*/
+}
+
+.refresh {
+  width: 20px;
+  height: auto;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  left: 8%;
   transform: translateX(-50%);
   /* border: 1px solid #ffffff;
   border-radius: 50%;*/
@@ -178,8 +195,8 @@ a.link:hover {
 
 .wave-canvas {
   margin-top: 130px;
-  width: 300px; 
-  height: 100px; 
+  width: 90%; 
+  height: 125px; 
 }
 
 /* Star rating  */
@@ -309,6 +326,7 @@ a.link:hover {
   line-height: 39px;
   border-radius: 16px;
   text-align: center;
+  color:#000000;
 }
 
 

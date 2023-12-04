@@ -9,11 +9,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-
-
-
-
-
 /////////////////////////   Star rating   ///////////////////////////
 
  // Star rating overall script
@@ -111,10 +106,6 @@ function handleRating(event, set) {
 }
 
 
-
-
-
-
 /////////////////////////   Show BUTTONS   ///////////////////////////
 
 // Function to show the overall rating
@@ -160,10 +151,6 @@ function showMicrophoneButton() {
   }
 
 
-
-
-
-
 /////////////////////////   HIDE BUTTONS   ///////////////////////////
 
 // Function to hide the overall rating
@@ -204,8 +191,6 @@ function hideStopButton() {
 }
 
 
-
-
 /////////////////////////   POPUP   ///////////////////////////
 
 // Popup script
@@ -228,10 +213,29 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function closePopup() {
-        document.body.classList.remove('popup-open');
-        popup.style.display = 'none';
         stopRecording();
+        location.reload();
     }
+
+    function refreshButtonClicked() {
+        resetStarRatings();
+        startRecording();
+    }
+
+    function resetStarRatings() {
+        // Reset star ratings to initial state
+        const stars = document.querySelectorAll('.star');
+        stars.forEach(star => star.classList.remove('checked'));
+
+        selectedOverallStarCount = 0;
+        foodRating = 0;
+        serviceRating = 0;
+        atmosphereRating = 0;
+
+        // Log or use the reset star ratings as needed
+        console.log('Star ratings reset.');
+    }
+
 
     function startRecording() {
         hideSpinner();
@@ -266,7 +270,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     savedAudioData = audioBlob;
     
                     // Save the audio or do further processing
-                    //console.log('Audio saved:', audioUrl);
                     transcribeAudio(audioBlob);
     
                     // Clear audioChunks after processing
@@ -363,20 +366,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       
         openPopup();
-        //recognition = new webkitSpeechRecognition();
-       // recognition.lang = 'en-US';
-        //recognition.start();
-
-        //recognition.onresult = function (event) {
-            //var transcript = event.results[0][0].transcript;
-            //console.log('Speech Recognition Result:', transcript);
-            // Do something with the recognized speech
-        //};
-
-       // recognition.onend = function () {
-            // Speech recognition ended
-        //};
-
         startRecording();
 
         // Start updating the wave canvas
@@ -384,11 +373,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     stopButton.addEventListener('click', function () {
+
         // Stop mediaRecorder
         stopRecording();
         mediaRecorder.stop();
-    
-       // recognition.stop();
     
         // Clear the wave canvas
         var canvasContext = waveCanvas.getContext('2d');
@@ -401,6 +389,9 @@ document.addEventListener('DOMContentLoaded', function () {
     
     var closeButton = document.querySelector('.close');
     closeButton.addEventListener('click', closePopup);
+
+    var refreshButton = document.querySelector('.refresh');
+    refreshButton.addEventListener('click', refreshButtonClicked);
 });
 
 
@@ -449,7 +440,7 @@ async function transcribeAudio(audioBlob) {
   const xhr = new XMLHttpRequest();
 
   // Configure it: POST-request for the specified URL
-  xhr.open('POST', 'https://vocalizer.dev/server/transcribe-audio', true);
+  xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
 
   // Set up a handler for when the request is successfully completed
   xhr.onload = function () {
@@ -486,7 +477,7 @@ async function generateImprovedReviewWithoutStars(whisperText) {
         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
         // Send text to the backend
-        const response = await fetch('https://vocalizer.dev/server/generate-improved-review', {
+        const response = await fetch('http://localhost:3000/generate-improved-review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -523,7 +514,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
         // Send data to the backend
-        const response = await fetch('https://vocalizer.dev/server/generate-improved-review-with-stars', {
+        const response = await fetch('http://localhost:3000/generate-improved-review-with-stars', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

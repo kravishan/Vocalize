@@ -1,7 +1,7 @@
 // places.js (Client-side code)
 
 // Fetch the Google Maps API script from your server
-fetch('https://vocalizer.dev/server/google-maps-script')
+fetch('http://192.168.0.103:3000/google-maps-script')
   .then(response => response.text())
   .then(script => {
     // Execute the retrieved script
