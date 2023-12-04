@@ -1,6 +1,6 @@
-var CACHE_NAME = 'Vocalize-v1'; // Change the version when you update your app
+var CACHE_NAME = 'Vocalize-v1';
 var urlsToCache = [
-  'https://www.vocalizer.dev/'
+  'https://vocalizer.dev/'
 ];
 
 self.addEventListener('install', function(event) {
