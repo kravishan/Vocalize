@@ -126,7 +126,8 @@ a.link:hover {
 }
 
 #popup {
-  width: 400px;
+  width: 80%;
+  max-width: 400px;
   height: 300px;
   display: none;
   position: fixed;
