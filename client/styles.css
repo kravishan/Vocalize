@@ -236,6 +236,7 @@ a.link:hover {
 
 /* Star rating  pack */
 .ratingpack {
+  margin-top: 20px;
   font-size: 26px;
   cursor: pointer;
   user-select: none;
@@ -243,7 +244,7 @@ a.link:hover {
 }
 
 .ratingpack-body {
-  margin-top: 100px;
+  margin-top: 90px;
 }
 
 .rating-text {

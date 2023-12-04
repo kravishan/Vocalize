@@ -117,9 +117,10 @@
         const db = firebase.firestore();
 
         // Function to navigate back to the previous page
-        function goBack() {
-            window.history.back();
+        function goToInitialStage() {
+             window.location.href = '/index.html'; // Replace '/initial-url' with your actual initial URL
         }
+
 
         // Add an event listener to the back button
         document.querySelector('.back-button').addEventListener('click', goBack);
