@@ -449,7 +449,7 @@ async function transcribeAudio(audioBlob) {
   const xhr = new XMLHttpRequest();
 
   // Configure it: POST-request for the specified URL
-  xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
+  xhr.open('POST', 'https://vocalizer.dev/server/transcribe-audio', true);
 
   // Set up a handler for when the request is successfully completed
   xhr.onload = function () {
@@ -486,7 +486,7 @@ async function generateImprovedReviewWithoutStars(whisperText) {
         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
         // Send text to the backend
-        const response = await fetch('http://localhost:3000/generate-improved-review', {
+        const response = await fetch('https://vocalizer.dev/server/generate-improved-review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -523,7 +523,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
         // Send data to the backend
-        const response = await fetch('http://localhost:3000/generate-improved-review-with-stars', {
+        const response = await fetch('https://vocalizer.dev/server/generate-improved-review-with-stars', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
