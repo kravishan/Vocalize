@@ -190,6 +190,15 @@ function hideStopButton() {
     }
 }
 
+// Function to hide the Instructions texts
+function hideInstructions() {
+    var hideInstructions1 = document.querySelector('.info');
+    var hideInstructions2 = document.querySelector('.heading');
+    if (hideInstructions1 && hideInstructions2) {
+        hideInstructions1.style.display = 'none';
+        hideInstructions2.style.display = 'none';
+    }
+}
 
 /////////////////////////   POPUP   ///////////////////////////
 
@@ -288,6 +297,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
             showSpinner();
             hideStopButton();
+            hideInstructions(); 
     
             mediaRecorder.stop();
             //stream.getTracks().forEach(track => track.stop());
