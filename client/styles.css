@@ -20,35 +20,34 @@ h1 {
   font-size: 1.6em;
 }
 
-/* Responsive styles */
-@media only screen and (max-width: 390px) {
-  .heading {
-    font-family: 'Poppins', sans-serif;
-    position: absolute;
-    z-index: 999;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-weight: bold;
-  }
+.heading {
+  font-family: 'Poppins', sans-serif; 
+  position: absolute;
+  z-index: 999;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
 
-  .info {
-    font-family: 'Poppins', sans-serif;
-    position: absolute;
-    margin-top: 30px;
-    top: 50px;
-    z-index: 999;
-  }
+}
 
-  h3 {
-    font-family: 'Poppins', sans-serif;
-    position: absolute;
-    top: 0px;
-    left: 10px;
-    font-weight: 1000;
-    color: #000000;
-    font-size: 32px;
-  }
+.info {
+  font-family: 'Poppins', sans-serif; 
+  position: absolute;
+  margin-top: 30px;
+  top: 50px;
+  z-index: 999;
+}
+
+h3 {
+  font-family: 'Poppins', sans-serif; 
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  font-weight: 1000; 
+  color: #000000;
+  font-size: 32px;
+}
 
 .symbol, .symbol svg {
   width: 80px;
@@ -210,7 +209,7 @@ a.link:hover {
 
 /* Star rating  */
 .rating {
-  font-size: 36px;
+  font-size: 42px;
   cursor: pointer;
   user-select: none;
   align-items: center;
@@ -237,7 +236,7 @@ a.link:hover {
 
 /* Star rating  pack */
 .ratingpack {
-  font-size: 30px;
+  font-size: 36px;
   cursor: pointer;
   user-select: none;
   align-items: center;
@@ -390,7 +389,7 @@ body.theme-light .bg-theme {
   background-color: #f0f0f0 !important;
 }
 
-}
+
 
 
 
