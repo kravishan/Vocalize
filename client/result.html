@@ -104,6 +104,9 @@
         function goBack() {
             window.history.back();
         }
+
+        // Add an event listener to the back button
+        document.querySelector('.back-button').addEventListener('click', goBack);
         
         // Get parameters from URL
         const urlParams = new URLSearchParams(window.location.search);
