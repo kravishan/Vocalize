@@ -1,6 +1,6 @@
-var CACHE_NAME = 'Vocalize';
+var CACHE_NAME = 'Vocalize-v1'; // Change the version when you update your app
 var urlsToCache = [
-  'https://vocalize-livid.vercel.app/index.html'
+  'https://www.vocalizer.dev/'
 ];
 
 self.addEventListener('install', function(event) {
@@ -20,7 +20,25 @@ self.addEventListener('fetch', function(event) {
         if (response) {
           return response;
         }
-        return fetch(event.request);
+
+        // If not in cache, fetch from the network
+        return fetch(event.request)
+          .then(function(response) {
+            // Check if the response is valid
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            // Clone the response to use and cache the original response
+            var responseToCache = response.clone();
+
+            caches.open(CACHE_NAME)
+              .then(function(cache) {
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          });
       })
   );
 });
@@ -38,4 +56,18 @@ self.addEventListener('activate', function(event) {
       );
     })
   );
+});
+
+// Periodically check for updates and update the cache
+self.addEventListener('fetch', function(event) {
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request).then(function(response) {
+        return caches.open(CACHE_NAME).then(function(cache) {
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      })
+    );
+  }
 });
