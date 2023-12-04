@@ -79,7 +79,7 @@
   }
   
   .shadow-xl {
-    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.301), 0 5px 15px 0 rgba(0, 0, 0, 0.192) !important;
+    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.342), 0 5px 15px 0 rgba(0, 0, 0, 0.02) !important;
   }
 
   h1 {
