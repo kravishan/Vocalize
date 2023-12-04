@@ -60,23 +60,28 @@
     <div id="dateandtimeOutput" class="resultOutput"></div>     
        
     <button id="saveButton" onclick="saveToFirestore()" class="button">Save Result</button>
-    <div id="toast" class="toast"></div>
     
-    <div data-menu-load="menu-footer.html"></div>
-</div>
-<!-- Page content ends here-->
+    </div>
+    <!-- Page content ends here-->
 
-<div id="success-msg" class="menu menu-box-modal rounded-m" data-menu-hide="1000" data-menu-width="220" data-menu-height="160" style="display: none;">
-    <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-check-circle color-green-dark"></i></h1>
-    <h2 class="text-center">Success</h2>
-</div>
+    <div id="overlay"></div>
 
-<div id="failed-msg" class="menu menu-box-modal rounded-m" data-menu-hide="1000" data-menu-width="220" data-menu-height="160" style="display: none;">
-    <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-times-circle color-red-dark"></i></h1>
-    <h2 class="text-center">Task Failed</h2>
-</div>
-
-
+    <!-- Success Message Modal -->
+    <div id="success-msg">
+        <div class="modal-content rounded-m">
+        <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-check-circle color-green-dark"></i></h1>
+        <h2 class="text-center">Success</h2>
+        </div>
+    </div>
+    
+    <!-- Failed Message Modal -->
+    <div id="failed-msg">
+        <div class="modal-popup-content rounded-m">
+        <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-times-circle color-red-dark"></i></h1>
+        <h2 class="text-center">Task Failed</h2>
+        </div>
+    </div>
+  
 
     <script>
         // Your Firebase project configuration
@@ -151,14 +156,13 @@
                 });
         }
 
-        // Function to show success or failure messages
         // Function to show success message
         function showSuccessMessage() {
             const successMsg = document.getElementById('success-msg');
             successMsg.style.display = 'block';
             setTimeout(() => {
                 successMsg.style.display = 'none';
-            }, 3000); // Adjust the time to your preference (in milliseconds)
+            }, 3000); 
         }
 
         // Function to show failure message
@@ -167,7 +171,7 @@
             failedMsg.style.display = 'block';
             setTimeout(() => {
                 failedMsg.style.display = 'none';
-            }, 3000); // Adjust the time to your preference (in milliseconds)
+            }, 3000); 
         }
 
 
