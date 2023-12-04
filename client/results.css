@@ -92,6 +92,7 @@
     font-size: 22px;
     color: #0f1117;
     text-align: center;
+    transform: translateY(-25%);
   }
   
   .color-yellow-dark {

@@ -84,6 +84,22 @@
   
 
     <script>
+        // Get the element with the class "font-22"
+        const font22Element = document.querySelector('.font-22');
+
+        // Add an event listener for the scroll event
+        window.addEventListener('scroll', function() {
+            // Check the scroll position (adjust the value as needed)
+            if (window.scrollY > 90) {
+                // If scroll position is greater than 50, add a class to hide the element
+                font22Element.style.display = 'none';
+            } else {
+                // Otherwise, remove the class to show the element
+                font22Element.style.display = 'block';
+            }
+        });
+
+
         // Your Firebase project configuration
         const firebaseConfig = {
             apiKey: "AIzaSyB9GNhQGsnfy85gM9u_dJuOKWAZqPUdk44",
