@@ -103,7 +103,7 @@ a.button:hover {
 }
 
 a.link {
-  color: #51B96D;
+  color: #0098fe84;
   text-decoration: none;
   font-weight: 300;
   transition: opacity .3s;
@@ -118,7 +118,7 @@ a.link:hover {
 }
 
 .st1 {
-  fill: #51B96D;
+  fill: #0098fe84;
 }
 
 .popup-open .symbol {
@@ -126,8 +126,8 @@ a.link:hover {
 }
 
 #popup {
-  width: 300px;
-  height: 130px;
+  width: 400px;
+  height: 300px;
   display: none;
   position: fixed;
   top: 50%;
@@ -136,7 +136,7 @@ a.link:hover {
   padding: 20px;
   background-color: #0098fe84;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
@@ -152,7 +152,7 @@ a.link:hover {
 }
 
 .stop {
-  width: 50px;
+  width: 70px;
   height: auto;
   cursor: pointer;
   position: absolute;
@@ -176,7 +176,7 @@ a.link:hover {
 }
 
 .wave-canvas {
-  margin-top: 20px;
+  margin-top: 130px;
   width: 300px; 
   height: 100px; 
 }
@@ -258,7 +258,7 @@ a.link:hover {
 }
 
 #restaurant-list li:hover {
-  background-color: #51B96D;
+  background-color: #0098fe84;
 }
 
 
