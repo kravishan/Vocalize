@@ -199,13 +199,22 @@ a.link:hover {
   height: 125px; 
 }
 
+.rating-message {
+  font-family: 'Poppins', sans-serif; 
+  font-size: 22px;
+  position: absolute;
+  z-index: 999;
+  top: 50px;
+  transform: translateX(-2%);
+}
+
 /* Star rating  */
 .rating {
-  font-size: 24px;
+  font-size: 42px;
   cursor: pointer;
   user-select: none;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 160px;
   /* transform: rotate(180deg);*/
 }
 

@@ -111,17 +111,27 @@ function handleRating(event, set) {
 // Function to show the overall rating
 function showRating() {
     var rating = document.querySelector('.rating');
-    if (rating) {
+    var message = document.querySelector('.rating-message');
+    if (rating && message) {
         rating.style.display = 'block';
+
+        // Set your custom message
+        message.innerHTML = "We value your feedback! Please rate your overall experience.";
+        message.style.display = 'block';
     }
 }
 
 // Function to show all rating sets
 function showRatingSets() {
     var ratingpacks = document.querySelectorAll('.ratingpack');
-    if (ratingpacks) {
+    var message = document.querySelector('.rating-message');
+    if (ratingpacks && message) {
         ratingpacks.forEach(ratingpack => {
             ratingpack.style.display = 'block';
+
+        // Set your custom message
+        message.innerHTML = "Please rate each experiences.";
+        message.style.display = 'block';    
         });
     }
 }
@@ -165,9 +175,12 @@ function hideRating() {
 // Function to hide all rating sets
 function hideRatingSets() {
     var ratingpacks = document.querySelectorAll('.ratingpack');
-    if (ratingpacks) {
+    var message = document.querySelector('.rating-message');
+    if (ratingpacks && message) {
         ratingpacks.forEach(ratingpack => {
             ratingpack.style.display = 'none';
+
+        message.style.display = 'none';      
         });
     }
 }
@@ -450,7 +463,8 @@ async function transcribeAudio(audioBlob) {
   const xhr = new XMLHttpRequest();
 
   // Configure it: POST-request for the specified URL
-  xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
+//   xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
+  xhr.open('POST', 'https://vocalizer.dev/server/transcribe-audio', true);
 
   // Set up a handler for when the request is successfully completed
   xhr.onload = function () {
@@ -487,7 +501,8 @@ async function generateImprovedReviewWithoutStars(whisperText) {
         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
         // Send text to the backend
-        const response = await fetch('http://localhost:3000/generate-improved-review', {
+        // const response = await fetch('http://localhost:3000/generate-improved-review', {
+        const response = await fetch('https://vocalizer.dev/server/generate-improved-review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -524,7 +539,8 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
         // Send data to the backend
-        const response = await fetch('http://localhost:3000/generate-improved-review-with-stars', {
+        // const response = await fetch('http://localhost:3000/generate-improved-review-with-stars', {
+        const response = await fetch('https://vocalizer.dev/server/generate-improved-review-with-stars', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
