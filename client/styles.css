@@ -201,11 +201,10 @@ a.link:hover {
 
 .rating-message {
   font-family: 'Poppins', sans-serif; 
-  font-size: 22px;
+  font-size: 18px;
   position: absolute;
   z-index: 999;
   top: 50px;
-  transform: translateX(-2%);
 }
 
 /* Star rating  */
@@ -237,16 +236,18 @@ a.link:hover {
 
 /* Star rating  pack */
 .ratingpack {
-  font-size: 24px;
+  font-size: 36px;
   cursor: pointer;
   user-select: none;
   align-items: center;
-  margin-top: 8px;
+}
 
+.ratingpack-body {
+  margin-top: 90px;
 }
 
 .rating-text {
-  font-size: 12px; 
+  font-size: 16px; 
 }
 
 
