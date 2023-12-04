@@ -463,8 +463,8 @@ async function transcribeAudio(audioBlob) {
   const xhr = new XMLHttpRequest();
 
   // Configure it: POST-request for the specified URL
-//   xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
-  xhr.open('POST', 'https://vocalizer.dev/server/transcribe-audio', true);
+  xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
+//   xhr.open('POST', 'https://vocalizer.dev/server/transcribe-audio', true);
 
   // Set up a handler for when the request is successfully completed
   xhr.onload = function () {
