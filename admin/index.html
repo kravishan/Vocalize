@@ -6,26 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard</title>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Extract the code parameter from the URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const codeParam = urlParams.get("code");
-
-      // Your secret code to access the page
-      const secretCode = "5165416516156"; // Replace with your actual secret code
-
-      // Check if the code matches
-      if (codeParam !== secretCode) {
-        // Redirect to the login page or another appropriate page
-        window.location.href = "/admin/login.html"; // Adjust the login page URL
-      } else {
-        // Code is valid, you can proceed with loading data or other actions
-        alert("Login successful!");
-      }
-    });
-  </script>
-
   <!-- Import Firebase scripts with module syntax -->
   <script type="module" src="database.js"></script>
 
@@ -147,22 +127,21 @@
             <div class="w-full overflow-x-auto">
               <table class="w-full whitespace-no-wrap">
                 <thead>
-                  <tr
-                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                  <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    <th class="px-4 py-3 atmosphereRating">No.</th>
                     <th class="px-4 py-3 atmosphereRating">Documents name</th>
+                    <th class="px-4 py-3 atmosphereRating">Actions</th>
                   </tr>
                 </thead>
-
-                <tbody id="table-body"
-                  class="data-style font-semibold bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"></tbody>
+          
+                <tbody id="table-body" class="data-style font-semibold bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"></tbody>
+          
               </table>
             </div>
-            <div
-              class="">
+            <div class="data-recoard">
               <span class="col-span-2"></span>
-
             </div>
-          </div>
+          </div>          
         </div>
       </main>
     </div>

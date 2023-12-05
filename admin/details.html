@@ -1,22 +1,26 @@
-<!-- details.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Record Details</title>
+  <title>Details</title>
+  <!-- Include any additional styles or scripts you may need -->
 </head>
 
 <body>
-  <h2>Record Details</h2>
-  <div id="record-details"></div>
+  <div>
+    <h1>Details Page</h1>
+    <div id="document-details">
+      <!-- Display detailed information here -->
+    </div>
+  </div>
 
-  <!-- Include Firebase scripts with module syntax -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
+    // Your web app's Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyB9GNhQGsnfy85gM9u_dJuOKWAZqPUdk44",
       authDomain: "vocalize-dc445.firebaseapp.com",
@@ -26,29 +30,55 @@
       appId: "1:50867328520:web:20eb0824d6b727b8b823bd"
     };
 
+    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
+
+    // Initialize Cloud Firestore
     const db = getFirestore(app);
 
-    // Get the document ID from the URL parameter
+    // Function to fetch details based on document ID from Firestore
+    function fetchDetailsFromFirestore(documentId) {
+      const documentDetailsContainer = document.getElementById('document-details');
+
+      // Fetch data from Firestore based on the document ID
+      const documentRef = doc(db, 'results', documentId);
+      getDoc(documentRef).then((docSnapshot) => {
+        if (docSnapshot.exists()) {
+          // Display detailed information
+          const data = docSnapshot.data();
+          documentDetailsContainer.innerHTML = `
+            <p>Document ID: ${documentId}</p>
+            <p>Whisper Text: ${data.whisperText}</p>
+            <p>Overall Star Count: ${data.overallStarCount}</p>
+            <p>Food Rating: ${data.foodRating}</p>
+            <p>Service Rating: ${data.serviceRating}</p>
+            <p>Atmosphere Rating: ${data.atmosphereRating}</p>
+            <p>Improved Review: ${data.improvedReview}</p>
+            <p>Improved Review With Stars: ${decodeURIComponent(data.improvedReviewWithStars)}</p>
+            <p>Generated Date and Time: ${data.generatedDateTime}</p>
+            <!-- Add more fields as needed -->
+          `;
+        } else {
+          documentDetailsContainer.innerHTML = '<p>No data found for this document ID.</p>';
+        }
+      }).catch((error) => {
+        console.error("Error fetching details:", error);
+        documentDetailsContainer.innerHTML = '<p>Error fetching details.</p>';
+      });
+    }
+
+    // Fetch document ID from the URL query parameters
     const urlParams = new URLSearchParams(window.location.search);
-    const docId = urlParams.get('docId');
+    const documentId = urlParams.get('id');
 
-    // Reference to the specific Firestore document
-    const resultDocRef = doc(db, 'results', docId);
-
-    // Fetch data for the specific document
-    getDoc(resultDocRef).then((docSnapshot) => {
-      if (docSnapshot.exists()) {
-        const recordData = docSnapshot.data();
-        // Display recordData on the page as needed
-        // For example, update the #record-details div with the data
-        const recordDetailsDiv = document.getElementById('record-details');
-        recordDetailsDiv.innerHTML = JSON.stringify(recordData, null, 2);
+    // Fetch and display details when the page loads
+    window.addEventListener('load', () => {
+      console.log("Window loaded. Fetching details from Firestore...");
+      if (documentId) {
+        fetchDetailsFromFirestore(documentId);
       } else {
-        console.error(`Document with ID ${docId} does not exist`);
+        console.error("Document ID not found in the URL.");
       }
-    }).catch((error) => {
-      console.error("Error fetching document:", error);
     });
   </script>
 </body>
