@@ -25,8 +25,13 @@
     </div>
   </div>
 
-  <!-- Add this button in the HTML body -->
-  <button id="analyzeButton" class="button">Analyze Review</button>
+  <p>Whisper Text: <span id="whisperTextGrade"></span></p>
+<p>Improved Review: <span id="improvedReviewGrade"></span></p>
+<p>Improved Review With Stars: <span id="improvedReviewWithStarsGrade"></span></p>
+
+
+<!-- Add the Analyze Review button in the HTML body -->
+<button id="analyzeButton" class="button">Analyze Review</button>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
@@ -95,41 +100,48 @@
 
 
     // Function to analyze the review using the API
-  async function analyzeReview() {
-    try {
-      // Get the necessary data from the document
-      const whisperText = document.querySelector('#document-details p:nth-child(2)').innerText.split(': ')[1];
-      const improvedReview = document.querySelector('#document-details p:nth-child(7)').innerText.split(': ')[1];
-      const improvedReviewWithStars = document.querySelector('#document-details p:nth-child(8)').innerText.split(': ')[1];
+    async function analyzeReview() {
+      try {
+        // Get the necessary data from the document
+        const whisperText = document.querySelector('#document-details p:nth-child(2)').textContent.trim().split(': ')[1];
+        const improvedReview = document.querySelector('#document-details p:nth-child(7)').textContent.trim().split(': ')[1];
+        const improvedReviewWithStars = document.querySelector('#document-details p:nth-child(8)').textContent.trim().split(': ')[1];
 
-      // Make the API call to your backend
-      const response = await fetch('https://vocalizer.dev/server/analyze-review', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ whisperText, improvedReview, improvedReviewWithStars }),
-      });
+        // Make the API call to your backend
+        const response = await fetch('http://localhost:3000/analyze-review', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ whisperText, improvedReview, improvedReviewWithStars }),
+        });
 
-      if (!response.ok) {
-        throw new Error(`API request failed: ${response.statusText}`);
+        if (!response.ok) {
+          throw new Error(`API request failed: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log('API Response:', data);
+
+         // Display the result in the UI
+        whisperTextElement.innerText = data.whisperText;
+        improvedReviewElement.innerText = data.improvedReview;
+        improvedReviewWithStarsElement.innerText = data.improvedReviewWithStars;
+
+
+      } catch (error) {
+        console.error('Error during API request:', error);
+        // Handle errors appropriately
       }
-
-      const data = await response.json();
-      console.log('API Response:', data);
-      // Display the result or perform any other action based on the API response
-
-    } catch (error) {
-      console.error('Error during API request:', error);
-      // Handle errors appropriately
     }
-  }
 
-  // Attach a click event listener to the button
-  const analyzeButton = document.getElementById('analyzeButton');
-  if (analyzeButton) {
-    analyzeButton.addEventListener('click', analyzeReview);
-  }
+    // Attach a click event listener to the button
+    const analyzeButton = document.getElementById('analyzeButton');
+    if (analyzeButton) {
+      analyzeButton.addEventListener('click', analyzeReview);
+    }
+
+  
   </script>
 </body>
 
