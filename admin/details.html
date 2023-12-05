@@ -116,6 +116,8 @@
     const improvedReview = improvedReviewElement.innerText;
     const improvedReviewWithStars = improvedReviewWithStarsElement.innerText;
 
+    console.log('Sending data to backend for analysis...');
+
     // Make the API call to your backend
     const response = await fetch('https://vocalizer.dev/server/analyze-review', {
       method: 'POST',
@@ -136,6 +138,11 @@
     whisperTextElement.innerText = data.whisperText;
     improvedReviewElement.innerText = data.improvedReview;
     improvedReviewWithStarsElement.innerText = data.improvedReviewWithStars;
+
+    console.log('Updated Whisper Text:', data.whisperText);
+    console.log('Updated Improved Review:', data.improvedReview);
+    console.log('Updated Improved Review With Stars:', data.improvedReviewWithStars);
+
 
   } catch (error) {
     console.error('Error during API request:', error);
