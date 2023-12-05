@@ -49,3 +49,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebas
       console.log("Window loaded. Fetching data from Firestore...");
       fetchDataFromFirestore();
     });
+
+
+
+  

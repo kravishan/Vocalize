@@ -1,0 +1,56 @@
+<!-- details.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Record Details</title>
+</head>
+
+<body>
+  <h2>Record Details</h2>
+  <div id="record-details"></div>
+
+  <!-- Include Firebase scripts with module syntax -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB9GNhQGsnfy85gM9u_dJuOKWAZqPUdk44",
+      authDomain: "vocalize-dc445.firebaseapp.com",
+      projectId: "vocalize-dc445",
+      storageBucket: "vocalize-dc445.appspot.com",
+      messagingSenderId: "50867328520",
+      appId: "1:50867328520:web:20eb0824d6b727b8b823bd"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Get the document ID from the URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const docId = urlParams.get('docId');
+
+    // Reference to the specific Firestore document
+    const resultDocRef = doc(db, 'results', docId);
+
+    // Fetch data for the specific document
+    getDoc(resultDocRef).then((docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const recordData = docSnapshot.data();
+        // Display recordData on the page as needed
+        // For example, update the #record-details div with the data
+        const recordDetailsDiv = document.getElementById('record-details');
+        recordDetailsDiv.innerHTML = JSON.stringify(recordData, null, 2);
+      } else {
+        console.error(`Document with ID ${docId} does not exist`);
+      }
+    }).catch((error) => {
+      console.error("Error fetching document:", error);
+    });
+  </script>
+</body>
+
+</html>
