@@ -262,6 +262,71 @@ app.post('/login', (req, res) => {
 });
 
 
+// New endpoint for analyzing the review and generating a grade
+app.post('/analyze-review', async (req, res) => {
+  try {
+    const { whisperText, improvedReview, improvedReviewWithStars } = req.body;
+
+    // Prompts tailored for review analysis
+    const additionalPrompts = [
+      "I want to analyze a user's review and provide a grade.",
+      "Enhance the review analysis by considering various aspects.",
+      "Imagine you are assessing the review for quality and helpfulness.",
+      "What key elements contribute to a well-structured and informative review?",
+      "Consider factors such as clarity, details, and overall impact on the reader.",
+      "Avoid mentioning specific grading criteria in the analysis.",
+    ];
+
+    // Combine additional prompts with the user's input
+    const inputMessages = [
+      { role: 'system', content: 'You are an expert review analyst.' },
+      ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
+      { role: 'user', content: whisperText },
+      { role: 'user', content: improvedReview },
+      { role: 'user', content: improvedReviewWithStars },
+    ];
+
+    // Fetch response from OpenAI API for review analysis
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${openaiApiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: inputMessages,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`OpenAI API request failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const analysisResult = data.choices[0].message.content;
+
+    // Perform grading logic based on the analysis result (replace this with your actual grading logic)
+    const grade = performGradingLogic(analysisResult);
+
+    // Respond with the grade
+    res.send({ grade });
+
+  } catch (error) {
+    console.error('Error during review analysis:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Function to perform grading logic (replace this with your actual grading logic)
+function performGradingLogic(analysisResult) {
+  // You can implement your own logic here to analyze the content and assign a grade
+  // Replace this with your actual grading logic
+  return Math.random() * 10; // Example: Return a random score between 0 and 10
+}
+
+
+
 // Start the server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

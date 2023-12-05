@@ -1,0 +1,41 @@
+/* ./assets/css/details.css */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f7fafc;
+    color: #2d3748;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #4a5568;
+  }
+  
+  #document-details {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+  
+  #document-details p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #4a5568;
+  }
+  
+  #document-details p:first-child {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2d3748;
+  }
+  

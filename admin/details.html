@@ -6,6 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Details</title>
   <!-- Include any additional styles or scripts you may need -->
+
+  <!-- Other styles and scripts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/tailwind.output.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <script src="./assets/js/init-alpine.js"></script>
+  <link rel="stylesheet" href="./assets/css/detials.css"/>
+
 </head>
 
 <body>
@@ -15,6 +24,9 @@
       <!-- Display detailed information here -->
     </div>
   </div>
+
+  <!-- Add this button in the HTML body -->
+  <button id="analyzeButton" class="button">Analyze Review</button>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
@@ -80,6 +92,44 @@
         console.error("Document ID not found in the URL.");
       }
     });
+
+
+    // Function to analyze the review using the API
+  async function analyzeReview() {
+    try {
+      // Get the necessary data from the document
+      const whisperText = document.querySelector('#document-details p:nth-child(2)').innerText.split(': ')[1];
+      const improvedReview = document.querySelector('#document-details p:nth-child(7)').innerText.split(': ')[1];
+      const improvedReviewWithStars = document.querySelector('#document-details p:nth-child(8)').innerText.split(': ')[1];
+
+      // Make the API call to your backend
+      const response = await fetch('https://vocalizer.dev/server/analyze-review', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ whisperText, improvedReview, improvedReviewWithStars }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API request failed: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log('API Response:', data);
+      // Display the result or perform any other action based on the API response
+
+    } catch (error) {
+      console.error('Error during API request:', error);
+      // Handle errors appropriately
+    }
+  }
+
+  // Attach a click event listener to the button
+  const analyzeButton = document.getElementById('analyzeButton');
+  if (analyzeButton) {
+    analyzeButton.addEventListener('click', analyzeReview);
+  }
   </script>
 </body>
 
