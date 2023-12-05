@@ -14,6 +14,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Track user login attempts
+const loginAttempts = {};
+
 // Define your Google Maps API key
 const googleMapsApiKey = process.env.GOOGLEMAP_APIKEY;
 const openaiApiKey = process.env.OPENAI_APIKEY;
@@ -223,6 +226,38 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
   } catch (error) {
       console.error('Error:', error);
       res.status(500).send({ error: 'Internal server error' });
+  }
+});
+
+
+// Endpoint to check login credentials
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  // For demonstration purposes, use a fixed password
+  const fixedPassword = process.env.FIXED_PASSWORD;
+
+  // Check if the username and password are correct
+  if (password === fixedPassword) {
+    // Successful login
+    res.send({ success: true, message: 'Login successful' });
+
+    // Reset login attempts for the user
+    delete loginAttempts[username];
+  } else {
+    // Incorrect password
+
+    // Track login attempts
+    loginAttempts[username] = (loginAttempts[username] || 0) + 1;
+
+    // Check if the user is locked
+    if (loginAttempts[username] >= 3) {
+      // Lock the account
+      res.status(403).send({ success: false, message: 'Account locked. Too many incorrect attempts.' });
+    } else {
+      // Provide feedback for incorrect password
+      res.status(401).send({ success: false, message: 'Incorrect password. Please try again.' });
+    }
   }
 });
 
