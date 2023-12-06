@@ -171,6 +171,14 @@ function hideRating() {
     }
 }
 
+// Funtion to hide the refresh button
+function hideRefreshButton() {
+    var refreshButton = document.querySelector('.refresh');
+    if (refreshButton) {
+        refreshButton.style.display = 'none';
+    }
+}
+
 
 // Function to hide all rating sets
 function hideRatingSets() {
@@ -310,7 +318,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
             showSpinner();
             hideStopButton();
-            hideInstructions(); 
+            hideInstructions();
+            hideRefreshButton() 
     
             mediaRecorder.stop();
             //stream.getTracks().forEach(track => track.stop());

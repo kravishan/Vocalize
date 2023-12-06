@@ -209,7 +209,7 @@ a.link:hover {
 
 /* Star rating  */
 .rating {
-  font-size: 42px;
+  font-size: 40px;
   cursor: pointer;
   user-select: none;
   align-items: center;
