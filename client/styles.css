@@ -303,7 +303,7 @@ a.link:hover {
 .page-title {
   display: flex;
   transition: all 300ms ease;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 30px;
 }
 
@@ -330,7 +330,7 @@ a.link:hover {
 .page-title-icon {
   position: fixed;
   top: 20px; 
-  right: 15px; 
+  right: 8px; 
   z-index: 99;
   height: 38px;
   width: 38px;
@@ -344,7 +344,7 @@ a.link:hover {
 .title-icon-two {
   position: fixed;
   top: 20px; 
-  right: 60px; 
+  right: 50px; 
   z-index: 99;
   height: 38px;
   width: 38px;

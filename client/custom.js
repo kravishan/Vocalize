@@ -49,18 +49,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function checkInputMode() {
       // Replace this logic with your actual condition to determine the input mode
-      let isVoiceMode = true; // Change this to your actual condition
+      let isVoiceMode = localStorage.getItem('InputMode') === 'voice'; // Change this to your actual condition
 
       function toggleMode() {
           isVoiceMode = !isVoiceMode;
 
           if (isVoiceMode) {
-              voiceButton.style.display = 'block';
-              mapButton.style.display = 'none';
-          } else {
               mapButton.style.display = 'block';
               voiceButton.style.display = 'none';
+              localStorage.setItem('InputMode', 'map');
+              
+          } else {
+              voiceButton.style.display = 'block';
+              mapButton.style.display = 'none';
+              localStorage.setItem('InputMode', 'voice');
+
+              
           }
+
+          console.log(`Current Input Mode: ${isVoiceMode ? 'Voice' : 'Map'}`);
       }
 
       // Add click event listeners to toggle between voice and map
