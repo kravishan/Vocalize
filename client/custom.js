@@ -81,3 +81,36 @@ document.addEventListener('DOMContentLoaded', function () {
   checkDarkMode();
   checkInputMode();
 });
+
+
+
+/////////////////////////////////////
+
+
+// Get the .page-title-fixed element
+const pageTitleFixedElement = document.querySelector('.page-title-fixed');
+
+// Set a variable to track the last scroll position
+let lastScrollPosition = window.scrollY;
+
+// Function to handle scroll events
+function handleScroll() {
+  // Get the current scroll position
+  const currentScrollPosition = window.scrollY;
+
+  // Check if scrolling down or up
+  if (currentScrollPosition > lastScrollPosition) {
+    // Scrolling down
+    pageTitleFixedElement.classList.add('hidden');
+  } else {
+    // Scrolling up
+    pageTitleFixedElement.classList.remove('hidden');
+  }
+
+  // Update the last scroll position
+  lastScrollPosition = currentScrollPosition;
+}
+
+// Add a scroll event listener to trigger the handleScroll function
+window.addEventListener('scroll', handleScroll);
+
