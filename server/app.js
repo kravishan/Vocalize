@@ -44,8 +44,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-var cors = require('cors')
-
 // Endpoint to serve the Google Maps API script
 app.get('/google-maps-script',cors(), (req, res) => {
   const script = `
@@ -120,7 +118,7 @@ app.post('/transcribe-audio', upload.single('file'), async (req, res) => {
 
 
 // Endpoint for handling the OpenAI request
-app.post('/generate-improved-review', async (req, res) => {
+app.post('/generate-improved-review', cors(), async (req, res) => {
   try {
       const whisperText = req.body.whisperText;
       const restaurantName = req.body.restaurantName;
