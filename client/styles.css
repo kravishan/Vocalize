@@ -1,4 +1,5 @@
 body {
+  margin: 0;
   background: #ffffff;
   text-align: center;
   display: flex;
@@ -145,8 +146,7 @@ a.link:hover {
   text-align: center;
   box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.308), 0 5px 15px 0 rgba(0, 0, 0, 0.596) !important;
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .popup-open {
@@ -162,7 +162,6 @@ a.link:hover {
 .popup-open #popup {
   display: block;
   opacity: 1;
-  visibility: visible;
 }
 
 .stop {
@@ -327,7 +326,7 @@ a.link:hover {
 }
 
 .page-title-fixed {
-  display: none;
+  display: flex;
   position: fixed;
   left: 0;
   right: 0;
