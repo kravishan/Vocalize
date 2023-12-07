@@ -90,27 +90,16 @@ document.addEventListener('DOMContentLoaded', function () {
 // Get the .page-title-fixed element
 const pageTitleFixedElement = document.querySelector('.page-title-fixed');
 
-// Set a variable to track the last scroll position
-let lastScrollPosition = window.scrollY;
+// Add an event listener for the scroll event
+window.addEventListener('scroll', function() {
+    // Check the scroll position (adjust the value as needed)
+    if (window.scrollY > 90) {
+        // If scroll position is greater than 50, add a class to hide the element
+        pageTitleFixedElement.style.display = 'none';
+    } else {
+        // Otherwise, remove the class to show the element
+        pageTitleFixedElement.style.display = 'block';
+    }
+});
 
-// Function to handle scroll events
-function handleScroll() {
-  // Get the current scroll position
-  const currentScrollPosition = window.scrollY;
-
-  // Check if scrolling down or up
-  if (currentScrollPosition > lastScrollPosition) {
-    // Scrolling down
-    pageTitleFixedElement.classList.add('hidden');
-  } else {
-    // Scrolling up
-    pageTitleFixedElement.classList.remove('hidden');
-  }
-
-  // Update the last scroll position
-  lastScrollPosition = currentScrollPosition;
-}
-
-// Add a scroll event listener to trigger the handleScroll function
-window.addEventListener('scroll', handleScroll);
 
