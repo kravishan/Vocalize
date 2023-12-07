@@ -34,7 +34,7 @@ const openaiApiKey = process.env.OPENAI_APIKEY;
 
 // Middleware to handle CORS (Cross-Origin Resource Sharing) - adjust as needed
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'origin');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
 });
 
 // Endpoint to serve the Google Maps API script
-app.get('/google-maps-script',cors(), (req, res) => {
+app.get('/google-maps-script', (req, res) => {
   const script = `
     const googleMapsScript = document.createElement('script');
     googleMapsScript.src = 'https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places';
@@ -118,7 +118,7 @@ app.post('/transcribe-audio', upload.single('file'), async (req, res) => {
 
 
 // Endpoint for handling the OpenAI request
-app.post('/generate-improved-review', cors(), async (req, res) => {
+app.post('/generate-improved-review', async (req, res) => {
   try {
       const whisperText = req.body.whisperText;
       const restaurantName = req.body.restaurantName;
