@@ -25,6 +25,7 @@ function fetchAndDisplayNearbyRestaurants() {
       function (position) {
         const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         console.log("User's location:", userLocation.lat(), userLocation.lng());
+        localStorage.setItem("userLocation", JSON.stringify(userLocation));
 
         // Create a PlacesService object to interact with the Places API
         const placesService = new google.maps.places.PlacesService(document.createElement("div"));
