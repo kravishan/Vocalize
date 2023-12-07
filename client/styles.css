@@ -35,8 +35,9 @@ h1 {
   font-family: 'Poppins', sans-serif; 
   position: absolute;
   margin-top: 30px;
-  top: 50px;
+  top: 70px;
   z-index: 999;
+  transform: translate(10%, -50%);
 }
 
 h3 {
@@ -148,6 +149,21 @@ a.link:hover {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
+
+/* Add the following styles for centering on small screens (optional) */
+@media (max-width: 768px) {
+  #popup {
+    width: 80%;
+  }
+}
+
+/* Add the following styles for centering on extra-small screens (optional) */
+@media (max-width: 576px) {
+  #popup {
+    width: 80%;
+  }
+}
+
 
 .popup-open {
   overflow: hidden;
@@ -282,7 +298,7 @@ a.link:hover {
 #restaurant-list {
   margin-top: 100px;
   padding: 10px;
-  width: 98%;
+  width: 95%;
 }
 
 #restaurant-list li {
