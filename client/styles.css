@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   background: #ffffff;
   text-align: center;
   display: flex;
@@ -328,7 +327,7 @@ a.link:hover {
 }
 
 .page-title-fixed {
-  display: flex;
+  display: none;
   position: fixed;
   left: 0;
   right: 0;
