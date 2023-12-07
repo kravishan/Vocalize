@@ -44,8 +44,10 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+var cors = require('cors')
+
 // Endpoint to serve the Google Maps API script
-app.get('/google-maps-script', (req, res) => {
+app.get('/google-maps-script',cors(), (req, res) => {
   const script = `
     const googleMapsScript = document.createElement('script');
     googleMapsScript.src = 'https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places';
