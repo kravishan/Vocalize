@@ -4,6 +4,7 @@ const fetch = require('node-fetch');
 const FormData = require('form-data');
 const multer = require('multer');
 const admin = require('firebase-admin');
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -11,6 +12,15 @@ const fs = require('fs');
 const wav = require('wav');
 
 const app = express();
+
+// Use CORS middleware
+const corsOptions = {
+  origin: 'https://www.vocalizer.dev/', 
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,  
+  optionsSuccessStatus: 204, 
+};
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -230,10 +240,6 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
   }
 });
 
-
-
-
-
 // Endpoint to get Firebase configuration
 app.get('/firebase-config', (req, res) => {
   res.json({
@@ -245,14 +251,6 @@ app.get('/firebase-config', (req, res) => {
     appId: "1:50867328520:web:81681fc6f1baaae8b823bd"
   });
 });
-
-
-
-
-
-
-
-
 
 // Endpoint to check login credentials
 app.post('/login', (req, res) => {
