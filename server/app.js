@@ -34,7 +34,7 @@ const openaiApiKey = process.env.OPENAI_APIKEY;
 
 // Middleware to handle CORS (Cross-Origin Resource Sharing) - adjust as needed
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'origin');
+  res.setHeader('Access-Control-Allow-Origin', 'https://www.vocalizer.dev');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
