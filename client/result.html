@@ -100,15 +100,20 @@
         });
 
 
-        // Your Firebase project configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyB9GNhQGsnfy85gM9u_dJuOKWAZqPUdk44",
-            authDomain: "vocalize-dc445.firebaseapp.com",
-            projectId: "vocalize-dc445",
-            storageBucket: "vocalize-dc445.appspot.com",
-            messagingSenderId: "50867328520",
-            appId: "1:50867328520:web:81681fc6f1baaae8b823bd"
-        };
+        // Function to fetch Firebase configuration from the backend
+        async function getFirebaseConfig() {
+            try {
+                const response = await fetch('https://vocalizer.dev/server/firebase-config');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch Firebase configuration');
+                }
+                const data = await response.json();
+                return data.firebaseConfig;
+            } catch (error) {
+                console.error('Error fetching Firebase configuration:', error);
+                // Handle the error appropriately
+            }
+        }
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
