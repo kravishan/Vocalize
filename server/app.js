@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const FormData = require('form-data');
 const multer = require('multer');
 const admin = require('firebase-admin');
-const cors = require('cors');
+
 
 require('dotenv').config();
 
@@ -12,15 +12,6 @@ const fs = require('fs');
 const wav = require('wav');
 
 const app = express();
-
-// Use CORS middleware
-const corsOptions = {
-  origin: 'https://www.vocalizer.dev/', 
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,  
-  optionsSuccessStatus: 204, 
-};
-app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,7 +25,7 @@ const openaiApiKey = process.env.OPENAI_APIKEY;
 
 // Middleware to handle CORS (Cross-Origin Resource Sharing) - adjust as needed
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.vocalizer.dev');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
