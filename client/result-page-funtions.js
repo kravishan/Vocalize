@@ -59,8 +59,11 @@ fetch('https://vocalizer.dev/server/firebase-config')
         //     return stars.repeat(parseInt(rating));
         // }
 
+        document.getElementById('saveButton').addEventListener('click', saveToFirestore);
+
         // Function to save data to Firestore
         function saveToFirestore() {
+            console.log('Inside saveToFirestore function');
             // Get the result data
             const resultData = {
                 whisperText: whisperText,
@@ -116,6 +119,9 @@ fetch('https://vocalizer.dev/server/firebase-config')
         console.error('Error fetching Firebase configuration:', error);
         // Handle error as needed
     });
+
+    // Add an event listener to the button outside the fetch block
+    // document.getElementById('saveButton').addEventListener('click', saveToFirestore);
 
 
       
