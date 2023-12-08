@@ -155,6 +155,15 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
 
 
+    // Function to update the value label when the slider is moved
+    function updateSliderValue() {
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("sliderValue");
+        output.innerHTML = slider.value;
+    }
+
+
+
 
  
 

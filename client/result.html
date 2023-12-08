@@ -65,6 +65,16 @@
         </div>
     </div>
 
+    <div class="card-style ">
+        <div>
+            <p class="slider-text">How accurate do you feel the generated review reflects your input and experience?</p>
+            <div class="slider-container">                
+                <input type="range" min="0" max="100" value="50" id="myRange" oninput="updateSliderValue()">
+                <div class="slider-value" id="sliderValue">50</div>
+            </div>
+        </div>  
+    </div>
+
     <div id="dateandtimeOutput" class="resultOutput"></div>
     <button id="saveButton" class="button">Save Result</button>
 
@@ -72,6 +82,10 @@
     <!-- Page content ends here-->
 
     <div id="overlay"></div>
+
+    
+    
+    
 
     <!-- Success Message Modal -->
     <div id="success-msg">

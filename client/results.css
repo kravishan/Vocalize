@@ -195,7 +195,7 @@
   color: #000000;
   position: absolute;
   margin-top: 20px;
-  right: 5px;
+  right: 0px;
   transform: translateY(-50%);
   border: none;
   background-color: transparent;
@@ -298,6 +298,61 @@ body.theme-dark .resultOutput {
 
 #failed-msg .modal-popup-content {
   color: #dc3545;
+}
+
+
+/* //////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+/* Basic styling for the slider container */
+.slider-container {
+  width: 88%;
+  margin: 50px auto;
+  max-width: 800px;
+}
+
+/* Styling for the range slider input */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  background: #0051ff;
+  border-radius: 5px;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+/* Custom styling for the thumb (handle) of the slider */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgb(0, 0, 0);
+}
+
+/* Additional styling for the thumb when active */
+/* input[type="range"]:active::-webkit-slider-thumb {
+  background: #45a049;
+} */
+
+/* Styling for the value label */
+.slider-value {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.slider-text {
+  margin-top: 25px;
+  margin-left: 10px;
+  font-size: 15px;
+  width: 100%;
 }
 
 
