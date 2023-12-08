@@ -70,10 +70,11 @@
             <p>Food Rating: ${data.foodRating}</p>
             <p>Service Rating: ${data.serviceRating}</p>
             <p>Atmosphere Rating: ${data.atmosphereRating}</p>
+            <p>Feedback value: ${data.sliderValue}</p>
             <p>Improved Review: ${data.improvedReview}</p>
             <p>Improved Review With Stars: ${decodeURIComponent(data.improvedReviewWithStars)}</p>
             <p>Generated Date and Time: ${data.generatedDateTime}</p>
-            <!-- Add more fields as needed -->
+            
           `;
         } else {
           documentDetailsContainer.innerHTML = '<p>No data found for this document ID.</p>';
