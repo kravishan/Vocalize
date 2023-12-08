@@ -201,6 +201,9 @@
   background-color: transparent;
 }
 
+body.theme-dark .edit-button {
+  color: #fff;
+}
 
 body.theme-dark .card-style {
   background-color: #1a1a1a;
@@ -302,6 +305,14 @@ body.theme-dark .resultOutput {
 
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+
+.result-card {
+  position: relative;
+  color: #000;
+  background-color: #00000017;
+}
+
 
 /* Basic styling for the slider container */
 .slider-container {
