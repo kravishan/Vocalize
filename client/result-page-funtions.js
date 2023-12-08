@@ -115,6 +115,27 @@
             console.error('Error fetching Firebase configuration:', error);
             // Handle error as needed
         });
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// Function to toggle between view mode and edit mode
+function toggleEditMode() {
+    const paragraph = document.getElementById('improvedReviewWithStarsText');
+    const editButton = document.querySelector('.edit-button');
+
+    if (paragraph.tagName === 'TEXTAREA') {
+        // If already in edit mode, revert to the original paragraph
+        paragraph.outerHTML = `<p id="improvedReviewWithStarsText" class="boxp">${paragraph.value}</p>`;
+        editButton.textContent = 'Edit';
+    } else {
+        // If not in edit mode, convert to a textarea
+        const textContent = paragraph.textContent.trim();
+        paragraph.outerHTML = `<textarea id="improvedReviewWithStarsText" class="boxp" rows="4">${textContent}</textarea>`;
+        editButton.textContent = 'Save';
+    }
+}
+
         
 
         

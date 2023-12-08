@@ -195,6 +195,13 @@ body.theme-dark .resultOutput {
   color: #fff;
 }
 
+.text-area {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+
 .button {
   margin: 20px auto; 
   display: block;

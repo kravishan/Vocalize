@@ -52,21 +52,18 @@
     <div class="card card-style mt-5">
         <div class="content mb-3">
             <h4 class="centered-heading">Improved review with stars</h4>
-            <p id="improvedReviewWithStarsText" class="boxp"></p>
+            <p id="improvedReviewWithStarsText" class="boxp text-area"></p>
 
             <!-- Add the "Edit" button with the same style as the card -->
-            <button class="button edit-button">
+            <button class="button edit-button" onclick="toggleEditMode()">
                 <i class="fa fa-edit color-yellow-dark"></i> Edit
             </button>
-        </div>  
+        </div>
     </div>
-</div>
 
-    <div id="dateandtimeOutput" class="resultOutput"></div>     
-       
+    <div id="dateandtimeOutput" class="resultOutput"></div>
     <button id="saveButton" onclick="saveToFirestore()" class="button">Save Result</button>
     
-    </div>
     <!-- Page content ends here-->
 
     <div id="overlay"></div>
