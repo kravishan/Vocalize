@@ -174,11 +174,20 @@
   font-family: 'San Francisco', Arial, sans-serif;
 }
 
+.card-style .content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .boxp {
+  flex: 1;
   margin-top: 10px;
   margin-right: 15px;
   margin-bottom: 15px;
   margin-left: 15px;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 body.theme-dark .card-style {
@@ -195,10 +204,14 @@ body.theme-dark .resultOutput {
   color: #fff;
 }
 
-.text-area {
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
+.boxp {
+  flex: 1;
+  margin-top: 10px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    max-height: 100%;
+    overflow-y: auto;
 }
 
 

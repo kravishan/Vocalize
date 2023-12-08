@@ -33,7 +33,7 @@ function fetchAndDisplayNearbyRestaurants() {
         // Define the request to fetch nearby restaurants
         const request = {
           location: userLocation,
-          radius: 2000, 
+          radius: 200, 
           types: ["restaurant"],
         };
 
