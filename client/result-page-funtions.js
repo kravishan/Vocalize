@@ -79,12 +79,10 @@ fetch('https://vocalizer.dev/server/firebase-config')
             } else {
                 // If not in edit mode, convert to a textarea
                 const textContent = paragraph.textContent.trim();
-                paragraph.outerHTML = `<textarea id="improvedReviewWithStarsText" class="edite-boxp" rows="4">${textContent}</textarea>`;
+                paragraph.outerHTML = `<textarea id="improvedReviewWithStarsText" class="edite-boxp" rows="10">${textContent}</textarea>`;
                 editButton.innerHTML = '<i class="fa fa-save"></i>';
                 editCounter++;
             }
-
-            console.log(editCounter);
             
             if (editCounter === 0) {
                 improvedReviewVersions=improvedReviewWithStars;
