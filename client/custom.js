@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const darkButton = document.querySelector('.dark-button');
   const lightButton = document.querySelector('.white-button');
   const voiceButton = document.querySelector('.voice-input-button');
-  const mapButton = document.querySelector('.map-button');
+  const mapButton = document.querySelector('.map-input-button');
 
   // Initially hide the light mode button
   lightButton.style.display = 'none';
