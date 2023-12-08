@@ -94,6 +94,12 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         document.getElementById('saveButton').addEventListener('click', saveToFirestore);
 
+
+        // Retrieve the stored user location from localStorage
+        var storedUserLocation = localStorage.getItem("userLocation");
+        var userLocation = JSON.parse(storedUserLocation);
+        console.log(userLocation);
+
         // Function to save data to Firestore
         function saveToFirestore() {
             console.log('Inside saveToFirestore function');
@@ -107,6 +113,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 improvedReview: improvedReview,
                 improvedReviewWithStars: improvedReviewVersions,
                 generatedDateTime: generatedDateTime,
+                sliderValue: document.getElementById("myRange").value,
+                userLocation: userLocation
             };
 
             // Add a new document with a generated ID to the 'results' collection
@@ -160,7 +168,13 @@ fetch('https://vocalizer.dev/server/firebase-config')
         var slider = document.getElementById("myRange");
         var output = document.getElementById("sliderValue");
         output.innerHTML = slider.value;
+
+        // Store the slider value in localStorage
+        localStorage.setItem("sliderValue", slider.value);
+
+        console.log(slider.value);
     }
+
 
 
 
