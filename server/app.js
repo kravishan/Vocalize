@@ -64,9 +64,6 @@ app.post('/transcribe-audio', upload.single('file'), async (req, res) => {
     // Convert the received audio data to a Buffer
     const wavData = Buffer.from(audioBlob, 'base64');
 
-    // Log the converted audio data
-    console.log('Converted Audio Data:', wavData);
-
     // Construct the multipart/form-data manually
     const formData = new FormData();
 
