@@ -4,7 +4,6 @@ const fetch = require('node-fetch');
 const FormData = require('form-data');
 const multer = require('multer');
 const admin = require('firebase-admin');
-const fluentFfmpeg = require('fluent-ffmpeg');
 
 
 require('dotenv').config();
@@ -56,9 +55,6 @@ app.post('/transcribe-audio', upload.single('file'), async (req, res) => {
   try {
     const audioBlob = req.file.buffer.toString('base64');
 
-    // Log the raw audioBlob data
-    console.log('Raw Audio Blob:', audioBlob);
-
     if (!audioBlob || typeof audioBlob !== 'string') {
       console.error('Invalid audio data:', audioBlob);
       res.status(400).send({ error: 'Invalid audio data' });
@@ -66,17 +62,7 @@ app.post('/transcribe-audio', upload.single('file'), async (req, res) => {
     }
 
     // Convert the received audio data to a Buffer
-    const m4aData = Buffer.from(audioBlob, 'base64');
-
-    // If the file is in M4A format, convert it to WAV
-    const isM4A = req.file.originalname.endsWith('.m4a');
-
-    let wavData = m4aData;
-
-    if (isM4A) {
-      // Convert M4A to WAV using fluent-ffmpeg
-      wavData = await convertM4AToWAV(m4aData);
-    }
+    const wavData = Buffer.from(audioBlob, 'base64');
 
     // Log the converted audio data
     console.log('Converted Audio Data:', wavData);
@@ -108,6 +94,8 @@ app.post('/transcribe-audio', upload.single('file'), async (req, res) => {
     const whisperApiData = await whisperApiResponse.text();
     const transcription = whisperApiData;
 
+    console.log('Whisper API Data:', transcription);
+
     // Send the result back to the frontend
     res.send({ transcription });
   } catch (error) {
@@ -115,6 +103,7 @@ app.post('/transcribe-audio', upload.single('file'), async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 // Endpoint for handling the OpenAI request
 app.post('/generate-improved-review', async (req, res) => {

@@ -267,77 +267,61 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    function startRecording() {
-        hideSpinner();
-        hideRating();
-        hideRatingSets();
-    
-        navigator.mediaDevices.getUserMedia({ audio: true })
-            .then(function (stream) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                analyser = audioContext.createAnalyser();
-                analyser.fftSize = 256;
-                var source = audioContext.createMediaStreamSource(stream);
-                source.connect(analyser);
-    
-                dataArray = new Float32Array(analyser.fftSize);
-    
-                mediaRecorder = new MediaRecorder(stream);
-    
-                mediaRecorder.ondataavailable = function (event) {
-                    if (event.data.size > 0) {
-                        audioChunks.push(event.data);
-    
-                        // Update the wave view
-                        drawWave();
-                    }
-                };
-    
-                mediaRecorder.onstop = function () {
-                    var audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-    
-                    // Save the audio data to a variable for later use
-                    savedAudioData = audioBlob;
-    
-                    // Save the audio or do further processing
-                    transcribeAudio(audioBlob);
-    
-                    // Clear audioChunks after processing
-                    audioChunks = [];
-                };
-    
-                // Start the mediaRecorder
-                mediaRecorder.start();
-            })
-            .catch(function (error) {
-                console.error('Error accessing microphone:', error);
-            });
-    }  
+    let recorder;
+    let isRecording = false;
 
-    function stopRecording() {
-        if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-            showSpinner();
-            hideStopButton();
-            hideInstructions();
-            hideRefreshButton() 
-    
-            mediaRecorder.stop();
-            //stream.getTracks().forEach(track => track.stop());
-            audioChunks = [];
-    
-            // Stop the media stream and close the audio context
-            if (audioContext && audioContext.state === 'running') {
-                // Stop all tracks in the stream
-                const tracks = mediaRecorder.stream.getTracks();
-                tracks.forEach(track => track.stop());
-    
-                // Close the audio context
-                audioContext.close().then(function () {
-                    //console.log('Microphone stream closed');
-                });
-            }
-        }
+
+    // Function to start recording using mic-recorder-to-mp3
+function startRecording() {
+    hideSpinner();
+    hideRating();
+    hideRatingSets();
+
+    const mp3Options = {
+        bitRate: 128, // Adjust as needed
+        encoder: 'mp3',
+        sampleRate: 44100,
+    };
+
+    recorder = new MicRecorder(mp3Options);
+
+    recorder.start()
+        .then(() => {
+            isRecording = true;
+            // You may want to add UI changes here if needed
+        })
+        .catch((e) => console.error(e));
+
+    // Optional: Start updating the wave canvas
+    updateWave();
+}
+
+    // Function to stop recording using mic-recorder-to-mp3
+function stopRecording() {
+    if (isRecording) {
+        showSpinner();
+        hideStopButton();
+        hideInstructions();
+        hideRefreshButton();
+
+        recorder
+            .stop()
+            .getMp3()
+            .then(([buffer, blob]) => {
+                // Save the audio data to a variable for later use
+                savedAudioData = blob;
+
+                // Save the audio or do further processing
+                transcribeAudio(blob);
+
+                // Clear any existing audioChunks after processing
+                audioChunks = [];
+            })
+            .catch((e) => console.error(e));
+
+        isRecording = false;
     }
+}
 
     function drawWave() {
         if (analyser) {
@@ -453,58 +437,33 @@ if (selectedRestaurantData) {
 
 
 /////////////////////////   API REQUESTS   ///////////////////////////
-// Function to play audio locally before sending to the backend
-function playAudio(audioBlob) {
-    const audioUrl = URL.createObjectURL(audioBlob);
-    const audioElement = new Audio(audioUrl);
-    audioElement.play();
-  }
-  
-  // Function to download audio file
-  function downloadAudio(audioBlob, fileName) {
-    const audioUrl = URL.createObjectURL(audioBlob);
-    const link = document.createElement('a');
-    link.href = audioUrl;
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
 
-// Function to get the transcribed audio from the backend
+
+// Function to get the transcribe audio from the backend
 let globalWhisperText = '';
 
 async function transcribeAudio(audioBlob) {
   let whisperText = '';
 
-  // Determine the browser
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-  // Choose the file format based on the browser
-  const fileFormat = isSafari ? 'audio/m4a' : 'audio/wav';
-  const fileExtension = isSafari ? 'm4a' : 'wav';
-
-  // Download the audio file
-  downloadAudio(audioBlob, `audio_received.${fileExtension}`);
-
   // Create a Blob from the audio data
-  const audioBlobObject = new Blob([audioBlob], { type: fileFormat });
+  const audioBlobObject = new Blob([audioBlob], { type: 'audio/wav' });
 
   // Create a FormData for sending to the server
   const formData = new FormData();
-  formData.append('file', audioBlobObject, `audio_received.${fileExtension}`);
+  formData.append('file', audioBlobObject, 'audio_received.wav');
 
   // Create an XMLHttpRequest object
   const xhr = new XMLHttpRequest();
 
   // Configure it: POST-request for the specified URL
-  xhr.open('POST', 'https://vocalizer.dev/server/transcribe-audio', true);
+  xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
+//   xhr.open('POST', 'https://vocalizer.dev/server/transcribe-audio', true);
 
   // Set up a handler for when the request is successfully completed
   xhr.onload = function () {
     if (xhr.status === 200) {
-      const responseData = JSON.parse(xhr.responseText);
-      const whisperText = responseData.transcription;
+        const responseData = JSON.parse(xhr.responseText);
+        const whisperText = responseData.transcription;
 
       globalWhisperText = whisperText;
 
@@ -610,7 +569,6 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         console.error('Error:', error);
     }
 }
-
 
 
 
