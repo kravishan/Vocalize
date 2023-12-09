@@ -228,14 +228,14 @@ document.addEventListener('DOMContentLoaded', function () {
     var popup = document.getElementById('popup');
     var stopButton = document.querySelector('.stop');
     var microphoneButton = document.querySelector('.symbol');
-    var waveCanvas = document.querySelector('.wave-canvas');
+    let waveCanvas = document.querySelector('.wave-canvas');
 
     //var recognition;
     var mediaRecorder;
     var audioChunks = [];
     var audioContext;
-    var analyser;
-    var dataArray;
+    let analyser;
+    let dataArray;
     
     function openPopup() {
         document.body.classList.add('popup-open');
@@ -267,64 +267,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    let recorder;
-    let isRecording = false;
-
-
-    // Function to start recording using mic-recorder-to-mp3
-function startRecording() {
-    hideSpinner();
-    hideRating();
-    hideRatingSets();
-
-    const mp3Options = {
-        bitRate: 128, // Adjust as needed
-        encoder: 'mp3',
-        sampleRate: 44100,
-    };
-
-    recorder = new MicRecorder(mp3Options);
-
-    recorder.start()
-        .then(() => {
-            isRecording = true;
-            // Start updating the wave canvas during recording
-            updateWave();
-            // You may want to add UI changes here if needed
-        })
-        .catch((e) => console.error(e));
-}
-
-    // Function to stop recording using mic-recorder-to-mp3
-function stopRecording() {
-    if (isRecording) {
-        showSpinner();
-        hideStopButton();
-        hideInstructions();
-        hideRefreshButton();
-
-        recorder
-            .stop()
-            .getMp3()
-            .then(([buffer, blob]) => {
-                // Save the audio data to a variable for later use
-                savedAudioData = blob;
-
-                // Save the audio or do further processing
-                transcribeAudio(blob);
-
-                // Clear any existing audioChunks after processing
-                audioChunks = [];
-            })
-            .catch((e) => console.error(e));
-
-        isRecording = false;
-    }
-}
 
     // Function to draw the wave on the canvas
     function drawWave() {
-        if (analyser) {
+        if (analyser && analyser.getFloatTimeDomainData) {
             analyser.getFloatTimeDomainData(dataArray);
 
             var canvasContext = waveCanvas.getContext('2d');
@@ -336,10 +282,10 @@ function stopRecording() {
             canvasContext.strokeStyle = '#ffffff';
             canvasContext.beginPath();
 
-            var sliceWidth = width / analyser.fftSize;
+            var sliceWidth = width / dataArray.length;
             var x = 0;
 
-            for (var i = 0; i < analyser.fftSize; i++) {
+            for (var i = 0; i < dataArray.length; i++) {
                 var value = (dataArray[i] + 1) / 2;
                 var y = value * height;
 
@@ -354,8 +300,11 @@ function stopRecording() {
 
             canvasContext.stroke();
         }
-    }
 
+        // Schedule the next frame
+        requestAnimationFrame(drawWave);
+    }
+    
     // Optional: Function to update the wave canvas during recording
     function updateWave() {
         drawWave();
@@ -363,6 +312,73 @@ function stopRecording() {
             requestAnimationFrame(updateWave);
         }
     }
+
+
+    let recorder;
+    let isRecording = false;
+
+
+    // Function to start recording using mic-recorder-to-mp3
+    function startRecording() {
+        hideSpinner();
+        hideRating();
+        hideRatingSets();
+    
+        const mp3Options = {
+            bitRate: 128,
+            encoder: 'mp3',
+            sampleRate: 44100,
+        };
+    
+        recorder = new MicRecorder(mp3Options);
+    
+        recorder.start()
+            .then(() => {
+                isRecording = true;
+                analyser = recorder.context.createAnalyser();
+                analyser.fftSize = 256;
+                dataArray = new Float32Array(analyser.fftSize);
+    
+                // Check if recorder.stream is a valid MediaStream object
+                if (recorder && recorder.stream instanceof MediaStream) {
+                    const source = recorder.context.createMediaStreamSource(recorder.stream);
+                    
+                    // Update the source.connect line to use analyser
+                    source.connect(analyser);
+                    
+                    // Start updating the wave canvas during recording
+                    drawWave();
+                } else {
+                    console.error('Invalid MediaStream object.');
+                }
+            })
+            .catch((e) => console.error(e));
+    }
+    
+
+    function stopRecording() {
+        showSpinner();
+        hideStopButton();
+        hideInstructions();
+        hideRefreshButton() 
+
+        if (isRecording) {
+            recorder
+                .stop()
+                .getMp3()
+                .then(([buffer, blob]) => {
+                    savedAudioData = blob;
+                    transcribeAudio(blob);
+                    audioChunks = [];
+                    analyser.disconnect(); // Disconnect the analyser when recording stops
+                })
+                .catch((e) => console.error(e));
+
+            isRecording = false;
+        }
+    }
+
+    
 
     microphoneButton.addEventListener('click', function () {
         // Hide the restaurant list
