@@ -333,24 +333,25 @@ document.addEventListener('DOMContentLoaded', function () {
         recorder = new MicRecorder(mp3Options);
     
         recorder.start()
-            .then(() => {
+            .then(function(stream) {
                 isRecording = true;
-                analyser = recorder.context.createAnalyser();
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
                 analyser.fftSize = 256;
+                var source = audioContext.createMediaStreamSource(stream);
+                source.connect(analyser);
+
                 dataArray = new Float32Array(analyser.fftSize);
+
+                recorder.ondataavailable = function (event) {
+                    if (event.data.size > 0) {
+                        audioChunks.push(event.data);
     
-                // Check if recorder.stream is a valid MediaStream object
-                if (recorder && recorder.stream instanceof MediaStream) {
-                    const source = recorder.context.createMediaStreamSource(recorder.stream);
-                    
-                    // Update the source.connect line to use analyser
-                    source.connect(analyser);
-                    
-                    // Start updating the wave canvas during recording
-                    drawWave();
-                } else {
-                    console.error('Invalid MediaStream object.');
-                }
+                        // Update the wave view
+                        drawWave();
+                    }
+                };
+
             })
             .catch((e) => console.error(e));
     }
