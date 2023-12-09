@@ -288,12 +288,11 @@ function startRecording() {
     recorder.start()
         .then(() => {
             isRecording = true;
+            // Start updating the wave canvas during recording
+            updateWave();
             // You may want to add UI changes here if needed
         })
         .catch((e) => console.error(e));
-
-    // Optional: Start updating the wave canvas
-    updateWave();
 }
 
     // Function to stop recording using mic-recorder-to-mp3
@@ -323,6 +322,7 @@ function stopRecording() {
     }
 }
 
+    // Function to draw the wave on the canvas
     function drawWave() {
         if (analyser) {
             analyser.getFloatTimeDomainData(dataArray);
@@ -340,7 +340,7 @@ function stopRecording() {
             var x = 0;
 
             for (var i = 0; i < analyser.fftSize; i++) {
-                var value = (dataArray[i] + 1) / 2; 
+                var value = (dataArray[i] + 1) / 2;
                 var y = value * height;
 
                 if (i === 0) {
@@ -356,9 +356,12 @@ function stopRecording() {
         }
     }
 
+    // Optional: Function to update the wave canvas during recording
     function updateWave() {
         drawWave();
-        requestAnimationFrame(updateWave);
+        if (isRecording) {
+            requestAnimationFrame(updateWave);
+        }
     }
 
     microphoneButton.addEventListener('click', function () {
