@@ -453,33 +453,58 @@ if (selectedRestaurantData) {
 
 
 /////////////////////////   API REQUESTS   ///////////////////////////
+// Function to play audio locally before sending to the backend
+function playAudio(audioBlob) {
+    const audioUrl = URL.createObjectURL(audioBlob);
+    const audioElement = new Audio(audioUrl);
+    audioElement.play();
+  }
+  
+  // Function to download audio file
+  function downloadAudio(audioBlob, fileName) {
+    const audioUrl = URL.createObjectURL(audioBlob);
+    const link = document.createElement('a');
+    link.href = audioUrl;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
-
-// Function to get the transcribe audio from the backend
+// Function to get the transcribed audio from the backend
 let globalWhisperText = '';
 
 async function transcribeAudio(audioBlob) {
   let whisperText = '';
 
+  // Determine the browser
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+  // Choose the file format based on the browser
+  const fileFormat = isSafari ? 'audio/m4a' : 'audio/wav';
+  const fileExtension = isSafari ? 'm4a' : 'wav';
+
+  // Download the audio file
+  downloadAudio(audioBlob, `audio_received.${fileExtension}`);
+
   // Create a Blob from the audio data
-  const audioBlobObject = new Blob([audioBlob], { type: 'audio/wav' });
+  const audioBlobObject = new Blob([audioBlob], { type: fileFormat });
 
   // Create a FormData for sending to the server
   const formData = new FormData();
-  formData.append('file', audioBlobObject, 'audio_received.wav');
+  formData.append('file', audioBlobObject, `audio_received.${fileExtension}`);
 
   // Create an XMLHttpRequest object
   const xhr = new XMLHttpRequest();
 
   // Configure it: POST-request for the specified URL
-//   xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
   xhr.open('POST', 'https://vocalizer.dev/server/transcribe-audio', true);
 
   // Set up a handler for when the request is successfully completed
   xhr.onload = function () {
     if (xhr.status === 200) {
-        const responseData = JSON.parse(xhr.responseText);
-        const whisperText = responseData.transcription;
+      const responseData = JSON.parse(xhr.responseText);
+      const whisperText = responseData.transcription;
 
       globalWhisperText = whisperText;
 
