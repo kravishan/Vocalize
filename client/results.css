@@ -196,12 +196,17 @@
   position: absolute;
   margin-top: 20px;
   right: 0px;
+  margin-right: 0px;
   transform: translateY(-50%);
   border: none;
   background-color: transparent;
 }
 
 body.theme-dark .edit-button {
+  color: #fff;
+}
+
+body.theme-dark .back-button {
   color: #fff;
 }
 
