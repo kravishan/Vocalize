@@ -400,6 +400,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (h3Element) {
             h3Element.style.display = 'none';
         }
+
+        // Hide the mode button
+        var modeButton = document.querySelector('.title-icon-two');
+        if (modeButton) {
+            modeButton.style.display = 'none';
+        }
       
         openPopup();
         startRecording();
