@@ -150,7 +150,6 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Display the data on the page
         document.getElementById('voiceReviewText').innerHTML = `${whisperText}`;
-        document.getElementById('improvedReviewText').innerHTML = `${improvedReview}`;
         document.getElementById('improvedReviewWithStarsText').innerHTML = `${decodeURIComponent(improvedReviewWithStars)}`;
         document.getElementById('dateandtimeOutput').innerHTML = `<strong>Generated Date and Time:</strong> ${generatedDateTime}`;
 
