@@ -42,6 +42,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         const foodRating = urlParams.get('foodRating');
         const serviceRating = urlParams.get('serviceRating');
         const atmosphereRating = urlParams.get('atmosphereRating');
+        const improvedReview = localStorage.getItem('improvedReview');
         const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
 
         // Get or set the generated date and time
@@ -109,6 +110,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 foodRating: foodRating,
                 serviceRating: serviceRating,
                 atmosphereRating: atmosphereRating,
+                improvedReview: improvedReview,
                 improvedReviewWithStars: improvedReviewVersions,
                 generatedDateTime: generatedDateTime,
                 sliderValue: document.getElementById("myRange").value,
@@ -148,6 +150,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Display the data on the page
         document.getElementById('voiceReviewText').innerHTML = `${whisperText}`;
+        document.getElementById('improvedReviewText').innerHTML = `${improvedReview}`;
         document.getElementById('improvedReviewWithStarsText').innerHTML = `${decodeURIComponent(improvedReviewWithStars)}`;
         document.getElementById('dateandtimeOutput').innerHTML = `<strong>Generated Date and Time:</strong> ${generatedDateTime}`;
 
