@@ -118,7 +118,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
             };
 
             // Add a new document with a generated ID to the 'results' collection
-            db.collection('results')
+            db.collection('Results LLM')
                 .add(resultData)
                 .then((docRef) => {
                     console.log('Document written with ID:', docRef.id);
