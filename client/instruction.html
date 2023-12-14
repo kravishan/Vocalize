@@ -69,7 +69,7 @@
             margin-bottom: 10px;
             padding: 15px;
             border-radius: 8px;
-            background-color: #ffffff !important;
+            background-color: #f1f1f1 !important;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             border: 1px solid #ccc; 
         }
@@ -90,14 +90,12 @@
             transform: translate3d(0, 0, 0);
             background-size: cover;
             border: 0px !important;
-            max-height: 150000px;
-            margin-bottom: 30px;
             background-position: center center !important;
         }
 
         .card-style {
             overflow: hidden;
-            margin: 0px 15px 30px 15px;
+            margin: 0px 10px 20px 0px;
             border-radius: 20px;
             border: none;
             box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.1);
@@ -143,12 +141,41 @@
 
     <div class="card card-style mt-5">
         <div class="content mb-3">
-            <h4 class="centered-heading">Introduction</h4>
-            <p class="boxp">Welcome to our research project! Below is a to-do list to guide you through the process:</p>
-        </div>  
+            <h3 class="centered-heading">Details</h3>
+            <div class="details">
+                <p>Welcome to our research project! This instruction page provides guidance on participating in our study. Below is a to-do list to guide you through the process:</p>
+                <p>This research aims to gather valuable insights into restaurant reviews using two methods:</p>
+                <ul>
+                    <li>Google Map Method: Provide your feedback using the Google Map application.</li>
+                    <li>LLM Method: Share your thoughts using the Vocalizer LLM application.</li>
+                </ul>
+                <p>Please complete the tasks in the to-do list and follow the provided links to access the applications and Google forms.</p>
+
+                <p><strong>What We're Trying to Do:</strong></p>
+                <p>We're on an exciting journey to see how smart computer programs (like talking robots) can change how we make reviews. Our main goal is to find out how these computer programs, known as AI, can make reviews better and cover more things. In this study, we're trying a new way to get reviews—from your voice, not just typing. This new idea is meant to make giving reviews more like talking to a friend or someone you know well.</p>
+                <p>Picture telling someone about a restaurant in the same way you'd tell a friend. That's what we want to capture with this new voice method. It's different from the usual way of typing words on a screen.</p>
+                <p>Now, let's get started with the tasks listed in the to-do list. Follow the links to try out the apps and fill in the Google forms.</p>
+                
+                
+                <p><strong>How Long We Need Your Reviews:</strong></p>
+                <p>We're looking to collect reviews over a period of 6 days. We've split everyone into two groups: one group will use the LLM application first, while the other will start with the Google Map Application. You'll use one application for reviewing three specific restaurants and the other application for the remaining three.</p>
+                <p>Make sure to fill out the Google form related to the application you used after completing the reviews for the first three restaurants according to your group.</p>
+
+                <p><strong>Data Usage Policy:</strong></p>
+                <p>We collect your location data for research. Your privacy is important. We only use your data for our study, and we delete it when we finish. We don't share it or use it for anything else. If you have questions, ask us.</p>
+
+                <p><strong>How to Contact Us:</strong></p>
+                <p>If you have any questions or concerns, please contact us at kavindu[dot]magalage[at]oulu[dot]fi</a></p>
+                <p>Thank you for participating in our research!</p>
+                    
+            </div>
+
+            </div>
+            </div>
+        </div>
     </div>
 
-    <h4 class="centered-heading">Todo list</h4>
+    <h3 class="centered-heading">Todo list</h4>
     <ul class="todo-list">
         <li class="todo-item" id="todo1">
             <input type="checkbox" class="todo-checkbox" id="checkbox1">
@@ -156,14 +183,50 @@
         </li>
         <li class="todo-item" id="todo2">
             <input type="checkbox" class="todo-checkbox" id="checkbox2">
-            <label for="checkbox2">Complete the Participant Background Survey</label>
+            <label for="checkbox2">Complete the Form 1:Participant Background and Survey</label>
+        </li>
+        <li class="todo-item" id="todo3">
+            <input type="checkbox" class="todo-checkbox" id="checkbox2">
+            <label for="checkbox2">Complete Form 2: Google Map Method Review</label>
+        </li>
+        <li class="todo-item" id="todo4">
+            <input type="checkbox" class="todo-checkbox" id="checkbox2">
+            <label for="checkbox2">Complete Form 3: LLM Method Improved Review</label>
+        </li>
+
+        <h4>Restaurant List</h4>
+
+        <!-- Restaurant list -->
+        <li class="todo-item" id="todo5">
+            <input type="checkbox" class="todo-checkbox" id="checkbox2">
+            <label for="checkbox2">Juvenes Restaurant Foobar</label>
+        </li>
+        <li class="todo-item" id="todo6">
+            <input type="checkbox" class="todo-checkbox" id="checkbox2">
+            <label for="checkbox2">Juvenes Cafe Tellus</label>
+        </li>
+        <li class="todo-item" id="todo7">
+            <input type="checkbox" class="todo-checkbox" id="checkbox2">
+            <label for="checkbox2">H2O</label>
+        </li>
+        <li class="todo-item" id="todo8">
+            <input type="checkbox" class="todo-checkbox" id="checkbox2">
+            <label for="checkbox2">Ravintold Kastari</label>
+        </li>
+        <li class="todo-item" id="todo9">
+            <input type="checkbox" class="todo-checkbox" id="checkbox2">
+            <label for="checkbox2">Juvenes Restaurant Kylyma</label>
+        </li>
+        <li class="todo-item" id="todo10">
+            <input type="checkbox" class="todo-checkbox" id="checkbox2">
+            <label for="checkbox2">Juvenes</label>
         </li>
         
     </ul>  
 
     <div class="card card-style mt-5">
         <div class="content mb-3">
-            <h4 class="centered-heading">App links</h4>
+            <h3 class="centered-heading">App links</h4>
             <p class="boxp">
                 <a href="https://vocalizer.dev/">LLM application</a>
             </p>
@@ -175,7 +238,7 @@
 
     <div class="card card-style mt-5">
         <div class="content mb-3">
-            <h4 class="centered-heading">Google form links</h4>
+            <h3 class="centered-heading">Google form links</h4>
             <p class="boxp">
                 <a href="https://forms.gle/6eFQTjvKZYgKLqJj9">Form 1: Participant Background and Philosophy Survey</a>
             </p>
@@ -210,6 +273,21 @@
                 checkbox.addEventListener('change', function () {
                     localStorage.setItem(`task${taskId}`, checkbox.checked);
                 });
+            }
+        });
+
+        // Get the .page-title-fixed element
+        const pageTitleFixedElement = document.querySelector('.page-title-fixed');
+
+        // Add an event listener for the scroll event
+        window.addEventListener('scroll', function() {
+            // Check the scroll position (adjust the value as needed)
+            if (window.scrollY > 90) {
+                // If scroll position is greater than 50, add a class to hide the element
+                pageTitleFixedElement.style.display = 'none';
+            } else {
+                // Otherwise, remove the class to show the element
+                pageTitleFixedElement.style.display = 'block';
             }
         });
     </script>
