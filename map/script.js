@@ -98,7 +98,7 @@ function handleRating(event, set) {
             showSpinner();
 
             // Redirect to the result page with parameters
-            const resultPageURL = `/result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}}`;
+            const resultPageURL = `/result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}`;
             window.location.href = resultPageURL;
         }
     }
