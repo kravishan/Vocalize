@@ -42,8 +42,11 @@ fetch('https://vocalizer.dev/server/firebase-config')
         const foodRating = urlParams.get('foodRating');
         const serviceRating = urlParams.get('serviceRating');
         const atmosphereRating = urlParams.get('atmosphereRating');
-        const improvedReview = localStorage.getItem('improvedReview');
-        const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
+
+        console.log("Overall Star Count:", overallStarCount);
+        console.log("Food Rating:", foodRating);
+        console.log("Service Rating:", serviceRating);
+        console.log("Atmosphere Rating:", atmosphereRating);
 
         // Get or set the generated date and time
         let generatedDateTime = localStorage.getItem('generatedDateTime');
@@ -58,39 +61,6 @@ fetch('https://vocalizer.dev/server/firebase-config')
         //     const stars = '\u2605'; // Unicode character for a solid star
         //     return stars.repeat(parseInt(rating));
         // }
-
-        // Array to store all versions of improvedReviewWithStars
-        let improvedReviewVersions = improvedReviewWithStars; // Set the initial value
-        // Initialize editCounter
-        let editCounter = 0;
-
-        // Event listener for the edit button
-        document.getElementById('edit-button-review').addEventListener('click', toggleEditMode);
-
-        // Function to toggle between view mode and edit mode
-        function toggleEditMode() {
-            const paragraph = document.getElementById('improvedReviewWithStarsText');
-            const editButton = document.getElementById('edit-button-review');
-
-            if (paragraph.tagName === 'TEXTAREA') {
-                // If already in edit mode, revert to the original paragraph
-                paragraph.outerHTML = `<p id="improvedReviewWithStarsText" class="edite-boxp boxp">${paragraph.value}</p>`;
-                editButton.innerHTML = '<i class="fa fa-edit"></i>';
-            } else {
-                // If not in edit mode, convert to a textarea
-                const textContent = paragraph.textContent.trim();
-                paragraph.outerHTML = `<textarea id="improvedReviewWithStarsText" class="edite-boxp" rows="15">${textContent}</textarea>`;
-                editButton.innerHTML = '<i class="fa fa-save"></i>';
-                editCounter++;
-            }
-            
-            if (editCounter === 0) {
-                improvedReviewVersions=improvedReviewWithStars;
-            }
-            else {
-                improvedReviewVersions = [improvedReviewWithStars, paragraph.value];
-            }
-        }   
 
         document.getElementById('saveButton').addEventListener('click', saveToFirestore);
 
@@ -110,15 +80,13 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 foodRating: foodRating,
                 serviceRating: serviceRating,
                 atmosphereRating: atmosphereRating,
-                improvedReview: improvedReview,
-                improvedReviewWithStars: improvedReviewVersions,
                 generatedDateTime: generatedDateTime,
                 sliderValue: document.getElementById("myRange").value,
                 userLocation: userLocation
             };
 
             // Add a new document with a generated ID to the 'results' collection
-            db.collection('results')
+            db.collection('results map view')
                 .add(resultData)
                 .then((docRef) => {
                     console.log('Document written with ID:', docRef.id);
@@ -150,8 +118,21 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Display the data on the page
         document.getElementById('voiceReviewText').innerHTML = `${whisperText}`;
-        document.getElementById('improvedReviewWithStarsText').innerHTML = `${decodeURIComponent(improvedReviewWithStars)}`;
         document.getElementById('dateandtimeOutput').innerHTML = `<strong>Generated Date and Time:</strong> ${generatedDateTime}`;
+
+        // Function to generate star icons based on the rating
+        function generateStarIcons(rating) {
+            const stars = '\u2605'; // Unicode character for a solid star
+            return stars.repeat(parseInt(rating));
+        }
+
+        // Display ratings
+        document.getElementById('ratingStarsOutputText').innerHTML = `
+        <p>Overall: ${generateStarIcons(overallStarCount)}</p>
+        <p>Food: ${generateStarIcons(foodRating)}</p>
+        <p>Service: ${generateStarIcons(serviceRating)}</p>
+        <p>Atmosphere: ${generateStarIcons(atmosphereRating)}</p>
+        `;
 
 
     })

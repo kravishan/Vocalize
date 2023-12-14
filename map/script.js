@@ -96,11 +96,11 @@ function handleRating(event, set) {
         if (foodRating !== 0 && serviceRating !== 0 && atmosphereRating !== 0) {
             hideRatingSets();
             showSpinner();
-            generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
-            //generateImprovedReviewWithStars();
+
+            // Redirect to the result page with parameters
+            const resultPageURL = `/result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}}`;
+            window.location.href = resultPageURL;
         }
-         
-        //generateImprovedReviewWithStars(whisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
     }
 
 }
@@ -511,89 +511,6 @@ async function transcribeAudio(audioBlob) {
 }
 
 
-// Function to send the text to the backend and trigger OpenAI request
-async function generateImprovedReviewWithoutStars(whisperText) {
-    try {
-        // Get restaurant details from localStorage
-        const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
-        const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
-
-        // Send text to the backend
-        // const response = await fetch('http://localhost:3000/generate-improved-review', {
-        const response = await fetch('https://vocalizer.dev/server/generate-improved-review', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                whisperText,
-                restaurantName,
-            }),
-        });
-
-        if (!response.ok) {
-            throw new Error(`Backend request failed: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        const improvedReview = data.improvedReview;
-
-        // Log or use the generated improved review as needed
-        console.log('Improved Review:', improvedReview);
-
-        // Store the improved review in localStorage
-        localStorage.setItem('improvedReview', improvedReview);
-
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-// Function to send the data to the backend and trigger OpenAI request
-async function generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating) {
-    try {
-        // Get restaurant details from localStorage
-        const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
-        const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
-
-        // Send data to the backend
-        // const response = await fetch('http://localhost:3000/generate-improved-review-with-stars', {
-        const response = await fetch('https://vocalizer.dev/server/generate-improved-review-with-stars', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                globalWhisperText,
-                selectedOverallStarCount,
-                foodRating,
-                serviceRating,
-                atmosphereRating,
-                restaurantName,
-            }),
-        });
-
-        if (!response.ok) {
-            throw new Error(`Backend request failed: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        const improvedReviewWithStars = data.improvedReviewWithStars;
-
-        // Log or use the generated improved review as needed
-        console.log('Improved Review with Stars:', improvedReviewWithStars);
-
-        // Store the improved review in localStorage
-        localStorage.setItem('improvedReviewWithStars', improvedReviewWithStars);
-
-        // Redirect to the result page with parameters
-        const resultPageURL = `/result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
-        window.location.href = resultPageURL;
-
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
 
 
 
