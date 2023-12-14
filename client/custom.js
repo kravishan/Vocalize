@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   const darkButton = document.querySelector('.dark-button');
   const lightButton = document.querySelector('.white-button');
-  const voiceButton = document.querySelector('.voice-input-button');
-  const mapButton = document.querySelector('.map-input-button');
 
   // Initially hide the light mode button
   lightButton.style.display = 'none';
@@ -46,40 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Activating Light Mode
       lightButton.addEventListener('click', activateLightMode);
   }
-
-  function checkInputMode() {
-      // Replace this logic with your actual condition to determine the input mode
-      let isVoiceMode = localStorage.getItem('InputMode') === 'voice'; // Change this to your actual condition
-
-      function toggleMode() {
-          isVoiceMode = !isVoiceMode;
-
-          if (isVoiceMode) {
-              mapButton.style.display = 'block';
-              voiceButton.style.display = 'none';
-              localStorage.setItem('InputMode', 'map');
-              
-          } else {
-              voiceButton.style.display = 'block';
-              mapButton.style.display = 'none';
-              localStorage.setItem('InputMode', 'voice');
-
-              
-          }
-
-          console.log(`Current Input Mode: ${isVoiceMode ? 'Voice' : 'Map'}`);
-      }
-
-      // Add click event listeners to toggle between voice and map
-      voiceButton.addEventListener('click', toggleMode);
-      mapButton.addEventListener('click', toggleMode);
-
-      // Initial mode check
-      toggleMode();
-  }
-
   checkDarkMode();
-  checkInputMode();
 });
 
 

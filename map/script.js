@@ -495,7 +495,6 @@ async function transcribeAudio(audioBlob) {
       console.log('Whisper text:', whisperText);
       hideSpinner();
       showRating();
-      generateImprovedReviewWithoutStars(whisperText);
     } else {
       console.error('Backend request failed:', xhr.statusText);
     }
