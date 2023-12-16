@@ -89,9 +89,13 @@
 
 // Define dummy restaurant data
 const dummyRestaurants = [
-  { name: 'Juvenes Restaurant Foobar', coordinates: { lat: 40.7128, lng: -74.0060 } },
-  { name: 'Juvenes Cafe Tellus', coordinates: { lat: 34.0522, lng: -118.2437 } },
-  // Add more dummy restaurants as needed
+  { name: 'Juvenes Restaurant Foobar', coordinates: { lat: 65.060708, lng: 25.3902493} },
+  { name: 'H2O', coordinates: { lat: 65.0577388, lng: 25.4676689  } },
+  { name: 'Ravintola Kastari', coordinates: { lat: 65.05711060000002, lng: 25.467537 } },
+  { name: 'Juvenes Restaurant Foodoo', coordinates: { lat: 65.060708, lng: 25.3902493 } },
+  { name: 'Juvenes Restaurant Napa', coordinates: { lat: 65.060708, lng: 25.3902493 } },
+  { name: 'Juvenes Restaurant Mara', coordinates: { lat: 65.0610899, lng: 25.4680569 } },
+  
 ];
 
 // Call the fetchAndDisplayDummyRestaurants function when the page loads
@@ -125,7 +129,6 @@ function fetchAndDisplayDummyRestaurants() {
     restaurantList.appendChild(listItem);
   }
 }
-
 
 
 
