@@ -73,10 +73,12 @@ window.addEventListener('scroll', function() {
 
 /////////////////////////////////////
 
+  // Show PWA installation guide notification after 2 seconds
+  setTimeout(showPWAInstallNotification, 1000);
 
-// script.js or custom.js
 
-// Function to show PWA installation guide notification
+
+  // Function to show PWA installation guide notification
 function showPWAInstallNotification() {
     const notification = document.getElementById('pwa-install-notification');
     if (notification) {
@@ -93,34 +95,53 @@ function showPWAInstallNotification() {
   }
   
   // Function to handle the PWA installation guide
-function showPWAInstallationGuide() {
+  function showPWAInstallationGuide() {
     // Detect the operating system
     const operatingSystem = getOperatingSystem();
   
     // Customize this function based on your PWA installation guide
     console.log(`Follow the installation guide for your ${operatingSystem} device.`);
-  }
   
-  // Function to get the operating system
-  function getOperatingSystem() {
-    const platform = navigator.platform.toLowerCase();
+    // Prompt user to install PWA on Android
+    if (operatingSystem === 'Android') {
+      const deferredPrompt = getDeferredPrompt();
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(choiceResult => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+          } else {
+            console.log('User dismissed the A2HS prompt');
+          }
+        });
+      }
+    }
   
-    if (platform.includes('win')) {
-      return 'Windows';
-    } else if (platform.includes('mac')) {
-      return 'Mac';
-    } else if (platform.includes('linux')) {
-      return 'Linux';
-    } else if (platform.includes('iphone') || platform.includes('ipad') || platform.includes('ipod')) {
-      return 'iOS';
-    } else if (platform.includes('android')) {
-      return 'Android';
-    } else {
-      return 'Unknown';
+    // Show Web App Banner on iOS
+    if (operatingSystem === 'iOS') {
+      // Customize the banner properties
+      const bannerOptions = {
+        title: 'Install PWA',
+        actionButton: 'Install',
+        url: '/manifest.json', // URL to your manifest file
+      };
+  
+      // Check if the banner is supported
+      if ('addToHomeScreen' in window) {
+        window.addToHomeScreen(bannerOptions);
+      }
     }
   }
   
+  // Function to get the deferred prompt for Android
+  function getDeferredPrompt() {
+    return new Promise((resolve) => {
+      window.addEventListener('beforeinstallprompt', (event) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        event.preventDefault();
+        resolve(event);
+      });
+    });
+  }
   
-  // Show PWA installation guide notification after 2 seconds
-  setTimeout(showPWAInstallNotification, 1000);
   
