@@ -157,6 +157,58 @@
     }
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* notification.css */
+#pwa-install-notification {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #000000; 
+  color: #ffffff;
+  padding: 15px;
+  text-align: center;
+  z-index: 10000;
+}
+
+.notification-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin-right: 20px;
+}
+
+.notification-button {
+  background-color: #3FB1FE; 
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.notification-close {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 30px;
+  cursor: pointer;
+  float: right;
+}
+
+
+
+
   
   
   
