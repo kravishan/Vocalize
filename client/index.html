@@ -62,18 +62,35 @@
 
 
 
+
+
+
   <!-- Top notification for PWA installation guide -->
   <div id="pwa-install-notification" class="notification">
     <span class="notification-text">
       Install Vocalizer on your device for a better experience!
     </span>
     <button class="notification-button" onclick="showPWAInstallationGuide()">
-      Install Now
+      Install
     </button>
     <button class="notification-close" onclick="closeNotification()">
       &times;
     </button>
   </div>
+
+  <!-- Modal -->
+  <div class="modal" id="installModal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeInstallModal()">&times;</span>
+      <h2 class="modal-title">Install the App</h2>
+      <p class="modal-text" id="installInstructions"></p>
+      <p class="modal-text text1" id="installInstructions1"></p>
+      <p class="modal-text text2" id="installInstructions2"></p>
+      <p class="modal-text text3" id="installInstructions3"></p>
+      <p class="modal-text text4" id="installInstructions4"></p>
+    </div>
+  </div>
+  
 
 
 

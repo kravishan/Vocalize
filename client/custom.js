@@ -73,12 +73,50 @@ window.addEventListener('scroll', function() {
 
 /////////////////////////////////////
 
+// Function to open the installation modal
+function openInstallModal() {
+    const modal = document.getElementById('installModal');
+    if (modal) {
+      modal.style.display = 'block';
+
+      // Add a class to the body when the modal is open
+      document.body.classList.add('modal-open');
+  
+      // Customize the installation instructions based on the detected operating system
+      const operatingSystem = getOperatingSystem();
+      const installInstructions = document.getElementById('installInstructions');
+      const installInstructions1 = document.getElementById('installInstructions1');
+      const installInstructions2 = document.getElementById('installInstructions2');
+      const installInstructions3 = document.getElementById('installInstructions3');
+  
+      if (operatingSystem === 'iOS') {
+        installInstructions.textContent = 'Follow the steps to install on iOS...';
+        installInstructions1.textContent = '1. Tap on share in the browser menu';
+        installInstructions2.textContent = '2. Tap on the menu icon';
+        installInstructions3.textContent = '3. Select "Add to Home Screen"';
+        installInstructions4.textContent = '4. Look for the app on your home screen';
+      } else if (operatingSystem === 'Android') {
+        installInstructions.textContent = 'Follow the steps to install on Android...';
+      } else {
+        installInstructions.textContent = 'Follow the steps to install on your device...';
+
+      }      
+    }
+  }
+  
+  // Function to close the installation modal
+  function closeInstallModal() {
+    const modal = document.getElementById('installModal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+
   // Show PWA installation guide notification after 2 seconds
   setTimeout(showPWAInstallNotification, 1000);
 
-
-
-  // Function to show PWA installation guide notification
+// Function to show PWA installation guide notification
 function showPWAInstallNotification() {
     const notification = document.getElementById('pwa-install-notification');
     if (notification) {
@@ -95,53 +133,36 @@ function showPWAInstallNotification() {
   }
   
   // Function to handle the PWA installation guide
-  function showPWAInstallationGuide() {
+function showPWAInstallationGuide() {
     // Detect the operating system
     const operatingSystem = getOperatingSystem();
+
+    openInstallModal();
+    closeNotification();
   
     // Customize this function based on your PWA installation guide
     console.log(`Follow the installation guide for your ${operatingSystem} device.`);
+  }
   
-    // Prompt user to install PWA on Android
-    if (operatingSystem === 'Android') {
-      const deferredPrompt = getDeferredPrompt();
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(choiceResult => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the A2HS prompt');
-          } else {
-            console.log('User dismissed the A2HS prompt');
-          }
-        });
-      }
-    }
+  // Function to get the operating system
+  function getOperatingSystem() {
+    const platform = navigator.platform.toLowerCase();
   
-    // Show Web App Banner on iOS
-    if (operatingSystem === 'iOS') {
-      // Customize the banner properties
-      const bannerOptions = {
-        title: 'Install PWA',
-        actionButton: 'Install',
-        url: '/manifest.json', // URL to your manifest file
-      };
-  
-      // Check if the banner is supported
-      if ('addToHomeScreen' in window) {
-        window.addToHomeScreen(bannerOptions);
-      }
+    if (platform.includes('win')) {
+      return 'Windows';
+    } else if (platform.includes('mac')) {
+      return 'Mac';
+    } else if (platform.includes('linux')) {
+      return 'Linux';
+    } else if (platform.includes('iphone') || platform.includes('ipad') || platform.includes('ipod')) {
+      return 'iOS';
+    } else if (platform.includes('android')) {
+      return 'Android';
+    } else {
+      return 'Unknown';
     }
   }
   
-  // Function to get the deferred prompt for Android
-  function getDeferredPrompt() {
-    return new Promise((resolve) => {
-      window.addEventListener('beforeinstallprompt', (event) => {
-        // Prevent Chrome 67 and earlier from automatically showing the prompt
-        event.preventDefault();
-        resolve(event);
-      });
-    });
-  }
   
+
   
