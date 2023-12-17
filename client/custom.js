@@ -171,7 +171,7 @@ function showPWAInstallNotification() {
   
   // Function to close the notification
   function closeNotification() {
-    setCookie('installModalClosed', 'true', 365); 
+    setCookie('pwaNotificationShown', 'true', 365);
     const notification = document.getElementById('pwa-install-notification');
     if (notification) {
       notification.style.display = 'none';
