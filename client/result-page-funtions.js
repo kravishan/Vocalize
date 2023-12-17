@@ -16,23 +16,6 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Retrieve the stored value from localStorage
-const storedParticipantId = localStorage.getItem('participantId');
-
-// Initialize the input value with the stored value or 0 if not present
-const participantIdInput = document.getElementById('participantIdInput');
-participantIdInput.value = storedParticipantId || '0';
-
-function adjustValue(delta) {
-    const inputElement = document.getElementById('participantIdInput');
-    let value = parseInt(inputElement.value) + delta;
-    // Ensure the value stays within the min and max limits
-    value = Math.min(99, Math.max(0, value));
-    inputElement.value = value;
-
-    // Store the updated value in localStorage
-    localStorage.setItem('participantId', value.toString());
-}
 
 
 // Fetch Firebase configuration from the server
@@ -135,24 +118,35 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 userLocation: userLocation
             };
 
-            // Reference to the 'Results LLM' collection
-            const collectionRef = db.collection('Results LLM');
+            // Retrieve the stepperValue from localStorage
+            const stepperValue = parseInt(localStorage.getItem('stepperValue'));
 
-            // Conditionally set the document ID based on the participant ID
-            const docRefPromise = (participantId > 0) 
-                ? collectionRef.doc(participantId.toString()).set(resultData)
-                : collectionRef.add(resultData);
-
-            // Add the document to Firestore
-            docRefPromise
-                .then(() => {
-                    console.log('Document written with ID:', participantId > 0 ? participantId : 'auto-generated');
-                    showSuccessMessage();
-                })
-                .catch((error) => {
-                    console.error('Error adding document:', error);
-                    showFailedMessage();
-                });
+            if (stepperValue > 0) {
+                // Save data with stepperValue as the ID
+                db.collection('Results LLM')
+                    .doc(stepperValue.toString())
+                    .set(resultData)
+                    .then(() => {
+                        console.log('Document written with ID:', stepperValue);
+                        showSuccessMessage();
+                    })
+                    .catch((error) => {
+                        console.error('Error adding document:', error);
+                        showFailedMessage();
+                    });
+            } else {
+                // Save data with a generated ID
+                db.collection('Results LLM')
+                    .add(resultData)
+                    .then((docRef) => {
+                        console.log('Document written with ID:', docRef.id);
+                        showSuccessMessage();
+                    })
+                    .catch((error) => {
+                        console.error('Error adding document:', error);
+                        showFailedMessage();
+                    });
+            }
         }
 
         // Function to show success message
@@ -198,6 +192,21 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         console.log(slider.value);
     }
+
+    // Function to retrieve the slider value from localStorage
+    function adjustValue(delta) {
+        const inputElement = document.querySelector('.ios-stepper input');
+        let value = parseInt(inputElement.value) + delta;
+        // Ensure the value stays within the min and max limits
+        value = Math.min(99, Math.max(0, value));
+        inputElement.value = value;
+
+        // Store the updated value in localStorage
+        localStorage.setItem('stepperValue', value.toString());
+    }
+
+    
+    
 
 
 
