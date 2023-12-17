@@ -91,6 +91,7 @@ function openInstallModal() {
       const installInstructions1 = document.getElementById('installInstructions1');
       const installInstructions2 = document.getElementById('installInstructions2');
       const installInstructions3 = document.getElementById('installInstructions3');
+      const installInstructions4 = document.getElementById('installInstructions4');
   
       if (operatingSystem === 'iOS') {
         installInstructions.textContent = 'Follow the steps to install on iOS';
@@ -219,22 +220,23 @@ function setCookie(name, value, days) {
   
   // Function to get the operating system
   function getOperatingSystem() {
-    const platform = navigator.platform.toLowerCase();
-  
-    if (platform.includes('win')) {
-      return 'Windows';
-    } else if (platform.includes('mac')) {
-      return 'Mac';
-    } else if (platform.includes('linux')) {
-      return 'Linux';
-    } else if (platform.includes('iphone') || platform.includes('ipad') || platform.includes('ipod')) {
-      return 'iOS';
-    } else if (platform.includes('android')) {
-      return 'Android';
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    if (userAgent.includes('android')) {
+        return 'Android';
+    } else if (userAgent.includes('iphone') || userAgent.includes('ipad') || userAgent.includes('ipod')) {
+        return 'iOS';
+    } else if (userAgent.includes('win')) {
+        return 'Windows';
+    } else if (userAgent.includes('mac')) {
+        return 'Mac';
+    } else if (userAgent.includes('linux')) {
+        return 'Linux';
     } else {
-      return 'Unknown';
+        return 'Unknown';
     }
-  }
+}
+
   
   
 
