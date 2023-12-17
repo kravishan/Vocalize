@@ -145,7 +145,7 @@ function showElement(elementId) {
 
   // Show PWA installation guide notification only if it hasn't been shown before
   if (!getCookie('pwaNotificationShown')) {
-    setTimeout(showPWAInstallNotification, 1000);
+    setTimeout(showPWAInstallNotification, 500);
 }
 
 // Function to show PWA installation guide notification
