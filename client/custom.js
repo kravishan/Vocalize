@@ -137,6 +137,9 @@ function showElement(elementId) {
 
     // Show the list when the modal is closed
     showElement('restaurant-list');
+
+    // Set the cookie to indicate that the modal has been closed
+    setCookie('pwaNotificationShown', 'true', 365); // 365 days expiration 
     }
   }
 
@@ -183,7 +186,7 @@ function showPWAInstallationGuide() {
             notification.style.display = 'block';
 
             // Set the cookie to indicate that the notification has been shown
-            setCookie('pwaNotificationShown', 'true', 365); // 365 days expiration (adjust as needed)
+            setCookie('pwaNotificationShown', 'true', 365); // 365 days expiration 
         }
     // Detect the operating system
     const operatingSystem = getOperatingSystem();
