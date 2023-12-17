@@ -16,6 +16,24 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// Retrieve the stored value from localStorage
+const storedParticipantId = localStorage.getItem('participantId');
+
+// Initialize the input value with the stored value or 0 if not present
+const participantIdInput = document.getElementById('participantIdInput');
+participantIdInput.value = storedParticipantId || '0';
+
+function adjustValue(delta) {
+    const inputElement = document.getElementById('participantIdInput');
+    let value = parseInt(inputElement.value) + delta;
+    // Ensure the value stays within the min and max limits
+    value = Math.min(99, Math.max(0, value));
+    inputElement.value = value;
+
+    // Store the updated value in localStorage
+    localStorage.setItem('participantId', value.toString());
+}
+
 
 // Fetch Firebase configuration from the server
 fetch('https://vocalizer.dev/server/firebase-config')
@@ -117,11 +135,18 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 userLocation: userLocation
             };
 
-            // Add a new document with a generated ID to the 'results' collection
-            db.collection('Results LLM')
-                .add(resultData)
-                .then((docRef) => {
-                    console.log('Document written with ID:', docRef.id);
+            // Reference to the 'Results LLM' collection
+            const collectionRef = db.collection('Results LLM');
+
+            // Conditionally set the document ID based on the participant ID
+            const docRefPromise = (participantId > 0) 
+                ? collectionRef.doc(participantId.toString()).set(resultData)
+                : collectionRef.add(resultData);
+
+            // Add the document to Firestore
+            docRefPromise
+                .then(() => {
+                    console.log('Document written with ID:', participantId > 0 ? participantId : 'auto-generated');
                     showSuccessMessage();
                 })
                 .catch((error) => {
