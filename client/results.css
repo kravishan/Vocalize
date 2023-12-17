@@ -365,6 +365,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .slider-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   margin-top: 25px;
   margin-left: 10px;
   font-size: 15px;
@@ -437,6 +438,10 @@ input[type="range"]::-webkit-slider-thumb {
   height: 1px;
   background-color: rgba(0, 0, 0, 0.1);
   margin: 15px 0; 
+}
+
+.result-top {
+  margin-top: 100px;
 }
 
 
