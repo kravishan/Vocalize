@@ -372,6 +372,18 @@ input[type="range"]::-webkit-slider-thumb {
   width: 100%;
 }
 
+.accurately-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 13px;
+  width: 100%;
+}
+
+.accurately-text-top {
+  margin-top: 30px;
+}
+
 .color-green-dark {
   color: #28a745 !important;
 }

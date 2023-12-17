@@ -72,7 +72,7 @@
         <div class="content mb-3">
             <h4 class="centered-heading">Please add your data before submitting</h4>
             <h5 class="centered-heading">Participant ID <span style="color: red;">!IMPORTANT</span></h5>
-            <p class="stepper-text">Please add your participant ID if you have one; otherwise, keep it as 0</p>
+            <p class="stepper-text">If you have a participant ID, please add it. Otherwise, leave it as zero</p>
             <div class="ios-stepper">
                 <a href="#" class="stepper-sub opacity-40" onclick="adjustValue(-1); return false;"><i class="fa fa-minus"></i></a>
                 <input type="number" min="0" max="99" value="0">
@@ -84,6 +84,9 @@
         <div>
             <h5 class="centered-heading">Result analysis</h4>
             <p class="slider-text">How accurate do you feel the generated review reflects your input and experience?</p>
+            <p class="accurately-text accurately-text-top">0-49: True to input: Aligns with your feedback</p>
+            <p class="accurately-text">50: Unfiltered: Objective, reflects your input without LLM influence</p>
+            <p class="accurately-text">51-100: Adjusted: Includes changes or additions</p>
             <div class="slider-container">                
                 <input type="range" min="0" max="100" value="50" id="myRange" oninput="updateSliderValue()">
                 <div class="slider-value" id="sliderValue">50</div>
