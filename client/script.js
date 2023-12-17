@@ -592,7 +592,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         console.log(userLocation);
 
         // Redirect to the result page with parameters
-        const resultPageURL = `./result.html?userLocation=${encodeURIComponent(userLocation)}&whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
+        const resultPageURL = `./result.html?userLocation=${encodeURIComponent(JSON.stringify(userLocation))}&whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
         window.location.href = resultPageURL;
 
     } catch (error) {

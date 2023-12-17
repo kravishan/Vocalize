@@ -38,7 +38,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Get parameters from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const userLocation = urlParams.get('userLocation');
+        const userLocationString = urlParams.get('userLocation');
+        const userLocation = JSON.parse(decodeURIComponent(userLocationString));
         const whisperText = urlParams.get('whisperText');
         const overallStarCount = urlParams.get('overallStarCount');
         const foodRating = urlParams.get('foodRating');
