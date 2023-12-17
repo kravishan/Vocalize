@@ -586,8 +586,13 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         // Store the improved review in localStorage
         localStorage.setItem('improvedReviewWithStars', improvedReviewWithStars);
 
+        // Retrieve the stored user location from localStorage
+        var storedUserLocation = localStorage.getItem("userLocation");
+        var userLocation = JSON.parse(storedUserLocation);
+        console.log(userLocation);
+
         // Redirect to the result page with parameters
-        const resultPageURL = `./result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
+        const resultPageURL = `./result.html?userLocation=${encodeURIComponent(userLocation)}&whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
         window.location.href = resultPageURL;
 
     } catch (error) {

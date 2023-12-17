@@ -38,6 +38,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Get parameters from URL
         const urlParams = new URLSearchParams(window.location.search);
+        const userLocation = urlParams.get('userLocation');
         const whisperText = urlParams.get('whisperText');
         const overallStarCount = urlParams.get('overallStarCount');
         const foodRating = urlParams.get('foodRating');
@@ -97,10 +98,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         document.getElementById('saveButton').addEventListener('click', saveToFirestore);
 
 
-        // Retrieve the stored user location from localStorage
-        var storedUserLocation = localStorage.getItem("userLocation");
-        var userLocation = JSON.parse(storedUserLocation);
-        console.log(userLocation);
+        
 
         // Function to save data to Firestore
         function saveToFirestore() {
