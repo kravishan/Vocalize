@@ -1,6 +1,6 @@
 {
-  "name": "Vocalize",
-  "short_name": "Vocalize",
+  "name": "Vocalizer",
+  "short_name": "Vocalizer",
   "description": "The app that turns your voice into reviews",
   "default_locale": "en",
   "start_url": "./index.html",

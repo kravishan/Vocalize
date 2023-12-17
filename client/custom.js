@@ -102,7 +102,7 @@ function openInstallModal() {
       } else if (operatingSystem === 'Android') {
         installInstructions.textContent = 'Follow the steps to install on Android';
         installInstructions1.textContent = '1. Press the three dot icon on chrome browser';
-        installInstructions2.textContent = '2. Select "Add to Home Screen';
+        installInstructions2.textContent = '2. Select "Add to Home Screen"';
         installInstructions3.textContent = '3. Look for the app on your home screen';
       } else {
         installInstructions.textContent = 'Follow the steps to install on your device...';
@@ -150,24 +150,24 @@ function showElement(elementId) {
 
 // Function to show PWA installation guide notification
 function showPWAInstallNotification() {
-    // // Detect the operating system
-    // const operatingSystem = getOperatingSystem();
+    // Detect the operating system
+    const operatingSystem = getOperatingSystem();
 
-    // // Show the notification only on Android and iOS
-    // if (operatingSystem === 'Android' || operatingSystem === 'iOS') {
-    //     const notification = document.getElementById('pwa-install-notification');
-    //     if (notification) {
-    //         notification.style.display = 'block';
-    //     }
-    // }
-
-
-
-
-    const notification = document.getElementById('pwa-install-notification');
-    if (notification) {
-      notification.style.display = 'block';
+    // Show the notification only on Android and iOS
+    if (operatingSystem === 'Android' || operatingSystem === 'iOS') {
+        const notification = document.getElementById('pwa-install-notification');
+        if (notification) {
+            notification.style.display = 'block';
+        }
     }
+
+
+
+
+    // const notification = document.getElementById('pwa-install-notification');
+    // if (notification) {
+    //   notification.style.display = 'block';
+    // }
   }
   
   // Function to close the notification
