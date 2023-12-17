@@ -407,7 +407,7 @@ input[type="range"]::-webkit-slider-thumb {
   text-align: center;
   width: 33px;
   height: 33px;
-  line-height: 33px;
+  line-height: 35px;
   font-size: 15px;
   color: #0051ff;
   cursor: pointer;
