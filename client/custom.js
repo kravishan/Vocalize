@@ -137,9 +137,7 @@ function showElement(elementId) {
 
     // Show the list when the modal is closed
     showElement('restaurant-list');
-
-    // Set the cookie to indicate that the modal has been closed
-    setCookie('pwaNotificationShown', 'true', 365); // 365 days expiration 
+        
     }
   }
 
@@ -173,6 +171,7 @@ function showPWAInstallNotification() {
   
   // Function to close the notification
   function closeNotification() {
+    setCookie('installModalClosed', 'true', 365); 
     const notification = document.getElementById('pwa-install-notification');
     if (notification) {
       notification.style.display = 'none';
