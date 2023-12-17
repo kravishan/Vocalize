@@ -79,8 +79,11 @@ function openInstallModal() {
     if (modal) {
       modal.style.display = 'block';
 
-      // Add a class to the body when the modal is open
-      document.body.classList.add('modal-open');
+    // Add a class to the body when the modal is open
+    document.body.classList.add('modal-open');
+
+    // Hide the list when the modal is open
+    hideElement('restaurant-list');
   
       // Customize the installation instructions based on the detected operating system
       const operatingSystem = getOperatingSystem();
@@ -90,17 +93,36 @@ function openInstallModal() {
       const installInstructions3 = document.getElementById('installInstructions3');
   
       if (operatingSystem === 'iOS') {
-        installInstructions.textContent = 'Follow the steps to install on iOS...';
+        installInstructions.textContent = 'Follow the steps to install on iOS';
         installInstructions1.textContent = '1. Tap on share in the browser menu';
         installInstructions2.textContent = '2. Tap on the menu icon';
         installInstructions3.textContent = '3. Select "Add to Home Screen"';
         installInstructions4.textContent = '4. Look for the app on your home screen';
       } else if (operatingSystem === 'Android') {
-        installInstructions.textContent = 'Follow the steps to install on Android...';
+        installInstructions.textContent = 'Follow the steps to install on Android';
+        installInstructions1.textContent = '1. Press the three dot icon on chrome browser';
+        installInstructions2.textContent = '2. Select "Add to Home Screen';
+        installInstructions3.textContent = '3. Look for the app on your home screen';
       } else {
         installInstructions.textContent = 'Follow the steps to install on your device...';
 
       }      
+    }
+  }
+
+  // Function to hide an element by ID
+function hideElement(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.style.display = 'none';
+    }
+  }
+
+  // Function to show an element by ID
+function showElement(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.style.display = 'block';
     }
   }
   
@@ -109,6 +131,12 @@ function openInstallModal() {
     const modal = document.getElementById('installModal');
     if (modal) {
       modal.style.display = 'none';
+
+    // Remove the class from the body when the modal is closed
+    document.body.classList.remove('modal-open');
+
+    // Show the list when the modal is closed
+    showElement('restaurant-list');
     }
   }
 
@@ -118,6 +146,20 @@ function openInstallModal() {
 
 // Function to show PWA installation guide notification
 function showPWAInstallNotification() {
+    // // Detect the operating system
+    // const operatingSystem = getOperatingSystem();
+
+    // // Show the notification only on Android and iOS
+    // if (operatingSystem === 'Android' || operatingSystem === 'iOS') {
+    //     const notification = document.getElementById('pwa-install-notification');
+    //     if (notification) {
+    //         notification.style.display = 'block';
+    //     }
+    // }
+
+
+
+
     const notification = document.getElementById('pwa-install-notification');
     if (notification) {
       notification.style.display = 'block';
