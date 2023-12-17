@@ -157,6 +157,14 @@
     }
   }
 
+  @media (min-width: 1024px) {
+    .custom-loader {
+      top: 47%;
+      left: 48%;
+    }
+    
+  }
+
 
 
 
