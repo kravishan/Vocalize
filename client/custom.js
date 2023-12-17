@@ -73,42 +73,63 @@ window.addEventListener('scroll', function() {
 
 /////////////////////////////////////
 
+// Function to check if the modal has been shown
+function hasModalBeenShown() {
+  const modalShown = document.cookie.includes('installModalShown=true');
+  console.log('Modal Shown:', modalShown);
+  return modalShown;
+}
+
+// Function to set a cookie indicating that the modal has been shown
+function setModalShownCookie() {
+  document.cookie = 'installModalShown=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
+  console.log('Modal Shown Cookie Set');
+}
+
+
 // Function to open the installation modal
 function openInstallModal() {
-    const modal = document.getElementById('installModal');
-    if (modal) {
-      modal.style.display = 'block';
+  // Check if the modal has been shown, if yes, return
+  if (hasModalBeenShown()) {
+    return;
+  }
+
+  const modal = document.getElementById('installModal');
+  if (modal) {
+    modal.style.display = 'block';
 
     // Add a class to the body when the modal is open
     document.body.classList.add('modal-open');
 
     // Hide the list when the modal is open
     hideElement('restaurant-list');
-  
-      // Customize the installation instructions based on the detected operating system
-      const operatingSystem = getOperatingSystem();
-      const installInstructions = document.getElementById('installInstructions');
-      const installInstructions1 = document.getElementById('installInstructions1');
-      const installInstructions2 = document.getElementById('installInstructions2');
-      const installInstructions3 = document.getElementById('installInstructions3');
-  
-      if (operatingSystem === 'iOS') {
-        installInstructions.textContent = 'Follow the steps to install on iOS';
-        installInstructions1.textContent = '1. Tap on share in the browser menu';
-        installInstructions2.textContent = '2. Tap on the menu icon';
-        installInstructions3.textContent = '3. Select "Add to Home Screen"';
-        installInstructions4.textContent = '4. Look for the app on your home screen';
-      } else if (operatingSystem === 'Android') {
-        installInstructions.textContent = 'Follow the steps to install on Android';
-        installInstructions1.textContent = '1. Press the three dot icon on chrome browser';
-        installInstructions2.textContent = '2. Select "Add to Home Screen';
-        installInstructions3.textContent = '3. Look for the app on your home screen';
-      } else {
-        installInstructions.textContent = 'Follow the steps to install on your device...';
 
-      }      
+    // Customize the installation instructions based on the detected operating system
+    const operatingSystem = getOperatingSystem();
+    const installInstructions = document.getElementById('installInstructions');
+    const installInstructions1 = document.getElementById('installInstructions1');
+    const installInstructions2 = document.getElementById('installInstructions2');
+    const installInstructions3 = document.getElementById('installInstructions3');
+
+    if (operatingSystem === 'iOS') {
+      installInstructions.textContent = 'Follow the steps to install on iOS';
+      installInstructions1.textContent = '1. Tap on share in the browser menu';
+      installInstructions2.textContent = '2. Tap on the menu icon';
+      installInstructions3.textContent = '3. Select "Add to Home Screen"';
+      installInstructions4.textContent = '4. Look for the app on your home screen';
+    } else if (operatingSystem === 'Android') {
+      installInstructions.textContent = 'Follow the steps to install on Android';
+      installInstructions1.textContent = '1. Press the three dots icon on the Chrome browser';
+      installInstructions2.textContent = '2. Select "Add to Home Screen"';
+      installInstructions3.textContent = '3. Look for the app on your home screen';
+    } else {
+      installInstructions.textContent = 'Follow the steps to install on your device...';
     }
+
+    // Set the cookie indicating that the modal has been shown
+    setModalShownCookie();
   }
+}
 
   // Function to hide an element by ID
 function hideElement(elementId) {
