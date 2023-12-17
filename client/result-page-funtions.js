@@ -43,7 +43,6 @@ fetch('https://vocalizer.dev/server/firebase-config')
         const foodRating = urlParams.get('foodRating');
         const serviceRating = urlParams.get('serviceRating');
         const atmosphereRating = urlParams.get('atmosphereRating');
-        // const improvedReview = localStorage.getItem('improvedReview');
         const improvedReview = localStorage.getItem('improvedReview');
         const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
 
@@ -55,10 +54,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
             localStorage.setItem('generatedDateTime', generatedDateTime);
         }
 
-        console.log('Improved Review:', improvedReview);
-        console.log('User Location:', userLocation);
-
-
+        
         // Function to generate star icons based on the rating
         // function getStarRating(rating) {
         //     const stars = '\u2605'; // Unicode character for a solid star
