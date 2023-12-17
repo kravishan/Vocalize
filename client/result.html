@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <div class="card-style result-card">
+    <!-- <div class="card-style result-card">
         <div>
             <p class="slider-text">How accurate do you feel the generated review reflects your input and experience?</p>
             <div class="slider-container">                
@@ -65,19 +65,30 @@
                 <div class="slider-value" id="sliderValue">50</div>
             </div>
         </div>  
-    </div>
+    </div> -->
 
     <!-- iOS-style stepper -->
     <div class="card card-style mt-5">
         <div class="content mb-3">
-            <h4 class="centered-heading">Participant ID</h4>
+            <h4 class="centered-heading">Please add your data before submitting</h4>
+            <h5 class="centered-heading">Participant ID <span style="color: red;">!IMPORTANT</span></h5>
             <p class="stepper-text">Please add your participant ID if you have one; otherwise, keep it as 0</p>
             <div class="ios-stepper">
-                <a href="#" class="stepper-sub opacity-40" onclick="adjustValue(-1)"><i class="fa fa-minus"></i></a>
+                <a href="#" class="stepper-sub opacity-40" onclick="adjustValue(-1); return false;"><i class="fa fa-minus"></i></a>
                 <input type="number" min="0" max="99" value="0">
-                <a href="#" class="stepper-add opacity-40" onclick="adjustValue(1)"><i class="fa fa-plus"></i></a>
+                <a href="#" class="stepper-add opacity-40" onclick="adjustValue(1); return false;"><i class="fa fa-plus"></i></a>
             </div>
         </div>
+        <!-- Add a horizontal line (divider) -->
+        <hr class="ios-divider">
+        <div>
+            <h5 class="centered-heading">Result analysis</h4>
+            <p class="slider-text">How accurate do you feel the generated review reflects your input and experience?</p>
+            <div class="slider-container">                
+                <input type="range" min="0" max="100" value="50" id="myRange" oninput="updateSliderValue()">
+                <div class="slider-value" id="sliderValue">50</div>
+            </div>
+        </div>  
     </div>
 
     
@@ -91,9 +102,9 @@
 
     <!-- Success Message Modal -->
     <div id="success-msg">
-        <div class="modal-content rounded-m">
+        <div class="modal-popup-content rounded-m">
         <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-check-circle color-green-dark"></i></h1>
-        <h2 class="text-center">Success</h2>
+        <h2 class="text-center color-green-dark">Success</h2>
         </div>
     </div>
     
