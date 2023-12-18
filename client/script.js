@@ -436,7 +436,30 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+/////////////////////////   USER COORDINATES   ///////////////////////////
 
+
+// Function to get the user's coordinates
+function getUserCoordinates() {
+    return new Promise((resolve, reject) => {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const coordinates = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                    };
+                    resolve(coordinates);
+                },
+                (error) => {
+                    reject(error.message);
+                }
+            );
+        } else {
+            reject('Geolocation is not supported in this browser.');
+        }
+    });
+}
 
 
 /////////////////////////   LOCAL STORAGE   ///////////////////////////
@@ -456,6 +479,12 @@ if (selectedRestaurantData) {
 } else {
   console.log("No selected restaurant data in localStorage.");
 }
+
+
+// // Retrieve the stored user location from localStorage
+// var storedUserLocation = localStorage.getItem("userLocation");
+// var userLocation = JSON.parse(storedUserLocation);
+// console.log('User location new:', userLocation);
 
 
 
@@ -556,6 +585,9 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
+        // Get user coordinates
+        const userLocation = await getUserCoordinates();
+
         // Send data to the backend
         // const response = await fetch('http://localhost:3000/generate-improved-review-with-stars', {
         const response = await fetch('https://vocalizer.dev/server/generate-improved-review-with-stars', {
@@ -585,10 +617,6 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
 
         // Store the improved review in localStorage
         localStorage.setItem('improvedReviewWithStars', improvedReviewWithStars);
-
-        // Retrieve the stored user location from localStorage
-        var storedUserLocation = localStorage.getItem("userLocation");
-        var userLocation = JSON.parse(storedUserLocation);
 
         // Redirect to the result page with parameters
         const resultPageURL = `./result.html?userLocation=${encodeURIComponent(JSON.stringify(userLocation))}&whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
