@@ -399,8 +399,11 @@ input[type="range"]::-webkit-slider-thumb {
   clear: both;
   margin-bottom: 25px;
   border: solid 1px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  
+  border-radius: 5px;  
+}
+
+body.theme-dark .ios-stepper{
+  border: solid 1px rgb(255, 255, 255);
 }
 
 .ios-stepper a {
@@ -423,6 +426,10 @@ input[type="range"]::-webkit-slider-thumb {
   font-size: 15px !important;
   background-color: transparent;
   border: none !important;
+}
+
+body.theme-dark .ios-stepper input{
+  color: #fff;
 }
 
 .ios-stepper .stepper-sub {
