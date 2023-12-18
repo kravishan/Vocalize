@@ -189,8 +189,6 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Store the slider value in localStorage
         localStorage.setItem("sliderValue", slider.value);
-
-        console.log(slider.value);
     }
 
     // Function to retrieve the slider value from localStorage
