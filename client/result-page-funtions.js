@@ -175,6 +175,9 @@ fetch('https://vocalizer.dev/server/firebase-config')
         document.getElementById('improvedReviewWithStarsText').innerHTML = `${decodeURIComponent(improvedReviewWithStars)}`;
         document.getElementById('dateandtimeOutput').innerHTML = `<strong>Generated Date and Time:</strong> ${generatedDateTime}`;
 
+        // Redirect to home page after 5 minutes
+        setTimeout(goToInitialStage, 300000);
+
 
     })
     .catch(error => {
