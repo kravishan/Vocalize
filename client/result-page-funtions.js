@@ -224,9 +224,6 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Save the selected value to Local Storage
         localStorage.setItem('selectedExpectation', selectedValue);
-
-        // You can also use this value for other purposes, such as updating the UI
-        console.log('Selected Expectation:', selectedValue);
         });
     });
 
