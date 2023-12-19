@@ -117,8 +117,9 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 generatedDateTime: generatedDateTime,
                 sliderValue: document.getElementById("myRange").value,
                 userLocation: userLocation,
-                selectedRestaurant: JSON.parse(selectedRestaurantData)
-                
+                selectedRestaurant: JSON.parse(selectedRestaurantData),
+                selectedValue: localStorage.getItem('selectedExpectation')
+              
             };
 
             // Retrieve the stepperValue from localStorage
@@ -211,6 +212,23 @@ fetch('https://vocalizer.dev/server/firebase-config')
         // Store the updated value in localStorage
         localStorage.setItem('stepperValue', value.toString());
     }
+
+    // Get all radio buttons
+    const radioButtons = document.querySelectorAll('input[name="expectations"]');
+    
+    // Add click event listener to each radio button
+    radioButtons.forEach(function (radioButton) {
+        radioButton.addEventListener('click', function () {
+        // Get the selected value
+        const selectedValue = this.value;
+
+        // Save the selected value to Local Storage
+        localStorage.setItem('selectedExpectation', selectedValue);
+
+        // You can also use this value for other purposes, such as updating the UI
+        console.log('Selected Expectation:', selectedValue);
+        });
+    });
 
 
     

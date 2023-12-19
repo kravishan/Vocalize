@@ -467,6 +467,85 @@ body.theme-dark .ios-stepper input {
 
 
 
+/* ///////////////////////////////////////////////////////////////////////////////////// */
+
+
+
+
+
+.radio-buttons-start {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  padding-top: 30px;
+}
+
+
+.radio-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.radio-buttons-end {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+/* Additional styles for the radio buttons */
+.interest-check {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-check-input {
+  display: none;
+}
+
+.form-check-label {
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.form-check-label::before {
+  margin-left: 50px;
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #007aff; /* Default color */
+  margin-right: 10px;
+}
+
+.form-check-label .fa-frown,
+.form-check-label .fa-meh,
+.form-check-label .fa-smile-beam {
+  font-size: 17px;
+  border-radius: 50%;
+  background-color: #fff;
+  padding: 5px;
+  margin-right: 10px;
+  display: none;
+}
+
+.form-check-input:checked + .form-check-label::before {
+  background-color: #007aff; /* Change color when checked */
+}
+
+.form-check-input:checked + .form-check-label .fa-frown,
+.form-check-input:checked + .form-check-label .fa-meh,
+.form-check-input:checked + .form-check-label .fa-smile-beam {
+  display: inline-block;
+  color: #007aff; /* Change color when checked */
+}
+
+
+
 
 
 
