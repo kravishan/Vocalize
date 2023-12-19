@@ -393,20 +393,21 @@ input[type="range"]::-webkit-slider-thumb {
 
 .ios-stepper {
   margin-top: 25px;
-  align-self: center;
-  width: 102px;
+  align-items: center;
   display: flex;
-  clear: both;
+  align-self: center;
+  width: 100px;
   margin-bottom: 25px;
   border: solid 1px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;  
+  border-radius: 5px;
 }
+
 
 body.theme-dark .ios-stepper{
   border: solid 1px rgb(255, 255, 255);
 }
 
-.ios-stepper a {
+/* .ios-stepper a {
   text-align: center;
   width: 33px;
   height: 33px;
@@ -415,24 +416,22 @@ body.theme-dark .ios-stepper{
   color: #0051ff;
   cursor: pointer;
   
-}
+} */
 
 .ios-stepper input {
-  height: 33px;
-  width: 33px;
   text-align: center;
-  display: block;
   line-height: 33px;
   font-size: 15px !important;
   background-color: transparent;
   border: none !important;
+  width: 100px; 
 }
 
-body.theme-dark .ios-stepper input{
+body.theme-dark .ios-stepper input {
   color: #fff;
 }
 
-.ios-stepper .stepper-sub {
+/* .ios-stepper .stepper-sub {
   border-bottom-left-radius: 8px !important;
   border-top-left-radius: 8px !important;
   border-right: none !important;
@@ -444,7 +443,7 @@ body.theme-dark .ios-stepper input{
   border-bottom-right-radius: 8px !important;
   border-top-right-radius: 8px !important;
   border-left: none !important;
-}
+} */
 
 .stepper-text {
   margin-left: 10px;

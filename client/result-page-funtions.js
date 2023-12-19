@@ -47,6 +47,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         const atmosphereRating = urlParams.get('atmosphereRating');
         const improvedReview = localStorage.getItem('improvedReview');
         const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
+        const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
 
         // Get or set the generated date and time
         let generatedDateTime = localStorage.getItem('generatedDateTime');
@@ -115,7 +116,9 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 improvedReviewWithStars: improvedReviewVersions,
                 generatedDateTime: generatedDateTime,
                 sliderValue: document.getElementById("myRange").value,
-                userLocation: userLocation
+                userLocation: userLocation,
+                selectedRestaurant: JSON.parse(selectedRestaurantData)
+                
             };
 
             // Retrieve the stepperValue from localStorage
