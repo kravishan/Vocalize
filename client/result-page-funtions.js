@@ -159,6 +159,10 @@ fetch('https://vocalizer.dev/server/firebase-config')
             setTimeout(() => {
                 successMsg.style.display = 'none';
             }, 3000);
+
+            // Redirect to home page after 5 minutes
+            // setTimeout(goToInitialStage, 3000);
+
         }
 
         // Function to show failure message
@@ -175,10 +179,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         document.getElementById('improvedReviewWithStarsText').innerHTML = `${decodeURIComponent(improvedReviewWithStars)}`;
         document.getElementById('dateandtimeOutput').innerHTML = `<strong>Generated Date and Time:</strong> ${generatedDateTime}`;
 
-        // Redirect to home page after 5 minutes
-        setTimeout(goToInitialStage, 300000);
-
-
+        
     })
     .catch(error => {
         console.error('Error fetching Firebase configuration:', error);
@@ -197,17 +198,20 @@ fetch('https://vocalizer.dev/server/firebase-config')
         localStorage.setItem("sliderValue", slider.value);
     }
 
-    // Function to retrieve the slider value from localStorage
-    function adjustValue(delta) {
-        const inputElement = document.querySelector('.ios-stepper input');
-        let value = parseInt(inputElement.value) + delta;
+    // Function to retrieve the stepper value from localStorage
+    function updateStepperValue(inputElement) {
+        let value = parseInt(inputElement.value);
+
         // Ensure the value stays within the min and max limits
         value = Math.min(99, Math.max(0, value));
+
+        // Update the input value
         inputElement.value = value;
 
         // Store the updated value in localStorage
         localStorage.setItem('stepperValue', value.toString());
     }
+
 
     
     
