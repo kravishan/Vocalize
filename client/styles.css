@@ -304,7 +304,7 @@ a.link:hover {
 
 
 #restaurant-list {
-  margin-top: 100px;
+  margin-top: 50px;
   padding: 10px;
   width: 95%;
 }
@@ -320,10 +320,14 @@ a.link:hover {
   transition: background-color 0.3s ease;
 }
 
-#restaurant-list li:hover {
+/* #restaurant-list li:hover {
+  background-color: #3FB1FE;
+} */
+
+/* Add this to your CSS */
+#restaurant-list li.selected-restaurant {
   background-color: #3FB1FE;
 }
-
 
 
 
