@@ -45,7 +45,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         const foodRating = urlParams.get('foodRating');
         const serviceRating = urlParams.get('serviceRating');
         const atmosphereRating = urlParams.get('atmosphereRating');
-        const improvedReview = localStorage.getItem('improvedReview');
+        // const improvedReview = localStorage.getItem('improvedReview');
         const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
 
@@ -112,7 +112,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 foodRating: foodRating,
                 serviceRating: serviceRating,
                 atmosphereRating: atmosphereRating,
-                improvedReview: improvedReview,
+                // improvedReview: improvedReview,
                 improvedReviewWithStars: improvedReviewVersions,
                 generatedDateTime: generatedDateTime,
                 sliderValue: document.getElementById("myRange").value,

@@ -524,7 +524,7 @@ async function transcribeAudio(audioBlob) {
       console.log('Whisper text:', whisperText);
       hideSpinner();
       showRating();
-      generateImprovedReviewWithoutStars(whisperText);
+    //   generateImprovedReviewWithoutStars(whisperText);
     } else {
       console.error('Backend request failed:', xhr.statusText);
     }
@@ -540,43 +540,43 @@ async function transcribeAudio(audioBlob) {
 }
 
 
-// Function to send the text to the backend and trigger OpenAI request
-async function generateImprovedReviewWithoutStars(whisperText) {
-    try {
-        // Get restaurant details from localStorage
-        const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
-        const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
+// // Function to send the text to the backend and trigger OpenAI request
+// async function generateImprovedReviewWithoutStars(whisperText) {
+//     try {
+//         // Get restaurant details from localStorage
+//         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
+//         const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
-        // Send text to the backend
-        // const response = await fetch('http://localhost:3000/generate-improved-review', {
-        const response = await fetch('https://vocalizer.dev/server/generate-improved-review', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                whisperText,
-                restaurantName,
-            }),
-        });
+//         // Send text to the backend
+//         // const response = await fetch('http://localhost:3000/generate-improved-review', {
+//         const response = await fetch('https://vocalizer.dev/server/generate-improved-review', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({
+//                 whisperText,
+//                 restaurantName,
+//             }),
+//         });
 
-        if (!response.ok) {
-            throw new Error(`Backend request failed: ${response.statusText}`);
-        }
+//         if (!response.ok) {
+//             throw new Error(`Backend request failed: ${response.statusText}`);
+//         }
 
-        const data = await response.json();
-        const improvedReview = data.improvedReview;
+//         const data = await response.json();
+//         const improvedReview = data.improvedReview;
 
-        // Log or use the generated improved review as needed
-        console.log('Improved Review:', improvedReview);
+//         // Log or use the generated improved review as needed
+//         console.log('Improved Review:', improvedReview);
 
-        // Store the improved review in localStorage
-        localStorage.setItem('improvedReview', improvedReview);
+//         // Store the improved review in localStorage
+//         localStorage.setItem('improvedReview', improvedReview);
 
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// }
 
 // Function to send the data to the backend and trigger OpenAI request
 async function generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating) {
