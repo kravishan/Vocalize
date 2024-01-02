@@ -211,6 +211,14 @@ function hideStopButton() {
     }
 }
 
+// Function to hide the stop button
+function hideStopButtonInfo() {
+    var stopButtonInfo = document.querySelector('.stop-button-info');
+    if (stopButtonInfo) {
+        stopButtonInfo.style.display = 'none';
+    }
+}
+
 // Function to hide the Instructions texts
 function hideInstructions() {
     var hideInstructions1 = document.querySelector('.info');
@@ -362,6 +370,7 @@ document.addEventListener('DOMContentLoaded', function () {
         hideStopButton();
         hideInstructions();
         hideRefreshButton() 
+        hideStopButtonInfo();
 
         if (isRecording) {
             recorder
