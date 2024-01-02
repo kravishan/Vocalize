@@ -162,7 +162,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
             }, 3000);
 
             // Redirect to home page after 5 minutes
-            // setTimeout(goToInitialStage, 3000);
+            setTimeout(goToInitialStage, 3000);
 
         }
 
