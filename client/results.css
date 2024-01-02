@@ -233,12 +233,22 @@ body.theme-dark .resultOutput {
   font-size: 16px;
 }
 
+.resultOutput {
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 
 .button {
-  margin: 20px auto; 
+  margin: 30px auto; 
+  margin-bottom: 80px;
   display: block;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
