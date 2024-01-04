@@ -158,7 +158,8 @@ app.post('/generate-improved-review', async (req, res) => {
   }
 });
 
-
+// 0 temparature mean no randomness and 1 means full randomness
+// Best of is how many results need to genarate and return the best one
 
 // Endpoint for handling the OpenAI request with stars
 app.post('/generate-improved-review-with-stars', async (req, res) => {
@@ -181,6 +182,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
         "Add details that could influence a consumer's decision to choose or avoid the restaurant.",
         "Avoid adding any information about the time of the restaurant visit, as you are not aware of that. Include it only if the user has mentioned it in their review.",
         "Avoid adding any fake information. Only include additional details if the user has mentioned them in their review. For example, if the user expresses liking the ambiance or mentions specific details about the lighting, you can incorporate those insights into the review to provide context for their ratings.",
+        "Never add any star rating values in the genarated review. Because I will display it in a another section. So don't add any star ratings in the review. But take the star ratings into consideration when genarating the review. You can get idea about user satisfaction from the star ratings. So you can use that information to genarate the review. but never use star rating values in the genarated review as a numeric value. this is a must.",
     ];
 
 
@@ -206,6 +208,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
           body: JSON.stringify({
               model: 'gpt-4',
               messages: inputMessages,
+              // temperature: 0.3,
           }),
       });
 
