@@ -56,6 +56,13 @@ function handleRating(event, set) {
     const stars = document.querySelectorAll(`.${set} .star`);
     const clickedStar = event.target;
 
+    // Get restaurant details from localStorage
+    const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
+    const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
+
+    // Get user coordinates
+    const userLocation = getUserCoordinates();
+
     if (clickedStar.classList.contains('star')) {
         const ratingValue = parseInt(clickedStar.getAttribute('data-value'));
 
@@ -158,7 +165,9 @@ function showMicrophoneButton() {
     if (selectedRestaurantData) {
       microphoneButton.style.display = 'block';
     }
-  }
+
+    
+}
 
 
 /////////////////////////   HIDE BUTTONS   ///////////////////////////
