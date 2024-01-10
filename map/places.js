@@ -119,6 +119,14 @@ function fetchAndDisplayDummyRestaurants() {
 
     // Add a click event listener to each list item
     listItem.addEventListener("click", function () {
+      // Remove the selected-restaurant class from all list items
+      const allListItems = document.querySelectorAll("#restaurant-list li");
+      allListItems.forEach(item => item.classList.remove("selected-restaurant"));
+
+      // Add the selected-restaurant class to the clicked list item
+      listItem.classList.add("selected-restaurant");
+
+      
       // Save the entire restaurant object to localStorage
       localStorage.setItem("selectedRestaurant", JSON.stringify(restaurant));
       console.log("Selected:", restaurant);
@@ -129,7 +137,6 @@ function fetchAndDisplayDummyRestaurants() {
     restaurantList.appendChild(listItem);
   }
 }
-
 
 
 

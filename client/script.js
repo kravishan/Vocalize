@@ -211,7 +211,7 @@ function hideStopButton() {
     }
 }
 
-// Function to hide the stop button
+// Function to hide the stop button info
 function hideStopButtonInfo() {
     var stopButtonInfo = document.querySelector('.stop-button-info');
     if (stopButtonInfo) {
@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function () {
         showSpinner();
         hideStopButton();
         hideInstructions();
-        hideRefreshButton() 
+        hideRefreshButton(); 
         hideStopButtonInfo();
 
         if (isRecording) {

@@ -339,7 +339,6 @@ a.link:hover {
   background-color: #3FB1FE;
 } */
 
-/* Add this to your CSS */
 #restaurant-list li.selected-restaurant {
   background-color: #3FB1FE;
 }

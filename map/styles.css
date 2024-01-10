@@ -20,27 +20,42 @@ h1 {
   font-size: 1.6em;
 }
 
-.heading {
+#popup .heading {
   font-family: 'Poppins', sans-serif; 
-  position: absolute;
+  margin-top: -250px;
   z-index: 999;
-  top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
   font-weight: bold;
-
+  font-size: 21px;
 }
 
 
 #popup .info {
   font-family: 'Poppins', sans-serif; 
   position: absolute;
-  top: 60px;
+  top: 70px;
   left: 0;
   right: 0;
   transform: translate(0%, -50%);
   margin-top: 10%; 
   z-index: 999;
+  font-size: 15px;
+}
+
+#popup .stop-button-info {
+  font-family: 'Poppins', sans-serif; 
+  color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  /* top: 150px; */
+  left: 0;
+  right: 0;
+  transform: translate(0%, -50%);
+  margin-top: 380px; 
+  z-index: 999;
+  font-size: 12px;
+
+  /* Apply the blur effect */
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.8); 
 }
 
 h3 {
@@ -304,7 +319,7 @@ a.link:hover {
 
 
 #restaurant-list {
-  margin-top: 100px;
+  margin-top: 50px;
   padding: 10px;
   width: 95%;
 }
@@ -320,7 +335,11 @@ a.link:hover {
   transition: background-color 0.3s ease;
 }
 
-#restaurant-list li:hover {
+/* #restaurant-list li:hover {
+  background-color: #3FB1FE;
+} */
+
+#restaurant-list li.selected-restaurant {
   background-color: #3FB1FE;
 }
 

@@ -98,7 +98,7 @@ function handleRating(event, set) {
             showSpinner();
 
             // Redirect to the result page with parameters
-            const resultPageURL = `./map/result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}`;
+            const resultPageURL = `./map/result.html?userLocation=${encodeURIComponent(JSON.stringify(userLocation))}&whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}`;
             window.location.href = resultPageURL;
         }
     }
@@ -208,6 +208,14 @@ function hideStopButton() {
     var stopButton = document.querySelector('.stop');
     if (stopButton) {
         stopButton.style.display = 'none';
+    }
+}
+
+// Function to hide the stop button info
+function hideStopButtonInfo() {
+    var stopButtonInfo = document.querySelector('.stop-button-info');
+    if (stopButtonInfo) {
+        stopButtonInfo.style.display = 'none';
     }
 }
 
@@ -361,7 +369,8 @@ document.addEventListener('DOMContentLoaded', function () {
         showSpinner();
         hideStopButton();
         hideInstructions();
-        hideRefreshButton() 
+        hideRefreshButton();
+        hideStopButtonInfo(); 
 
         if (isRecording) {
             recorder
@@ -434,6 +443,33 @@ document.addEventListener('DOMContentLoaded', function () {
     var refreshButton = document.querySelector('.refresh');
     refreshButton.addEventListener('click', refreshButtonClicked);
 });
+
+
+
+/////////////////////////   USER COORDINATES   ///////////////////////////
+
+
+// Function to get the user's coordinates
+function getUserCoordinates() {
+    return new Promise((resolve, reject) => {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const coordinates = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                    };
+                    resolve(coordinates);
+                },
+                (error) => {
+                    reject(error.message);
+                }
+            );
+        } else {
+            reject('Geolocation is not supported in this browser.');
+        }
+    });
+}
 
 
 
