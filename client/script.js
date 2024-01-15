@@ -352,16 +352,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Timer variables
     let timer;
-    let timerDuration = 10; // 3 minutes in seconds
+    let timerDuration = 180; // 3 minutes in seconds
 
     // Function to update and display the custom message
     function updateTimer() {
         // Display a custom message when time is below 30 seconds
-        if (timerDuration <= 5) {
+        if (timerDuration <= 30) {
             const messageElement = document.getElementById('custom-message-timer');
             if (messageElement) {
                 const remainingTime = timerDuration > 0 ? `${timerDuration} seconds` : 'less than a second';
-                messageElement.innerText = `Time is running out. Please finish the recording within ${remainingTime}.`;
+                messageElement.innerText = `Time is running out. Please finish the recording within ${remainingTime}`;
             }
         }
 
