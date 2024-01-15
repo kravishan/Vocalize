@@ -354,23 +354,18 @@ document.addEventListener('DOMContentLoaded', function () {
     let timer;
     let timerDuration = 10; // 3 minutes in seconds
 
-    // Function to update and display the timer
+    // Function to update and display the custom message
     function updateTimer() {
-        const timerElement = document.getElementById('timer');
-        if (timerElement && timerDuration > 0) {
-            const minutes = Math.floor(timerDuration / 60);
-            const seconds = timerDuration % 60;
-            timerElement.innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
-            // Display a custom message when time is below 30 seconds
-            if (timerDuration <= 5) {
-                const messageElement = document.getElementById('custom-message-timer');
-                if (messageElement) {
-                    const remainingTime = timerDuration > 0 ? `${timerDuration} seconds` : 'less than a second';
-                    messageElement.innerText = `Time is running out. Please finish the recording within ${remainingTime}.`;
-                }
+        // Display a custom message when time is below 30 seconds
+        if (timerDuration <= 5) {
+            const messageElement = document.getElementById('custom-message-timer');
+            if (messageElement) {
+                const remainingTime = timerDuration > 0 ? `${timerDuration} seconds` : 'less than a second';
+                messageElement.innerText = `Time is running out. Please finish the recording within ${remainingTime}.`;
             }
+        }
 
+        if (timerDuration > 0) {
             timerDuration--;
 
             // Continue updating the timer every second
@@ -378,8 +373,25 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             stopRecording();
             console.log('Timer reached zero.');
+
+            // Hide the custom message when the timer reaches zero
+            const messageElement = document.getElementById('custom-message-timer');
+            if (messageElement) {
+                messageElement.style.display = 'none';
+            }
         }
     }
+
+    // Function to start the timer
+    function startTimer() {
+        updateTimer();
+    }
+
+    // Function to stop the timer
+    function stopTimer() {
+        clearTimeout(timer);
+    }
+
 
     // Function to start the timer
     function startTimer() {
