@@ -51,6 +51,7 @@ function handleOverallRating(event) {
 let foodRating = 0;
 let serviceRating = 0;
 let atmosphereRating = 0;
+let whisperTextReceived = 0;
 
 function handleRating(event, set) {
     const stars = document.querySelectorAll(`.${set} .star`);
@@ -91,18 +92,45 @@ function handleRating(event, set) {
                 break;
                 
         }
-
-        // Check if all ratings are set before calling showSpinnerWithStar
-        if (foodRating !== 0 && serviceRating !== 0 && atmosphereRating !== 0) {
-            hideRatingSets();
-            showSpinner();
-            generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
-            //generateImprovedReviewWithStars();
-        }
-         
-        //generateImprovedReviewWithStars(whisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
+        checkAndShowSpinner();    
+        waitForWhisperText();          
     }
 
+}
+
+function waitUntilWhisperTextReceived() {
+    return new Promise((resolve) => {
+        function checkWhisperText() {
+            if (whisperTextReceived === 1) {
+                resolve();
+            } else {
+                setTimeout(checkWhisperText, 100); 
+            }
+        }
+
+        checkWhisperText();
+    });
+}
+
+// Call this function before the block of code to execute after whisperTextReceived becomes 1
+async function waitForWhisperText() {
+    await waitUntilWhisperTextReceived();
+
+    // If whisperTextReceived is 1, execute the code below
+    if (foodRating !== 0 && serviceRating !== 0 && atmosphereRating !== 0 && whisperTextReceived !== 0) {
+        hideRatingSets();
+        showSpinner();
+        generateImprovedReviewWithStars(globalWhisperText, selectedOverallStarCount, foodRating, serviceRating, atmosphereRating);
+    }
+    else {
+    }
+}
+
+function checkAndShowSpinner() {
+    if (foodRating !== 0 && serviceRating !== 0 && atmosphereRating !== 0) {
+        hideRatingSets();
+        showSpinner();
+    }
 }
 
 
@@ -366,7 +394,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     function stopRecording() {
-        showSpinner();
+        // showSpinner();
+        showRating();
         hideStopButton();
         hideInstructions();
         hideRefreshButton(); 
@@ -531,8 +560,9 @@ async function transcribeAudio(audioBlob) {
       globalWhisperText = whisperText;
 
       console.log('Whisper text:', whisperText);
-      hideSpinner();
-      showRating();
+      whisperTextReceived = 1;
+    //   hideSpinner();
+    //   showRating();
     //   generateImprovedReviewWithoutStars(whisperText);
     } else {
       console.error('Backend request failed:', xhr.statusText);

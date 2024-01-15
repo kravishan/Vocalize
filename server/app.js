@@ -208,7 +208,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
           body: JSON.stringify({
               model: 'gpt-4',
               messages: inputMessages,
-              temperature: 0.3,
+              temperature: 0.6,
           }),
       });
 
