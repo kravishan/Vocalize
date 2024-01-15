@@ -98,6 +98,14 @@ function handleRating(event, set) {
 
 }
 
+function checkAndShowSpinner() {
+    if (foodRating !== 0 && serviceRating !== 0 && atmosphereRating !== 0) {
+        hideRatingSets();
+        showSpinner();
+    }
+}
+
+
 function waitUntilWhisperTextReceived() {
     return new Promise((resolve) => {
         function checkWhisperText() {
@@ -126,12 +134,6 @@ async function waitForWhisperText() {
     }
 }
 
-function checkAndShowSpinner() {
-    if (foodRating !== 0 && serviceRating !== 0 && atmosphereRating !== 0) {
-        hideRatingSets();
-        showSpinner();
-    }
-}
 
 
 /////////////////////////   Show BUTTONS   ///////////////////////////
@@ -259,6 +261,7 @@ function hideInstructions() {
 
 /////////////////////////   POPUP   ///////////////////////////
 
+
 // Popup script
 document.addEventListener('DOMContentLoaded', function () {
     var popup = document.getElementById('popup');
@@ -301,8 +304,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Log or use the reset star ratings as needed
         console.log('Star ratings reset.');
     }
-
-
 
     // Function to draw the wave on the canvas
     function drawWave() {
@@ -349,6 +350,49 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Timer variables
+    let timer;
+    let timerDuration = 10; // 3 minutes in seconds
+
+    // Function to update and display the timer
+    function updateTimer() {
+        const timerElement = document.getElementById('timer');
+        if (timerElement && timerDuration > 0) {
+            const minutes = Math.floor(timerDuration / 60);
+            const seconds = timerDuration % 60;
+            timerElement.innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+            // Display a custom message when time is below 30 seconds
+            if (timerDuration <= 5) {
+                const messageElement = document.getElementById('custom-message-timer');
+                if (messageElement) {
+                    const remainingTime = timerDuration > 0 ? `${timerDuration} seconds` : 'less than a second';
+                    messageElement.innerText = `Time is running out. Please finish the recording within ${remainingTime}.`;
+                }
+            }
+
+            timerDuration--;
+
+            // Continue updating the timer every second
+            timer = setTimeout(updateTimer, 1000);
+        } else {
+            stopRecording();
+            console.log('Timer reached zero.');
+        }
+    }
+
+    // Function to start the timer
+    function startTimer() {
+        updateTimer();
+    }
+
+    // Function to stop the timer
+    function stopTimer() {
+        clearTimeout(timer);
+    }
+
+
+
 
     let recorder;
     let isRecording = false;
@@ -356,6 +400,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to start recording using mic-recorder-to-mp3
     function startRecording() {
+        startTimer();
         hideSpinner();
         hideRating();
         hideRatingSets();
@@ -666,6 +711,11 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         console.error('Error:', error);
     }
 }
+
+
+
+
+
 
 
 
