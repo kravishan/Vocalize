@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Timer variables
     let timer;
-    let timerDuration = 180; // 3 minutes in seconds
+    let timerDuration = 11000; // 3 minutes in seconds
 
     // Function to update and display the custom message
     function updateTimer() {
