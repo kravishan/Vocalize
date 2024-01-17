@@ -179,23 +179,27 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
         "Imagine you are the customer. What additional information would you find helpful in a review if you are reading a review?",
         "Take my review and make it more informative for other consumers. Ensure not to include any fake information about the restaurant.",
         "Provide insights that would be valuable for someone considering a visit to the restaurant.",
+        "Do not use any advanced English. The review should be readable by anyone with any level of English",
+        "A good restaurant review should also be beneficial to readers who are looking for information or suggestions about where to eat.",
         "Add details that could influence a consumer's decision to choose or avoid the restaurant.",
         "Avoid adding any information about the time of the restaurant visit, as you are not aware of that. Include it only if the user has mentioned it in their review.",
         "Avoid adding any fake information. Only include additional details if the user has mentioned them in their review. For example, if the user expresses liking the ambiance or mentions specific details about the lighting, you can incorporate those insights into the review to provide context for their ratings.",
         "Never add any star rating values in the genarated review. Because I will display it in a another section. So don't add any star ratings in the review. But take the star ratings into consideration when genarating the review. You can get idea about user satisfaction from the star ratings. So you can use that information to genarate the review. but never use star rating values in the genarated review as a numeric value. this is a must.",
+        "Don't make it too long. Average word count is 105. Less is better but don't exceed 150 words count. This is a must.",
+        "Please avoid including numerical star ratings in the review text. I provided them to offer context about the experience. Instead, consider the ratings separately and focus on capturing the overall mood and satisfaction for each aspect: overall experience, food quality, service, and atmosphere. and dont mention those things separatly. just get an idea from that those rating to improve the user review. This is a must",
     ];
 
 
       // Combine additional prompts with the user's input and star ratings
       const inputMessages = [
-        { role: 'system', content: 'You are a helpful assistant. Generate a review in a style that a normal person would use when posting a review on Google.' },
+        { role: 'system', content: 'You are a restaurant review improver GPT. Carefully read all the instructions I given to you prompts and user inputs, and then search on the internet and learn how quality restaurant review should be looks like. Then improve the user review considering those info you learned from the internet. Generate a review in a style that a normal person would use when posting a review on Google. So the reader can get more detailed and quality review and make a consideration about visiting that restaurant.' },
         ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
         { role: 'user', content: globalWhisperText },
         // { role: 'user', content: `This is the restaurant name: ${restaurantName}` },
         { role: 'user', content: `Consider my overall star rating as an expression of my satisfaction with the dining experience. Higher ratings indicate a positive experience, while lower ratings suggest areas for improvement. Capture the sentiment and feelings conveyed by the rating: ${selectedOverallStarCount}` },
-        { role: 'user', content: `Please evaluate the food quality I experienced during my dining. Explore aspects like taste, flavor, freshness of ingredients, and presentation. Provide insights into my satisfaction with these elements. I'd like you to capture the context behind my happiness with the food, and My review rating for food quality is ${foodRating}` },
-        { role: 'user', content: `Please assess the service I received, considering aspects like friendliness, promptness, efficiency, and attention to detail. Capture insights on my satisfaction with the restaurant's service. I encourage you to explore ways to enhance the review, and My review rating for service is ${serviceRating}` },
-        { role: 'user', content: `Take note of the experience I had with the ambiance and overall environment. Consider factors like decor, comfort, and overall atmosphere to understand the basis of my rating. My rating for the restaurant's atmosphere is ${atmosphereRating}` },
+        { role: 'user', content: `Please evaluate the food quality I experienced during my dining. Explore aspects like taste, flavor, freshness of ingredients, and presentation. Provide insights into my satisfaction with these elements. I'd like you to capture the context behind my happiness with the food, and My review rating for food quality is: ${foodRating}` },
+        { role: 'user', content: `Please assess the service I received, considering aspects like friendliness, promptness, efficiency, and attention to detail. Capture insights on my satisfaction with the restaurant's service. I encourage you to explore ways to enhance the review, and My review rating for service is: ${serviceRating}` },
+        { role: 'user', content: `Take note of the experience I had with the ambiance and overall environment. Consider factors like decor, comfort, and overall atmosphere to understand the basis of my rating. My rating for the restaurant's atmosphere is: ${atmosphereRating}` },
     ];
 
       // Fetch response from OpenAI API
