@@ -52,16 +52,17 @@ let foodRating = 0;
 let serviceRating = 0;
 let atmosphereRating = 0;
 
-function handleRating(event, set) {
+async function handleRating(event, set) {
+    // Get user coordinates
+    const userLocation = await getUserCoordinates();
+    console.log('getUserCoordinates:', userLocation);
+
     const stars = document.querySelectorAll(`.${set} .star`);
     const clickedStar = event.target;
 
     // Get restaurant details from localStorage
     const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
     const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
-
-    // Get user coordinates
-    const userLocation = getUserCoordinates();
 
     if (clickedStar.classList.contains('star')) {
         const ratingValue = parseInt(clickedStar.getAttribute('data-value'));
@@ -96,7 +97,7 @@ function handleRating(event, set) {
                 break;
             default:
                 break;
-                
+
         }
 
         // Check if all ratings are set before calling showSpinnerWithStar
@@ -105,12 +106,12 @@ function handleRating(event, set) {
             showSpinner();
 
             // Redirect to the result page with parameters
-            const resultPageURL = `./map/result.html?userLocation=${encodeURIComponent(JSON.stringify(userLocation))}&whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}`;
+            const resultPageURL = `./result.html?userLocation=${encodeURIComponent(JSON.stringify(userLocation))}&whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}`;
             window.location.href = resultPageURL;
         }
     }
-
 }
+
 
 
 /////////////////////////   Show BUTTONS   ///////////////////////////
@@ -238,6 +239,28 @@ function hideInstructions() {
     }
 }
 
+// Hide custom timmer message
+function hideCustomTimerMessage() {
+    const messageElement = document.getElementById('custom-message-timer');
+    if (messageElement) {
+        messageElement.style.display = 'none';
+    }
+}
+
+function hideAndShowCustomTimerMessage(showDurationInSeconds) {
+    const messageElement = document.getElementById('custom-message-timer');
+    if (messageElement) {
+        // Hide the message immediately
+        messageElement.style.display = 'none';
+
+        // Set a timeout to display the message again after the fixed show duration
+        setTimeout(() => {
+            messageElement.style.display = 'block';
+        }, showDurationInSeconds * 1000); // Convert seconds to milliseconds
+    }
+}
+
+
 /////////////////////////   POPUP   ///////////////////////////
 
 // Popup script
@@ -264,8 +287,45 @@ document.addEventListener('DOMContentLoaded', function () {
         location.reload();
     }
 
+    // Function to show a toast message
+    function showToast(message) {
+        const toastElement = document.getElementById('toast');
+        if (toastElement) {
+            toastElement.textContent = message;
+            toastElement.style.display = 'block';
+
+            // Hide the toast after a certain duration (e.g., 3 seconds)
+            setTimeout(() => {
+                toastElement.style.display = 'none';
+            }, 300);
+        }
+    }
+
     function refreshButtonClicked() {
-        resetStarRatings();
+        showToast('Refreshing...');
+        localStorage.clear();
+        if (isRecording) {
+            recorder
+                .stop()
+                .getMp3()
+                .then(([buffer, blob]) => {
+                    savedAudioData = blob;
+                    transcribeAudio(blob);
+                    audioChunks = [];
+                    analyser.disconnect(); // Disconnect the analyser when recording stops
+                })
+                .catch((e) => console.error(e));
+
+            isRecording = false;
+        }
+
+        stopTimer();
+        hideAndShowCustomTimerMessage(5);
+
+        timerDuration = 35;
+         
+        
+        // resetStarRatings();
         startRecording();
     }
 
@@ -331,12 +391,51 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
+    // Timer variables
+    let timer;
+    let timerDuration = 35; // 5 minutes in seconds
+
+    // Function to update and display the custom message
+    function updateTimer() {
+        // Display a custom message when time is below 30 seconds
+        if (timerDuration <= 30) {
+            const messageElement = document.getElementById('custom-message-timer');
+            if (messageElement) {
+                const remainingTime = timerDuration > 0 ? `${timerDuration} seconds` : 'less than a second';
+                messageElement.innerText = `Time is running out. Please finish the recording within ${remainingTime}`;
+            }
+        }
+
+        if (timerDuration > 0) {
+            timerDuration--;
+
+            // Continue updating the timer every second
+            timer = setTimeout(updateTimer, 1000);
+        } else {
+            stopRecording();
+            console.log('Timer reached zero.');
+            hideCustomTimerMessage();
+        }
+    }
+
+    // Function to start the timer
+    function startTimer() {
+        updateTimer();
+    }
+
+    // Function to stop the timer
+    function stopTimer() {
+        clearTimeout(timer);
+    }
+
+
     let recorder;
     let isRecording = false;
 
 
     // Function to start recording using mic-recorder-to-mp3
     function startRecording() {
+        startTimer();
         hideSpinner();
         hideRating();
         hideRatingSets();
@@ -375,6 +474,10 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     function stopRecording() {
+        hideCustomTimerMessage();
+        stopTimer();
+        // showSpinner();
+        // showRating();
         showSpinner();
         hideStopButton();
         hideInstructions();

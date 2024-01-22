@@ -20,6 +20,11 @@ h1 {
   font-size: 1.6em;
 }
 
+.toast {
+  display: none;
+  margin-top: 180px;
+}
+
 #popup .heading {
   font-family: 'Poppins', sans-serif; 
   margin-top: -250px;
@@ -54,8 +59,37 @@ h1 {
   font-size: 12px;
 
   /* Apply the blur effect */
-  backdrop-filter: blur(5px);
-  background-color: rgba(255, 255, 255, 0.8); 
+  backdrop-filter: blur(1px);
+}
+
+body.theme-dark #popup .stop-button-info {
+  color: rgba(255, 255, 255, 0.651);
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#popup .custom-message-timer {
+  font-family: 'Poppins', sans-serif; 
+  animation: blink 1s infinite;
+  color: rgba(255, 0, 0, 0.7);
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  transform: translate(0%, -50%);
+  margin-top: 380px; 
+  z-index: 999;
+  font-size: 12px;
 }
 
 h3 {
@@ -155,7 +189,7 @@ a.link:hover {
   height: 300px;
   display: none;
   position: fixed;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
