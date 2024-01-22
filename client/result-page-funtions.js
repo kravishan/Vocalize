@@ -168,10 +168,22 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 successMsg.style.display = 'none';
             }, 3000);
 
-            // Redirect to home page after 5 minutes
-            setTimeout(goToInitialStage, 3000);
+            goToInitialStage();
 
         }
+
+        // Function to navigate back to the previous page and reset data
+        function goToInitialStage() {
+            // Clear local storage
+            localStorage.clear();
+
+            // Redirect to the initial stage after 3000 milliseconds (3 seconds)
+            setTimeout(() => {
+                window.location.href = './index.html';
+            }, 3000);
+        }
+
+
 
         // Function to show failure message
         function showFailedMessage() {
