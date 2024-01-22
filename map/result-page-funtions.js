@@ -37,14 +37,19 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Get parameters from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const userLocationString = urlParams.get('userLocation');
-        const userLocation = JSON.parse(decodeURIComponent(userLocationString));
+        // const userLocationString = urlParams.get('userLocation');
+        // const userLocation = JSON.parse(decodeURIComponent(userLocationString));
         const whisperText = urlParams.get('whisperText');
         const overallStarCount = urlParams.get('overallStarCount');
         const foodRating = urlParams.get('foodRating');
         const serviceRating = urlParams.get('serviceRating');
         const atmosphereRating = urlParams.get('atmosphereRating');
         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
+
+        // Retrieve user coordinates from localStorage
+        const storedCoordinates = localStorage.getItem('userCoordinates');
+
+        console.log("Stored Coordinates:", storedCoordinates);
 
         console.log("Overall Star Count:", overallStarCount);
         console.log("Food Rating:", foodRating);
@@ -79,7 +84,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 atmosphereRating: atmosphereRating,
                 generatedDateTime: generatedDateTime,
                 sliderValue: document.getElementById("myRange").value,
-                userLocation: userLocation,
+                userLocation: JSON.parse(storedCoordinates),
                 selectedRestaurant: JSON.parse(selectedRestaurantData)
             };
 
@@ -103,6 +108,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
             setTimeout(() => {
                 successMsg.style.display = 'none';
             }, 3000);
+
+            goToInitialStageWithDelay();
         }
 
         // Function to show failure message
@@ -111,6 +118,17 @@ fetch('https://vocalizer.dev/server/firebase-config')
             failedMsg.style.display = 'block';
             setTimeout(() => {
                 failedMsg.style.display = 'none';
+            }, 3000);
+        }
+
+        // Function to navigate back to the previous page and reset data
+        function goToInitialStageWithDelay() {
+            // Clear local storage
+            localStorage.clear();
+
+            // Redirect to the initial stage after 3000 milliseconds (3 seconds)
+            setTimeout(() => {
+                window.location.href = './index.html';
             }, 3000);
         }
 

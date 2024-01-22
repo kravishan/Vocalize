@@ -51,16 +51,18 @@ function handleOverallRating(event) {
 let foodRating = 0;
 let serviceRating = 0;
 let atmosphereRating = 0;
+// const userLocation = getUserCoordinates();
 
 async function handleRating(event, set) {
     // Get user coordinates
-    const userLocation = await getUserCoordinates();
+    // const userLocation = await getUserCoordinates();
 
     const stars = document.querySelectorAll(`.${set} .star`);
     const clickedStar = event.target;
 
     // Get restaurant details from localStorage
     const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
+    // const userLocation = JSON.parse(localStorage.getItem("userLocation"));
     // const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
     if (clickedStar.classList.contains('star')) {
@@ -105,7 +107,7 @@ async function handleRating(event, set) {
             showSpinner();
 
             // Redirect to the result page with parameters
-            const resultPageURL = `./result.html?userLocation=${encodeURIComponent(JSON.stringify(userLocation))}&whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}`;
+            const resultPageURL = `./result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}`;
             window.location.href = resultPageURL;
         }
     }
@@ -268,6 +270,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var stopButton = document.querySelector('.stop');
     var microphoneButton = document.querySelector('.symbol');
     let waveCanvas = document.querySelector('.wave-canvas');
+
+    getUserCoordinates();
 
     //var recognition;
     var mediaRecorder;
@@ -570,6 +574,13 @@ function getUserCoordinates() {
                         latitude: position.coords.latitude,
                         longitude: position.coords.longitude,
                     };
+
+                    // Save coordinates to localStorage
+                    localStorage.setItem('userCoordinates', JSON.stringify(coordinates));
+
+                    // Log userCoordinates
+                    console.log('User Coordinates:', coordinates);
+
                     resolve(coordinates);
                 },
                 (error) => {
@@ -581,6 +592,7 @@ function getUserCoordinates() {
         }
     });
 }
+
 
 
 

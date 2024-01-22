@@ -168,12 +168,12 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 successMsg.style.display = 'none';
             }, 3000);
 
-            goToInitialStage();
+            goToInitialStageWithDelay();
 
         }
 
         // Function to navigate back to the previous page and reset data
-        function goToInitialStage() {
+        function goToInitialStageWithDelay() {
             // Clear local storage
             localStorage.clear();
 
