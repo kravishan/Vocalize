@@ -323,19 +323,19 @@ document.addEventListener('DOMContentLoaded', function () {
         startRecording();
     }
 
-    function resetStarRatings() {
-        // Reset star ratings to initial state
-        const stars = document.querySelectorAll('.star');
-        stars.forEach(star => star.classList.remove('checked'));
+    // function resetStarRatings() {
+    //     // Reset star ratings to initial state
+    //     const stars = document.querySelectorAll('.star');
+    //     stars.forEach(star => star.classList.remove('checked'));
 
-        selectedOverallStarCount = 0;
-        foodRating = 0;
-        serviceRating = 0;
-        atmosphereRating = 0;
+    //     selectedOverallStarCount = 0;
+    //     foodRating = 0;
+    //     serviceRating = 0;
+    //     atmosphereRating = 0;
 
-        // Log or use the reset star ratings as needed
-        console.log('Star ratings reset.');
-    }
+    //     // Log or use the reset star ratings as needed
+    //     console.log('Star ratings reset.');
+    // }
 
 
 
