@@ -342,9 +342,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         stopTimer();
-        hideAndShowCustomTimerMessage(5);
+        hideAndShowCustomTimerMessage(270);
 
-        timerDuration = 35;
+        timerDuration = 300;
          
         
         // resetStarRatings();
@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Timer variables
     let timer;
-    let timerDuration = 35; // 5 minutes in seconds
+    let timerDuration = 300; // 5 minutes in seconds
 
     // Function to update and display the custom message
     function updateTimer() {
