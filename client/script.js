@@ -259,6 +259,27 @@ function hideInstructions() {
     }
 }
 
+// Hide custom timmer message
+function hideCustomTimerMessage() {
+    const messageElement = document.getElementById('custom-message-timer');
+    if (messageElement) {
+        messageElement.style.display = 'none';
+    }
+}
+
+function hideAndShowCustomTimerMessage(showDurationInSeconds) {
+    const messageElement = document.getElementById('custom-message-timer');
+    if (messageElement) {
+        // Hide the message immediately
+        messageElement.style.display = 'none';
+
+        // Set a timeout to display the message again after the fixed show duration
+        setTimeout(() => {
+            messageElement.style.display = 'block';
+        }, showDurationInSeconds * 1000); // Convert seconds to milliseconds
+    }
+}
+
 /////////////////////////   POPUP   ///////////////////////////
 
 
@@ -302,10 +323,33 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    function refreshButtonClicked() {
-        resetStarRatings();
-        startRecording();
+    function refreshButtonClicked() {       
         showToast('Refreshing...');
+        localStorage.clear();
+        if (isRecording) {
+            recorder
+                .stop()
+                .getMp3()
+                .then(([buffer, blob]) => {
+                    savedAudioData = blob;
+                    transcribeAudio(blob);
+                    audioChunks = [];
+                    analyser.disconnect(); // Disconnect the analyser when recording stops
+                })
+                .catch((e) => console.error(e));
+
+            isRecording = false;
+        }
+
+        stopTimer();
+        hideAndShowCustomTimerMessage(5);
+
+        timerDuration = 35;
+         
+        
+        // resetStarRatings();
+        startRecording();
+        
     }
 
     function resetStarRatings() {
@@ -369,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Timer variables
     let timer;
-    let timerDuration = 300; // 5 minutes in seconds
+    let timerDuration = 35; // 5 minutes in seconds
 
     // Function to update and display the custom message
     function updateTimer() {
@@ -390,12 +434,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             stopRecording();
             console.log('Timer reached zero.');
-
-            // Hide the custom message when the timer reaches zero
-            const messageElement = document.getElementById('custom-message-timer');
-            if (messageElement) {
-                messageElement.style.display = 'none';
-            }
+            hideCustomTimerMessage();
         }
     }
 
@@ -408,20 +447,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function stopTimer() {
         clearTimeout(timer);
     }
-
-
-    // Function to start the timer
-    function startTimer() {
-        updateTimer();
-    }
-
-    // Function to stop the timer
-    function stopTimer() {
-        clearTimeout(timer);
-    }
-
-
-
 
     let recorder;
     let isRecording = false;
@@ -468,6 +493,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     function stopRecording() {
+        hideCustomTimerMessage();
+        stopTimer();
         // showSpinner();
         showRating();
         hideStopButton();

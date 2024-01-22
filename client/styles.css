@@ -21,6 +21,7 @@ h1 {
 }
 
 .toast {
+  display: none;
   margin-top: 180px;
 }
 
