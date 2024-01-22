@@ -44,6 +44,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         const foodRating = urlParams.get('foodRating');
         const serviceRating = urlParams.get('serviceRating');
         const atmosphereRating = urlParams.get('atmosphereRating');
+        const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
 
         console.log("Overall Star Count:", overallStarCount);
         console.log("Food Rating:", foodRating);
@@ -78,7 +79,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 atmosphereRating: atmosphereRating,
                 generatedDateTime: generatedDateTime,
                 sliderValue: document.getElementById("myRange").value,
-                userLocation: userLocation
+                userLocation: userLocation,
+                selectedRestaurant: JSON.parse(selectedRestaurantData)
             };
 
             // Add a new document with a generated ID to the 'results' collection

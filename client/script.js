@@ -723,7 +723,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
     try {
         // Get restaurant details from localStorage
         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
-        const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
+        // const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
         // Get user coordinates
         const userLocation = await getUserCoordinates();
@@ -741,7 +741,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
                 foodRating,
                 serviceRating,
                 atmosphereRating,
-                restaurantName,
+                // restaurantName,
             }),
         });
 

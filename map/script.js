@@ -55,14 +55,13 @@ let atmosphereRating = 0;
 async function handleRating(event, set) {
     // Get user coordinates
     const userLocation = await getUserCoordinates();
-    console.log('getUserCoordinates:', userLocation);
 
     const stars = document.querySelectorAll(`.${set} .star`);
     const clickedStar = event.target;
 
     // Get restaurant details from localStorage
     const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
-    const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
+    // const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
     if (clickedStar.classList.contains('star')) {
         const ratingValue = parseInt(clickedStar.getAttribute('data-value'));
