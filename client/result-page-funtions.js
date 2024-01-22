@@ -64,8 +64,10 @@ fetch('https://vocalizer.dev/server/firebase-config')
         //     return stars.repeat(parseInt(rating));
         // }
 
+        originalReview = decodeURIComponent(improvedReviewWithStars);
+
         // Array to store all versions of improvedReviewWithStars
-        let improvedReviewVersions = [improvedReviewWithStars]; 
+        let improvedReviewVersions = [originalReview];
         // Initialize editCounter
         let editCounter = 0;
 
@@ -77,24 +79,29 @@ fetch('https://vocalizer.dev/server/firebase-config')
             const paragraph = document.getElementById('improvedReviewWithStarsText');
             const editButton = document.getElementById('edit-button-review');
 
-            if (paragraph.tagName === 'TEXTAREA') {
-                // If already in edit mode, revert to the original paragraph
-                paragraph.outerHTML = `<p id="improvedReviewWithStarsText" class="edite-boxp boxp">${paragraph.value}</p>`;
-                editButton.innerHTML = '<i class="fa fa-edit"></i>';
-                editCounter++;
-                console.log(editCounter);
+            if (paragraph && editButton) {
+                if (paragraph.tagName === 'TEXTAREA') {
+                    // If already in edit mode, revert to the original paragraph
+                    paragraph.outerHTML = `<p id="improvedReviewWithStarsText" class="edite-boxp boxp">${paragraph.value}</p>`;
+                    editButton.innerHTML = '<i class="fa fa-edit"></i>';
+                    editCounter++;
+                    console.log(editCounter);
+                } else {
+                    // If not in edit mode, convert to a textarea
+                    const textContent = paragraph.textContent.trim();
+                    paragraph.outerHTML = `<textarea id="improvedReviewWithStarsText" class="edite-boxp" rows="15">${textContent}</textarea>`;
+                    editButton.innerHTML = '<i class="fa fa-save"></i>';
+                }
+
+                // Only add the edited text to the array if it's different from the original text
+                if (editCounter > 0 && paragraph.value && paragraph.value.trim() !== originalReview) {
+                    improvedReviewVersions.push(paragraph.value.trim() || originalReview);
+                }
             } else {
-                // If not in edit mode, convert to a textarea
-                const textContent = paragraph.textContent.trim();
-                paragraph.outerHTML = `<textarea id="improvedReviewWithStarsText" class="edite-boxp" rows="15">${textContent}</textarea>`;
-                editButton.innerHTML = '<i class="fa fa-save"></i>';
-
-            }
-
-            if (editCounter === 0 || paragraph.value !== improvedReviewWithStars) {
-                improvedReviewVersions.push(paragraph.value || improvedReviewWithStars);
+                console.error('Error: Unable to find necessary elements.');
             }
         }
+
 
         document.getElementById('saveButton').addEventListener('click', saveToFirestore);
 
