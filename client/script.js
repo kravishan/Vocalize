@@ -329,15 +329,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (isRecording) {
             recorder
                 .stop()
-                .getMp3()
-                .then(([buffer, blob]) => {
-                    savedAudioData = blob;
-                    transcribeAudio(blob);
-                    audioChunks = [];
-                    analyser.disconnect(); // Disconnect the analyser when recording stops
-                })
-                .catch((e) => console.error(e));
-
             isRecording = false;
         }
 
