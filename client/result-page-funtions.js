@@ -65,7 +65,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         // }
 
         // Array to store all versions of improvedReviewWithStars
-        let improvedReviewVersions = improvedReviewWithStars; // Set the initial value
+        let improvedReviewVersions = [improvedReviewWithStars]; 
         // Initialize editCounter
         let editCounter = 0;
 
@@ -81,21 +81,20 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 // If already in edit mode, revert to the original paragraph
                 paragraph.outerHTML = `<p id="improvedReviewWithStarsText" class="edite-boxp boxp">${paragraph.value}</p>`;
                 editButton.innerHTML = '<i class="fa fa-edit"></i>';
+                editCounter++;
+                console.log(editCounter);
             } else {
                 // If not in edit mode, convert to a textarea
                 const textContent = paragraph.textContent.trim();
                 paragraph.outerHTML = `<textarea id="improvedReviewWithStarsText" class="edite-boxp" rows="15">${textContent}</textarea>`;
                 editButton.innerHTML = '<i class="fa fa-save"></i>';
-                editCounter++;
+
             }
-            
-            if (editCounter === 0) {
-                improvedReviewVersions=improvedReviewWithStars;
+
+            if (editCounter === 0 || paragraph.value !== improvedReviewWithStars) {
+                improvedReviewVersions.push(paragraph.value || improvedReviewWithStars);
             }
-            else {
-                improvedReviewVersions = [improvedReviewWithStars, paragraph.value];
-            }
-        }   
+        }
 
         document.getElementById('saveButton').addEventListener('click', saveToFirestore);
 
@@ -152,6 +151,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                     });
             }
         }
+
 
         // Function to show success message
         function showSuccessMessage() {
