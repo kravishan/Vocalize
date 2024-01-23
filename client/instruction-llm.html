@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-subtitle" content="Join our innovative research study on restaurant reviews! Explore the impact of AI, share your voice, and earn rewards. Learn more about the study and tasks here.">
+    <title>Research Instruction Page</title>
+    <style>
+        .page-title {
+            position: relative;
+            display: flex;
+            transition: all 300ms ease;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            margin-right: auto;
+            font-weight: 700;
+            font-size: 28px;
+            margin-left: auto;
+            text-align: center;
+            width: 100%;
+        }
+
+        .page-title-fixed {
+            display: flex;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 99;
+        }
+
+        .page-title-over {
+            z-index: 99;
+        }
+
+        
+        h1 {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-weight: 500;
+            font-size: 1.6em;
+        }
+
+        .font-22 {
+            font-size: 22px;
+            color: #0f1117;
+            text-align: center;
+            transform: translateY(-25%);
+        }
+
+        body {
+            transition: background-color 0.3s ease;
+            margin-top: 120px;
+            font-family: 'San Francisco', Arial, sans-serif;
+            background-color: #ffffffb0;
+        }
+
+        p {
+            margin: 10px 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+
+
+    
+        .todo-item {
+            margin-right: 45px;
+            display: flex;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f1f1f1 !important;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc; 
+        }
+
+        .todo-list {
+            background-color: #ffffff !important;
+        }
+
+
+        .todo-item label {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin-left: 20px;
+        }
+
+
+        .card {
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            background-size: cover;
+            border: 0px !important;
+            background-position: center center !important;
+        }
+
+        .card-style {
+            overflow: hidden;
+            margin: 0px 5px 20px 0px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .card-style .card-overlay {
+            border-radius: 20px;
+        }
+
+        .centered-heading {
+            text-align: center;
+            text-transform: uppercase;
+            font-family: 'San Francisco', Arial, sans-serif;
+        }
+
+        .card-style .content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            margin-left: 15px;
+            margin-right: 8px;
+            margin-bottom: 20px;
+        }
+
+        .boxp {
+            flex: 1;
+            margin-top: 10px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            margin-left: 15px;
+            max-height: 100%;
+            overflow-y: auto;
+        } 
+        
+        .hide {
+            display: none;
+        }
+
+        .more-button {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 300ms ease;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-title page-title-fixed">
+        <h1 class="font-22">Instruction Page</h1>
+       
+    </div>
+    <div class="page-title-clear"></div>
+
+    <h3 class="centered-heading">Todo list</h4>
+        <ul class="todo-list">
+            <h4>Research Task List</h4>
+            <li class="todo-item" id="todo1">
+                <input type="checkbox" class="todo-checkbox" id="checkbox1">
+                <label for="checkbox1">Read about our project details</label>
+            </li>
+            <li class="todo-item" id="todo2">
+                <input type="checkbox" class="todo-checkbox" id="checkbox2">
+                <label for="checkbox2">Complete the Form 1:Participant Background and Survey</label>
+            </li>
+            <li class="todo-item" id="todo3">
+                <input type="checkbox" class="todo-checkbox" id="checkbox2">
+                <label for="checkbox2">Complete Form 2: Google Map Method Review</label>
+            </li>
+            <li class="todo-item" id="todo4">
+                <input type="checkbox" class="todo-checkbox" id="checkbox2">
+                <label for="checkbox2">Complete Form 3: LLM Method Improved Review</label>
+            </li>
+    
+            <h4>Restaurant List</h4>
+    
+            <!-- Restaurant list -->
+            <li class="todo-item" id="todo5">
+                <input type="checkbox" class="todo-checkbox" id="checkbox2">
+                <label for="checkbox2">Juvenes Restaurant Foobar</label>
+            </li>
+            <li class="todo-item" id="todo6">
+                <input type="checkbox" class="todo-checkbox" id="checkbox2">
+                <label for="checkbox2">Juvenes Cafe Tellus</label>
+            </li>
+            <li class="todo-item" id="todo7">
+                <input type="checkbox" class="todo-checkbox" id="checkbox2">
+                <label for="checkbox2">H2O</label>
+            </li>
+            <li class="todo-item" id="todo8">
+                <input type="checkbox" class="todo-checkbox" id="checkbox2">
+                <label for="checkbox2">Ravintold Kastari</label>
+            </li>
+            <li class="todo-item" id="todo9">
+                <input type="checkbox" class="todo-checkbox" id="checkbox2">
+                <label for="checkbox2">Juvenes Restaurant Kylyma</label>
+            </li>
+            <li class="todo-item" id="todo10">
+                <input type="checkbox" class="todo-checkbox" id="checkbox2">
+                <label for="checkbox2">Juvenes</label>
+            </li>           
+        </ul>  
+
+
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h3 class="centered-heading">Details</h3>
+            <div class="details">
+                <p>Welcome to our research project! This instruction page provides guidance on participating in our study. Below is a to-do list to guide you through the process:</p>
+                <p class="hide">This research aims to gather valuable insights into restaurant reviews using two methods:</p>
+                <ul class="hide">
+                    <li>Google Map Method: Provide your feedback using the Google Map application.</li>
+                    <li>LLM Method: Share your thoughts using the Vocalizer LLM application.</li>
+                </ul>
+                <p class="hide">Please complete the tasks in the to-do list and follow the provided links to access the applications and Google forms.</p>
+
+                <p><strong>What We're Trying to Do:</strong></p>
+                <p>We're on an exciting journey to see how smart computer programs can change how we make reviews. Our main goal is to find out how these computer programs, known as AI, can make reviews better and cover more things. In this study, we're trying a new way to get reviews—from your voice, not just typing. This new idea is meant to make giving reviews more like talking to a friend or someone you know well, and we improve your review using AI.</p>
+                <p>Picture telling someone about a restaurant in the same way you'd tell a friend. That's what we want to capture with this new voice method. It's different from the usual way of typing words on a screen.</p>
+                
+                
+                <p><strong>How Long We Need Your Reviews:</strong></p>
+                <p>We're looking to collect reviews over a period of 6 days. We've split everyone into two groups: one group will use the LLM application first, while the other will start with the Google Map Application. You'll use one application for reviewing three specific restaurants and the other application for the remaining three.</p>
+                <p>Make sure to fill out the Google form related to the application you used after completing the reviews for the first three restaurants according to your group.</p>
+
+                <p class="details-usage hide"><strong>Data Usage Policy:</strong></p>
+                <p class="details-usage hide">We collect your location data for research. Your privacy is important. We only use your data for our study, and we delete it when we finish. We don't share it or use it for anything else. If you have questions, ask us.</p>
+
+                <p class="details-contact hide"><strong>How to Contact Us:</strong></p>
+                <p class="details-contact hide">If you have any questions or concerns, please contact us at kavindu[dot]magalage[at]oulu[dot]fi</a></p>
+                <p class="details-contact hide">Thank you for participating in our research!</p>
+
+                <p class="details-reward hide"><strong>Reward:</strong></p>
+                <p class="details-reward hide">Start the research, and you'll receive 5 euros gif card. Complete all the steps, and you'll get the remaining 20 euros gif card. Your effort is appreciated!</p>
+    
+                <p class="details-paid hide"><strong>How to Get Paid:</strong></p>
+                <p class="details-paid hide">After completing the research, we'll send you a link to a form. Fill out the form, and we'll send you the money.</p>
+    
+                <p><strong>How to Start:</strong></p>
+                <p>Begin by completing the first task on the to-do list.</p>                   
+            </div>
+            <!-- Add a button to toggle the visibility of the details -->
+            <button class="more-button" id="toggleDetailsButton" onclick="toggleDetails()">Show Details</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h3 class="centered-heading">App links</h4>
+            <p class="boxp">
+                <a href="https://vocalizer.dev/">LLM application</a>
+            </p>
+            <p class="boxp">
+                <a href="https://vocalizer.dev/map">Google Map Application</a>
+            </p>
+        </div>  
+    </div>
+
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h3 class="centered-heading">Google form links</h4>
+            <p class="boxp">
+                <a href="https://forms.gle/6eFQTjvKZYgKLqJj9">Form 1: Participant Background</a>
+            </p>
+            
+            <p class="boxp">
+                <a href="https://forms.gle/HCFismMGeBWaKJQo6">Form 2: Post-Visit Feedback</a>
+            </p>
+        </div>  
+    </div>
+    
+
+    
+
+    <script>
+        // JavaScript function to toggle the visibility of the details container
+        function toggleDetails() {
+            var detailsContainer = document.getElementById('toggleDetailsButton');
+            var detailsElements = document.querySelectorAll('.hide');
+
+            // Toggle the display property for each element with the 'hide' class
+            for (var i = 0; i < detailsElements.length; i++) {
+                var computedStyle = window.getComputedStyle(detailsElements[i]);
+
+                if (computedStyle.display === 'none') {
+                    detailsElements[i].style.display = 'block';
+                    detailsContainer.innerHTML = 'Hide Details';
+                } else {
+                    detailsElements[i].style.display = 'none';
+                    detailsContainer.innerHTML = 'Show Details';
+                }
+            }
+        }
+
+        
+        // Check if tasks are completed and update the checkboxes
+        document.addEventListener('DOMContentLoaded', function () {
+            const todoItems = document.querySelectorAll('.todo-item');
+
+            // Check the cache for completed tasks
+            for (const item of todoItems) {
+                const taskId = item.id.replace('todo', '');
+                const isCompleted = localStorage.getItem(`task${taskId}`) === 'true';
+
+                // Update the checkbox based on completion status
+                const checkbox = item.querySelector('.todo-checkbox');
+                checkbox.checked = isCompleted;
+
+                // Add event listener to save completion status to cache
+                checkbox.addEventListener('change', function () {
+                    localStorage.setItem(`task${taskId}`, checkbox.checked);
+                });
+            }
+        });
+
+        // Get the .page-title-fixed element
+        const pageTitleFixedElement = document.querySelector('.page-title-fixed');
+
+        // Add an event listener for the scroll event
+        window.addEventListener('scroll', function() {
+            // Check the scroll position (adjust the value as needed)
+            if (window.scrollY > 90) {
+                // If scroll position is greater than 50, add a class to hide the element
+                pageTitleFixedElement.style.display = 'none';
+            } else {
+                // Otherwise, remove the class to show the element
+                pageTitleFixedElement.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>
