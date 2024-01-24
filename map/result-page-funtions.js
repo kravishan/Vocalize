@@ -105,7 +105,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 console.log('docName:', restaurantName);
         
                 // Save data with combined docName, restaurantName, and coordinates as the ID
-                db.collection('Results LLM')
+                db.collection('Results Voice')
                     .doc(`${docName}_${restaurantName}`)
                     .set(resultData)
                     .then(() => {
