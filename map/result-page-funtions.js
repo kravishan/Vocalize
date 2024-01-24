@@ -110,11 +110,13 @@ fetch('https://vocalizer.dev/server/firebase-config')
                     .set(resultData)
                     .then(() => {
                         console.log('Document written with ID:', docName);
+                        document.cookie = `stepperValue=${stepperValue}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
                         showSuccessMessage();
+                        
                     })
                     .catch((error) => {
                         console.error('Error adding document:', error);
-                        showFailedMessage();
+                        showFailedMessage();                       
                     });
             } else {
                 // Save data with a generated ID
@@ -122,7 +124,9 @@ fetch('https://vocalizer.dev/server/firebase-config')
                     .add(resultData)
                     .then((docRef) => {
                         console.log('Document written with ID:', docRef.id);
+                        document.cookie = `stepperValue=${stepperValue}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
                         showSuccessMessage();
+                        
                     })
                     .catch((error) => {
                         console.error('Error adding document:', error);
@@ -139,7 +143,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 successMsg.style.display = 'none';
             }, 3000);
 
-            goToInitialStageWithDelay();
+            // goToInitialStageWithDelay();
         }
 
         // Function to show failure message
@@ -217,6 +221,38 @@ fetch('https://vocalizer.dev/server/firebase-config')
         // Store the updated value in localStorage
         localStorage.setItem('stepperValue', value.toString());
     }
+
+
+    // Function to read a specific cookie value by name
+    function getCookie(name) {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Check if the cookie starts with the specified name
+            if (cookie.startsWith(name + '=')) {
+                return cookie.substring(name.length + 1);
+            }
+        }
+        return null;
+    }
+
+    // Function to set stepper value from cookies to UI and call updateStepperValue
+    function setStepperValueFromCookies() {
+        const stepperValueCookie = getCookie('stepperValue');
+        if (stepperValueCookie !== null) {
+            const stepperInputElement = document.querySelector('.ios-stepper input[type="number"]');
+            if (stepperInputElement) {
+                stepperInputElement.value = stepperValueCookie;
+                // Call updateStepperValue function with the retrieved value
+                updateStepperValue(stepperInputElement);
+            }
+        }
+    }
+
+    // Call this function when the page is loaded
+    window.addEventListener('load', setStepperValueFromCookies);
+
+
 
 
 
