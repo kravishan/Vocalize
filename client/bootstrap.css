@@ -15,6 +15,7 @@
 }
 
 .processing-text {
+  display: none;
   position: fixed;
   top: 48%;
   left: 40%;
