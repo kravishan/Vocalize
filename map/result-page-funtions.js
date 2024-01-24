@@ -143,7 +143,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 successMsg.style.display = 'none';
             }, 3000);
 
-            // goToInitialStageWithDelay();
+            goToInitialStageWithDelay();
         }
 
         // Function to show failure message

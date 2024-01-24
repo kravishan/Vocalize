@@ -169,8 +169,14 @@ function showRatingSets() {
 // Function to show the spinner
 function showSpinner() {
     var spinner = document.querySelector('.custom-loader');
+    var processingText = document.querySelector('.processing-text');
+
     if (spinner) {
     spinner.style.display = 'block';
+    }
+
+    if (processingText) {
+        processingText.style.display = 'block';
     }
 }
 
@@ -227,8 +233,14 @@ function hideRatingSets() {
 // Function to hide the spinner
 function hideSpinner() {
     var spinner = document.querySelector('.custom-loader');
+    var processingText = document.querySelector('.processing-text');
+
     if (spinner) {
     spinner.style.display = 'none';
+    }
+
+    if (processingText) {
+        processingText.style.display = 'none';
     }
 }
 

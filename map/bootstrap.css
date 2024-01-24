@@ -1,7 +1,7 @@
 /* Spinner CSS */
 .custom-loader {
   position: fixed;
-  top: 42%;
+  top: 40%;
   left: 46%;
   transform: translate(-50%, -50%);
   width: 40px;
@@ -11,6 +11,15 @@
   border-top: 4px solid transparent;
   animation: spin 1s linear infinite;
   display: none;
+  z-index: 999;
+}
+
+.processing-text {
+  display: none;
+  position: fixed;
+  top: 48%;
+  left: 40%;
+  color: #ffffff;
   z-index: 999;
 }
 

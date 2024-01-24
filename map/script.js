@@ -148,8 +148,14 @@ function showRatingSets() {
 // Function to show the spinner
 function showSpinner() {
     var spinner = document.querySelector('.custom-loader');
+    var processingText = document.querySelector('.processing-text');
+
     if (spinner) {
     spinner.style.display = 'block';
+    }
+
+    if (processingText) {
+        processingText.style.display = 'block';
     }
 }
 
@@ -208,8 +214,14 @@ function hideRatingSets() {
 // Function to hide the spinner
 function hideSpinner() {
     var spinner = document.querySelector('.custom-loader');
+    var processingText = document.querySelector('.processing-text');
+
     if (spinner) {
     spinner.style.display = 'none';
+    }
+
+    if (processingText) {
+        processingText.style.display = 'none';
     }
 }
 
@@ -632,7 +644,7 @@ async function transcribeAudio(audioBlob) {
 
   // Configure it: POST-request for the specified URL
 //   xhr.open('POST', 'http://localhost:3000/transcribe-audio', true);
-  xhr.open('POST', 'https://vocalizer.dev/server/transcribe-audio', true);
+  xhr.open('POST', 'https://vocalizer.dev/server/transcribe-audiop', true);
 
   // Set up a handler for when the request is successfully completed
   xhr.onload = function () {
