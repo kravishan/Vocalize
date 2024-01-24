@@ -132,12 +132,24 @@ fetch('https://vocalizer.dev/server/firebase-config')
             const stepperValue = parseInt(localStorage.getItem('stepperValue'));
 
             if (stepperValue > 0) {
-                // Save data with stepperValue as the ID
+                // Use stepperValue as the document name
+                const docName = stepperValue.toString();
+        
+                // Extract the restaurant name and coordinates from selectedRestaurant
+                const selectedRestaurant = JSON.parse(localStorage.getItem("selectedRestaurant"));
+
+                // Accessing the "name" field using bracket notation
+                const restaurantName = selectedRestaurant['name'];
+
+
+                console.log('docName:', restaurantName);
+        
+                // Save data with combined docName, restaurantName, and coordinates as the ID
                 db.collection('Results LLM')
-                    .doc(stepperValue.toString())
+                    .doc(`${docName}_${restaurantName}`)
                     .set(resultData)
                     .then(() => {
-                        console.log('Document written with ID:', stepperValue);
+                        console.log('Document written with ID:', docName);
                         showSuccessMessage();
                     })
                     .catch((error) => {
