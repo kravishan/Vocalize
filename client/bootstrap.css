@@ -32,6 +32,22 @@
   }
 }
 
+/* Larger screens (e.g., laptops) */
+@media (min-width: 768px) {
+  .custom-loader {
+    top: 40%;
+    left: 48.5%;
+    transform: translate(-50%, -50%);
+  }
+
+  .processing-text {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+
   /* ///////////////////////////////// */
 
   .card {

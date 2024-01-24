@@ -113,6 +113,23 @@ async function handleRating(event, set) {
     }
 }
 
+// let dotCount = 0;
+
+
+// // Function to increment dots in processing text
+// function updateProcessingText() {
+//     var processingText = document.querySelector('.processing-text');
+
+//     if (processingText) {
+//         dotCount = (dotCount + 1) % (3 + 1); // Increment dot count and reset to 0 when it reaches maxDots
+//         var dots = Array(dotCount + 1).join('.'); // Create a string with dotCount number of dots
+//         processingText.textContent = 'Processing' + dots;
+
+//         // Call the function again after a delay (adjust the delay as needed)
+//         setTimeout(updateProcessingText, 500);
+//     }
+// }
+
 
 
 /////////////////////////   Show BUTTONS   ///////////////////////////
@@ -156,6 +173,7 @@ function showSpinner() {
 
     if (processingText) {
         processingText.style.display = 'block';
+        // updateProcessingText();
     }
 }
 
