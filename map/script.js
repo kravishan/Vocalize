@@ -314,9 +314,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         stopTimer();
-        hideAndShowCustomTimerMessage(5);
+        hideAndShowCustomTimerMessage(270);
 
-        timerDuration = 35;
+        timerDuration = 300;
          
         
         // resetStarRatings();
