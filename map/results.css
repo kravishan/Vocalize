@@ -188,6 +188,7 @@
   margin-left: 15px;
   max-height: 100%;
   overflow-y: auto;
+  text-align: justify;
 }
 
 .edit-button {
@@ -369,6 +370,52 @@ input[type="range"]::-webkit-slider-thumb {
   margin-left: 10px;
   font-size: 15px;
   width: 100%;
+}
+
+.stepper-text {
+  margin-left: 10px;
+  font-size: 15px;
+  width: 100%;
+}
+
+.ios-stepper {
+  margin-top: 25px;
+  align-items: center;
+  display: flex;
+  align-self: center;
+  width: 100px;
+  margin-bottom: 25px;
+  border: solid 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+
+body.theme-dark .ios-stepper{
+  border: solid 1px rgb(255, 255, 255);
+}
+
+/* .ios-stepper a {
+  text-align: center;
+  width: 33px;
+  height: 33px;
+  line-height: 40px;
+  font-size: 15px;
+  color: #0051ff;
+  cursor: pointer;
+  
+} */
+
+.ios-stepper input {
+  text-align: center;
+  line-height: 33px;
+  font-size: 15px !important;
+  background-color: transparent;
+  border: none !important;
+  width: 100px; 
+}
+
+body.theme-dark .ios-stepper input {
+  color: #fff;
 }
 
 

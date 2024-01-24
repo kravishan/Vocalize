@@ -1,7 +1,7 @@
 /* Spinner CSS */
 .custom-loader {
   position: fixed;
-  top: 47%;
+  top: 42%;
   left: 46%;
   transform: translate(-50%, -50%);
   width: 40px;

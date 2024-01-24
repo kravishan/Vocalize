@@ -88,17 +88,35 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 selectedRestaurant: JSON.parse(selectedRestaurantData)
             };
 
-            // Add a new document with a generated ID to the 'results' collection
-            db.collection('Results map view')
-                .add(resultData)
-                .then((docRef) => {
-                    console.log('Document written with ID:', docRef.id);
-                    showSuccessMessage();
-                })
-                .catch((error) => {
-                    console.error('Error adding document:', error);
-                    showFailedMessage();
-                });
+            // Retrieve the stepperValue from localStorage
+            const stepperValue = parseInt(localStorage.getItem('stepperValue'));
+
+            if (stepperValue > 0) {
+                // Save data with stepperValue as the ID
+                db.collection('Results Voice')
+                    .doc(stepperValue.toString())
+                    .set(resultData)
+                    .then(() => {
+                        console.log('Document written with ID:', stepperValue);
+                        showSuccessMessage();
+                    })
+                    .catch((error) => {
+                        console.error('Error adding document:', error);
+                        showFailedMessage();
+                    });
+            } else {
+                // Save data with a generated ID
+                db.collection('Results Voice')
+                    .add(resultData)
+                    .then((docRef) => {
+                        console.log('Document written with ID:', docRef.id);
+                        showSuccessMessage();
+                    })
+                    .catch((error) => {
+                        console.error('Error adding document:', error);
+                        showFailedMessage();
+                    });
+            }
         }
 
         // Function to show success message
@@ -163,13 +181,31 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValue() {
         var slider = document.getElementById("myRange");
         var output = document.getElementById("sliderValue");
-        output.innerHTML = slider.value;
+        // output.innerHTML = slider.value;
+
+        // Update the output only if the slider has been moved
+        if (slider.value !== "0") {
+            output.innerHTML = slider.value;
+        }
 
         // Store the slider value in localStorage
         localStorage.setItem("sliderValue", slider.value);
-
-        console.log(slider.value);
     }
+
+    // Function to retrieve the stepper value from localStorage
+    function updateStepperValue(inputElement) {
+        let value = parseInt(inputElement.value);
+
+        // Ensure the value stays within the min and max limits
+        value = Math.min(99, Math.max(0, value));
+
+        // Update the input value
+        inputElement.value = value;
+
+        // Store the updated value in localStorage
+        localStorage.setItem('stepperValue', value.toString());
+    }
+
 
 
 

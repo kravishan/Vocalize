@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <div class="card-style result-card">
+    <!-- <div class="card-style result-card">
         <div>
             <p class="slider-text">How accurate do you feel the voice review reflects your input and experience?</p>
             <div class="slider-container">                
@@ -60,7 +60,37 @@
                 <div class="slider-value" id="sliderValue">0</div>
             </div>
         </div>  
+    </div> -->
+
+
+    <!-- iOS-style stepper -->
+    <div class="card card-style mt-5 result-top">
+        <div class="content mb-3">
+            <h4 class="centered-heading">Please add your data before submitting</h4>
+            <h5 class="centered-heading">Participant ID <span style="color: red;">!IMPORTANT</span></h5>
+            <p class="stepper-text">If you have a participant ID, please add it. Otherwise, leave it as zero</p>
+            <div class="ios-stepper">
+                <!-- <a href="#" class="stepper-sub opacity-40" onclick="adjustValue(-1); return false;"><i class="fa fa-minus"></i></a> -->
+                <input type="number" min="1" max="99" value="0" onchange="updateStepperValue(this)">
+                <!-- <a href="#" class="stepper-add opacity-40" onclick="adjustValue(1); return false;"><i class="fa fa-plus"></i></a> -->
+            </div>
+        </div>
+        <!-- Add a horizontal line (divider) -->
+        <hr class="ios-divider">
+        <div>
+            <h5 class="centered-heading">Result analysis</h4>
+            <p class="slider-text">How well the generated review aligns with your feedback?</p>
+            <!-- <p class="accurately-text accurately-text-top">0-49: True to input: Aligns with your feedback</p>
+            <p class="accurately-text">50: Unfiltered: Objective, reflects your input without LLM influence</p>
+            <p class="accurately-text">51-100: Adjusted: Includes changes or additions</p> -->
+            <div class="slider-container">                
+                <input type="range" min="0" max="7" value="0" id="myRange" oninput="updateSliderValue()">
+                <div class="slider-value" id="sliderValue"></div>
+            </div>
+            
+        </div>  
     </div>
+    
 
     <div id="dateandtimeOutput" class="resultOutput"></div>
     <button id="saveButton" class="button">Save Result</button>

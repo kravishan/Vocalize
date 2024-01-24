@@ -212,7 +212,11 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValue() {
         var slider = document.getElementById("myRange");
         var output = document.getElementById("sliderValue");
-        output.innerHTML = slider.value;
+        
+        // Update the output only if the slider has been moved
+        if (slider.value !== "0") {
+            output.innerHTML = slider.value;
+        }
 
         // Store the slider value in localStorage
         localStorage.setItem("sliderValue", slider.value);
