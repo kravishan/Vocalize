@@ -165,10 +165,10 @@ app.post('/generate-improved-review', async (req, res) => {
 app.post('/generate-improved-review-with-stars', async (req, res) => {
   try {
       const globalWhisperText = req.body.globalWhisperText;
-      const selectedOverallStarCount = req.body.selectedOverallStarCount;
-      const foodRating = req.body.foodRating;
-      const serviceRating = req.body.serviceRating;
-      const atmosphereRating = req.body.atmosphereRating;
+      // const selectedOverallStarCount = req.body.selectedOverallStarCount;
+      // const foodRating = req.body.foodRating;
+      // const serviceRating = req.body.serviceRating;
+      // const atmosphereRating = req.body.atmosphereRating;
       // const restaurantName = req.body.restaurantName;
 
       // Prompts tailored for hotel and restaurant reviews
@@ -192,14 +192,14 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
 
       // Combine additional prompts with the user's input and star ratings
       const inputMessages = [
-        { role: 'system', content: 'You are a restaurant review improver GPT. Carefully read all the instructions I given to you prompts and user inputs, and then search on the internet and learn how quality restaurant review should be looks like. Then improve the user review considering those info you learned from the internet. Generate a review in a style that a normal person would use when posting a review on Google. So the reader can get more detailed and quality review and make a consideration about visiting that restaurant.' },
+        { role: 'system', content: 'You are a restaurant review improver GPT. Please revise this restaurent review to remove the conversation like rambling and make it more coherent.' },
         ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
         { role: 'user', content: globalWhisperText },
         // { role: 'user', content: `This is the restaurant name: ${restaurantName}` },
-        { role: 'user', content: `Consider my overall star rating as an expression of my satisfaction with the dining experience. Higher ratings indicate a positive experience, while lower ratings suggest areas for improvement. Capture the sentiment and feelings conveyed by the rating: ${selectedOverallStarCount}`},
-        { role: 'user', content: `Please evaluate the food quality I experienced during my dining. Explore aspects like taste, flavor, freshness of ingredients, and presentation. Provide insights into my satisfaction with these elements. I'd like you to capture the context behind my happiness with the food, and My review rating for food quality is: ${foodRating}` },
-        { role: 'user', content: `Please assess the service I received, considering aspects like friendliness, promptness, efficiency, and attention to detail. Capture insights on my satisfaction with the restaurant's service. I encourage you to explore ways to enhance the review, and My review rating for service is: ${serviceRating}` },
-        { role: 'user', content: `Take note of the experience I had with the ambiance and overall environment. Consider factors like decor, comfort, and overall atmosphere to understand the basis of my rating. My rating for the restaurant's atmosphere is: ${atmosphereRating}` },
+        // { role: 'user', content: `Consider my overall star rating as an expression of my satisfaction with the dining experience. Higher ratings indicate a positive experience, while lower ratings suggest areas for improvement. Capture the sentiment and feelings conveyed by the rating: ${selectedOverallStarCount}`},
+        // { role: 'user', content: `Please evaluate the food quality I experienced during my dining. Explore aspects like taste, flavor, freshness of ingredients, and presentation. Provide insights into my satisfaction with these elements. I'd like you to capture the context behind my happiness with the food, and My review rating for food quality is: ${foodRating}` },
+        // { role: 'user', content: `Please assess the service I received, considering aspects like friendliness, promptness, efficiency, and attention to detail. Capture insights on my satisfaction with the restaurant's service. I encourage you to explore ways to enhance the review, and My review rating for service is: ${serviceRating}` },
+        // { role: 'user', content: `Take note of the experience I had with the ambiance and overall environment. Consider factors like decor, comfort, and overall atmosphere to understand the basis of my rating. My rating for the restaurant's atmosphere is: ${atmosphereRating}` },
     ];
 
       // Fetch response from OpenAI API
