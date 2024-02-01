@@ -304,6 +304,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Prevent the default form submission behavior
         event.preventDefault();
 
+        
+
         // Get the generated text from the improvedReviewWithStarsText
         const generatedText = document.getElementById('improvedReviewWithStarsText').innerText;
 
@@ -314,6 +316,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (generatedText.trim() !== '' && refineInstructions.trim() !== '') {
             // Send the data to the backend for processing using an API request
             sendToBackendToRefine(generatedText, refineInstructions);
+
+            // Replace improvedReviewWithStarsText with refinedReview
+            document.getElementById('improvedReviewWithStarsText').style.color = 'transparent';
+
+            // Show the loading animation
+            document.getElementById('loadingAnimation').style.display = 'block';
         } else {
             // Display an error message if either the generated text or instructions are empty
             alert('Please provide your instructions');
@@ -351,6 +359,11 @@ function sendToBackendToRefine(generatedText, refineInstructions) {
 
         // Replace improvedReviewWithStarsText with refinedReview
         document.getElementById('improvedReviewWithStarsText').innerText = data.refinedReview;
+
+        // hide the loading animation
+        document.getElementById('loadingAnimation').style.display = 'none';
+
+        document.getElementById('improvedReviewWithStarsText').style.color = '';
     })
     .catch(error => {
         console.error('Error:', error);
