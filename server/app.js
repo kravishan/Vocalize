@@ -173,22 +173,26 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
 
       // Prompts tailored for hotel and restaurant reviews
       const additionalPrompts = [
-        "Please refine this review to remove unnecessary rambling and ensure coherence.",
-        "Focus on eliminating filler words like 'um' and 'ah' while maintaining the original tone.",
-        "Consider what information would enhance the clarity and coherence of this review.",
-        "Keep the content and tone as close to the original audio review as possible.",
-        "Ensure the tweaks maintain the authenticity of the reviewer's voice.",
-        "The review should remain true to the original sentiment expressed in the audio.",
-        "Enhance the review to provide valuable insights without altering the reviewer's intent.",
-        "Pay attention to the overall flow of the review while making necessary adjustments.",
-        "Consider how online readers would perceive and engage with this refined review.",
-        "Focus on enhancing the review's readability and comprehension for a wider audience."
-      ];
+        "I recently visited a restaurant and want to share my experience.",
+        "Don't add \n inside the text you are genarating. I don't need new lines. All the review content should be in one paragraph. this is a must",
+        "Please enhance my brief feedback by adding more details and making it consumer-friendly.",
+        "Imagine you are the customer. What additional information would you find helpful in a review if you are reading a review?",
+        "Take my review and make it more informative for other consumers. Ensure not to include any fake information about the restaurant.",
+        "Provide insights that would be valuable for someone considering a visit to the restaurant.",
+        "Do not use any advanced English. The review should be readable by anyone with any level of English",
+        "A good restaurant review should also be beneficial to readers who are looking for information or suggestions about where to eat.",
+        "Add details that could influence a consumer's decision to choose or avoid the restaurant.",
+        "Avoid adding any information about the time of the restaurant visit, as you are not aware of that. Include it only if the user has mentioned it in their review.",
+        "Avoid adding any fake information. Only include additional details if the user has mentioned them in their review. For example, if the user expresses liking the ambiance or mentions specific details about the lighting, you can incorporate those insights into the review to provide context for their ratings.",
+        "Never add any star rating values in the genarated review. Because I will display it in a another section. So don't add any star ratings in the review. But take the star ratings into consideration when genarating the review. You can get idea about user satisfaction from the star ratings. So you can use that information to genarate the review. but never use star rating values in the genarated review as a numeric value. this is a must.",
+        "Don't make it too long. Average word count is 105. Less is better but don't exceed 150 words count. This is a must.",
+        "Please avoid including numerical star ratings in the review text. I provided them to offer context about the experience. Instead, consider the ratings separately and focus on capturing the overall mood and satisfaction for each aspect: overall experience, food quality, service, and atmosphere. and dont mention those things separatly. just get an idea from that those rating to improve the user review. This is a must",
+    ];
 
 
       // Combine additional prompts with the user's input and star ratings
       const inputMessages = [
-        { role: 'system', content: 'You are an AI assistant tasked with enhancing restaurant reviews. Please refine this review to remove unnecessary details and improve coherence.' },
+        { role: 'system', content: 'You are a restaurant review improver GPT. Please revise this restaurent review to remove the conversation like rambling and make it more coherent.' },
         ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
         { role: 'user', content: globalWhisperText },
         // { role: 'user', content: `This is the restaurant name: ${restaurantName}` },
