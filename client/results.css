@@ -578,7 +578,7 @@ body.theme-dark .ios-stepper input {
   outline: none;
 }
 
-#improveReviewInput {
+.refine-form {
   width: 90%;
   padding: 10px;
   margin: 0 auto;
@@ -590,7 +590,7 @@ body.theme-dark .ios-stepper input {
   display: block;
 }
 
-#improveReviewInput:focus {
+.refine-form:focus {
   border-color: #007bff; /* Change border color on focus */
   outline: none; /* Remove default focus outline */
 }
