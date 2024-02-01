@@ -313,16 +313,16 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if both the generated text and instructions are not empty
         if (generatedText.trim() !== '' && refineInstructions.trim() !== '') {
             // Send the data to the backend for processing using an API request
-            sendToBackend(generatedText, refineInstructions);
+            sendToBackendToRefine(generatedText, refineInstructions);
         } else {
             // Display an error message if either the generated text or instructions are empty
-            alert('Please provide your instructions.');
+            alert('Please provide your instructions');
         }
     });
 });
 
 // Function to send data to the backend for processing
-function sendToBackend(generatedText, refineInstructions) {
+function sendToBackendToRefine(generatedText, refineInstructions) {
     // Here you would make an API request to your backend
     // You can use fetch or any other AJAX library to send the data
     // Example using fetch:
@@ -348,6 +348,9 @@ function sendToBackend(generatedText, refineInstructions) {
     .then(data => {
         // Display the refined review in the console
         console.log('Refined Review:', data.refinedReview);
+
+        // Replace improvedReviewWithStarsText with refinedReview
+        document.getElementById('improvedReviewWithStarsText').innerText = data.refinedReview;
     })
     .catch(error => {
         console.error('Error:', error);
