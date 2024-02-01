@@ -298,6 +298,7 @@ app.post('/refine-review', async (req, res) => {
       },
       body: JSON.stringify({
         model: 'gpt-4',
+        stream: true,
         messages: inputMessages,
     }),
     });
@@ -346,7 +347,6 @@ app.post('/analyze-review', async (req, res) => {
         },
         body: JSON.stringify({
           model: 'gpt-3.5-turbo',
-          stream: true,
           messages: [
             { role: 'system', content: 'You are an expert review analyst.' },
             ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
