@@ -297,9 +297,9 @@ app.post('/refine-review', async (req, res) => {
         'Authorization': `Bearer ${openaiApiKey}`,
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4',
         messages: inputMessages,
-      }),
+    }),
     });
 
     if (!response.ok) {
