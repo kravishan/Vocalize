@@ -298,7 +298,6 @@ app.post('/refine-review', async (req, res) => {
       },
       body: JSON.stringify({
         model: 'gpt-4',
-        stream: true,
         messages: inputMessages,
     }),
     });
