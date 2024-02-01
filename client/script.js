@@ -733,7 +733,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
 
         // Send data to the backend
         // const response = await fetch('http://localhost:3000/generate-improved-review-with-stars', {
-        const response = await fetch('https://vocalizer.dev/server/generate-improved-review-with-starss', {
+        const response = await fetch('https://vocalizer.dev/server/generate-improved-review-with-stars', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
