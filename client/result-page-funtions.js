@@ -297,8 +297,64 @@ fetch('https://vocalizer.dev/server/firebase-config')
     window.addEventListener('load', setStepperValueFromCookies);
 
 
+// Wait for the DOM content to be fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+    // Add an event listener to the form submit button
+    document.getElementById('refineReviewForm').addEventListener('submit', function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
 
+        // Get the generated text from the improvedReviewWithStarsText
+        const generatedText = document.getElementById('improvedReviewWithStarsText').innerText;
 
+        // Get the instructions from the reviewRefineInput
+        const refineInstructions = document.getElementById('reviewRefineInput').value;
+
+        // Check if both the generated text and instructions are not empty
+        if (generatedText.trim() !== '' && refineInstructions.trim() !== '') {
+            // Send the data to the backend for processing using an API request
+            sendToBackend(generatedText, refineInstructions);
+        } else {
+            // Display an error message if either the generated text or instructions are empty
+            alert('Please provide your instructions.');
+        }
+    });
+});
+
+// Function to send data to the backend for processing
+function sendToBackend(generatedText, refineInstructions) {
+    // Here you would make an API request to your backend
+    // You can use fetch or any other AJAX library to send the data
+    // Example using fetch:
+    fetch('/refine-review', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            generatedText: generatedText,
+            refineInstructions: refineInstructions,
+        }),
+    })
+    .then(response => {
+        if (response.ok) {
+            // Data successfully sent to the backend
+            return response.json(); // Parse the response body as JSON
+        } else {
+            // Handle errors if any
+            throw new Error('Failed to send data to the backend.');
+        }
+    })
+    .then(data => {
+        // Display the refined review in the console
+        console.log('Refined Review:', data.refinedReview);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Display an error message to the user
+        alert('An error occurred while sending data to the backend.');
+    });
+}
     
     
 

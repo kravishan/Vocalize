@@ -272,6 +272,50 @@ app.post('/login', (req, res) => {
 });
 
 
+// Endpoint to send generated review to ChatGPT and make improvements
+app.post('/refine-review', async (req, res) => {
+  try {
+    const { generatedText, refineInstructions, prompts } = req.body;
+
+    // Combine refineInstructions with prompts
+    const inputMessages = [
+      { role: 'system', content: 'You are a review refinement assistant.' },
+      ...prompts.map(prompt => ({ role: 'assistant', content: prompt })),
+      { role: 'user', content: generatedText },
+      { role: 'user', content: refineInstructions },
+    ];
+
+    // Fetch response from OpenAI API for refining the review
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${openaiApiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: inputMessages,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`OpenAI API request failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const refinedReview = data.choices[0].message.content;
+
+    // Send the refined review back to the frontend
+    res.send({ refinedReview });
+
+  } catch (error) {
+    console.error('Error during review refinement:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
 // New endpoint for analyzing the review and generating grades for each field
 app.post('/analyze-review', async (req, res) => {
   try {
