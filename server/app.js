@@ -208,7 +208,6 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
           body: JSON.stringify({
               model: 'gpt-4',
               messages: inputMessages,
-              temperature: 0.6,
           }),
       });
 
@@ -275,14 +274,19 @@ app.post('/login', (req, res) => {
 // Endpoint to send generated review to ChatGPT and make improvements
 app.post('/refine-review', async (req, res) => {
   try {
-    const { generatedText, refineInstructions, prompts } = req.body;
+    const { generatedText, refineInstructions } = req.body;
+
+    // Prompts to guide the refinement process based on refineInstructions
+    const prompts = [
+      "Please refine the generated text based on the following instructions:",
+      refineInstructions
+    ];
 
     // Combine refineInstructions with prompts
     const inputMessages = [
       { role: 'system', content: 'You are a review refinement assistant.' },
       ...prompts.map(prompt => ({ role: 'assistant', content: prompt })),
       { role: 'user', content: generatedText },
-      { role: 'user', content: refineInstructions },
     ];
 
     // Fetch response from OpenAI API for refining the review
