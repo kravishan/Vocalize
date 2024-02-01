@@ -60,6 +60,23 @@
         </div>
     </div>
 
+    <div id="voiceReviewOutputGPTInput" class="resultOutput"></div>
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h4 class="centered-heading">Refine with AI</h4>
+            <p id="voiceReviewText" class="boxp">Do you want to further improve the review? Please provide your feedback:</p>
+        </div>
+
+        <!-- Form for users to provide feedback on the refined review -->
+        <form id="improveReviewForm">
+            <div class="form-group">          
+                <textarea class="form-control" id="improveReviewInput" rows="4" placeholder="Enter your feedback here..."></textarea>
+            </div>
+            <button type="submit" class="submit-button">Submit Feedback</button>
+        </form>
+    </div>
+
+
     <!-- <div class="card-style result-card">
         <div>
             <p class="slider-text">How accurate do you feel the generated review reflects your input and experience?</p>
