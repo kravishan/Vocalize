@@ -174,6 +174,12 @@
   font-family: 'San Francisco', Arial, sans-serif;
 }
 
+.custom-card {
+    /* Override the border-radius property for the custom card */
+    border-radius: 50px; 
+}
+
+
 .card-style .content {
   display: flex;
   flex-direction: column;
@@ -564,7 +570,7 @@ body.theme-dark .ios-stepper input {
 
 .submit-button {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background-color: #007bff;
+  background-color: #007aff;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -597,7 +603,7 @@ body.theme-dark .ios-stepper input {
 }
 
 .refine-form:focus {
-  border-color: #007bff; /* Change border color on focus */
+  border-color: #007aff; /* Change border color on focus */
   outline: none; /* Remove default focus outline */
 }
 
@@ -617,7 +623,7 @@ body.theme-dark .ios-stepper input {
 
 .loader {
   border: 8px solid #f3f3f3; /* Light grey */
-  border-top: 8px solid #3498db; /* Blue */
+  border-top: 8px solid #007aff; /* Blue */
   border-radius: 50%;
   width: 50px;
   height: 50px;
