@@ -235,12 +235,12 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
 // Endpoint to get Firebase configuration
 app.get('/firebase-config', (req, res) => {
   res.json({
-    apiKey: "AIzaSyB9GNhQGsnfy85gM9u_dJuOKWAZqPUdk44",
-    authDomain: "vocalize-dc445.firebaseapp.com",
-    projectId: "vocalize-dc445",  
-    storageBucket: "vocalize-dc445.appspot.com",
-    messagingSenderId: "50867328520",
-    appId: "1:50867328520:web:81681fc6f1baaae8b823bd"
+    apiKey: "AIzaSyC2TErdjOAOIGXFtptWSyjxqmE6t5qMAHs",
+    authDomain: "vocalizer-c4f6c.firebaseapp.com",
+    projectId: "vocalizer-c4f6c",
+    storageBucket: "vocalizer-c4f6c.appspot.com",
+    messagingSenderId: "484851946203",
+    appId: "1:484851946203:web:38261c18dceee445b2b2fe"
   });
 });
 
