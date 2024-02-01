@@ -326,7 +326,7 @@ function sendToBackend(generatedText, refineInstructions) {
     // Here you would make an API request to your backend
     // You can use fetch or any other AJAX library to send the data
     // Example using fetch:
-    fetch('/refine-review', {
+    fetch('https://vocalizer.dev/server/refine-review', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
