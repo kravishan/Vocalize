@@ -45,6 +45,20 @@ h1 {
   font-size: 15px;
 }
 
+#popup .warning-info {
+  display: none;
+  font-family: 'Poppins', sans-serif; 
+  position: absolute;
+  top: 70px;
+  right: 0px;
+  left: 0;
+  transform: translate(0%, -50%);
+  margin-top: 380px; 
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 12px;
+  z-index: 1001; 
+}
+
 #popup .stop-button-info {
   font-family: 'Poppins', sans-serif; 
   color: rgba(0, 0, 0, 0.7);
@@ -62,6 +76,22 @@ h1 {
 }
 
 body.theme-dark #popup .stop-button-info {
+  color: rgba(255, 255, 255, 0.651);
+}
+
+#popup .last-warning {
+  font-family: 'Poppins', sans-serif; 
+  color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  left: 0;
+  right: 0;
+  transform: translate(0%, -50%);
+  margin-top: 380px; 
+  z-index: 999;
+  font-size: 12px;
+}
+
+body.theme-dark #popup .last-warning {
   color: rgba(255, 255, 255, 0.651);
 }
 
@@ -567,6 +597,10 @@ input:checked + .slider:before {
 label span {
   margin-left: 10px;
 } */
+
+
+
+
 
 
 

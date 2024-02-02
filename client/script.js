@@ -43,6 +43,7 @@ function handleOverallRating(event) {
         // Log or use the selected star count as needed
         console.log('Overall star count:', selectedOverallStarCount);
         hideRating();
+        showFinalWarning();
         showRatingSets();
     }
 }
@@ -195,6 +196,14 @@ function showMicrophoneButton() {
       microphoneButton.style.display = 'block';
     }
   }
+
+ function showFinalWarning() {
+    var stopButtonInfo = document.querySelector('.warning-info');
+    if (stopButtonInfo) {
+        stopButtonInfo.style.display = 'block';
+    }
+    }
+
 
 
 /////////////////////////   HIDE BUTTONS   ///////////////////////////
