@@ -355,6 +355,13 @@ function sendToBackendToRefine(generatedText, refineInstructions) {
         }
     })
     .then(data => {
+        // Save the response data along with generatedText and refineInstructions
+        saveDataToFile({
+            generatedText: generatedText,
+            refineInstructions: refineInstructions,
+            apiResponse: data
+        });
+
         // Display the refined review in the console
         console.log('Refined Review:', data.refinedReview);
 
@@ -371,6 +378,28 @@ function sendToBackendToRefine(generatedText, refineInstructions) {
         // Display an error message to the user
         alert('An error occurred while sending data to the backend.');
     });
+}
+
+// Function to save data as a JSON file
+function saveDataToFile(data) {
+    // Convert the JSON object to a string
+    const jsonData = JSON.stringify(data, null, 2);
+
+    // Save the JSON data as a file
+    downloadJSON(jsonData, 'reviewData.json');
+}
+
+// Function to download JSON data as a file
+function downloadJSON(data, filename) {
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
     
     
