@@ -49,6 +49,11 @@ fetch('https://vocalizer.dev/server/firebase-config')
         const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
 
+
+        // Retrieve the data from local storage and parse it back into a JavaScript object
+        const userRefineDataUpdatesData = localStorage.getItem('refinedata');
+
+
         // Get or set the generated date and time
         let generatedDateTime = localStorage.getItem('generatedDateTime');
 
@@ -124,7 +129,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 sliderValue: document.getElementById("myRange").value,
                 userLocation: userLocation,
                 selectedRestaurant: JSON.parse(selectedRestaurantData),
-                selectedValue: localStorage.getItem('selectedExpectation')
+                selectedValue: localStorage.getItem('selectedExpectation'),
+                userRefineDataUpdates: JSON.parse(userRefineDataUpdatesData)
               
             };
 
@@ -185,7 +191,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 successMsg.style.display = 'none';
             }, 3000);
 
-            goToInitialStageWithDelay();
+            // goToInitialStageWithDelay();
 
         }
 
@@ -356,11 +362,12 @@ function sendToBackendToRefine(generatedText, refineInstructions) {
     })
     .then(data => {
         // Save the response data along with generatedText and refineInstructions
-        saveDataToFile({
+        saveDataToLocalStorage({
             generatedText: generatedText,
             refineInstructions: refineInstructions,
             apiResponse: data
-        });
+        });        
+        
 
         // Display the refined review in the console
         console.log('Refined Review:', data.refinedReview);
@@ -380,27 +387,22 @@ function sendToBackendToRefine(generatedText, refineInstructions) {
     });
 }
 
-// Function to save data as a JSON file
-function saveDataToFile(data) {
-    // Convert the JSON object to a string
-    const jsonData = JSON.stringify(data, null, 2);
+// Function to save data as a JSON object to local storage
+function saveDataToLocalStorage(data) {
+    // Combine the data into a single object
+    const jsonData = {
+        generatedText: data.generatedText,
+        refineInstructions: data.refineInstructions,
+        apiResponse: data.apiResponse
+    };
 
-    // Save the JSON data as a file
-    downloadJSON(jsonData, 'reviewData.json');
+    // Save the JSON object to local storage
+    localStorage.setItem('refinedata', JSON.stringify(jsonData));
 }
 
-// Function to download JSON data as a file
-function downloadJSON(data, filename) {
-    const blob = new Blob([data], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}
+
+
+
     
     
 
