@@ -112,9 +112,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
         // Function to save data to Firestore
         function saveToFirestore() {
             // Get the refined data from local storage
-            const refinedData = localStorage.getItem('refinedata');
-            const refinedDataArray = refinedData ? JSON.parse(refinedData) : [];
-            console.log('refinedDataArray:', refinedDataArray);
+            // Retrieve the data from local storage and parse it back into a JavaScript object
+            const userRefineDataUpdatesData = localStorage.getItem('refinedata');
 
             console.log('Inside saveToFirestore function');
             // Get the result data
@@ -131,7 +130,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 userLocation: userLocation,
                 selectedRestaurant: JSON.parse(selectedRestaurantData),
                 selectedValue: localStorage.getItem('selectedExpectation'),
-                userRefinedData: refinedDataArray
+                userRefineData: JSON.parse(userRefineDataUpdatesData)
                 
               
             };
