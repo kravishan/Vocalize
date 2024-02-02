@@ -179,10 +179,10 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
         "Keep the content and tone as close to the original audio review as possible.",
         "Ensure the tweaks maintain the authenticity of the reviewer's voice.",
         "The review should remain true to the original sentiment expressed in the audio.",
-        "Enhance the review to provide valuable insights without altering the reviewer's intent.",
-        "Pay attention to the overall flow of the review while making necessary adjustments.",
-        "Consider how online readers would perceive and engage with this refined review.",
-        "Focus on enhancing the review's readability and comprehension for a wider audience."
+        // "Enhance the review to provide valuable insights without altering the reviewer's intent.",
+        // "Pay attention to the overall flow of the review while making necessary adjustments.",
+        // "Consider how online readers would perceive and engage with this refined review.",
+        // "Focus on enhancing the review's readability and comprehension for a wider audience."
       ];
 
 

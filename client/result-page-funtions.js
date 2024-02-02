@@ -304,8 +304,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Prevent the default form submission behavior
         event.preventDefault();
 
-        
-
         // Get the generated text from the improvedReviewWithStarsText
         const generatedText = document.getElementById('improvedReviewWithStarsText').innerText;
 
@@ -322,6 +320,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Show the loading animation
             document.getElementById('loadingAnimation').style.display = 'block';
+
+            // Clear the refine instructions input
+            document.getElementById('reviewRefineInput').value = '';
         } else {
             // Display an error message if either the generated text or instructions are empty
             alert('Please provide your instructions');
