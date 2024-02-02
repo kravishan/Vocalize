@@ -322,6 +322,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // Send the data to the backend for processing using an API request
             sendToBackendToRefine(generatedText, refineInstructions);
 
+            document.getElementById('edit-button-review').style.display = 'none';
+
             // Replace improvedReviewWithStarsText with refinedReview
             document.getElementById('improvedReviewWithStarsText').style.color = 'transparent';
 
@@ -378,6 +380,8 @@ function sendToBackendToRefine(generatedText, refineInstructions) {
 
         // hide the loading animation
         document.getElementById('loadingAnimation').style.display = 'none';
+
+        document.getElementById('edit-button-review').style.display = 'block';
 
         document.getElementById('improvedReviewWithStarsText').style.color = '';
     })
