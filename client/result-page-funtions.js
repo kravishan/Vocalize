@@ -130,7 +130,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 userLocation: userLocation,
                 selectedRestaurant: JSON.parse(selectedRestaurantData),
                 selectedValue: localStorage.getItem('selectedExpectation'),
-                userRefineDataUpdates: JSON.parse(userRefineDataUpdatesData)
+                userRefineData: JSON.parse(userRefineDataUpdatesData)
               
             };
 
