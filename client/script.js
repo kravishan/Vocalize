@@ -311,6 +311,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var microphoneButton = document.querySelector('.symbol');
     let waveCanvas = document.querySelector('.wave-canvas');
 
+    // Clear the localStorage when the page is loaded
+    localStorage.removeItem('refinedata');
+
     //var recognition;
     var mediaRecorder;
     var audioChunks = [];

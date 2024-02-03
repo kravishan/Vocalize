@@ -324,6 +324,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (generatedText.trim() !== '' && refineInstructions.trim() !== '') {
             // Send the data to the backend for processing using an API request
             sendToBackendToRefine(generatedText, refineInstructions);
+            document.getElementById('reset-button-review').style.display = 'block';
+
 
             document.getElementById('edit-button-review').style.display = 'none';
 
@@ -425,6 +427,8 @@ function saveDataToLocalStorage(data) {
     // Save the updated array back to local storage
     localStorage.setItem('refinedata', JSON.stringify(jsonDataArray));
 }
+
+
 
 
 
