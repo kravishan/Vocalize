@@ -1,5 +1,6 @@
 // Get the element with the class "font-22"
 const font22Element = document.querySelector('.font-22');
+let userActions = []; // Declare userActions outside the event listeners
 
 // Add an event listener for the scroll event
 window.addEventListener('scroll', function() {
@@ -50,6 +51,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
 
 
+
         // Get or set the generated date and time
         let generatedDateTime = localStorage.getItem('generatedDateTime');
 
@@ -87,6 +89,9 @@ fetch('https://vocalizer.dev/server/firebase-config')
                     editButton.innerHTML = '<i class="fa fa-edit"></i>';
                     editCounter++;
                     console.log(editCounter);
+
+                    // Add 'edited' to userActions array
+                    userActions.push('edited');
                 } else {
                     // If not in edit mode, convert to a textarea
                     const textContent = paragraph.textContent.trim();
@@ -130,7 +135,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 userLocation: userLocation,
                 selectedRestaurant: JSON.parse(selectedRestaurantData),
                 selectedValue: localStorage.getItem('selectedExpectation'),
-                userRefineData: JSON.parse(userRefineDataUpdatesData)
+                userRefineData: JSON.parse(userRefineDataUpdatesData),
+                UserAction: userActions
                 
               
             };
@@ -306,6 +312,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
 document.addEventListener('DOMContentLoaded', function () {
     let ResetButtonText = ''; // Declare ResetButtonText outside the event listeners
+    
 
     // Add an event listener to the form submit button
     document.getElementById('refineReviewForm').addEventListener('submit', function (event) {
@@ -324,6 +331,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (generatedText.trim() !== '' && refineInstructions.trim() !== '') {
             // Send the data to the backend for processing using an API request
             sendToBackendToRefine(generatedText, refineInstructions);
+
+            // Add 'reset' to userActions array
+            userActions.push('refine');
+
             document.getElementById('reset-button-review').style.display = 'block';
 
 
@@ -347,6 +358,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('reset-button-review').addEventListener('click', function () {
         // Set the generated text as the content of improvedReviewWithStarsText
         document.getElementById('improvedReviewWithStarsText').innerText = ResetButtonText;
+
+        // Add 'reset' to userActions array
+        userActions.push('reset');
     });
 });
 
