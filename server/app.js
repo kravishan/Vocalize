@@ -175,10 +175,10 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
       const additionalPrompts = [
         "Please refine this review to remove unnecessary rambling and ensure coherence.",
         "Focus on eliminating filler words like 'um' and 'ah' while maintaining the original tone.",
-        "Consider what information would enhance the clarity and coherence of this review.",
+        // "Consider what information would enhance the clarity and coherence of this review.",
         "Keep the content and tone as close to the original audio review as possible.",
         "Ensure the tweaks maintain the authenticity of the reviewer's voice.",
-        "The review should remain true to the original sentiment expressed in the audio.",
+        "The review should remain true to the original sentiment expressed in the input text.",
         // "Enhance the review to provide valuable insights without altering the reviewer's intent.",
         // "Pay attention to the overall flow of the review while making necessary adjustments.",
         // "Consider how online readers would perceive and engage with this refined review.",
@@ -188,7 +188,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
 
       // Combine additional prompts with the user's input and star ratings
       const inputMessages = [
-        { role: 'system', content: 'You are a restaurant review improver GPT. Please revise this restaurent review to remove the conversation like rambling and make it more coherent.' },
+        { role: 'system', content: 'You are a restaurant review improver GPT' },
         ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
         { role: 'user', content: globalWhisperText },
         // { role: 'user', content: `This is the restaurant name: ${restaurantName}` },
