@@ -179,7 +179,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
         "Keep the content and tone as close to the original audio review as possible.",
         "Ensure the tweaks maintain the authenticity of the reviewer's voice.",
         "The review should remain true to the original sentiment expressed in the input text.",
-        "Analyse the english level of the review and make your english level similar to the review.",
+        "Analyse the english level of the review and make your english level similar to the review. If the review is simple, make your english simple. If the review is complex, make your english complex. If the review is formal, make your english formal. If the review is informal, make your english informal. If the review is casual, make your english casual. If the review is professional, make your english professional. ",
         // "Enhance the review to provide valuable insights without altering the reviewer's intent.",
         // "Pay attention to the overall flow of the review while making necessary adjustments.",
         // "Consider how online readers would perceive and engage with this refined review.",
