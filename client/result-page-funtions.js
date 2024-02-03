@@ -304,8 +304,9 @@ fetch('https://vocalizer.dev/server/firebase-config')
     window.addEventListener('load', setStepperValueFromCookies);
 
 
-// Wait for the DOM content to be fully loaded
 document.addEventListener('DOMContentLoaded', function () {
+    let ResetButtonText = ''; // Declare ResetButtonText outside the event listeners
+
     // Add an event listener to the form submit button
     document.getElementById('refineReviewForm').addEventListener('submit', function (event) {
         // Prevent the default form submission behavior
@@ -313,6 +314,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Get the generated text from the improvedReviewWithStarsText
         const generatedText = document.getElementById('improvedReviewWithStarsText').innerText;
+
+        ResetButtonText = generatedText; // Update ResetButtonText with generatedText
 
         // Get the instructions from the reviewRefineInput
         const refineInstructions = document.getElementById('reviewRefineInput').value;
@@ -336,6 +339,12 @@ document.addEventListener('DOMContentLoaded', function () {
             // Display an error message if either the generated text or instructions are empty
             alert('Please provide your instructions');
         }
+    });
+
+    // Add an event listener to the reset button
+    document.getElementById('reset-button-review').addEventListener('click', function () {
+        // Set the generated text as the content of improvedReviewWithStarsText
+        document.getElementById('improvedReviewWithStarsText').innerText = ResetButtonText;
     });
 });
 
