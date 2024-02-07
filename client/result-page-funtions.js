@@ -123,20 +123,20 @@ fetch('https://vocalizer.dev/server/firebase-config')
             console.log('Inside saveToFirestore function');
             // Get the result data
             const resultData = {
-                whisperText: whisperText,
-                overallStarCount: overallStarCount,
-                foodRating: foodRating,
-                serviceRating: serviceRating,
-                atmosphereRating: atmosphereRating,
+                Transcribe_Text: whisperText,
+                Overall_Rating: overallStarCount,
+                Food_Rating: foodRating,
+                Service_Rating: serviceRating,
+                Atmosphere_Rating: atmosphereRating,
                 // improvedReview: improvedReview,
-                improvedReviewWithStars: improvedReviewVersions,
-                generatedDateTime: generatedDateTime,
-                sliderValue: document.getElementById("myRange").value,
-                userLocation: userLocation,
-                selectedRestaurant: JSON.parse(selectedRestaurantData),
-                selectedValue: localStorage.getItem('selectedExpectation'),
-                userRefineData: JSON.parse(userRefineDataUpdatesData),
-                UserAction: userActions
+                Improved_Review: improvedReviewVersions,
+                Date_Time: generatedDateTime,
+                Feedback_Align: document.getElementById("myRange").value,
+                User_Location: userLocation,
+                Selected_Restaurant: JSON.parse(selectedRestaurantData),
+                Expectation: localStorage.getItem('selectedExpectation'),
+                AI_Agent_Data: JSON.parse(userRefineDataUpdatesData),
+                User_Actions: userActions
                 
               
             };

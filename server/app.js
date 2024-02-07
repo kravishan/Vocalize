@@ -279,7 +279,7 @@ app.post('/refine-review', async (req, res) => {
 
     // Prompts to guide the refinement process based on refineInstructions
     const prompts = [
-      "Please refine the generatedText based on the following instructions:",
+      "Please refine the generated text based on the following instructions:",
       refineInstructions
     ];
 
