@@ -412,6 +412,8 @@ function sendToBackendToRefine(generatedText, refineInstructions) {
 
         document.getElementById('edit-button-review').style.display = 'block';
 
+        document.getElementById('resetButtonText').style.display = 'block';
+
         document.getElementById('improvedReviewWithStarsText').style.color = '';
     })
     .catch(error => {

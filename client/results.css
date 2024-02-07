@@ -200,6 +200,15 @@
   text-align: justify;
 }
 
+.resetButtonText {
+  display: none;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  text-align: justify;
+  font-size: 10px;
+}
+
 .edit-button {
   font-size: 24px;
   color: #000000;
