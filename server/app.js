@@ -308,10 +308,10 @@ app.post('/refine-review', async (req, res) => {
     }
 
     const data = await response.json();
-    const Cleanup_Review = data.choices[0].message.content;
+    const refinedReview = data.choices[0].message.content;
 
     // Send the refined review back to the frontend
-    res.send({ Cleanup_Review });
+    res.send({ refinedReview });
 
   } catch (error) {
     console.error('Error during review refinement:', error);
