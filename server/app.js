@@ -279,7 +279,7 @@ app.post('/refine-review', async (req, res) => {
 
     // Prompts to guide the refinement process based on refineInstructions
     const prompts = [
-      "Please refine the generated text based on the following instructions:",
+      "Please refine the generatedText based on the following instructions:",
       refineInstructions
     ];
 
@@ -308,10 +308,10 @@ app.post('/refine-review', async (req, res) => {
     }
 
     const data = await response.json();
-    const refinedReview = data.choices[0].message.content;
+    const Cleanup_Review = data.choices[0].message.content;
 
     // Send the refined review back to the frontend
-    res.send({ refinedReview });
+    res.send({ Cleanup_Review });
 
   } catch (error) {
     console.error('Error during review refinement:', error);

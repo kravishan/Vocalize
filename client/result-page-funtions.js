@@ -434,9 +434,9 @@ function saveDataToLocalStorage(data) {
 
     // Combine the new data with existing data
     const newData = {
-        generatedText: data.generatedText,
-        refineInstructions: data.refineInstructions,
-        apiResponse: data.apiResponse
+        Original_Review: data.generatedText,
+        User_Instructions: data.refineInstructions,
+        AI_Agent: data.apiResponse
     };
 
     // Push the new data into the array
