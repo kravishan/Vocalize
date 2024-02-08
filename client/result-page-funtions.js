@@ -52,13 +52,12 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
 
 
-        // Get or set the generated date and time
-        let generatedDateTime = localStorage.getItem('generatedDateTime');
+        // Get the current date and time
+        let currentDate = new Date();
+        let currentDateTime = currentDate.toLocaleString();
 
-        if (!generatedDateTime) {
-            generatedDateTime = new Date().toLocaleString();
-            localStorage.setItem('generatedDateTime', generatedDateTime);
-        }
+        console.log('Saved Date and Time:', currentDateTime);
+
 
         
         // Function to generate star icons based on the rating
@@ -130,7 +129,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 Atmosphere_Rating: atmosphereRating,
                 // improvedReview: improvedReview,
                 Improved_Review: improvedReviewVersions,
-                Date_Time: generatedDateTime,
+                Date_Time: currentDateTime,
                 Feedback_Align: document.getElementById("myRange").value,
                 User_Location: userLocation,
                 Selected_Restaurant: JSON.parse(selectedRestaurantData),
