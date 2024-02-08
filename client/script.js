@@ -197,12 +197,12 @@ function showMicrophoneButton() {
     }
   }
 
- function showFinalWarning() {
+function showFinalWarning() {
     var stopButtonInfo = document.querySelector('.warning-info');
     if (stopButtonInfo) {
         stopButtonInfo.style.display = 'block';
     }
-    }
+}
 
 
 

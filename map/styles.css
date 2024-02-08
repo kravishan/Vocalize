@@ -46,6 +46,21 @@ h1 {
   font-size: 15px;
 }
 
+#popup .warning-info {
+  display: none;
+  font-family: 'Poppins', sans-serif; 
+  position: absolute;
+  top: 70px;
+  right: 0px;
+  left: 0;
+  transform: translate(0%, -50%);
+  margin-top: 380px; 
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 15px;
+  z-index: 1001; 
+}
+
+
 #popup .stop-button-info {
   font-family: 'Poppins', sans-serif; 
   color: rgba(0, 0, 0, 0.7);
