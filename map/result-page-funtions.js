@@ -56,13 +56,11 @@ fetch('https://vocalizer.dev/server/firebase-config')
         console.log("Service Rating:", serviceRating);
         console.log("Atmosphere Rating:", atmosphereRating);
 
-        // Get or set the generated date and time
-        let generatedDateTime = localStorage.getItem('generatedDateTime');
+        // Get the current date and time
+        let currentDate = new Date();
+        let currentDateTime = currentDate.toLocaleString();
 
-        if (!generatedDateTime) {
-            generatedDateTime = new Date().toLocaleString();
-            localStorage.setItem('generatedDateTime', generatedDateTime);
-        }
+        console.log('Saved Date and Time:', currentDateTime);
 
         // Function to generate star icons based on the rating
         // function getStarRating(rating) {
@@ -77,15 +75,15 @@ fetch('https://vocalizer.dev/server/firebase-config')
             console.log('Inside saveToFirestore function');
             // Get the result data
             const resultData = {
-                whisperText: whisperText,
-                overallStarCount: overallStarCount,
-                foodRating: foodRating,
-                serviceRating: serviceRating,
-                atmosphereRating: atmosphereRating,
-                generatedDateTime: generatedDateTime,
-                sliderValue: document.getElementById("myRange").value,
-                userLocation: JSON.parse(storedCoordinates),
-                selectedRestaurant: JSON.parse(selectedRestaurantData)
+                Transcribe_Text: whisperText,
+                Overall_Rating: overallStarCount,
+                Food_Rating: foodRating,
+                Service_Rating: serviceRating,
+                Atmosphere_Rating: atmosphereRating,
+                Date_Time: currentDateTime,
+                Feedback_Align: document.getElementById("myRange").value,
+                User_Location: JSON.parse(storedCoordinates),
+                Selected_Restaurant: JSON.parse(selectedRestaurantData)
             };
 
             // Retrieve the stepperValue from localStorage
