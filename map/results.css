@@ -389,6 +389,13 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 5px;
 }
 
+.ios-divider {
+  border: none;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 15px 0; 
+}
+
 
 body.theme-dark .ios-stepper{
   border: solid 1px rgb(255, 255, 255);
