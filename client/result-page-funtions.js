@@ -134,7 +134,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 Feedback_Align: document.getElementById("myRange").value,
                 User_Location: userLocation,
                 Selected_Restaurant: JSON.parse(selectedRestaurantData),
-                Expectation: localStorage.getItem('selectedExpectation'),
+                Expectation: document.getElementById("myRangeExp").value,
                 AI_Agent_Data: JSON.parse(userRefineDataUpdatesData),
                 User_Actions: userActions
                 
@@ -252,6 +252,21 @@ fetch('https://vocalizer.dev/server/firebase-config')
         localStorage.setItem("sliderValue", slider.value);
     }
 
+    // Function to update the value label when the slider is moved
+    function updateSliderValueExp() {
+        var slider = document.getElementById("myRangeExp");
+        var output = document.getElementById("sliderValueExp");
+        
+        // Update the output only if the slider has been moved
+        if (slider.value !== "0") {
+            output.innerHTML = slider.value;
+        }
+
+        // Store the slider value in localStorage
+        localStorage.setItem("sliderValueExp", slider.value);
+    }
+
+
     // Function to retrieve the stepper value from localStorage
     function updateStepperValue(inputElement) {
         let value = parseInt(inputElement.value);
@@ -266,19 +281,19 @@ fetch('https://vocalizer.dev/server/firebase-config')
         localStorage.setItem('stepperValue', value.toString());
     }
 
-    // Get all radio buttons
-    const radioButtons = document.querySelectorAll('input[name="expectations"]');
+    // // Get all radio buttons
+    // const radioButtons = document.querySelectorAll('input[name="expectations"]');
 
-    // Add click event listener to each radio button
-    radioButtons.forEach(function (radioButton) {
-        radioButton.addEventListener('click', function () {
-        // Get the selected value
-        const selectedValue = this.value;
+    // // Add click event listener to each radio button
+    // radioButtons.forEach(function (radioButton) {
+    //     radioButton.addEventListener('click', function () {
+    //     // Get the selected value
+    //     const selectedValue = this.value;
 
-        // Save the selected value to Local Storage
-        localStorage.setItem('selectedExpectation', selectedValue);
-        });
-    });
+    //     // Save the selected value to Local Storage
+    //     localStorage.setItem('selectedExpectation', selectedValue);
+    //     });
+    // });
 
     // Function to read a specific cookie value by name
     function getCookie(name) {
