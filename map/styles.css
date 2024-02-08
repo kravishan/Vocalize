@@ -458,8 +458,11 @@ a.link:hover {
 }
 
 .font-22 {
+  font-family: 'Poppins', sans-serif; ;
   font-size: 22px;
   color: #0f1117;
+  font-weight: bold;
+  margin-inline-start: 5px;
 }
 
 .color-yellow-dark {

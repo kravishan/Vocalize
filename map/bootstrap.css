@@ -1,8 +1,7 @@
-/* Spinner CSS */
 .custom-loader {
   position: fixed;
-  top: 40%;
-  left: 46%;
+  top: 43%;
+  left: 48%;
   transform: translate(-50%, -50%);
   width: 40px;
   height: 40px;
@@ -10,17 +9,24 @@
   border-radius: 50%;
   border-top: 4px solid transparent;
   animation: spin 1s linear infinite;
-  display: none;
   z-index: 999;
+  display: none;
 }
 
-.processing-text {
-  display: none;
-  position: fixed;
-  top: 48%;
-  left: 40%;
-  color: #ffffff;
-  z-index: 999;
+/* Adjust the position for smaller screens */
+@media screen and (max-width: 768px) {
+  .custom-loader {
+    top: 43%;
+    left: 45%;
+  }
+}
+
+/* Adjust the position for larger screens */
+@media screen and (min-width: 1200px) {
+  .custom-loader {
+    top: 43%;
+    left: 48.5%;
+  }
 }
 
 @keyframes spin {
@@ -32,19 +38,14 @@
   }
 }
 
-/* Larger screens (e.g., laptops) */
-@media (min-width: 768px) {
-  .custom-loader {
-    top: 40%;
-    left: 48.5%;
-    transform: translate(-50%, -50%);
-  }
-
-  .processing-text {
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+.processing-text {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  z-index: 999;
 }
 
 
