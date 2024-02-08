@@ -29,7 +29,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Function to navigate back to the previous page
         function goToInitialStage() {
-            window.location.href = './map/index.html';
+            window.location.href = './index.html';
         }
 
         // Add an event listener to the back button
@@ -166,7 +166,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Display the data on the page
         document.getElementById('voiceReviewText').innerHTML = `${whisperText}`;
-        document.getElementById('dateandtimeOutput').innerHTML = `<strong>Generated Date and Time:</strong> ${generatedDateTime}`;
+        // document.getElementById('dateandtimeOutput').innerHTML = `<strong>Generated Date and Time:</strong> ${generatedDateTime}`;
 
         // Function to generate star icons based on the rating
         function generateStarIcons(rating) {
