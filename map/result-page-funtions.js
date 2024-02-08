@@ -29,7 +29,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Function to navigate back to the previous page
         function goToInitialStage() {
-            window.location.href = '/index.html';
+            window.location.href = './map/index.html';
         }
 
         // Add an event listener to the back button
