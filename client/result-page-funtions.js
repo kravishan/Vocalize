@@ -341,7 +341,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             document.getElementById('reset-button-review').style.display = 'block';
 
-
             document.getElementById('edit-button-review').style.display = 'none';
 
             // Replace improvedReviewWithStarsText with refinedReview
@@ -431,7 +430,7 @@ function saveDataToLocalStorage(data) {
     const newData = {
         Original_Review: data.generatedText,
         User_Instructions: data.refineInstructions,
-        AI_Agent: data.apiResponse,
+        // AI_Agent: data.apiResponse,
         CleanUP_Review: data.apiResponse.refinedReview,
     };
 
