@@ -437,14 +437,20 @@ function sendToBackendToRefine(generatedText, refineInstructions) {
 
 // Function to save data as a JSON object to local storage
 function saveDataToLocalStorage(data) {
-    // Initialize an empty array
-    let jsonDataArray = [];
+    // Retrieve existing data from local storage or initialize an empty array
+    let existingData = localStorage.getItem('refinedataset');
+    let jsonDataArray = existingData ? JSON.parse(existingData) : [];
+
+    // Ensure jsonDataArray is an array
+    if (!Array.isArray(jsonDataArray)) {
+        jsonDataArray = [];
+    }
 
     // Combine the new data with existing data
     const newData = {
         Original_Review: data.generatedText,
         User_Instructions: data.refineInstructions,
-        AI_Agent: data.apiResponse,
+        // AI_Agent: data.apiResponse,
         CleanUP_Review: data.apiResponse.refinedReview,
     };
 
