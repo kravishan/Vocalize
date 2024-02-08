@@ -118,7 +118,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         function saveToFirestore() {
             // Get the refined data from local storage
             // Retrieve the data from local storage and parse it back into a JavaScript object
-            const userRefineDataUpdatesData = localStorage.getItem('refinedata');
+            const userRefineDataUpdatesData = localStorage.getItem('refinedataset');
 
             console.log('Inside saveToFirestore function');
             // Get the result data
@@ -398,9 +398,8 @@ function sendToBackendToRefine(generatedText, refineInstructions) {
             generatedText: generatedText,
             refineInstructions: refineInstructions,
             apiResponse: data
-        });        
+        });  
         
-
         // Display the refined review in the console
         console.log('Refined Review:', data.refinedReview);
 
@@ -425,27 +424,24 @@ function sendToBackendToRefine(generatedText, refineInstructions) {
 
 // Function to save data as a JSON object to local storage
 function saveDataToLocalStorage(data) {
-    // Retrieve existing data from local storage or initialize an empty array
-    let existingData = localStorage.getItem('refinedata');
-    let jsonDataArray = existingData ? JSON.parse(existingData) : [];
-
-    // Ensure jsonDataArray is an array
-    if (!Array.isArray(jsonDataArray)) {
-        jsonDataArray = [];
-    }
+    // Initialize an empty array
+    let jsonDataArray = [];
 
     // Combine the new data with existing data
     const newData = {
         Original_Review: data.generatedText,
         User_Instructions: data.refineInstructions,
-        AI_Agent: data.apiResponse
+        AI_Agent: data.apiResponse,
+        CleanUP_Review: data.apiResponse.refinedReview,
     };
 
     // Push the new data into the array
     jsonDataArray.push(newData);
 
-    // Save the updated array back to local storage
-    localStorage.setItem('refinedata', JSON.stringify(jsonDataArray));
+    // Save the array to local storage
+    localStorage.setItem('refinedataset', JSON.stringify(jsonDataArray));
+
+    console.log('Data saved to local storage:', localStorage.getItem('refinedataset'));
 }
 
 
