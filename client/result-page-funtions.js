@@ -444,7 +444,7 @@ function saveDataToLocalStorage(data) {
     const newData = {
         Original_Review: data.generatedText,
         User_Instructions: data.refineInstructions,
-        // AI_Agent: data.apiResponse,
+        AI_Agent: data.apiResponse,
         CleanUP_Review: data.apiResponse.refinedReview,
     };
 
