@@ -280,7 +280,9 @@ app.post('/refine-review', async (req, res) => {
     // Prompts to guide the refinement process based on refineInstructions
     const prompts = [
       "Please refine the generatedText based on the following instructions by user refineInstructions",
-      "Please keep the English level the same as the original unless users request to change it"
+      "Please keep the English level the same as the original unless users request to change it by refineInstructions",
+      "Please dont add words like 'Here's the refined review' or 'Here's the improved review' or any other words at the beginning of the refined review. Just refine the review and send it back.",
+      "Please ensure that the refined review maintains the original sentiment and tone unless user request to change it by refineInstructions.",
     ];
 
     // Combine refineInstructions with prompts
