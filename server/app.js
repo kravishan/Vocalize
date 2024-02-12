@@ -283,7 +283,7 @@ app.post('/refine-review', async (req, res) => {
       "Please refine the generatedText based on the following instructions by user refineInstructions",
       "Please keep the English level the same as the original unless users request to change it by refineInstructions",
       "Please dont add words like 'Here's the refined review' or 'Here's the improved review' or any other words at the beginning of the refined review. Just refine the review and send it back.",
-      "Please ensure that the refined review maintains the original sentiment and tone unless user request to change it by refineInstructions.",
+      // "Please ensure that the refined review maintains the original sentiment and tone unless user request to change it by refineInstructions.",
       "If the user requests additional information, the temperature should be set to 0.1 max it can be goes upto 0.2. If the user requests to make the review more creative, the temperature should be set to 0.4 max it can be goes upto 0.6",
     ];
 
