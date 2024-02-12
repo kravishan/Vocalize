@@ -59,6 +59,10 @@ h1 {
   z-index: 1001; 
 }
 
+body.theme-dark #popup .warning-info {
+  color: rgba(255, 255, 255, 0.651);
+}
+
 #popup .stop-button-info {
   font-family: 'Poppins', sans-serif; 
   color: rgba(0, 0, 0, 0.7);

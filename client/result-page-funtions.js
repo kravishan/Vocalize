@@ -353,6 +353,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // Add 'reset' to userActions array
             userActions.push('refine');
 
+            document.getElementById('resetButtonText').style.display = 'block';
+
             document.getElementById('reset-button-review').style.display = 'block';
 
             document.getElementById('edit-button-review').style.display = 'none';
@@ -423,8 +425,6 @@ function sendToBackendToRefine(generatedText, refineInstructions) {
         document.getElementById('loadingAnimation').style.display = 'none';
 
         document.getElementById('edit-button-review').style.display = 'block';
-
-        document.getElementById('resetButtonText').style.display = 'block';
 
         document.getElementById('improvedReviewWithStarsText').style.color = '';
     })
