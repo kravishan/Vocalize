@@ -279,15 +279,16 @@ app.post('/refine-review', async (req, res) => {
 
     // Prompts to guide the refinement process based on refineInstructions
     const prompts = [
-      "Please refine the generated text based on the following instructions:",
-      refineInstructions
+      "Please refine the generatedText based on the following instructions by user refineInstructions",
+      "Please keep the English level the same as the original unless users request to change it"
     ];
 
     // Combine refineInstructions with prompts
     const inputMessages = [
       { role: 'system', content: 'You are a review refinement assistant.' },
       ...prompts.map(prompt => ({ role: 'assistant', content: prompt })),
-      { role: 'user', content: generatedText },
+      { role: 'user', content: `This is the original review: ${generatedText}` },
+      { role: 'user', content: `This is the instruction given by the user how to refine the review: ${refineInstructions}` },
     ];
 
     // Fetch response from OpenAI API for refining the review
