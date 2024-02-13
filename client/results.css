@@ -665,3 +665,7 @@ body.theme-dark .reset-button {
   color: #fff;
 }
 
+.agent-before {
+  display: none;
+}
+
