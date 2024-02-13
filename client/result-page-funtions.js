@@ -133,7 +133,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 Feedback_Align: document.getElementById("myRange").value,
                 User_Location: userLocation,
                 Selected_Restaurant: JSON.parse(selectedRestaurantData),
-                REVIEW_Expectation: document.getElementById("myRangeExp").value,
+                Review_Expectation: document.getElementById("myRangeExp").value,
                 AGENT_Expectation: document.getElementById("myRangeAgen").value,
                 AI_Agent_Data: JSON.parse(userRefineDataUpdatesData),
                 User_Actions: userActions
@@ -246,7 +246,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
             output.innerHTML = slider.value;
-        }
+        } else {output.innerHTML = "";}
 
         // Store the slider value in localStorage
         localStorage.setItem("sliderValue", slider.value);
@@ -260,7 +260,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
             output.innerHTML = slider.value;
-        }
+        } else {output.innerHTML = "";}
 
         // Store the slider value in localStorage
         localStorage.setItem("sliderValueExp", slider.value);
@@ -274,7 +274,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
             output.innerHTML = slider.value;
-        }
+        } else {output.innerHTML = "";}
 
         // Store the slider value in localStorage
         localStorage.setItem("sliderValueAgen", slider.value);
