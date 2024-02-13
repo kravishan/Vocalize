@@ -306,6 +306,7 @@ app.post('/refine-review', async (req, res) => {
       body: JSON.stringify({
         model: 'gpt-4',
         messages: inputMessages,
+        temperature: 0.8,
     }),
     });
 
