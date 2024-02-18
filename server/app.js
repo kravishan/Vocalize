@@ -328,68 +328,53 @@ app.post('/refine-review', async (req, res) => {
 
 
 
-// New endpoint for analyzing the review and generating grades for each field
+// New endpoint for analyzing the review and generating tips for refinement or editing
 app.post('/analyze-review', async (req, res) => {
   try {
-    const { whisperText, improvedReview, improvedReviewWithStars } = req.body;
+    const { reviewText } = req.body;
 
-    // Prompts tailored for review analysis
-    const additionalPrompts = [
-      "I want to analyze a user's review and provide a grade.",
-      "Enhance the review analysis by considering various aspects.",
-      "Imagine you are assessing the review for quality and helpfulness.",
-      "What key elements contribute to a well-structured and informative review?",
-      "Consider factors such as clarity, details, and overall impact on the reader.",
-      "Avoid mentioning specific grading criteria in the analysis.",
+    // Define prompts for ChatGPT to analyze the review and generate tips
+    const prompts = [
+      "Please analyze the review text and provide tips for refinement or editing.",
+      `Review Text: ${reviewText}`
     ];
 
-    // Function to perform grading logic for a given content
-    const performGradingLogic = async (content) => {
-      // Fetch response from OpenAI API for review analysis
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${openaiApiKey}`,
-        },
-        body: JSON.stringify({
-          model: 'gpt-3.5-turbo',
-          messages: [
-            { role: 'system', content: 'You are an expert review analyst.' },
-            ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
-            { role: 'user', content },
-          ],
-        }),
-      });
+    // Combine prompts with user's input
+    const inputMessages = [
+      { role: 'system', content: 'You are an AI review analysis assistant.' },
+      ...prompts.map(prompt => ({ role: 'assistant', content: prompt })),
+    ];
 
-      if (!response.ok) {
-        throw new Error(`OpenAI API request failed: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      const analysisResult = data.choices[0].message.content;
-
-      // Replace this with your actual grading logic
-      return Math.random() * 10; // Example: Return a random score between 0 and 10
-    };
-
-    // Perform grading for each field
-    const whisperTextGrade = await performGradingLogic(whisperText);
-    const improvedReviewGrade = await performGradingLogic(improvedReview);
-    const improvedReviewWithStarsGrade = await performGradingLogic(improvedReviewWithStars);
-
-    // Respond with individual grades
-    res.send({
-      whisperTextGrade,
-      improvedReviewGrade,
-      improvedReviewWithStarsGrade,
+    // Send request to ChatGPT for analysis and tips generation
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${openaiApiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-4', // Adjust the model according to your needs
+        messages: inputMessages,
+        temperature: 0.7, // Adjust temperature as needed
+      }),
     });
+
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const generatedTips = data.choices[0].message.content;
+
+    // Send the generated tips back to the frontend
+    res.send({ tips: generatedTips });
 
   } catch (error) {
     console.error('Error during review analysis:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 
 

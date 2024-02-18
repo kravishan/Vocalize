@@ -486,6 +486,46 @@ function saveDataToLocalStorage(data) {
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Get the improved review text
+    const improvedReviewWithStars = document.getElementById('improvedReviewWithStarsText').innerText;
+
+    // Send the improved review text to the backend
+    fetch('https://vocalizer.dev/server/analyze-review', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ improvedReviewWithStars: improvedReviewWithStars }),
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json(); // Parse the response body as JSON
+        } else {
+            throw new Error('Failed to send data to the backend.');
+        }
+    })
+    .then(data => {
+        // Once you receive the tips from the backend, update the HTML to display them
+        const tips = data.tips; // Assuming the response contains a field named 'tips'
+        document.getElementById('improveTipsText').innerText = tips; // Update the HTML element with the tips
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle errors if any
+    });
+});
+
+
+
+
+
+
 
 
     
