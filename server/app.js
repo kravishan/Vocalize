@@ -181,7 +181,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
         "The review should remain true to the original sentiment expressed in the input text.",
         "Please don't add any addition words to make it creative or more informative. Just refine the review and send it back. ",
         "Analyse the english level of the review and make your english level similar to the review. If the review is simple, make your english simple. If the review is complex, make your english complex. If the review is formal, make your english formal. If the review is informal, make your english informal. If the review is casual, make your english casual. If the review is professional, make your english professional. ",
-        "Please ensure your genarated review english level is similar to original review english level. first please identify english level of review and genarate according to it. most of time users give review in simple english. if it a simple english, dont use any fanzy english words it shold be simple english. this is a must"
+        "Please ensure your genarated review english level is similar to original review english level. first please identify english level of review and genarate according to it. most of time users give review in simple english. if it a simple english, dont use any fanzy english words it shold be simple english. This is a must must"
         // "Enhance the review to provide valuable insights without altering the reviewer's intent.",
         // "Pay attention to the overall flow of the review while making necessary adjustments.",
         // "Consider how online readers would perceive and engage with this refined review.",
@@ -345,7 +345,7 @@ app.post('/analyze-review', async (req, res) => {
       "We dont also have edite button as a text it is a icon. So, don't mention the term 'edit' in the genarated tips. Instead, refer to the edite icon. This is a must.",
       "Don't generate enhanced reviews by yourself. Let users do it. Your role is to provide instructions or tips. This is a must.",
       "AI AGENT have limitations. We utilize GPT4 model to refine reviews. It cannot read users' minds. Users cannot simply say 'add more info' without providing clear ideas. Do not provide any tips that are not feasible for AI agents to accomplish. You cannot genarate tips like 'add more info' if users gives only a single sentsnce review like 'food was nice'. if user review has enought information, you can genarate tips like 'make it more polite'.",
-      "Dont tell users to rate the review on a scale when you give review analysis. Because we already have star rating system. we are colelcting overall, food, service, and atmosphere rating as a 1 to 5 scale from the user. so we dont need to tell them again to do that one in the review. Please keep this on your mind when you genarate a review. This is a must.",
+      "Dont tell users to rate the review on a scale when you give review analysis. Because we already have star rating system. we are colelcting overall, food, service, and atmosphere rating as a 1 to 5 scale from the user. so we dont need to tell them again to do that one in the review. Please keep this on your mind when you genarate a review. dont print this one in genarated review, this is for your guidance. This is a must.",
     ];
 
 
