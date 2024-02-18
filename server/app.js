@@ -335,13 +335,15 @@ app.post('/analyze-review', async (req, res) => {
 
     // Define prompts for ChatGPT to analyze the review and generate tips
     const prompts = [
-      "We have a application that collect user review and send it to openai and make it more coherence",
-      "And we are giving users two opetions. one is edite and another one is refine. when user seletct edite option, they can edite the gpt genarated review by keyboard or user can select refine feature and there is a text box, they can write something how they want to refine the review like make it more polite",
-      "Before user trying to do either of that opetion, you need to give some guidance or tips to improve the review quality.",
-      "dont add too much info. make it short and sweet. this is a must",
-      "As I said we have two option edite and refine. You need to mention that when you give tips which one they need to use like click edite button and add more specific features or refine we rename as a AI agent, so use AI Agent and tell it to make it more polite if user review not polite. You need to suggest users to which feature they need to use for that improment. dont use refine word. because we used it in code user can only see AI agent section",
-      "dont genarate enhanced review by yourself. let them to do it. you just need to give instractions or tips. this is a must",
+      "We have an application that collects user reviews and sends them to OpenAI to make them more coherent.",
+      "And we are offering users two options: editing and refining. When users select the editing option, they can edit the GPT-generated review using the keyboard. Alternatively, users can select the refining feature, which presents a text box where they can specify how they want to refine the review, such as making it more polite.",
+      "Before users attempt either of these options, you need to provide some guidance or tips to improve the review quality.",
+      "Don't add too much information. Keep it short and sweet. This is a must.",
+      "As mentioned, we have two options: editing and refining. When giving tips, specify which option users should use. For example, mention clicking the edit button to add more specific features, or refer to the AI Agent section for refining the review to make it more polite. Guide users on which feature to use for improvement, avoiding the term 'refine' since it's used in the code, and users only see the AI Agent section.",
+      "Don't generate enhanced reviews by yourself. Let users do it. Your role is to provide instructions or tips. This is a must.",
+      "AI agents have limitations. We utilize ChatGPT to refine reviews using AI agents, so it's not perfect. It's not human; it's AI. It cannot read users' minds. Users cannot simply say 'add more info' without providing clear ideas. It has many limitations and can only perform simple tasks, such as making reviews more friendly. Do not provide any tips that are not feasible for AI agents to accomplish."
     ];
+
 
     // Combine prompts with user's input
     const inputMessages = [
