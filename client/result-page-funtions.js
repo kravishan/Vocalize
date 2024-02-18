@@ -227,7 +227,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
         // Display the data on the page
         document.getElementById('voiceReviewText').innerHTML = `${whisperText}`;
         document.getElementById('improvedReviewWithStarsText').innerHTML = `${decodeURIComponent(improvedReviewWithStars)}`;
-        document.getElementById('dateandtimeOutput').innerHTML = `<strong>Generated Date and Time:</strong> ${generatedDateTime}`;
+        // document.getElementById('dateandtimeOutput').innerHTML = `<strong>Generated Date and Time:</strong> ${generatedDateTime}`;
 
         
     })
@@ -492,10 +492,9 @@ function saveDataToLocalStorage(data) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Create a URLSearchParams object from window.location.search
     const urlParams = new URLSearchParams(window.location.search);
-    // Get the improved review text
-    const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
+    const reviewText = urlParams.get('improvedReviewWithStars');
+    
 
     // Send the improved review text to the backend
     fetch('https://vocalizer.dev/server/analyze-review', {
@@ -503,7 +502,7 @@ document.addEventListener('DOMContentLoaded', function () {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ improvedReviewWithStars: improvedReviewWithStars }),
+        body: JSON.stringify({ reviewText: reviewText }),
     })
     .then(response => {
         if (response.ok) {
@@ -522,6 +521,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Handle errors if any
     });
 });
+
+
 
 
 
