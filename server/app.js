@@ -345,7 +345,7 @@ app.post('/analyze-review', async (req, res) => {
       "We dont also have edite button as a text it is a icon. So, don't mention the term 'edit' in the genarated tips. Instead, refer to the edite icon. This is a must.",
       "Don't generate enhanced reviews by yourself. Let users do it. Your role is to provide instructions or tips. This is a must.",
       "AI AGENT have limitations. We utilize GPT4 model to refine reviews. It cannot read users' minds. Users cannot simply say 'add more info' without providing clear ideas. Do not provide any tips that are not feasible for AI agents to accomplish. You cannot genarate tips like 'add more info' if users gives only a single sentsnce review like 'food was nice'. if user review has enought information, you can genarate tips like 'make it more polite'.",
-      "Dont tell users as a genarated tips to rate the review on a scale when you give review analysis. Because we already have star rating system. we are colelcting overall, food, service, and atmosphere rating as a 1 to 5 scale from the user. so we dont need to tell them again to do that one in the review. This is a must.",
+      "Dont tell users to rate the review on a scale when you give review analysis. Because we already have star rating system. we are colelcting overall, food, service, and atmosphere rating as a 1 to 5 scale from the user. so we dont need to tell them again to do that one in the review. Please keep this on your mind when you genarate a review. This is a must.",
     ];
 
 
