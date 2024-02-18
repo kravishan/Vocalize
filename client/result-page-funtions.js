@@ -493,7 +493,7 @@ function saveDataToLocalStorage(data) {
 
 document.addEventListener('DOMContentLoaded', function () {
     // Get the improved review text
-    const improvedReviewWithStars = document.getElementById('improvedReviewWithStarsText').innerText;
+    const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
 
     // Send the improved review text to the backend
     fetch('https://vocalizer.dev/server/analyze-review', {
