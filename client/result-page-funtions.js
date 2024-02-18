@@ -506,6 +506,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .then(response => {
         if (response.ok) {
+            document.getElementById('text-loadingbar-tips').style.display = 'none';
             return response.json(); // Parse the response body as JSON
         } else {
             throw new Error('Failed to send data to the backend.');

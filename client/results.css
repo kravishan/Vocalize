@@ -669,3 +669,41 @@ body.theme-dark .reset-button {
   display: none;
 }
 
+
+
+
+
+
+/* ///////////////////////////////////////////  Text loader tips  ///////////////////////////////////////////// */
+
+.main-item {
+  padding: 2px;
+  width: 95%; 
+  margin: 0 auto;
+}
+
+.animated-background {
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: linear-gradient(to right, #eeeeee 8%, #bbbbbb 18%, #eeeeee 33%);
+  background-size: 800px 104px; /* Adjust background size as needed */
+  height: 10px; /* Adjust height as needed */
+  position: relative;
+  border-radius: 10px;
+}
+
+
+
+
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -800px 0;
+  }
+  100% {
+    background-position: 800px 0;
+  }
+}
