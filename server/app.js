@@ -342,7 +342,8 @@ app.post('/analyze-review', async (req, res) => {
       "As mentioned, we have two options: editing and refining. When giving tips, specify which option users should use. For example, mention clicking the edit button to add more specific features, or refer to the AI AGENT section for refining the review to make it more polite. Guide users on which feature to use for improvement, avoiding the term 'refine' since it's used in the code, and users only see the AI AGENT section.",
       "We dont also have edite button as a text it is a icon. So, don't mention the term 'edit' in the tips. Instead, refer to the edite icon that users should click to edit the review. This is a must.",
       "Don't generate enhanced reviews by yourself. Let users do it. Your role is to provide instructions or tips. This is a must.",
-      "AI AGENT have limitations. We utilize ChatGPT to refine reviews using AI agents, so it's not perfect. It's not human; it's AI. It cannot read users' minds. Users cannot simply say 'add more info' without providing clear ideas. It has many limitations and can only perform simple tasks, such as making reviews more friendly. Do not provide any tips that are not feasible for AI agents to accomplish."
+      "AI AGENT have limitations. We utilize ChatGPT to refine reviews using AI agents, so it's not perfect. It's not human; it's AI. It cannot read users' minds. Users cannot simply say 'add more info' without providing clear ideas. It has many limitations and can only perform simple tasks, such as making reviews more friendly. Do not provide any tips that are not feasible for AI agents to accomplish.",
+      "Dont tell users to rate the review on a scale. Because we alredy have star rating system. we are colelcting overall, food, service, and atmosphere rating from the user. So, don't ask users to rate the review on a scale. This is a must.",
     ];
 
 
