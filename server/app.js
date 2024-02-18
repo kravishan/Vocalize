@@ -335,15 +335,15 @@ app.post('/analyze-review', async (req, res) => {
 
     // Define prompts for ChatGPT to analyze the review and generate tips
     const prompts = [
-      "We have an application that collects user reviews and sends them to OpenAI to make them more coherent.",
-      "And we are offering users two options: editing and refining. When users select the editing option, they can edit the GPT-generated review using the keyboard. Alternatively, users can select the refining feature, which presents a text box where they can specify how they want to refine the review, such as making it more polite.",
-      "Before users attempt either of these options, you need to provide some guidance or tips to improve the review quality.",
+      "We have an application that collects user audio reviews and sends them to chatGPT to remove eliminating filler words make them more coherent.",
+      "And we are giving users two opetions. one is edite and another one is refine. when user seletct edite option, they can edite the gpt genarated review by keyboard or user can select refine feature and there is a text box, they can write something how they want to refine the review like make it more polite",
+      "Before user trying to do either of that opetion, you need to give some guidance or tips to improve the review quality",
       "Don't add too much information. Keep it short and sweet. This is a must.",
-      "As mentioned, we have two options: editing and refining. When giving tips, specify which option users should use. For example, mention clicking the edit button to add more specific features, or refer to the AI AGENT section for refining the review to make it more polite. Guide users on which feature to use for improvement, avoiding the term 'refine' since it's used in the code, and users only see the AI AGENT section.",
-      "We dont also have edite button as a text it is a icon. So, don't mention the term 'edit' in the tips. Instead, refer to the edite icon that users should click to edit the review. This is a must.",
+      "As I said we have two option edite and refine. You need to mention that when you give tips which one they need to use like click edite button and add more specific features or refine we rename as a AI agent, so use AI Agent and tell it to make it more polite if user review not polite. You need to suggest users to which feature they need to use for that improment. dont use refine word. because we used it in code user can only see AI agent section",
+      "We dont also have edite button as a text it is a icon. So, don't mention the term 'edit' in the genarated tips. Instead, refer to the edite icon. This is a must.",
       "Don't generate enhanced reviews by yourself. Let users do it. Your role is to provide instructions or tips. This is a must.",
-      "AI AGENT have limitations. We utilize GPT4 model to refine reviews using AI agents. it's AI, It cannot read users' minds. Users cannot simply say 'add more info' without providing clear ideas. Do not provide any tips that are not feasible for AI agents to accomplish. You cannot give tips like 'add more info' if users gives only a single sentsnce review like 'food was nice'.",
-      "Dont tell users to rate the review on a scale. Because we alredy have star rating system. we are colelcting overall, food, service, and atmosphere rating from the user. So, don't ask users to rate the review on a scale. This is a must.",
+      "AI AGENT have limitations. We utilize GPT4 model to refine reviews. It cannot read users' minds. Users cannot simply say 'add more info' without providing clear ideas. Do not provide any tips that are not feasible for AI agents to accomplish. You cannot genarate tips like 'add more info' if users gives only a single sentsnce review like 'food was nice'. if user review has enought information, you can genarate tips like 'make it more polite'.",
+      "Dont tell users as a genarated tips to rate the review on a scale when you give review analysis. Because we already have star rating system. we are colelcting overall, food, service, and atmosphere rating as a 1 to 5 scale from the user. so we dont need to tell them again to do that one in the review. This is a must.",
     ];
 
 
