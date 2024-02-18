@@ -492,6 +492,8 @@ function saveDataToLocalStorage(data) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Create a URLSearchParams object from window.location.search
+    const urlParams = new URLSearchParams(window.location.search);
     // Get the improved review text
     const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
 
