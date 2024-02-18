@@ -181,7 +181,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
         "The review should remain true to the original sentiment expressed in the input text.",
         "Please don't add any addition words to make it creative or more informative. Just refine the review and send it back. ",
         "Analyse the english level of the review and make your english level similar to the review. If the review is simple, make your english simple. If the review is complex, make your english complex. If the review is formal, make your english formal. If the review is informal, make your english informal. If the review is casual, make your english casual. If the review is professional, make your english professional. ",
-        "Please ensure your genarated review english level is similar to original review english level. first please identify english level of review and genarate according to it. most of time english level is a1 or a2. dont use any fanzy english words if user review has simple english. this is a must"
+        "Please ensure your genarated review english level is similar to original review english level. first please identify english level of review and genarate according to it. most of time users give review in simple english. if it a simple english, dont use any fanzy english words it shold be simple english. this is a must"
         // "Enhance the review to provide valuable insights without altering the reviewer's intent.",
         // "Pay attention to the overall flow of the review while making necessary adjustments.",
         // "Consider how online readers would perceive and engage with this refined review.",
