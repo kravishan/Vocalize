@@ -136,6 +136,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 Review_Expectation: document.getElementById("myRangeExp").value,
                 AGENT_Expectation: document.getElementById("myRangeAgen").value,
                 AI_Agent_Data: JSON.parse(userRefineDataUpdatesData),
+                Tips_Helpfull: lastSelectedOption,
                 User_Actions: userActions
                 
               
@@ -554,6 +555,42 @@ helpButton.addEventListener('click', function() {
         cardStyleTips.style.display = 'none';
     }
 });
+
+
+// Get the thumbs-up and thumbs-down icons
+const thumbsUpIcon = document.getElementById('thumbsUpEditIcon');
+const thumbsDownIcon = document.getElementById('thumbsDownEditIcon');
+
+// Variable to keep track of the last selected option
+let lastSelectedOption = ''; // Initialize as empty
+
+// Add click event listeners to the icons
+thumbsUpIcon.addEventListener('click', function() {
+    // Change the color of the thumbs-up icon to green
+    thumbsUpIcon.style.color = '#28a745';
+
+    // Revert the color of the thumbs-down icon to its initial state
+    thumbsDownIcon.style.color = ''; // Empty string removes inline style
+
+    // Update the last selected option
+    lastSelectedOption = 'thumbsUp';
+});
+
+thumbsDownIcon.addEventListener('click', function() {
+    // Change the color of the thumbs-down icon to red
+    thumbsDownIcon.style.color = '#dc3545';
+
+    // Revert the color of the thumbs-up icon to its initial state
+    thumbsUpIcon.style.color = ''; // Empty string removes inline style
+
+    // Update the last selected option
+    lastSelectedOption = 'thumbsDown';
+});
+
+
+// need to create a json and save all of it if selected trumbs up or down and data they received from the server
+
+
 
 
 

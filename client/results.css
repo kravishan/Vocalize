@@ -776,11 +776,11 @@ body.theme-dark .card-style-tips {
 }
 
 .thumbs-green {
-  color: #28a745; /* Set the color to green */
+  color: #28a74657; /* Set the color to green */
 }
 
 .thumbs-red {
-  color: #dc3545; /* Set the color to red */
+  color: #dc35465b; /* Set the color to red */
 }
 
 .thumbs-icons:last-child {
