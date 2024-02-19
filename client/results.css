@@ -750,3 +750,43 @@ body.theme-dark .card-style-tips {
 .noidea-button:hover {
   background-color: #007bff1c;
 }
+
+
+/* Container for the thumbs-up and thumbs-down icons */
+.thumbs-container {
+  display: flex; /* Use flexbox to align items */
+  justify-content: center; /* Center the items horizontally */
+  align-items: center; /* Center the items vertically */
+}
+
+/* Styles for the thumbs-up and thumbs-down icons */
+.thumbs-icons {
+  display: none;
+  margin: 0 5px; /* Add some horizontal spacing between the icons */
+  margin-right: 80px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* Styles for the thumbs-up icon */
+.thumbs-up-edit,
+.thumbs-down-edit {
+  cursor: pointer; /* Change cursor to pointer when hovering over the icon */
+  font-size: 60px;
+}
+
+.thumbs-green {
+  color: #28a745; /* Set the color to green */
+}
+
+.thumbs-red {
+  color: #dc3545; /* Set the color to red */
+}
+
+.thumbs-icons:last-child {
+  margin-right: 0; /* Remove right margin from the last icon to avoid extra space */
+}
+
+.thumbs-hide-text {
+  display: none; 
+}

@@ -152,12 +152,31 @@
                 <div class="slider-value" id="sliderValueExp"></div>
             </div>
 
-            <p id="agent-before-text" class="slider-text agent-before">3. How well did the AI AGENT meet your expectations?</p>
+            <p class="slider-text thumbs-hide-text" id="thumbs-hide-txt">3. How helpful are the provided tips and tricks for improving the review?</p>
+
+            <div class="thumbs-container">
+                <!-- Thumbs UP Icon -->
+                <div class="thumbs-icons thumbs-green" id="thumbs-hide-left">
+                    <i class="fas fa-thumbs-up thumbs-up-edit" id="thumbsUpEditIcon"></i>
+                </div>
+                <!-- Thumbs Down Icon -->
+                <div class="thumbs-icons thumbs-red" id="thumbs-hide-right">
+                    <i class="fas fa-thumbs-down thumbs-down-edit" id="thumbsDownEditIcon"></i>
+                </div>
+            </div>
+            
+            
+
+
+
+
+            <p id="agent-before-text" class="slider-text agent-before">4. How well did the AI AGENT meet your expectations?</p>
             
             <div id="agent-before-slider" class="slider-container agent-before">                
                 <input type="range" min="0" max="7" value="0" id="myRangeAgen" oninput="updateSliderValueAgen()">
                 <div class="slider-value" id="sliderValueAgen"></div>
             </div>
+            
 
             <!-- <select id="expectations">
                 <option value="below-expectations">Below Expectations</option>

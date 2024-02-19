@@ -497,7 +497,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     // Send the improved review text to the backend
-    fetch('https://vocalizer.dev/server/analyze-review', {
+    fetch('https://vocalizer.dev/server/analyze-revieww', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -545,6 +545,9 @@ helpButton.addEventListener('click', function() {
         // mainItem.style.display = 'flex';
         cardStyleTips.style.display = 'flex';
         helpButton.style.display = 'none';
+        document.getElementById('thumbs-hide-txt').style.display = 'block';
+        document.getElementById('thumbs-hide-left').style.display = 'block';
+        document.getElementById('thumbs-hide-right').style.display = 'block';
     } else {
         // Set the display property of the elements to none
         // mainItem.style.display = 'none';
