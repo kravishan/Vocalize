@@ -524,6 +524,36 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// Define a variable to track whether the user needs help
+let userNeedHelp = false;
+
+// Get the button element
+const helpButton = document.getElementById('helpButton');
+
+// Add a click event listener to the button
+helpButton.addEventListener('click', function() {
+    // Toggle the userNeedHelp variable
+    userNeedHelp = !userNeedHelp;
+
+    // Get the elements with the specified classes
+    // const mainItem = document.querySelector('.main-item');
+    const cardStyleTips = document.querySelector('.card-style-tips');
+
+    // Check if userNeedHelp is true
+    if (userNeedHelp) {
+        // Set the display property of the elements to flex
+        // mainItem.style.display = 'flex';
+        cardStyleTips.style.display = 'flex';
+        helpButton.style.display = 'none';
+    } else {
+        // Set the display property of the elements to none
+        // mainItem.style.display = 'none';
+        cardStyleTips.style.display = 'none';
+    }
+});
+
+
+
 
 
 
