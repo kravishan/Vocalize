@@ -698,7 +698,7 @@ body.theme-dark .reset-button {
   animation-iteration-count: infinite;
   animation-name: placeHolderShimmer;
   animation-timing-function: linear;
-  background: linear-gradient(to right, #eeeeee 8%, #bbbbbb 18%, #eeeeee 33%);
+  background: linear-gradient(to right, #eeeeee 8%, #007aff 18%, #eeeeee 33%);
   background-size: 800px 104px; /* Adjust background size as needed */
   height: 10px; /* Adjust height as needed */
   position: relative;
