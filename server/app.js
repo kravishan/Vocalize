@@ -169,7 +169,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
       // const foodRating = req.body.foodRating;
       // const serviceRating = req.body.serviceRating;
       // const atmosphereRating = req.body.atmosphereRating;
-      // const restaurantName = req.body.restaurantName;
+      const restaurantName = req.body.restaurantName;
 
       // Prompts for enhancing transcribed audio reviews
       const additionalPrompts = [
@@ -181,7 +181,8 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
         "The review should remain true to the original sentiment expressed in the input text.",
         "Please don't add any addition words to make it creative or more informative. Just refine the review and send it back. ",
         "Analyse the english level of the review and make your english level similar to the review. If the review is simple, make your english simple. If the review is complex, make your english complex. If the review is formal, make your english formal. If the review is informal, make your english informal. If the review is casual, make your english casual. If the review is professional, make your english professional. ",
-        "Please ensure your genarated review english level is similar to original review english level. first please identify english level of review and genarate according to it. most of time users give review in simple english. if it a simple english, dont use any fanzy english words it shold be simple english. This is a must must"
+        "Please ensure your genarated review english level is similar to original review english level. first please identify english level of review and genarate according to it. most of time users give review in simple english. if it a simple english, dont use any fanzy english words it shold be simple english. This is a must must",
+        "I gave you the restaurent name. you dont need to add that in the review. someone you assume another name as a restaurent name. That's why i added it. it user said the restaurent name in the review you can add that one. otherwise dont add it. This is a must",
         // "Enhance the review to provide valuable insights without altering the reviewer's intent.",
         // "Pay attention to the overall flow of the review while making necessary adjustments.",
         // "Consider how online readers would perceive and engage with this refined review.",
@@ -194,7 +195,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
         { role: 'system', content: 'You are a restaurant review improver GPT' },
         ...additionalPrompts.map(prompt => ({ role: 'assistant', content: prompt })),
         { role: 'user', content: globalWhisperText },
-        // { role: 'user', content: `This is the restaurant name: ${restaurantName}` },
+        { role: 'user', content: `This is the restaurant name: ${restaurantName}` },
         // { role: 'user', content: `Consider my overall star rating as an expression of my satisfaction with the dining experience. Higher ratings indicate a positive experience, while lower ratings suggest areas for improvement. Capture the sentiment and feelings conveyed by the rating: ${selectedOverallStarCount}`},
         // { role: 'user', content: `Please evaluate the food quality I experienced during my dining. Explore aspects like taste, flavor, freshness of ingredients, and presentation. Provide insights into my satisfaction with these elements. I'd like you to capture the context behind my happiness with the food, and My review rating for food quality is: ${foodRating}` },
         // { role: 'user', content: `Please assess the service I received, considering aspects like friendliness, promptness, efficiency, and attention to detail. Capture insights on my satisfaction with the restaurant's service. I encourage you to explore ways to enhance the review, and My review rating for service is: ${serviceRating}` },
@@ -211,7 +212,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
           body: JSON.stringify({
               model: 'gpt-4',
               messages: inputMessages,
-              temperature: 0.4,
+              temperature: 0.2,
           }),
       });
 
@@ -285,7 +286,8 @@ app.post('/refine-review', async (req, res) => {
       "Please refine the generatedText based on the following instructions by user refineInstructions",
       "Please keep the English level the same as the original unless users request to change it by refineInstructions",
       "Please dont add words like 'Here's the refined review' or 'Here's the improved review' or any other words at the beginning of the refined review. Just refine the review and send it back.",
-      "Please ensure your genarated review english level is similar to original review english level. first please identify english level of review and genarate according to it. most of time english level is a1 or a2. dont use any fanzy english words if user review has simple english. this is a must"
+      "Please ensure your genarated review english level is similar to original review english level. first please identify english level of review and genarate according to it. most of time english level is a1 or a2. dont use any fanzy english words if user review has simple english. this is a must",
+      "If user ask to refine only one part of the review like rewrite only one insident, you need to refine only that insident. You dont need to refine the whole review. keep the other parts like previous and change the part what user ask for. This is a super must must"
       // "Please ensure that the refined review maintains the original sentiment and tone unless user request to change it by refineInstructions.",
       // "If the user requests additional information, the temperature should be set to 0.1 max it can be goes upto 0.2. If the user requests to make the review more creative, the temperature should be set to 0.4 max it can be goes upto 0.6",
     ];
@@ -344,8 +346,10 @@ app.post('/analyze-review', async (req, res) => {
       "As I said we have two option edite and refine. You need to mention that when you give tips which one they need to use like click edite button and add more specific features or refine we rename as a AI agent, so use AI Agent and tell it to make it more polite if user review not polite. You need to suggest users to which feature they need to use for that improment. dont use refine word. because we used it in code user can only see AI agent section",
       "We dont also have edite button as a text it is a icon. So, don't mention the term 'edit' in the genarated tips. Instead, refer to the edite icon. This is a must.",
       "Don't generate enhanced reviews by yourself. Let users do it. Your role is to provide instructions or tips. This is a must.",
-      "AI AGENT have limitations. We utilize GPT4 model to refine reviews. It cannot read users' minds. Users cannot simply say 'add more info' without providing clear ideas. Do not provide any tips that are not feasible for AI agents to accomplish. You cannot genarate tips like 'add more info' if users gives only a single sentsnce review like 'food was nice'. if user review has enought information, you can genarate tips like 'make it more polite'.",
+      "AI AGENT have limitations. We utilize chatgpt model to refine reviews. It cannot read users' minds. Users cannot simply say 'add more info' without providing clear ideas. Do not provide any tips that are not feasible for AI agents to accomplish. You cannot genarate tips like 'add more info' if users gives only a single sentsnce review like 'food was nice'. if user review has enought information, you can genarate tips like 'make it more polite'.",
+      "When users want to add details using AI AGENT, they need to provide specific details. For example, if they want to add more details about the food, they need to mention what they want to add. They cannot simply say 'add more details'. This is a must.",
       "Dont tell users to rate the review on a scale when you give review analysis. Because we already have star rating system. we are colelcting overall, food, service, and atmosphere rating as a 1 to 5 scale from the user. so we dont need to tell them again to do that one in the review. Please keep this on your mind when you genarate a review. dont print this one in genarated review, this is for your guidance. This is a must.",
+      "You shold focus to give tips to make the review high quality and valuable for other consumers. This is a must.",
     ];
 
 

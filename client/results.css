@@ -707,3 +707,16 @@ body.theme-dark .reset-button {
     background-position: 800px 0;
   }
 }
+
+.card-style-tips {
+  overflow: hidden;
+  margin: 30px 2px 0px 2px;
+
+  border:#000 solid 0.1px !important;
+}
+
+body.theme-dark .card-style-tips {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+}
