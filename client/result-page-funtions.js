@@ -125,8 +125,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
             const helpData = {
                 Tips: userHelpDataTips,
-                SeekHelp: userHelpDataActions,
-                SelectedOption: userHelpDataSelectedOption
+                Asked_Help: userHelpDataActions,
+                Reaction: userHelpDataSelectedOption
             };
 
             const helpDataJson = JSON.stringify(helpData);
@@ -155,7 +155,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 Review_Expectation: document.getElementById("myRangeExp").value,
                 AGENT_Expectation: document.getElementById("myRangeAgen").value,
                 AI_Agent_Data: JSON.parse(userRefineDataUpdatesData),
-                Tips: JSON.parse(helpDataJson),
+                Help_Data: JSON.parse(helpDataJson),
                 User_Actions: userActions
                 
               
@@ -577,7 +577,7 @@ helpButton.addEventListener('click', function() {
         // Add 'seekHelp' to userActions array
         userActions.push('seekHelp');
 
-        localStorage.setItem('helpSeekHelp', "Seeked");
+        localStorage.setItem('helpSeekHelp', "Asked");
 
         
     } else {
@@ -585,7 +585,7 @@ helpButton.addEventListener('click', function() {
         // mainItem.style.display = 'none';
         cardStyleTips.style.display = 'none';
 
-        localStorage.setItem('helpSeekHelp', "Not_Seeked");
+        localStorage.setItem('helpSeekHelp', "Not_Asked");
     }
 });
 
