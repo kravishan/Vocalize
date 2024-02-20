@@ -173,6 +173,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
 
       // Prompts for enhancing transcribed audio reviews
       const additionalPrompts = [
+        "Imagine yourself as a human. You should genarate the review as a human and human vibe for it. You should not genarate the review as a AI. This is a must. You should not add any words like 'Here's the refined review' or 'Here's the improved review' or any other words at the beginning of the refined review. Just refine the review and send it back. This is a must. ",
         "Please refine this review to remove unnecessary rambling and ensure coherence.",
         "Focus on eliminating filler words like 'um' and 'ah' while maintaining the original tone.",
         // "Consider what information would enhance the clarity and coherence of this review.",
