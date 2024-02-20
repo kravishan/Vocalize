@@ -575,7 +575,7 @@ helpButton.addEventListener('click', function() {
         document.getElementById('thumbs-hide-right').style.display = 'block';
 
         // Add 'seekHelp' to userActions array
-        userActions.push('seekHelp');
+        userActions.push('askedHelp');
 
         localStorage.setItem('helpSeekHelp', "Asked");
 
