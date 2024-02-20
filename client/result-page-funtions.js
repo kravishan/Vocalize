@@ -549,6 +549,9 @@ helpButton.addEventListener('click', function() {
         document.getElementById('thumbs-hide-txt').style.display = 'block';
         document.getElementById('thumbs-hide-left').style.display = 'block';
         document.getElementById('thumbs-hide-right').style.display = 'block';
+
+        // Add 'seekHelp' to userActions array
+        userActions.push('seekHelp');
     } else {
         // Set the display property of the elements to none
         // mainItem.style.display = 'none';
@@ -589,6 +592,7 @@ thumbsDownIcon.addEventListener('click', function() {
 
 
 // need to create a json and save all of it if selected trumbs up or down and data they received from the server
+// add when they click on seek help button
 
 
 
