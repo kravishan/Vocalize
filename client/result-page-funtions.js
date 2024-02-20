@@ -119,6 +119,25 @@ fetch('https://vocalizer.dev/server/firebase-config')
             // Retrieve the data from local storage and parse it back into a JavaScript object
             const userRefineDataUpdatesData = localStorage.getItem('refinedataset');
 
+            const userHelpDataTips = localStorage.getItem('helpTip');
+            const userHelpDataActions = localStorage.getItem('helpSeekHelp');
+            const userHelpDataSelectedOption = localStorage.getItem('helpSelectedOption');
+
+            const helpData = {
+                Tips: userHelpDataTips,
+                SeekHelp: userHelpDataActions,
+                SelectedOption: userHelpDataSelectedOption
+            };
+
+            const helpDataJson = JSON.stringify(helpData);
+
+
+            
+
+
+
+
+
             console.log('Inside saveToFirestore function');
             // Get the result data
             const resultData = {
@@ -136,7 +155,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 Review_Expectation: document.getElementById("myRangeExp").value,
                 AGENT_Expectation: document.getElementById("myRangeAgen").value,
                 AI_Agent_Data: JSON.parse(userRefineDataUpdatesData),
-                Tips_Helpfull: lastSelectedOption,
+                Tips: JSON.parse(helpDataJson),
                 User_Actions: userActions
                 
               
@@ -517,6 +536,11 @@ document.addEventListener('DOMContentLoaded', function () {
         // Once you receive the tips from the backend, update the HTML to display them
         const tips = data.tips; // Assuming the response contains a field named 'tips'
         document.getElementById('improveTipsText').innerText = tips; // Update the HTML element with the tips
+
+        // Save the tips to local storage
+        localStorage.setItem('helpTip', tips);
+
+        
     })
     .catch(error => {
         console.error('Error:', error);
@@ -552,10 +576,16 @@ helpButton.addEventListener('click', function() {
 
         // Add 'seekHelp' to userActions array
         userActions.push('seekHelp');
+
+        localStorage.setItem('helpSeekHelp', "Seeked");
+
+        
     } else {
         // Set the display property of the elements to none
         // mainItem.style.display = 'none';
         cardStyleTips.style.display = 'none';
+
+        localStorage.setItem('helpSeekHelp', "Not_Seeked");
     }
 });
 
@@ -577,6 +607,12 @@ thumbsUpIcon.addEventListener('click', function() {
 
     // Update the last selected option
     lastSelectedOption = 'thumbsUp';
+
+    localStorage.setItem('helpSelectedOption', lastSelectedOption);
+
+    
+
+    
 });
 
 thumbsDownIcon.addEventListener('click', function() {
@@ -588,7 +624,12 @@ thumbsDownIcon.addEventListener('click', function() {
 
     // Update the last selected option
     lastSelectedOption = 'thumbsDown';
+
+    localStorage.setItem('helpSelectedOption', lastSelectedOption);
+
+    
 });
+
 
 
 // need to create a json and save all of it if selected trumbs up or down and data they received from the server
