@@ -262,43 +262,55 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValue() {
         var slider = document.getElementById("myRange");
         var output = document.getElementById("sliderValue");
+        var alignmentLabels = ["1 - Not aligned at all", "2 - Slightly aligned", "3 - Somewhat aligned", 
+                            "4 - Moderately aligned", "5 - Aligned", "6 - Highly aligned", "7 - Completely aligned"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
-            output.innerHTML = slider.value;
-        } else {output.innerHTML = "";}
-
-        // Store the slider value in localStorage
-        localStorage.setItem("sliderValue", slider.value);
+            output.innerHTML = alignmentLabels[slider.value - 1];
+            localStorage.setItem("sliderValue", slider.value - 1); // Save the number 0 to 6 in localStorage
+        } else {
+            output.innerHTML = "Please select a value";
+            localStorage.setItem("sliderValue", "0"); // Save 0 in localStorage when the slider is at 0 position
+        }
     }
+
 
     // Function to update the value label when the slider is moved
     function updateSliderValueExp() {
         var slider = document.getElementById("myRangeExp");
         var output = document.getElementById("sliderValueExp");
+        var satisfactionLabels = ["1 - Not satisfied at all", "2 - Slightly satisfied", "3 - Somewhat satisfied", 
+                            "4 - Moderately satisfied", "5 - Satisfied", "6 - Highly satisfied", "7 - Completely satisfied"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
-            output.innerHTML = slider.value;
-        } else {output.innerHTML = "";}
-
-        // Store the slider value in localStorage
-        localStorage.setItem("sliderValueExp", slider.value);
+            output.innerHTML = satisfactionLabels[slider.value - 1];
+            localStorage.setItem("sliderValueExp", slider.value - 1); // Save the number 0 to 6 in localStorage
+        } else {
+            output.innerHTML = "Please select a value";
+            localStorage.setItem("sliderValueExp", "0"); // Save 0 in localStorage when the slider is at 0 position
+        }
     }
+
 
     // Function to update the value label when the slider is moved
     function updateSliderValueAgen() {
         var slider = document.getElementById("myRangeAgen");
         var output = document.getElementById("sliderValueAgen");
+        var expectationLabels = ["1 - Did not meet expectations at all", "2 - Slightly met expectations", "3 - Partially met expectations", 
+                            "4 - Moderately met expectations", "5 - Met expectations", "6 - Exceeded expectations", "7 - Completely exceeded expectations"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
-            output.innerHTML = slider.value;
-        } else {output.innerHTML = "";}
-
-        // Store the slider value in localStorage
-        localStorage.setItem("sliderValueAgen", slider.value);
+            output.innerHTML = expectationLabels[slider.value - 1];
+            localStorage.setItem("sliderValueAgen", slider.value - 1); // Save the number 0 to 6 in localStorage
+        } else {
+            output.innerHTML = "Please select a value";
+            localStorage.setItem("sliderValueAgen", "0"); // Save 0 in localStorage when the slider is at 0 position
+        }
     }
+
 
 
     // Function to retrieve the stepper value from localStorage

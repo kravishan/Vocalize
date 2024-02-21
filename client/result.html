@@ -69,24 +69,6 @@
         </div>
     </div>
 
-    <button id="helpButton" class="noidea-button"><i class="far fa-question-circle"></i> Lacking ideas</button>
-
-
-    <div id="improveTips" class="resultOutput"></div>
-      
-    <div class="card card-style-tips">
-        <div class="content mb-3">
-            <h4 class="centered-heading">How to improve the review</h4>
-            <div class="main-item" id="text-loadingbar-tips">          
-                <div class="animated-background">
-                  <div class="background-masker btn-divide-left"></div>
-                </div>        
-              </div>
-            <p id="improveTipsText" class="boxp"></p>
-        </div>  
-    </div>
-
-
     <div id="ReviewOutputRefine" class="resultOutput"></div>
     <div class="card card-style custom-card mt-5 result-top">
         <div class="content mb-3">
@@ -109,6 +91,23 @@
         </form>
     </div>
 
+    <button id="helpButton" class="noidea-button"><i class="far fa-question-circle"></i> Get improvement ideas</button>
+
+
+    <div id="improveTips" class="resultOutput"></div>
+      
+    <div class="card card-style-tips">
+        <div class="content mb-3">
+            <h4 class="centered-heading">How to improve the review</h4>
+            <div class="main-item" id="text-loadingbar-tips">          
+                <div class="animated-background">
+                  <div class="background-masker btn-divide-left"></div>
+                </div>        
+              </div>
+            <p id="improveTipsText" class="boxp"></p>
+        </div>  
+    </div>
+
 
     <!-- <div class="card-style result-card">
         <div>
@@ -126,6 +125,7 @@
             <h4 class="centered-heading">Please add your data before submitting</h4>
             <h5 class="centered-heading">Participant ID <span style="color: red;">!IMPORTANT</span></h5>
             <p class="stepper-text">If you have a participant ID, please add it. Otherwise, leave it as zero</p>
+            <p class="stepper-text ste-small">You only need to do this once</p>
             <div class="ios-stepper">
                 <!-- <a href="#" class="stepper-sub opacity-40" onclick="adjustValue(-1); return false;"><i class="fa fa-minus"></i></a> -->
                 <input type="number" min="0" max="99" value="0" onchange="updateStepperValue(this)">
@@ -145,7 +145,7 @@
                 <div class="slider-value" id="sliderValue"></div>
             </div>
 
-            <p class="slider-text">2. How well did the improved review meet your expectations?</p>
+            <p class="slider-text">2. How satisfied are you with the final review?</p>
             
             <div class="slider-container">                
                 <input type="range" min="0" max="7" value="0" id="myRangeExp" oninput="updateSliderValueExp()">
