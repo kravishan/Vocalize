@@ -731,6 +731,7 @@ body.theme-dark .reset-button {
   overflow: hidden;
   margin: 30px 2px 0px 2px;
   border:#000 solid 0.1px !important;
+  margin-bottom: 20px;
 }
 
 body.theme-dark .card-style-tips {
