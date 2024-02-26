@@ -30,18 +30,18 @@ function checkReviews() {
 
     // Check if question 4 needs to be answered
     if (userActions.includes('refine') && review4 == '0') {
-        showToast('Please provide a rating for the queston 4');
+        showToast('Please provide a rating for the question 4');
         return false;
     }
 
     // Check if any of the reviews are missing
     if (review1 === "0" ) {
-        showToast('Please provide a rating for the queston 1');
+        showToast('Please provide a rating for the question 1');
         return false;
     }
 
     if (review2 === "0") {
-        showToast('Please provide a rating for the queston 2');
+        showToast('Please provide a rating for the question 2');
         return false;
     }
 

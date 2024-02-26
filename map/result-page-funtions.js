@@ -21,7 +21,7 @@ function checkReviews() {
 
     // Check if any of the reviews are missing
     if (review1 === "0" ) {
-        showToast('Please provide a rating for the queston 1');
+        showToast('Please provide a rating for the question 1');
         return false;
     }
 
