@@ -174,12 +174,14 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 // Accessing the "name" field using bracket notation
                 const restaurantName = selectedRestaurant['name'];
 
+                // Get the current time from the currentDateTime variable
+                let currentTime = currentDate.toLocaleTimeString(); // Extracts the time portion from the current date
 
                 console.log('docName:', restaurantName);
         
                 // Save data with combined docName, restaurantName, and coordinates as the ID
                 db.collection('Results LLM')
-                    .doc(`${docName}_${restaurantName}`)
+                    .doc(`${docName}_${restaurantName}_${currentTime}`)
                     .set(resultData)
                     .then(() => {
                         console.log('Document written with ID:', docName);
@@ -218,7 +220,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 successMsg.style.display = 'none';
             }, 3000);
 
-            goToInitialStageWithDelay();
+            // goToInitialStageWithDelay();
 
         }
 
