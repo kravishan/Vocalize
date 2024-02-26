@@ -107,6 +107,26 @@ body.theme-dark #popup .stop-button-info {
   font-size: 12px;
 }
 
+#popup .lock-warning {
+  font-family: 'Poppins', sans-serif; 
+  color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 130px;
+  left: 0;
+  right: 0;
+  transform: translate(0%, -50%);
+  margin-top: 380px; 
+  z-index: 999;
+  font-size: 12px;
+
+  /* Apply the blur effect */
+  backdrop-filter: blur(1px);
+}
+
+body.theme-dark #popup .lock-warning {
+  color: rgba(255, 255, 255, 0.651);
+}
+
 h3 {
   font-family: 'Poppins', sans-serif; 
   position: absolute;

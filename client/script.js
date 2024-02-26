@@ -270,6 +270,14 @@ function hideStopButtonInfo() {
     }
 }
 
+// Function to hide the stop button info
+function hideScreenOnInfo() {
+    var stopButtonInfo = document.querySelector('.lock-warning');
+    if (stopButtonInfo) {
+        stopButtonInfo.style.display = 'none';
+    }
+}
+
 // Function to hide the Instructions texts
 function hideInstructions() {
     var hideInstructions1 = document.querySelector('.info');
@@ -516,6 +524,7 @@ document.addEventListener('DOMContentLoaded', function () {
         hideInstructions();
         hideRefreshButton(); 
         hideStopButtonInfo();
+        hideScreenOnInfo();
 
         if (isRecording) {
             recorder

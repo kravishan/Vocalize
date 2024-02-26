@@ -276,6 +276,14 @@ function hideInstructions() {
     }
 }
 
+// Function to hide the stop button info
+function hideScreenOnInfo() {
+    var stopButtonInfo = document.querySelector('.lock-warning');
+    if (stopButtonInfo) {
+        stopButtonInfo.style.display = 'none';
+    }
+}
+
 // Hide custom timmer message
 function hideCustomTimerMessage() {
     const messageElement = document.getElementById('custom-message-timer');
@@ -513,6 +521,7 @@ document.addEventListener('DOMContentLoaded', function () {
         hideInstructions();
         hideRefreshButton();
         hideStopButtonInfo(); 
+        hideScreenOnInfo();
 
         if (isRecording) {
             recorder
