@@ -17,6 +17,40 @@ window.addEventListener('scroll', function() {
     }
 });
 
+function checkReviews() {
+    var review1 = document.getElementById("myRange").value;
+    var review2 = document.getElementById("myRangeExp").value;
+    var review4 = document.getElementById("myRangeAgen").value;
+
+    console.log('Review 1:', lastSelectedOption);
+
+    // Check if question 3 needs to be answered
+    if (userActions.includes('askedHelp') && lastSelectedOption == '') {
+        alert("Please provide an answer for question 3.");
+        return false;
+    }
+
+    // Check if question 4 needs to be answered
+    if (userActions.includes('refine') && review4 == '0') {
+        alert("PPlease provide a rating for the queston 4");
+        return false;
+    }
+
+    // Check if any of the reviews are missing
+    if (review1 === "0" ) {
+        alert("Please provide a rating for the queston 1");
+        return false;
+    }
+
+    if (review2 === "0") {
+        alert("Please provide a rating for the queston 2");
+        return false;
+    }
+
+    return true;
+}
+
+
 
 
 // Fetch Firebase configuration from the server
@@ -115,6 +149,10 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Function to save data to Firestore
         function saveToFirestore() {
+            if (!checkReviews()) {
+                return;
+            }
+
             // Get the refined data from local storage
             // Retrieve the data from local storage and parse it back into a JavaScript object
             const userRefineDataUpdatesData = localStorage.getItem('refinedataset');
