@@ -310,6 +310,9 @@ function hideAndShowCustomTimerMessage(showDurationInSeconds) {
 
 // Popup script
 document.addEventListener('DOMContentLoaded', function () {
+    // Clear local storage
+    localStorage.clear();
+    
     var popup = document.getElementById('popup');
     var stopButton = document.querySelector('.stop');
     var microphoneButton = document.querySelector('.symbol');
