@@ -157,7 +157,7 @@ function showRatingSets() {
             ratingpack.style.display = 'block';
 
         // Set your custom message
-        message.innerHTML = "Please rate each experiences separately";
+        message.innerHTML = "Please rate each experience separately";
         message.style.display = 'block';    
         });
     }

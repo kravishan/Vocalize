@@ -372,7 +372,7 @@ app.post('/analyze-review', async (req, res) => {
         'Authorization': `Bearer ${openaiApiKey}`,
       },
       body: JSON.stringify({
-        model: 'gpt-4', // Adjust the model according to your needs
+        model: '3.5', // Adjust the model according to your needs
         messages: inputMessages,
         temperature: 0.7, // Adjust temperature as needed
       }),
