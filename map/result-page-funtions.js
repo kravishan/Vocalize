@@ -16,6 +16,30 @@ window.addEventListener('scroll', function() {
     }
 });
 
+function checkReviews() {
+    var review1 = document.getElementById("myRange").value;
+
+    // Check if any of the reviews are missing
+    if (review1 === "0" ) {
+        showToast('Please provide a rating for the queston 1');
+        return false;
+    }
+
+    return true;
+}
+
+
+// Modify the showToast function to display the error message with the icon
+function showToast(message) {
+    var toast = document.getElementById('toast-notification');
+    var toastMessage = document.getElementById('toast-message');
+    toastMessage.textContent = message;
+    toast.classList.remove('hidden');
+    setTimeout(function() {
+        toast.classList.add('hidden');
+    }, 2500); // Adjust the duration (in milliseconds) for how long the toast will be displayed
+}
+
 
 // Fetch Firebase configuration from the server
 fetch('https://vocalizer.dev/server/firebase-config')
@@ -72,6 +96,10 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Function to save data to Firestore
         function saveToFirestore() {
+            if (!checkReviews()) {
+                return;
+            }
+
             console.log('Inside saveToFirestore function');
             // Get the result data
             const resultData = {
@@ -99,12 +127,15 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 // Accessing the "name" field using bracket notation
                 const restaurantName = selectedRestaurant['name'];
 
+                // Get the current time from the currentDateTime variable
+                let currentTime = currentDate.toLocaleTimeString(); // Extracts the time portion from the current date
+
 
                 console.log('docName:', restaurantName);
         
                 // Save data with combined docName, restaurantName, and coordinates as the ID
                 db.collection('Results Voice')
-                    .doc(`${docName}_${restaurantName}`)
+                    .doc(`${docName}_${restaurantName}_${currentTime}`)
                     .set(resultData)
                     .then(() => {
                         console.log('Document written with ID:', docName);
@@ -176,10 +207,10 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Display ratings
         document.getElementById('ratingStarsOutputText').innerHTML = `
-        <p>Overall: ${generateStarIcons(overallStarCount)}</p>
-        <p>Food: ${generateStarIcons(foodRating)}</p>
-        <p>Service: ${generateStarIcons(serviceRating)}</p>
-        <p>Atmosphere: ${generateStarIcons(atmosphereRating)}</p>
+        <p class="category">Overall: <span class="star">${generateStarIcons(overallStarCount)}</span></p>
+        <p class="category">Food: <span class="star">${generateStarIcons(foodRating)}</span></p>
+        <p class="category">Service: <span class="star">${generateStarIcons(serviceRating)}</span></p>
+        <p class="category">Atmosphere: <span class="star">${generateStarIcons(atmosphereRating)}</span></p>
         `;
 
 
@@ -191,19 +222,21 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
 
 
-    // Function to update the value label when the slider is moved
+    /// Function to update the value label when the slider is moved
     function updateSliderValue() {
         var slider = document.getElementById("myRange");
         var output = document.getElementById("sliderValue");
-        // output.innerHTML = slider.value;
-
+        var alignmentLabels = ["1 - Not aligned at all", "2 - Slightly aligned", "3 - Somewhat aligned", 
+                            "4 - Moderately aligned", "5 - Aligned", "6 - Highly aligned", "7 - Completely aligned"];
+        
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
-            output.innerHTML = slider.value;
+            output.innerHTML = alignmentLabels[slider.value - 1];
+            localStorage.setItem("sliderValue", slider.value - 1); // Save the number 0 to 6 in localStorage
+        } else {
+            output.innerHTML = "Please select a value";
+            localStorage.setItem("sliderValue", "0"); // Save 0 in localStorage when the slider is at 0 position
         }
-
-        // Store the slider value in localStorage
-        localStorage.setItem("sliderValue", slider.value);
     }
 
     // Function to retrieve the stepper value from localStorage

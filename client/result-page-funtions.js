@@ -57,7 +57,7 @@ function showToast(message) {
     toast.classList.remove('hidden');
     setTimeout(function() {
         toast.classList.add('hidden');
-    }, 2200); // Adjust the duration (in milliseconds) for how long the toast will be displayed
+    }, 2500); // Adjust the duration (in milliseconds) for how long the toast will be displayed
 }
 
 
@@ -270,7 +270,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 successMsg.style.display = 'none';
             }, 3000);
 
-            // goToInitialStageWithDelay();
+            goToInitialStageWithDelay();
 
         }
 
