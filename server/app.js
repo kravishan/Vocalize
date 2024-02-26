@@ -352,7 +352,7 @@ app.post('/analyze-review', async (req, res) => {
       "AI AGENT have limitations. We utilize chatgpt model to refine reviews. It cannot read users' minds. Users cannot simply say 'add more info' without providing clear ideas. Do not provide any tips that are not feasible for AI agents to accomplish. You cannot genarate tips like 'add more info' if users gives only a single sentsnce review like 'food was nice'. if user review has enought information, you can genarate tips like 'make it more polite'.",
       "When users want to add details using AI AGENT, they need to provide specific details. For example, if they want to add more details about the food, they need to mention what they want to add. They cannot simply say 'add more details'. This is a must.",
       "Dont tell users to rate the review on a scale when you give review analysis. Because we already have star rating system. we are colelcting overall, food, service, and atmosphere rating as a 1 to 5 scale from the user. so we dont need to tell them again to do that one in the review. Please keep this on your mind when you genarate a review. dont print this one in genarated review, this is for your guidance. This is a must.",
-      "If you cannot genarate genarate a results, Please send a message like 'Sorry, we don't have any improvement tips for this review' to user.",
+      "If you cannot genarate genarate a results, Please send a message like 'Sorry, we don't have any improvement tips for this review' to user. And dont add any other words to that message. Send what I typed here. This is a must.",
       "You shold focus to give tips to make the review high quality and valuable for other consumers. This is a must.",
     ];
 
