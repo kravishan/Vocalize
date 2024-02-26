@@ -22,33 +22,45 @@ function checkReviews() {
     var review2 = document.getElementById("myRangeExp").value;
     var review4 = document.getElementById("myRangeAgen").value;
 
-    console.log('Review 1:', lastSelectedOption);
-
     // Check if question 3 needs to be answered
     if (userActions.includes('askedHelp') && lastSelectedOption == '') {
-        alert("Please provide an answer for question 3.");
+        showToast('Please provide an answer for question 3');
         return false;
     }
 
     // Check if question 4 needs to be answered
     if (userActions.includes('refine') && review4 == '0') {
-        alert("PPlease provide a rating for the queston 4");
+        showToast('Please provide a rating for the queston 4');
         return false;
     }
 
     // Check if any of the reviews are missing
     if (review1 === "0" ) {
-        alert("Please provide a rating for the queston 1");
+        showToast('Please provide a rating for the queston 1');
         return false;
     }
 
     if (review2 === "0") {
-        alert("Please provide a rating for the queston 2");
+        showToast('Please provide a rating for the queston 2');
         return false;
     }
 
     return true;
 }
+
+
+// Modify the showToast function to display the error message with the icon
+function showToast(message) {
+    var toast = document.getElementById('toast-notification');
+    var toastMessage = document.getElementById('toast-message');
+    toastMessage.textContent = message;
+    toast.classList.remove('hidden');
+    setTimeout(function() {
+        toast.classList.add('hidden');
+    }, 2200); // Adjust the duration (in milliseconds) for how long the toast will be displayed
+}
+
+
 
 
 

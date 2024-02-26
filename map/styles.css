@@ -118,9 +118,6 @@ body.theme-dark #popup .stop-button-info {
   margin-top: 380px; 
   z-index: 999;
   font-size: 12px;
-
-  /* Apply the blur effect */
-  backdrop-filter: blur(1px);
 }
 
 body.theme-dark #popup .lock-warning {
