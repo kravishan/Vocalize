@@ -226,8 +226,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValue() {
         var slider = document.getElementById("myRange");
         var output = document.getElementById("sliderValue");
-        var alignmentLabels = ["1 - Not aligned at all", "2 - Slightly aligned", "3 - Somewhat aligned", 
-                            "4 - Moderately aligned", "5 - Aligned", "6 - Highly aligned", "7 - Completely aligned"];
+        var alignmentLabels = ["1 - Not at all", "2 - Slightly", "3 - Moderately", 
+                            "4 - Somewhat", "5 - Considerably", "6 - Very", "7 - Extremely"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
