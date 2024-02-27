@@ -475,7 +475,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('reviewRefineInput').value = '';
         } else {
             // Display an error message if either the generated text or instructions are empty
-            showToast('Please provide your instructions to AI AGENT.');
+            showToast('Please provide your instructions to AI AGENT');
             // alert('Please provide your instructions');
         }
     });
@@ -677,16 +677,13 @@ thumbsUpIcon.addEventListener('click', function() {
     // Update the last selected option
     lastSelectedOption = 'thumbsUp';
 
-    localStorage.setItem('helpSelectedOption', lastSelectedOption);
-
-    
-
-    
+    localStorage.setItem('helpSelectedOption', lastSelectedOption);  
 });
 
 thumbsDownIcon.addEventListener('click', function() {
     // Change the color of the thumbs-down icon to red
     thumbsDownIcon.style.color = '#dc3545';
+    thumbsDownIcon.style.transition = 'color 0.3s ease';
 
     // Revert the color of the thumbs-up icon to its initial state
     thumbsUpIcon.style.color = ''; // Empty string removes inline style
@@ -694,9 +691,7 @@ thumbsDownIcon.addEventListener('click', function() {
     // Update the last selected option
     lastSelectedOption = 'thumbsDown';
 
-    localStorage.setItem('helpSelectedOption', lastSelectedOption);
-
-    
+    localStorage.setItem('helpSelectedOption', lastSelectedOption); 
 });
 
 
