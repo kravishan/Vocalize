@@ -1,6 +1,6 @@
-var CACHE_NAME = 'Vocalize-v1';
+var CACHE_NAME = 'Vocalize-v2';
 var urlsToCache = [
-  'https://vocalizer.dev/'
+  'https://vocalizer.dev/map/'
 ];
 
 self.addEventListener('install', function(event) {
