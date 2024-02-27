@@ -314,8 +314,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValue() {
         var slider = document.getElementById("myRange");
         var output = document.getElementById("sliderValue");
-        var alignmentLabels = ["1 - Not at all", "2 - Slightly", "3 - Moderately", 
-                            "4 - Somewhat", "5 - Considerably", "6 - Very", "7 - Extremely"];
+        var alignmentLabels = ["1 - Not at all willing", "2 - Slightly willing", "3 - Moderately willing", 
+                            "4 - Somewhat willing", "5 - Considerably willing", "6 - Very willing", "7 - Extremely willing"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
@@ -350,8 +350,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValueAgen() {
         var slider = document.getElementById("myRangeAgen");
         var output = document.getElementById("sliderValueAgen");
-        var expectationLabels = ["1 - Did not meet expectations at all", "2 - Slightly met expectations", "3 - Partially met expectations", 
-                            "4 - Moderately met expectations", "5 - Met expectations", "6 - Exceeded expectations", "7 - Completely exceeded expectations"];
+        var expectationLabels = ["1 - Not at all useful", "2 - Slightly useful", "3 - Somewhat useful", 
+                            "4 - Moderately useful", "5 - Very useful", "6 - Highly useful", "7 - Extremely useful"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {

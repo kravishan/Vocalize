@@ -205,13 +205,13 @@ fetch('https://vocalizer.dev/server/firebase-config')
             return stars.repeat(parseInt(rating));
         }
 
-        // Display ratings
-        document.getElementById('ratingStarsOutputText').innerHTML = `
-        <p class="category">Overall: <span class="star">${generateStarIcons(overallStarCount)}</span></p>
-        <p class="category">Food: <span class="star">${generateStarIcons(foodRating)}</span></p>
-        <p class="category">Service: <span class="star">${generateStarIcons(serviceRating)}</span></p>
-        <p class="category">Atmosphere: <span class="star">${generateStarIcons(atmosphereRating)}</span></p>
-        `;
+        // // Display ratings
+        // document.getElementById('ratingStarsOutputText').innerHTML = `
+        // <p class="category">Overall: <span class="star">${generateStarIcons(overallStarCount)}</span></p>
+        // <p class="category">Food: <span class="star">${generateStarIcons(foodRating)}</span></p>
+        // <p class="category">Service: <span class="star">${generateStarIcons(serviceRating)}</span></p>
+        // <p class="category">Atmosphere: <span class="star">${generateStarIcons(atmosphereRating)}</span></p>
+        // `;
 
 
     })
@@ -226,8 +226,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValue() {
         var slider = document.getElementById("myRange");
         var output = document.getElementById("sliderValue");
-        var alignmentLabels = ["1 - Not at all", "2 - Slightly", "3 - Moderately", 
-                            "4 - Somewhat", "5 - Considerably", "6 - Very", "7 - Extremely"];
+        var alignmentLabels = ["1 - Not at all willing", "2 - Slightly willing", "3 - Moderately willing", 
+                            "4 - Somewhat willing", "5 - Considerably willing", "6 - Very willing", "7 - Extremely willing"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {

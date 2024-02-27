@@ -343,8 +343,8 @@ app.post('/analyze-review', async (req, res) => {
     // Define prompts for ChatGPT to analyze the review and generate tips
     const prompts = [
       "We have an application that collects user audio reviews and sends them to chatGPT to remove eliminating filler words make them more coherent.",
-      "And we are giving users two opetions. one is edite and another one is refine. when user seletct edite option, they can edite the gpt genarated review by keyboard or user can select refine feature and there is a text box, they can write something how they want to refine the review like make it more polite",
-      "Before user trying to do either of that opetion, you need to give some guidance or tips to improve the review quality",
+      "And we are giving users two options. one is edite and another one is refine. when user seletct edite option, they can edite the gpt genarated review by keyboard or user can select refine feature and there is a text box, they can write something how they want to refine the review like make it more polite",
+      "Before user trying to do either of that options, you need to give some guidance or tips to improve the review quality",
       "Don't add too much information. Keep it short and sweet. This is a must.",
       "As I said we have two option edite and refine. You need to mention that when you give tips which one they need to use like click edite button and add more specific features or refine we rename as a AI agent, so use AI Agent and tell it to make it more polite if user review not polite. You need to suggest users to which feature they need to use for that improment. dont use refine word. because we used it in code user can only see AI agent section",
       "We dont also have edite button as a text it is a icon. So, don't mention the term 'edit' in the genarated tips. Instead, refer to the edite icon. This is a must.",
