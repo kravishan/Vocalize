@@ -21,6 +21,13 @@ function checkReviews() {
     var review1 = document.getElementById("myRange").value;
     var review2 = document.getElementById("myRangeExp").value;
     var review4 = document.getElementById("myRangeAgen").value;
+    var userID = localStorage.getItem('stepperValue');
+
+    // Check if the value is within the specified limits
+    if (userID < 0 || userID > 99) {
+        showToast('Please provide a value less than 100');
+        return false; // Exit the function early if the value is out of bounds
+    }
 
     // Check if question 3 needs to be answered
     if (userActions.includes('askedHelp') && lastSelectedOption == '') {
@@ -332,8 +339,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValueExp() {
         var slider = document.getElementById("myRangeExp");
         var output = document.getElementById("sliderValueExp");
-        var satisfactionLabels = ["1 - Not satisfied at all", "2 - Slightly satisfied", "3 - Somewhat satisfied", 
-                            "4 - Moderately satisfied", "5 - Satisfied", "6 - Highly satisfied", "7 - Completely satisfied"];
+        var satisfactionLabels = ["1 - Not at all satisfied", "2 - Slightly satisfied", "3 - Moderately satisfied", 
+                            "4 - Somewhat satisfied", "5 - Satisfied", "6 - Highly satisfied", "7 - Completely satisfied"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
@@ -350,8 +357,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValueAgen() {
         var slider = document.getElementById("myRangeAgen");
         var output = document.getElementById("sliderValueAgen");
-        var expectationLabels = ["1 - Not at all useful", "2 - Slightly useful", "3 - Somewhat useful", 
-                            "4 - Moderately useful", "5 - Very useful", "6 - Highly useful", "7 - Extremely useful"];
+        var expectationLabels = ["1 - Not at all useful", "2 - Slightly useful", "3 - Moderately useful", 
+                            "4 - Somewhat useful", "5 - Very useful", "6 - Highly useful", "7 - Extremely useful"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
@@ -368,9 +375,6 @@ fetch('https://vocalizer.dev/server/firebase-config')
     // Function to retrieve the stepper value from localStorage
     function updateStepperValue(inputElement) {
         let value = parseInt(inputElement.value);
-
-        // Ensure the value stays within the min and max limits
-        value = Math.min(99, Math.max(0, value));
 
         // Update the input value
         inputElement.value = value;
@@ -471,7 +475,8 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('reviewRefineInput').value = '';
         } else {
             // Display an error message if either the generated text or instructions are empty
-            alert('Please provide your instructions');
+            showToast('Please provide your instructions to AI AGENT.');
+            // alert('Please provide your instructions');
         }
     });
 

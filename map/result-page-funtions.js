@@ -18,6 +18,13 @@ window.addEventListener('scroll', function() {
 
 function checkReviews() {
     var review1 = document.getElementById("myRange").value;
+    var userID = localStorage.getItem('stepperValue');
+
+    // Check if the value is within the specified limits
+    if (userID < 0 || userID > 99) {
+        showToast('Please provide a value less than 100');
+        return false; // Exit the function early if the value is out of bounds
+    }
 
     // Check if any of the reviews are missing
     if (review1 === "0" ) {
@@ -242,9 +249,6 @@ fetch('https://vocalizer.dev/server/firebase-config')
     // Function to retrieve the stepper value from localStorage
     function updateStepperValue(inputElement) {
         let value = parseInt(inputElement.value);
-
-        // Ensure the value stays within the min and max limits
-        value = Math.min(99, Math.max(0, value));
 
         // Update the input value
         inputElement.value = value;
