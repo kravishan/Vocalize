@@ -298,6 +298,7 @@ app.post('/refine-review', async (req, res) => {
       "Text readability is important. Please ensure the refined review is easy to read and understand.",
       "Readability of a review text is correlated with perceived helpfulness of the reviews. so make sure the refined review is easy to read and understand.And also english is also should be simple that everyone can undestand. this is a must",
       "Please ensure the refined review maintains the original sentiment and tone unless user request to change it by refineInstructions.",
+      "You should use the simple english words. dont use any fanzy english words. This is a very very must",
       "If you cannot genarate a results, Please send a message like 'Sorry, we cannot refine this review' to user. this is a must"
       // "Please ensure that the refined review maintains the original sentiment and tone unless user request to change it by refineInstructions.",
       // "If the user requests additional information, the temperature should be set to 0.1 max it can be goes upto 0.2. If the user requests to make the review more creative, the temperature should be set to 0.4 max it can be goes upto 0.6",
@@ -305,7 +306,7 @@ app.post('/refine-review', async (req, res) => {
 
     // Combine refineInstructions with prompts
     const inputMessages = [
-      { role: 'system', content: 'I want you to act as an text refine agent. You need to read user-generated restaurant and user given instraction how they want to refine the review.' },
+      { role: 'system', content: 'I want you to act as a text refinement agent. You should read the user-generated restaurant review and the instructions given to the user. Then refine the review how user asked.' },
       ...prompts.map(prompt => ({ role: 'assistant', content: prompt })),
       { role: 'user', content: `This is the original review: ${generatedText}` },
       { role: 'user', content: `This is the instruction given by the user how to refine the review: ${refineInstructions}` },
