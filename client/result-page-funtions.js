@@ -586,7 +586,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     // Send the improved review text to the backend
-    fetch('http://localhost:3000/analyze-review', {
+    fetch('https://vocalizer.dev/server/analyze-review', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
