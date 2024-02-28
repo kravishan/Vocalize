@@ -832,3 +832,10 @@ body.theme-dark .card-style-tips {
 .thumbs-hide-text {
   display: none; 
 }
+
+.beta-symbol {
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  color: orange;
+}
