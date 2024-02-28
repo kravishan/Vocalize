@@ -662,7 +662,7 @@ body.theme-dark .ios-stepper input {
   margin-bottom: 15px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  /* resize: vertical;  */
+  resize: none; 
   display: block;
 }
 
