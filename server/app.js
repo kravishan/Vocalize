@@ -179,6 +179,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
         // "Consider what information would enhance the clarity and coherence of this review.",
         "Keep the content and tone as close to the original audio review as possible.",
         "Ensure the tweaks maintain the authenticity of the reviewer's voice.",
+        "Review readability is a most important thing. Please ensure the refined review is easy to read and understand. This is a must. ",
         "The review should remain true to the original sentiment expressed in the input text.",
         "Please don't add any addition words to make it creative or more informative. Just refine the review and send it back. ",
         "Analyse the english level of the review and make your english level similar to the review. If the review is simple, make your english simple. If the review is complex, make your english complex. If the review is formal, make your english formal. If the review is informal, make your english informal. If the review is casual, make your english casual. If the review is professional, make your english professional. ",
@@ -358,6 +359,7 @@ app.post('/analyze-review', async (req, res) => {
       "Dont tell users to rate the review on a scale when you give review analysis. Because we already have star rating system. we are colelcting overall, food, service, and atmosphere rating as a 1 to 5 scale from the user. so we dont need to tell them again to do that one in the review. Please keep this on your mind when you genarate a review. dont print this one in genarated review, this is for your guidance. This is a must.",
       "If you cannot genarate genarate a results, Please send a message like 'Sorry, we don't have any improvement tips for this review' to user. And dont add any other words to that message. Send what I typed here. This is a must.",
       "You shold focus to give tips to make the review high quality and valuable for other consumers. I will give you some latest reserch findings how good review looks like. Please follow those rules. This is a must.",
+
       "Reserchers found that the most helpful reviews are those that are specific and detailed. Therefore, when giving tips, focus on making the review more specific and detailed.",
       "Reserchers found that if there is a indications if reason why or cause-and-effect relationship in the review, it is more helpful for other consumers.",
       "Reserchers found that food is the strongest impact on the overall restaurent evaluation.",
