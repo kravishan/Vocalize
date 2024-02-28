@@ -465,7 +465,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             document.getElementById('edit-button-review').style.display = 'none';
 
-            window.location.href = '#voiceReviewOutput';
+            document.getElementById('voiceReviewOutput').scrollIntoView({ behavior: 'smooth' });
 
             // Replace improvedReviewWithStarsText with refinedReview
             document.getElementById('improvedReviewWithStarsText').style.color = 'transparent';
