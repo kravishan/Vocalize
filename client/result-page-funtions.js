@@ -611,6 +611,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Save the tips to local storage
         localStorage.setItem('helpTip', tips);
 
+        document.getElementById('hide-tips-button').style.display = 'block';
+
         
     })
     .catch(error => {
@@ -694,6 +696,18 @@ thumbsDownIcon.addEventListener('click', function() {
     lastSelectedOption = 'thumbsDown';
 
     localStorage.setItem('helpSelectedOption', lastSelectedOption); 
+});
+
+
+
+const hideTipsButton = document.getElementById('hide-tips-button');
+
+hideTipsButton.addEventListener('click', function() {
+    const cardStyleTips = document.querySelector('.card-style-tips');
+    cardStyleTips.style.display = 'none';
+    helpButton.style.display = 'block';
+
+    userActions.push('hideHelpWindow');
 });
 
 

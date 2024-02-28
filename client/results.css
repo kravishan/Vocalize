@@ -662,7 +662,7 @@ body.theme-dark .ios-stepper input {
   margin-bottom: 15px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  resize: none; 
+  resize: vertical; 
   display: block;
 }
 
@@ -835,7 +835,34 @@ body.theme-dark .card-style-tips {
 
 .beta-symbol {
   position: absolute;
+  top: 0;
   right: 0;
-  margin-right: 20px;
+  margin-right: 6px;
+  margin-top: 6px;
   color: orange;
 }
+
+
+.button-container {
+  display: none; /* Change to block to occupy full width */
+  width: 30px; /* Adjust width and height to fit your design */
+  height: 30px;
+  background-color: #ffffff; /* Button background color */
+  border-radius: 50%; /* Make it round */
+  text-align: center;
+  line-height: 30px; /* Center the icon vertically */
+  cursor: pointer; /* Show pointer cursor on hover */
+  margin: -18px auto; /* Center horizontally */
+  border: 1.5px solid #000000;
+}
+
+.button-container i {
+  font-size: 20px; /* Adjust the icon size as needed */
+  color: #000000; /* Icon color */
+}
+
+.tips-boxp {
+  margin-bottom: 30px;
+}
+
+
