@@ -290,6 +290,7 @@ app.post('/refine-review', async (req, res) => {
       "Please dont add words like 'Here's the refined review' or 'Here's the improved review' or any other words at the beginning of the refined review. Just refine the review and send it back.",
       "Please ensure your genarated review english level is similar to original review english level. first please identify english level of review and genarate according to it. most of time english level is a1 or a2. dont use any fanzy english words if user review has simple english. this is a must",
       "If user ask to refine only one part of the review like rewrite only one insident, you need to refine only that insident. You dont need to refine the whole review. keep the other parts like previous and change the part what user ask for. This is a super must must",
+      "Use only simple english words, dont use any fanzy words. review content shold be understandable for everyone. This is a very very must",
       "If you cannot genarate genarate a results, Please send a message like 'Sorry, we cannot refine this review' to user."
       // "Please ensure that the refined review maintains the original sentiment and tone unless user request to change it by refineInstructions.",
       // "If the user requests additional information, the temperature should be set to 0.1 max it can be goes upto 0.2. If the user requests to make the review more creative, the temperature should be set to 0.4 max it can be goes upto 0.6",
