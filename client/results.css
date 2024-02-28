@@ -137,7 +137,7 @@
     transition: background-color 0.3s ease;
     margin-top: 120px;
     font-family: 'San Francisco', Arial, sans-serif;
-    width: 100%;
+    width: 99.7% !important;
   }
   
   /* Dark theme styles */
@@ -759,11 +759,9 @@ body.theme-dark .reset-button {
 }
 
 .card-style-tips {
+  width: 99.5%;
   display: none;
-  overflow: hidden;
-  margin: 30px 2px 0px 2px;
   border:#000 solid 0.1px !important;
-  margin-bottom: 20px;
 }
 
 body.theme-dark .card-style-tips {
