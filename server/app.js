@@ -354,7 +354,7 @@ app.post('/analyze-review', async (req, res) => {
       "When users want to add details using the AI Agent, they need to provide specific details. For example, if they want to add more details about the food, they need to mention what they want to add. They cannot simply say 'add more details'. This is a must.",
       "Don't tell users to rate the review on a scale when providing review analysis. We already have a star rating system in place where we collect overall, food, service, and atmosphere ratings on a 1 to 5 scale from the user. Therefore, we don't need to prompt them again in the review. Please keep this in mind when generating a review. Don't include this instruction in the generated review; it's for your guidance. This is a must.",
       "If you cannot generate results, please send a message like 'Sorry, we don't have any improvement tips for this review' to the user. Don't add any other words to that message. Send exactly what I typed here. This is a must.",
-      "You should focus on giving tips to make the review high quality and valuable for other consumers. Now I am going to give you the latest reserch findings about what are the things that matter when it comes to good review. You should use these findings. This is a very very very important must",
+      "You should focus on giving tips to make the review high quality and valuable for other consumers. Now I am going to give you the latest reserch findings about how good review looks like. This is a must.",
 
 
       // These are the findings I plan to link with the above promts
