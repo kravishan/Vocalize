@@ -286,6 +286,8 @@ app.post('/refine-review', async (req, res) => {
 
     // Prompts to guide the refinement process based on refineInstructions
     const prompts = [
+      "We have an application that collects user audio reviews then convert it into audio and sends them to llm to remove eliminating filler words make them more coherent. We will display the results on the results display page." ,
+      "Your task is to refine the review based on the user's instructions. ",
       "Please refine the generatedText based on the following instructions by user refineInstructions",
       "Please keep the English level the same as the original unless users request to change it by refineInstructions",
       "Please dont add words like 'Here's the refined review' or 'Here's the improved review' or any other words at the beginning of the refined review. Just refine the review and send it back.",
@@ -293,14 +295,14 @@ app.post('/refine-review', async (req, res) => {
       "If user ask to refine only one part of the review like rewrite only one insident, you need to refine only that insident. You dont need to refine the whole review. keep the other parts like previous and change the part what user ask for. This is a super must must",
       "Use only simple english words, dont use any fanzy words. review content shold be understandable for everyone. This is a very very must",
       "Text readability is important. Please ensure the refined review is easy to read and understand.",
-      "If you cannot genarate genarate a results, Please send a message like 'Sorry, we cannot refine this review' to user."
+      "If you cannot genarate a results, Please send a message like 'Sorry, we cannot refine this review' to user."
       // "Please ensure that the refined review maintains the original sentiment and tone unless user request to change it by refineInstructions.",
       // "If the user requests additional information, the temperature should be set to 0.1 max it can be goes upto 0.2. If the user requests to make the review more creative, the temperature should be set to 0.4 max it can be goes upto 0.6",
     ];
 
     // Combine refineInstructions with prompts
     const inputMessages = [
-      { role: 'system', content: 'You are a review refinement assistant.' },
+      { role: 'system', content: 'I want you to act as an text refine agent. You need to read user-generated restaurant and user given instraction how they want to refine the review.' },
       ...prompts.map(prompt => ({ role: 'assistant', content: prompt })),
       { role: 'user', content: `This is the original review: ${generatedText}` },
       { role: 'user', content: `This is the instruction given by the user how to refine the review: ${refineInstructions}` },
@@ -345,7 +347,6 @@ app.post('/analyze-review', async (req, res) => {
 
     // Define prompts for ChatGPT to analyze the review and generate tips
     const prompts = [
-      "I want you to act as an adviser. You need to read user-generated restaurant reviews and give some tips and tricks to improve their review quality. When you give an adviser you should focus on facts that are confirmed by scientific research.",
       "We have an application that collects user audio reviews then convert it into audio and sends them to llm to remove eliminating filler words make them more coherent. We will display the results on the results display page." ,
       "And we are giving users two options on the results display page to further modify the review how they want. one is edite and another one is refine. when user seletct edite option, they can edite the llm imporved review by keyboard or user can select refine feature and there is a text box, they can write something how they want to refine the review; they could ask something like make it more polite" ,
       "User cannot see something like refine and edite. In the app UI refine funtion we renamed as AI AGENT and edite has a edite button. So dont tell users to use refine or edite, just say either AI AGENT or edite button. This is a must",  
@@ -388,7 +389,7 @@ app.post('/analyze-review', async (req, res) => {
       body: JSON.stringify({
         model: 'gpt-4', // Adjust the model according to your needs
         messages: inputMessages,
-        temperature: 0.7, // Adjust temperature as needed
+        // temperature: 0.7, // Adjust temperature as needed
       }),
     });
 

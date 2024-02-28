@@ -225,6 +225,7 @@
 }
 
 .boxp {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   flex: 1;
   margin-top: 10px;
   margin-right: 15px;
