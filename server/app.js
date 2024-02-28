@@ -186,6 +186,7 @@ app.post('/generate-improved-review-with-stars', async (req, res) => {
         "Please ensure your genarated review english level is similar to original review english level. first please identify english level of review and genarate according to it. most of time users give review in simple english. if it a simple english, dont use any fanzy english words it shold be simple english. This is a must must",
         "I gave you the restaurent name. you dont need to add that in the review. someone you assume another name as a restaurent name. That's why i added it. it user said the restaurent name in the review you can add that one. otherwise dont add it. This is a must",
         "If you cannot genarate genarate a results or there is not enought infomations, Please send a message like 'Sorry, we don't improvement this review' to user.",
+        "Readability of a review text is correlated with perceived helpfulness of the reviews. so make sure the refined review is easy to read and understand. And also english is also should be simple that everyone can undestand. this is a must",
         // "Enhance the review to provide valuable insights without altering the reviewer's intent.",
         // "Pay attention to the overall flow of the review while making necessary adjustments.",
         // "Consider how online readers would perceive and engage with this refined review.",
@@ -295,7 +296,9 @@ app.post('/refine-review', async (req, res) => {
       "If user ask to refine only one part of the review like rewrite only one insident, you need to refine only that insident. You dont need to refine the whole review. keep the other parts like previous and change the part what user ask for. This is a super must must",
       "Use only simple english words, dont use any fanzy words. review content shold be understandable for everyone. This is a very very must",
       "Text readability is important. Please ensure the refined review is easy to read and understand.",
-      "If you cannot genarate a results, Please send a message like 'Sorry, we cannot refine this review' to user."
+      "Readability of a review text is correlated with perceived helpfulness of the reviews. so make sure the refined review is easy to read and understand.And also english is also should be simple that everyone can undestand. this is a must",
+      "Please ensure the refined review maintains the original sentiment and tone unless user request to change it by refineInstructions.",
+      "If you cannot genarate a results, Please send a message like 'Sorry, we cannot refine this review' to user. this is a must"
       // "Please ensure that the refined review maintains the original sentiment and tone unless user request to change it by refineInstructions.",
       // "If the user requests additional information, the temperature should be set to 0.1 max it can be goes upto 0.2. If the user requests to make the review more creative, the temperature should be set to 0.4 max it can be goes upto 0.6",
     ];
