@@ -662,6 +662,17 @@ helpButton.addEventListener('click', function() {
     }
 });
 
+const hideTipsButton = document.getElementById('hide-tips-button');
+
+hideTipsButton.addEventListener('click', function() {
+    const cardStyleTips = document.querySelector('.card-style-tips');
+    cardStyleTips.style.display = 'none';
+
+    helpButton.style.display = 'block';
+
+    userActions.push('hideHelpWindow');
+});
+
 
 // Get the thumbs-up and thumbs-down icons
 const thumbsUpIcon = document.getElementById('thumbsUpEditIcon');
@@ -700,15 +711,7 @@ thumbsDownIcon.addEventListener('click', function() {
 
 
 
-const hideTipsButton = document.getElementById('hide-tips-button');
 
-hideTipsButton.addEventListener('click', function() {
-    const cardStyleTips = document.querySelector('.card-style-tips');
-    cardStyleTips.style.display = 'none';
-    helpButton.style.display = 'block';
-
-    userActions.push('hideHelpWindow');
-});
 
 
 

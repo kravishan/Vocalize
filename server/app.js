@@ -306,7 +306,7 @@ app.post('/refine-review', async (req, res) => {
 
     // Combine refineInstructions with prompts
     const inputMessages = [
-      { role: 'system', content: 'I want you to act as a text refinement agent. You should read the user-generated restaurant review and the instructions given to the user. Then refine the review how user asked.' },
+      { role: 'system', content: 'I want you to act as a text refinement agent. You should read the user-generated restaurant review and the instructions given to the user. Then refine the review how user asked. Dont use any fanzy english words, use basic english level that eveyone can undestand.' },
       ...prompts.map(prompt => ({ role: 'assistant', content: prompt })),
       { role: 'user', content: `This is the original review: ${generatedText}` },
       { role: 'user', content: `This is the instruction given by the user how to refine the review: ${refineInstructions}` },
