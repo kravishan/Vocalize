@@ -630,18 +630,9 @@ const helpButton = document.getElementById('helpButton');
 
 // Add a click event listener to the button
 helpButton.addEventListener('click', function() {
-    // Toggle the userNeedHelp variable
-    userNeedHelp = !userNeedHelp;
-
-    // Get the elements with the specified classes
-    // const mainItem = document.querySelector('.main-item');
     const cardStyleTips = document.querySelector('.card-style-tips');
 
-    // Check if userNeedHelp is true
-    if (userNeedHelp) {
-        // Set the display property of the elements to flex
-        // mainItem.style.display = 'flex';
-        cardStyleTips.style.display = 'flex';
+    cardStyleTips.style.display = 'flex';
         helpButton.style.display = 'none';
         document.getElementById('thumbs-hide-txt').style.display = 'block';
         document.getElementById('thumbs-hide-left').style.display = 'block';
@@ -652,14 +643,43 @@ helpButton.addEventListener('click', function() {
 
         localStorage.setItem('helpSeekHelp', "Asked");
 
-        
-    } else {
-        // Set the display property of the elements to none
-        // mainItem.style.display = 'none';
-        cardStyleTips.style.display = 'none';
 
-        localStorage.setItem('helpSeekHelp', "Not_Asked");
-    }
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // // Toggle the userNeedHelp variable
+    // userNeedHelp = !userNeedHelp;
+
+    // // Get the elements with the specified classes
+    // // const mainItem = document.querySelector('.main-item');
+    // const cardStyleTips = document.querySelector('.card-style-tips');
+
+    // // Check if userNeedHelp is true
+    // if (userNeedHelp) {
+    //     // Set the display property of the elements to flex
+    //     // mainItem.style.display = 'flex';
+    //     cardStyleTips.style.display = 'flex';
+    //     helpButton.style.display = 'none';
+    //     document.getElementById('thumbs-hide-txt').style.display = 'block';
+    //     document.getElementById('thumbs-hide-left').style.display = 'block';
+    //     document.getElementById('thumbs-hide-right').style.display = 'block';
+
+    //     // Add 'seekHelp' to userActions array
+    //     userActions.push('askedHelp');
+
+    //     localStorage.setItem('helpSeekHelp', "Asked");
+
+        
+    // } else {
+    //     // Set the display property of the elements to none
+    //     // mainItem.style.display = 'none';
+    //     cardStyleTips.style.display = 'none';
+
+    //     localStorage.setItem('helpSeekHelp', "Not_Asked");
+    // }
 });
 
 const hideTipsButton = document.getElementById('hide-tips-button');
