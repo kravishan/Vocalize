@@ -351,16 +351,6 @@ app.post('/analyze-review', async (req, res) => {
 
     // Define prompts for ChatGPT to analyze the review and generate tips
     const prompts = [
-      "We have an application that collects user audio reviews then convert it into audio and sends them to llm to remove eliminating filler words make them more coherent. We will display the results on the results display page." ,
-      "And we are giving users two options on the results display page to further modify the review how they want. one is edite and another one is refine. when user seletct edite option, they can edite the llm imporved review by keyboard or user can select refine feature and there is a text box, they can write something how they want to refine the review; they could ask something like make it more polite" ,
-      "User cannot see something like refine and edite. In the app UI refine funtion we renamed as AI AGENT and edite has a edite button. So dont tell users to use refine or edite, just say either AI AGENT or edite button. This is a must",  
-      "Before user trying to do either of that options, you need to give some guidance or tips to improve the review quality",
-      "Don't add too much information. Keep it short and sweet. This is a must.",
-      "As I said we have two option edite and refine. You need to mention that when you give tips which feature they need to use from refine and edite; it could be like click on edite button add more specific details or something like use AI AGENT and make it more exciting.",
-      "so use AI Agent and tell it to make it more polite if user review not polite. You need to suggest users to which feature they need to use for that improment. dont use refine word. because we used it in code user can only see AI agent section.",
-      "Don't generate enhanced reviews by yourself. Let users do it. Your role is to provide instructions or tips to improve their review. This is a must.",
-      "AI AGENT have limitations. We utilize llm model to refine reviews. It cannot read users' minds. Users cannot simply say 'add more info' without providing clear ideas. Do not provide any tips that are not feasible for AI agents to accomplish. You cannot genarate tips like 'add more info' if users gives only a single sentsnce review like 'food was nice'. if user review has enought information, you can genarate tips like 'make it more polite'",
-      "When users want to add details using AI AGENT, they need to provide specific details. For example, if they want to add more details about the food, they need to mention what they want to add like 'add more detailed about customer service because they were very healfull and gave promt response to my requests'. They cannot simply say 'add more details' without any context. This is a must.",
       "Dont tell users to rate the review on a scale when you give review analysis. Because we already have star rating system. we are colelcting overall, food, service, and atmosphere rating as a 1 to 5 scale from the user. so we dont need to tell them again to do that one in the review. Please keep this on your mind when you genarate a review. dont print this one in genarated review, this is for your guidance. This is a must.",
       "If you cannot genarate a results, Please send a message like 'Sorry, we don't have any improvement tips for this review' to user. And dont add any other words to that message. Send what I typed here. This is a must.",
       "You shold focus to give tips to make the review high quality and valuable for other consumers. I will give you some latest reserch findings how good review looks like. Please follow those rules. This is a must.",
@@ -378,7 +368,7 @@ app.post('/analyze-review', async (req, res) => {
 
     // Combine prompts with user's input
     const inputMessages = [
-      { role: 'system', content: "I want you to act as an adviser. You need to read user-generated restaurant reviews and give some tips and tricks to improve their review quality. When you give an adviser you should focus on facts that are confirmed by scientific research, but dont add any reference to the source." },
+      { role: 'system', content: "I want you to act as an adviser. You need to read user-generated restaurant reviews and give some tips and tricks to improve their review quality. When you act as an adviser, you should focus on facts that are confirmed by scientific research, but don't add any reference to the source. I added all the scientific findings on how a high-quality review looks in the prompts. Please use only those." },
       ...prompts.map(prompt => ({ role: 'assistant', content: prompt })),
       { role: 'user', content: `User given review: ${reviewText}` },
     ];
