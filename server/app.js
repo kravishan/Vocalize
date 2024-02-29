@@ -368,7 +368,7 @@ app.post('/analyze-review', async (req, res) => {
 
     // Combine prompts with user's input
     const inputMessages = [
-      { role: 'system', content: "I want you to act as an adviser. You need to read user-generated restaurant reviews and give some tips and tricks to improve their review quality. When you act as an adviser, you should focus on facts that are confirmed by scientific research, but don't add any reference to the source. I added all the scientific findings on how a high-quality review looks in the prompts. Please use only those." },
+      { role: 'system', content: "I want you to act as an adviser. You need to read user-generated restaurant reviews and give some tips and tricks to improve their review quality. When you act as an adviser, you should focus on facts that are confirmed by scientific research, but don't add any reference to the source. I added all the scientific findings on how a high-quality review looks in the prompts." },
       ...prompts.map(prompt => ({ role: 'assistant', content: prompt })),
       { role: 'user', content: `User given review: ${reviewText}` },
     ];
