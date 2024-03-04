@@ -99,6 +99,49 @@ fetch('https://vocalizer.dev/server/firebase-config')
         //     return stars.repeat(parseInt(rating));
         // }
 
+        /////////////////////////// Added edite button ///////////////////////////
+
+        originalReview = decodeURIComponent(whisperText);
+
+        // Array to store all versions of improvedReviewWithStars
+        let improvedReviewVersions = [originalReview];
+        // Initialize editCounter
+        let editCounter = 0;
+
+        // Event listener for the edit button
+        document.getElementById('edit-button-review').addEventListener('click', toggleEditMode);
+
+        // Function to toggle between view mode and edit mode
+        function toggleEditMode() {
+            const paragraph = document.getElementById('voiceReviewText');
+            const editButton = document.getElementById('edit-button-review');
+
+            if (paragraph && editButton) {
+                if (paragraph.tagName === 'TEXTAREA') {
+                    // If already in edit mode, revert to the original paragraph
+                    paragraph.outerHTML = `<p id="voiceReviewText" class="edite-boxp boxp">${paragraph.value}</p>`;
+                    editButton.innerHTML = '<i class="fa fa-edit"></i>';
+                    editCounter++;
+                    console.log(editCounter);
+
+                } else {
+                    // If not in edit mode, convert to a textarea
+                    const textContent = paragraph.textContent.trim();
+                    paragraph.outerHTML = `<textarea id="voiceReviewText" class="edite-boxp" rows="15">${textContent}</textarea>`;
+                    editButton.innerHTML = '<i class="fa fa-save"></i>';
+                }
+
+                // Only add the edited text to the array if it's different from the original text
+                if (editCounter > 0 && paragraph.value && paragraph.value.trim() !== originalReview) {
+                    improvedReviewVersions.push(paragraph.value.trim() || originalReview);
+                }
+            } else {
+                console.error('Error: Unable to find necessary elements.');
+            }
+        }
+
+        ///////////////////////////  ///////////////////////////
+
         document.getElementById('saveButton').addEventListener('click', saveToFirestore);
 
         // Function to save data to Firestore
@@ -110,7 +153,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
             console.log('Inside saveToFirestore function');
             // Get the result data
             const resultData = {
-                Transcribe_Text: whisperText,
+                Transcribe_Text: improvedReviewVersions,
                 Overall_Rating: overallStarCount,
                 Food_Rating: foodRating,
                 Service_Rating: serviceRating,
