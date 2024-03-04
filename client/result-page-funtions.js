@@ -321,8 +321,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValue() {
         var slider = document.getElementById("myRange");
         var output = document.getElementById("sliderValue");
-        var alignmentLabels = ["1 - Not at all willing", "2 - Slightly willing", "3 - Moderately willing", 
-                            "4 - Somewhat willing", "5 - Considerably willing", "6 - Very willing", "7 - Extremely willing"];
+        var alignmentLabels = ["1 - Not at all willing", "2 - Slightly willing", "3 - Somewhat willing", 
+                            "4 - Moderately willing", "5 - Willing", "6 - Very willing", "7 - Extremely willing"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
@@ -339,8 +339,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValueExp() {
         var slider = document.getElementById("myRangeExp");
         var output = document.getElementById("sliderValueExp");
-        var satisfactionLabels = ["1 - Not at all satisfied", "2 - Slightly satisfied", "3 - Moderately satisfied", 
-                            "4 - Somewhat satisfied", "5 - Satisfied", "6 - Highly satisfied", "7 - Completely satisfied"];
+        var satisfactionLabels = ["1 - Not at all satisfied", "2 - Slightly satisfied", "3 - Somewhat satisfied", 
+                            "4 - Moderately satisfied", "5 - Satisfied", "6 - Very satisfied", "7 - Extremely satisfied"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
@@ -357,8 +357,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
     function updateSliderValueAgen() {
         var slider = document.getElementById("myRangeAgen");
         var output = document.getElementById("sliderValueAgen");
-        var expectationLabels = ["1 - Not at all useful", "2 - Slightly useful", "3 - Moderately useful", 
-                            "4 - Somewhat useful", "5 - Very useful", "6 - Highly useful", "7 - Extremely useful"];
+        var expectationLabels = ["1 - Not at all useful", "2 - Slightly useful", "3 - Somewhat useful", 
+                            "4 - Moderately useful", "5 - Useful", "6 - Very useful", "7 - Extremely useful"];
         
         // Update the output only if the slider has been moved
         if (slider.value !== "0") {
