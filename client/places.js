@@ -89,12 +89,13 @@
 
 // Define dummy restaurant data
 const dummyRestaurants = [
-  { name: 'Juvenes Restaurant Foobar', coordinates: { lat: 65.060708, lng: 25.3902493} },
-  { name: 'H2O', coordinates: { lat: 65.0577388, lng: 25.4676689  } },
-  { name: 'Ravintola Kastari', coordinates: { lat: 65.05711060000002, lng: 25.467537 } },
-  { name: 'Juvenes Restaurant Foodoo', coordinates: { lat: 65.060708, lng: 25.3902493 } },
-  { name: 'Juvenes Restaurant Napa', coordinates: { lat: 65.060708, lng: 25.3902493 } },
-  { name: 'Juvenes Restaurant Mara', coordinates: { lat: 65.0610899, lng: 25.4680569 } },
+  { name: 'Juvenes Restaurant Foobar', coordinates: { lat: 65.05835803688187, lng: 25.466745998683635} },
+  { name: 'H2O', coordinates: { lat: 65.05778669409074, lng: 25.467668347355918} },
+  { name: 'Ravintola Kastari', coordinates: { lat: 65.05716021329793, lng: 25.46753835453169} },
+  { name: 'Juvenes Restaurant Foodoo', coordinates: { lat: 65.06079845565952, lng: 25.466466998683735} },
+  { name: 'Juvenes Restaurant Napa', coordinates: { lat: 65.05941493275516, lng: 25.46612951217566} },
+  { name: 'Juvenes Restaurant Mara', coordinates: { lat: 65.06119392580896, lng: 25.468024712175737} },
+  { name: 'Subway', coordinates: { lat: 65.06100168513277, lng: 25.46661923595951} },
   
 ];
 
