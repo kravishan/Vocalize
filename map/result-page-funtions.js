@@ -159,7 +159,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 Service_Rating: serviceRating,
                 Atmosphere_Rating: atmosphereRating,
                 Date_Time: currentDateTime,
-                Feedback_Align: document.getElementById("myRange").value,
+                ShareReview_Input: document.getElementById("myRange").value,
                 User_Location: JSON.parse(storedCoordinates),
                 Selected_Restaurant: JSON.parse(selectedRestaurantData)
             };
