@@ -92,8 +92,8 @@ fetch('https://vocalizer.dev/server/firebase-config')
 
         // Get parameters from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const userLocationString = urlParams.get('userLocation');
-        const userLocation = JSON.parse(decodeURIComponent(userLocationString));
+        // const userLocationString = urlParams.get('userLocation');
+        // const userLocation = JSON.parse(decodeURIComponent(userLocationString));
         const whisperText = urlParams.get('whisperText');
         const overallStarCount = urlParams.get('overallStarCount');
         const foodRating = urlParams.get('foodRating');
@@ -102,6 +102,9 @@ fetch('https://vocalizer.dev/server/firebase-config')
         // const improvedReview = localStorage.getItem('improvedReview');
         const improvedReviewWithStars = urlParams.get('improvedReviewWithStars');
         const selectedRestaurantData = localStorage.getItem("selectedRestaurant");
+
+        // Retrieve user coordinates from localStorage
+        const storedCoordinates = localStorage.getItem('userCoordinates');
 
 
 
@@ -207,7 +210,7 @@ fetch('https://vocalizer.dev/server/firebase-config')
                 Improved_Review: improvedReviewVersions,
                 Date_Time: currentDateTime,
                 ShareReview_Input: document.getElementById("myRange").value,
-                User_Location: userLocation,
+                User_Location: JSON.parse(storedCoordinates),
                 Selected_Restaurant: JSON.parse(selectedRestaurantData),
                 Satisfied_Input: document.getElementById("myRangeExp").value,
                 Useful_Input: document.getElementById("myRangeAgen").value,

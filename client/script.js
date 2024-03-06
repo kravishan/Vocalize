@@ -322,6 +322,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var microphoneButton = document.querySelector('.symbol');
     let waveCanvas = document.querySelector('.wave-canvas');
 
+    getUserCoordinates();
+
     // Clear the localStorage when the page is loaded
     localStorage.removeItem('refinedata');
 
@@ -343,19 +345,19 @@ document.addEventListener('DOMContentLoaded', function () {
         location.reload();
     }
 
-    // Function to show a toast message
-    function showToast(message) {
-        const toastElement = document.getElementById('toast');
-        if (toastElement) {
-            toastElement.textContent = message;
-            toastElement.style.display = 'block';
+    // // Function to show a toast message
+    // function showToast(message) {
+    //     const toastElement = document.getElementById('toast');
+    //     if (toastElement) {
+    //         toastElement.textContent = message;
+    //         toastElement.style.display = 'block';
 
-            // Hide the toast after a certain duration (e.g., 3 seconds)
-            setTimeout(() => {
-                toastElement.style.display = 'none';
-            }, 300);
-        }
-    }
+    //         // Hide the toast after a certain duration (e.g., 3 seconds)
+    //         setTimeout(() => {
+    //             toastElement.style.display = 'none';
+    //         }, 300);
+    //     }
+    // }
 
 
     function refreshButtonClicked() {       
@@ -545,9 +547,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Modify the showToast function to display the error message with the icon
+    function showToast(message) {
+        var toast = document.getElementById('toast-notification');
+        var toastMessage = document.getElementById('toast-message');
+        toastMessage.textContent = message;
+        toast.classList.remove('hidden');
+        setTimeout(function() {
+            toast.classList.add('hidden');
+        }, 2500); // Adjust the duration (in milliseconds) for how long the toast will be displayed
+    }
+
     
 
     microphoneButton.addEventListener('click', function () {
+        // Check if userCoordinates exist in localStorage
+        const userCoordinates = localStorage.getItem('userCoordinates');
+        if (!userCoordinates) {
+            // Alert the user or perform any other action you deem necessary
+            showToast('Please allow access to your location before starting recording');
+            return; // Exit the function and prevent recording
+        }
+
         // Hide the restaurant list
         var restaurantList = document.getElementById('restaurant-list');
         if (restaurantList) {
@@ -615,6 +636,13 @@ function getUserCoordinates() {
                         latitude: position.coords.latitude,
                         longitude: position.coords.longitude,
                     };
+
+                    // Save coordinates to localStorage
+                    localStorage.setItem('userCoordinates', JSON.stringify(coordinates));
+
+                    // Log userCoordinates
+                    console.log('User Coordinates:', coordinates);
+
                     resolve(coordinates);
                 },
                 (error) => {
@@ -626,6 +654,7 @@ function getUserCoordinates() {
         }
     });
 }
+
 
 
 /////////////////////////   LOCAL STORAGE   ///////////////////////////
@@ -753,7 +782,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         // const restaurantName = selectedRestaurantData ? JSON.parse(selectedRestaurantData).name : '';
 
         // Get user coordinates
-        const userLocation = await getUserCoordinates();
+        // const userLocation = await getUserCoordinates();
 
         // Send data to the backend
         // const response = await fetch('http://localhost:3000/generate-improved-review-with-stars', {
@@ -786,7 +815,7 @@ async function generateImprovedReviewWithStars(globalWhisperText, selectedOveral
         localStorage.setItem('improvedReviewWithStars', improvedReviewWithStars);
 
         // Redirect to the result page with parameters
-        const resultPageURL = `./result.html?userLocation=${encodeURIComponent(JSON.stringify(userLocation))}&whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
+        const resultPageURL = `./result.html?whisperText=${encodeURIComponent(globalWhisperText)}&overallStarCount=${selectedOverallStarCount}&foodRating=${foodRating}&serviceRating=${serviceRating}&atmosphereRating=${atmosphereRating}&improvedReviewWithStars=${encodeURIComponent(improvedReviewWithStars)}`;
         window.location.href = resultPageURL;
 
 

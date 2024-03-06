@@ -338,18 +338,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Function to show a toast message
-    function showToast(message) {
-        const toastElement = document.getElementById('toast');
-        if (toastElement) {
-            toastElement.textContent = message;
-            toastElement.style.display = 'block';
+    // function showToast(message) {
+    //     const toastElement = document.getElementById('toast');
+    //     if (toastElement) {
+    //         toastElement.textContent = message;
+    //         toastElement.style.display = 'block';
 
-            // Hide the toast after a certain duration (e.g., 3 seconds)
-            setTimeout(() => {
-                toastElement.style.display = 'none';
-            }, 300);
-        }
-    }
+    //         // Hide the toast after a certain duration (e.g., 3 seconds)
+    //         setTimeout(() => {
+    //             toastElement.style.display = 'none';
+    //         }, 300);
+    //     }
+    // }
 
     function refreshButtonClicked() {
         showToast('Refreshing...');
