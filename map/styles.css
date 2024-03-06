@@ -607,4 +607,34 @@ label span {
 } */
 
 
+/* Add this CSS to your existing CSS file or create a new one */
+#toast-notification {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  z-index: 9999;
+  width: 75%;
+  max-width: 400px;
+  transition: opacity 0.5s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+#toast-notification i {
+  color: #ff5555; /* Red color for the error icon */
+  margin-right: 1px; /* Adjust the spacing between the icon and text */
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
 

@@ -542,28 +542,46 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Modify the showToast function to display the error message with the icon
+    function showToast(message) {
+        var toast = document.getElementById('toast-notification');
+        var toastMessage = document.getElementById('toast-message');
+        toastMessage.textContent = message;
+        toast.classList.remove('hidden');
+        setTimeout(function() {
+            toast.classList.add('hidden');
+        }, 2500); // Adjust the duration (in milliseconds) for how long the toast will be displayed
+    }
+
     
 
     microphoneButton.addEventListener('click', function () {
+        // Check if userCoordinates exist in localStorage
+        const userCoordinates = localStorage.getItem('userCoordinates');
+        if (!userCoordinates) {
+            // Alert the user or perform any other action you deem necessary
+            showToast('Please allow access to your location before starting recording');
+            return; // Exit the function and prevent recording
+        }
+    
         // Hide the restaurant list
         var restaurantList = document.getElementById('restaurant-list');
         if (restaurantList) {
             restaurantList.style.display = 'none';
         }
-
+    
         // Hide the microphone button
         var symbolButton = document.querySelector('.symbol');
         if (symbolButton) {
             symbolButton.style.display = 'none';
         }
-
-
+    
         // Hide the h3 element
         var h3Element = document.querySelector('.font-22');
         if (h3Element) {
             h3Element.style.display = 'none';
         }
-
+    
         // Hide the mode button
         var modeButton = document.querySelector('.title-icon-two');
         if (modeButton) {
@@ -572,10 +590,11 @@ document.addEventListener('DOMContentLoaded', function () {
       
         openPopup();
         startRecording();
-
+    
         // Start updating the wave canvas
         updateWave();
     });
+    
 
     stopButton.addEventListener('click', function () {
 
