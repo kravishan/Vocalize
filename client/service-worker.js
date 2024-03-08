@@ -11,6 +11,20 @@ self.addEventListener('install', function(event) {
         return cache.addAll(urlsToCache);
       })
   );
+
+  // Trigger cache cleanup when installing the service worker
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          // Add a condition to preserve the desired cache(s)
+          return cacheName.startsWith('Vocalize') && cacheName !== CACHE_NAME;
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
+    })
+  );
 });
 
 self.addEventListener('fetch', function(event) {
