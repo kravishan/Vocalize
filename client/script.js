@@ -647,6 +647,7 @@ function getUserCoordinates() {
                 },
                 (error) => {
                     reject(error.message);
+                    showToast('Please enable location services before proceeding further');
                 }
             );
         } else {
