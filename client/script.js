@@ -316,13 +316,13 @@ function hideAndShowCustomTimerMessage(showDurationInSeconds) {
 document.addEventListener('DOMContentLoaded', function () {
     // Clear local storage
     localStorage.clear();
+
+    getUserCoordinates();
     
     var popup = document.getElementById('popup');
     var stopButton = document.querySelector('.stop');
     var microphoneButton = document.querySelector('.symbol');
     let waveCanvas = document.querySelector('.wave-canvas');
-
-    getUserCoordinates();
 
     // Clear the localStorage when the page is loaded
     localStorage.removeItem('refinedata');
