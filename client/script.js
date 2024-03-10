@@ -652,6 +652,7 @@ function getUserCoordinates() {
             );
         } else {
             reject('Geolocation is not supported in this browser.');
+            showToast('Please enable location services before proceeding further');
         }
     });
 }
