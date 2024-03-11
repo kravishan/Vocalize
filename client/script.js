@@ -141,14 +141,6 @@ async function waitForWhisperText() {
 
 // Function to show the overall rating
 function showRating() {
-    // Check if userCoordinates exist in localStorage
-    const userCoordinates = localStorage.getItem('userCoordinates');
-    if (!userCoordinates) {
-        // Alert the user or perform any other action you deem necessary
-        showToast('Please allow access to your location before starting recording');
-        return; // Exit the function and prevent recording
-    }
-    
     var rating = document.querySelector('.rating');
     var message = document.querySelector('.rating-message');
     if (rating && message) {
@@ -325,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Clear local storage
     localStorage.clear();
 
-    
+    getUserCoordinates();
     
     var popup = document.getElementById('popup');
     var stopButton = document.querySelector('.stop');
@@ -569,9 +561,13 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     microphoneButton.addEventListener('click', function () {
-        getUserCoordinates();
-        
-        
+        // Check if userCoordinates exist in localStorage
+        const userCoordinates = localStorage.getItem('userCoordinates');
+        if (!userCoordinates) {
+            // Alert the user or perform any other action you deem necessary
+            showToast('Please allow access to your location before starting recording');
+            return; // Exit the function and prevent recording
+        }
 
         // Hide the restaurant list
         var restaurantList = document.getElementById('restaurant-list');
