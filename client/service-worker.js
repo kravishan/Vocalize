@@ -1,87 +1,46 @@
+// Define a unique cache name
 var CACHE_NAME = 'Vocalize-v1';
+
+// Specify URLs to cache
 var urlsToCache = [
   'https://vocalizer.dev/'
 ];
 
+// Install event listener
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
-  );
-
-  // Trigger cache cleanup when installing the service worker
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.filter(function(cacheName) {
-          // Add a condition to preserve the desired cache(s)
-          return cacheName.startsWith('Vocalize') && cacheName !== CACHE_NAME;
-        }).map(function(cacheName) {
-          return caches.delete(cacheName);
-        })
-      );
+    // Open the cache and add specified URLs
+    caches.open(CACHE_NAME).then(function(cache) {
+      console.log('Opened cache');
+      return cache.addAll(urlsToCache);
+    })
+    .then(function() {
+      // Once the cache is opened and URLs are added, clean up old caches
+      return caches.keys().then(function(cacheNames) {
+        return Promise.all(
+          cacheNames.filter(function(cacheName) {
+            // Filter out the current cache and delete the rest
+            return cacheName !== CACHE_NAME;
+          }).map(function(cacheName) {
+            return caches.delete(cacheName);
+          })
+        );
+      });
     })
   );
 });
 
+// Fetch event listener
 self.addEventListener('fetch', function(event) {
   event.respondWith(
+    // Intercept fetch requests
     caches.match(event.request)
       .then(function(response) {
         if (response) {
-          return response;
+          return response; // Return cached response if found
         }
-
-        // If not in cache, fetch from the network
-        return fetch(event.request)
-          .then(function(response) {
-            // Check if the response is valid
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            // Clone the response to use and cache the original response
-            var responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          });
+        // If not in cache, fetch from network
+        return fetch(event.request);
       })
   );
-});
-
-self.addEventListener('activate', function(event) {
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.filter(function(cacheName) {
-          // Add a condition to preserve the desired cache(s)
-          return cacheName.startsWith('Vocalize') && cacheName !== CACHE_NAME;
-        }).map(function(cacheName) {
-          return caches.delete(cacheName);
-        })
-      );
-    })
-  );
-});
-
-// Periodically check for updates and update the cache
-self.addEventListener('fetch', function(event) {
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request).then(function(response) {
-        return caches.open(CACHE_NAME).then(function(cache) {
-          cache.put(event.request, response.clone());
-          return response;
-        });
-      })
-    );
-  }
 });
