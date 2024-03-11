@@ -647,12 +647,10 @@ function getUserCoordinates() {
                 },
                 (error) => {
                     reject(error.message);
-                    showToast('Please enable location services before proceeding further');
                 }
             );
         } else {
             reject('Geolocation is not supported in this browser.');
-            showToast('Please enable location services before proceeding further');
         }
     });
 }
