@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Clear local storage
     localStorage.clear();
 
-    getUserCoordinates();
+    
     
     var popup = document.getElementById('popup');
     var stopButton = document.querySelector('.stop');
@@ -561,6 +561,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     microphoneButton.addEventListener('click', function () {
+        getUserCoordinates();
+        
         // Check if userCoordinates exist in localStorage
         const userCoordinates = localStorage.getItem('userCoordinates');
         if (!userCoordinates) {
