@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-subtitle" content="Join our innovative research study on restaurant reviews! Explore the impact of AI, share your voice, and earn rewards. Learn more about the study and tasks here.">
+    <title>Analysis Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .page-title {
+            position: relative;
+            display: flex;
+            transition: all 300ms ease;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            margin-right: auto;
+            font-weight: 700;
+            font-size: 28px;
+            margin-left: auto;
+            text-align: center;
+            width: 100%;
+        }
+
+        .page-title-fixed {
+            display: flex;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 99;
+        }
+
+        .page-title-over {
+            z-index: 99;
+        }
+
+        h1 {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-weight: 500;
+            font-size: 1.6em;
+        }
+
+        .font-22 {
+            font-size: 22px;
+            color: #0f1117;
+            text-align: center;
+            transform: translateY(-25%);
+        }
+
+        body {
+            transition: background-color 0.3s ease;
+            margin-top: 120px;
+            font-family: 'San Francisco', Arial, sans-serif;
+            background-color: #ffffffbb;
+        }
+
+        p {
+            margin: 10px 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .card {
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            background-size: cover;
+            border: 0px !important;
+            background-position: center center !important;
+        }
+
+        .card-style {
+            overflow: hidden;
+            margin: 0px 5px 20px 0px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .card-style .card-overlay {
+            border-radius: 20px;
+        }
+
+        .centered-heading {
+            text-align: center;
+            text-transform: uppercase;
+            font-family: 'San Francisco', Arial, sans-serif;
+        }
+
+        .card-style .content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            margin-left: 15px;
+            margin-right: 8px;
+            margin-bottom: 20px;
+        }
+
+        .boxp {
+            flex: 1;
+            margin-top: 10px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            margin-left: 15px;
+            max-height: 100%;
+            overflow-y: auto;
+        } 
+        
+        .hide {
+            display: none;
+        }
+
+        .more-button {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 300ms ease;
+        }
+
+        .review-container {
+            justify-content: space-between;
+            margin-bottom: 20px;
+            align-items: center; /* To vertically center content */
+        }
+
+        .ios-divider {
+            border: none;
+            height: 1px; /* Adjust thickness as needed */
+            background-color: rgba(0, 0, 0, 0.1); /* Adjust color as needed */
+            margin: 15px 0; /* Adjust margin as needed */
+        }
+
+        .thumbs-icons {
+            display: flex;
+            justify-content: space-between; /* Align items to the beginning and end */
+        }
+
+        /* Styles for the thumbs-up icon */
+        .thumbs-up-edit,
+        .thumbs-down-edit {
+            cursor: pointer; /* Change cursor to pointer when hovering over the icon */
+            font-size: 60px;
+        }
+
+        .thumbs-green {
+            color: #28a74621; /* Set the color to green */
+            margin-left: 10px; /* Add margin to separate the icon from the text */
+        }
+
+        .review-text {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            color: #0f1117 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-title page-title-fixed">
+        <h1 class="font-22">Analysis Page</h1>
+    </div>
+    <div class="page-title-clear"></div>
+
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h3 class="centered-heading">Selection 1</h3>
+            
+            <!-- Left Review -->
+            <div class="review-container">
+                <div class="review left-review">
+                    <div class="thumbs-icons thumbs-green" id="thumbs-hide-left">
+                        <p class="review-text">Today's menu was chicken, a potato, and salad, and chicken is really good taste and a good sauce with white wine.</p>
+                        <i class="fas fa-thumbs-up thumbs-up-edit" id="thumbsUpEditIcon"></i>
+                    </div>
+                </div>
+                
+                <!-- Vertical Divider -->
+                <hr class="ios-divider">
+                
+                <!-- Right Review -->
+                <div class="review right-review">
+                    <div class="thumbs-icons thumbs-green" id="thumbs-hide-right">
+                        <p class="review-text">The chicken dish served today was truly delightful, complemented by a flavorful white wine sauce. The accompanying potato and salad were also quite enjoyable.</p>
+                        <i class="fas fa-thumbs-up thumbs-up-edit" id="thumbsUpEditIcon"></i>
+                    </div>
+                </div>
+            </div>   
+        </div>  
+    </div>
+
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h3 class="centered-heading">Selection 2</h3>
+            
+            <!-- Left Review -->
+            <div class="review-container">
+                <div class="review left-review">
+                    <div class="thumbs-icons thumbs-green" id="thumbs-hide-left">
+                        <p class="review-text">The minced meat dish was enjoyable, served with salad. However, the flavor of the meat was a bit mild for my taste.</p>
+                        <i class="fas fa-thumbs-up thumbs-up-edit" id="thumbsUpEditIcon"></i>
+                    </div>
+                </div>
+                
+                <!-- Vertical Divider -->
+                <hr class="ios-divider">
+                
+                <!-- Right Review -->
+                <div class="review right-review">
+                    <div class="thumbs-icons thumbs-green" id="thumbs-hide-right">
+                        <p class="review-text">It was good minced meat baked one with salad, but the minced meat baked one is a bit slight taste.</p>
+                        <i class="fas fa-thumbs-up thumbs-up-edit" id="thumbsUpEditIcon"></i>
+                    </div>
+                </div>
+            </div>   
+        </div>  
+    </div>   
+    
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h3 class="centered-heading">Selection 3</h3>
+            
+            <!-- Left Review -->
+            <div class="review-container">
+                <div class="review left-review">
+                    <div class="thumbs-icons thumbs-green" id="thumbs-hide-left">
+                        <p class="review-text">The fish and potato combination on the menu today was really nice, where the tastes matched each other well. Plus, the meal was salty enough to enjoy it.</p>
+                        <i class="fas fa-thumbs-up thumbs-up-edit" id="thumbsUpEditIcon"></i>
+                    </div>
+                </div>
+                
+                <!-- Vertical Divider -->
+                <hr class="ios-divider">
+                
+                <!-- Right Review -->
+                <div class="review right-review">
+                    <div class="thumbs-icons thumbs-green" id="thumbs-hide-right">
+                        <p class="review-text">Today's menu was fish with potato and it's a good combination and the taste is also good.</p>
+                        <i class="fas fa-thumbs-up thumbs-up-edit" id="thumbsUpEditIcon"></i>
+                    </div>
+                </div>
+            </div>   
+        </div>  
+    </div> 
+
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h3 class="centered-heading">Selection 4</h3>
+            
+            <!-- Left Review -->
+            <div class="review-container">
+                <div class="review left-review">
+                    <div class="thumbs-icons thumbs-green" id="thumbs-hide-left">
+                        <p class="review-text">The Thai curry provided by this restaurant is not excessively spicy, however, it certainly is enjoyable. Additionally, the dressing on their salad has a pleasant flavor.</p>
+                        <i class="fas fa-thumbs-up thumbs-up-edit" id="thumbsUpEditIcon"></i>
+                    </div>
+                </div>
+                
+                <!-- Vertical Divider -->
+                <hr class="ios-divider">
+                
+                <!-- Right Review -->
+                <div class="review right-review">
+                    <div class="thumbs-icons thumbs-green" id="thumbs-hide-right">
+                        <p class="review-text">It was curry, Thai curry taste and it's not so spicy but it's really good and the salad dressing was also nice.</p>
+                        <i class="fas fa-thumbs-up thumbs-up-edit" id="thumbsUpEditIcon"></i>
+                    </div>
+                </div>
+            </div>   
+        </div>  
+    </div> 
+
+    <div class="card card-style mt-5">
+        <div class="content mb-3">
+            <h3 class="centered-heading">Selection 5</h3>
+            
+            <!-- Left Review -->
+            <div class="review-container">
+                <div class="review left-review">
+                    <div class="thumbs-icons thumbs-green" id="thumbs-hide-left">
+                        <p class="review-text">Foobar is probably the most popular one or the second most popular restaurant in the campus. FUBAR is near the R gate and that's why we can see every time the food runs out very quick and the staffs are very friendly, the food they provide, those are good, mostly they refill it in good time so you get warm dishes most of the time but the food runs out very quick so that's why if you are a bit late then it is impossible to get food in FUBAR. Other than that the staff friendliness is there, the cleanliness is there, the food variety is good, the payment options are good, the meal improvement counter where the ketchup sauce and other things are given, the variety are good there but there are two enclosed booth sofas given there and I think it is unnecessary instead of that if they install more tables then it will be more sitting space for students.</p>
+                        <i class="fas fa-thumbs-up thumbs-up-edit" id="thumbsUpEditIcon"></i>
+                    </div>
+                </div>
+                
+                <!-- Vertical Divider -->
+                <hr class="ios-divider">
+                
+                <!-- Right Review -->
+                <div class="review right-review">
+                    <div class="thumbs-icons thumbs-green" id="thumbs-hide-right">
+                        <p class="review-text">Foober, a well-liked place on campus, is right near the R gate. Because many people go there, food often runs out fast. But, the workers are good at filling up the dishes again, so most of the time, your food will be warm. Yet, if you come late, you might struggle to find food. The workers are nice, and the place is kept clean. The range of food they have is good, and they accept many ways to pay. There's also a place to add things like ketchup to your meal. But they could do better with where to sit. The two big sofas in their own space seem not needed, and more tables would mean more places for students to sit.</p>
+                        <i class="fas fa-thumbs-up thumbs-up-edit" id="thumbsUpEditIcon"></i>
+                    </div>
+                </div>
+            </div>   
+        </div>  
+    </div> 
+
+    <button class="more-button" id="toggleDetailsButton" onclick="toggleDetails()">Submit data</button>
+
+
+
+
+        
+        
+        
+
+    
+
+    
+    
+
+
+    
+
+    <script>
+        
+
+        // Get the .page-title-fixed element
+        const pageTitleFixedElement = document.querySelector('.page-title-fixed');
+
+        // Add an event listener for the scroll event
+        window.addEventListener('scroll', function() {
+            // Check the scroll position (adjust the value as needed)
+            if (window.scrollY > 90) {
+                // If scroll position is greater than 50, add a class to hide the element
+                pageTitleFixedElement.style.display = 'none';
+            } else {
+                // Otherwise, remove the class to show the element
+                pageTitleFixedElement.style.display = 'block';
+            }
+        });
+
+        // Get the thumbs-up and thumbs-down icons
+        const thumbsUpIcon = document.getElementById('thumbsUpEditIcon');
+
+        // Add click event listeners to the icons
+        thumbsUpIcon.addEventListener('click', function() {
+            // Change the color of the thumbs-up icon to green
+            thumbsUpIcon.style.color = '#28a745';
+
+            // Revert the color of the thumbs-down icon to its initial state
+            thumbsDownIcon.style.color = ''; // Empty string removes inline style
+
+
+        });
+    </script>
+
+</body>
+</html>
